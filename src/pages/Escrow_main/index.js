@@ -26,7 +26,7 @@ const Escrow_main = () => {
   }, []);
 
   return (
-    <div className="back shadow">
+    <div className="">
       <div className="container">
         <div className="row pt-5 pb-5">
           <div className="back shadow">
@@ -34,7 +34,7 @@ const Escrow_main = () => {
               <div className="row order__body mt-4">
                 <h2 className="text-center mb-5">Place Order</h2>
                 <h3 className="mb-3">Select a Coin</h3>
-                <div className="col col-xs-12 col-lg-7 mb-5 btn-group">
+                <div className="col col-12 mb-5 btn-group">
                   <button
                     type="button"
                     className="btn btn-dark dropdown-toggle w-100"
@@ -54,7 +54,7 @@ const Escrow_main = () => {
                   </ul>
                 </div>
                 <h3 className="mb-3">Enter Amount</h3>
-                <div className="col col-xs-12 col-lg-7">
+                <div className="col col-12">
                 <div className="input1 w-100">
                       <input
                         type="text"
@@ -67,7 +67,7 @@ const Escrow_main = () => {
                     </div>
               </div>
               <div className="row">
-                <div className="d-flex justify-content-end mb-5">
+                <div className="d-flex justify-content-center mb-5">
                   <Link
                     className="primary mt-4 ps-5 pe-5"
                     style={{ position: "absolute" }}

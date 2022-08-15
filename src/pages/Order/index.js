@@ -137,7 +137,7 @@ const Order = () => {
 
   function network_list(){
     var data = JSON.stringify({
-      "string":coin
+      // "string":coin
     })
     fetch("http://34.73.24.72/network", {
       method: "POST",

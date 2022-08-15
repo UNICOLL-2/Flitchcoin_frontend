@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import HistoryChart from "./Charts/HistoryChart";
 import CoinData from "./CoinData";
 import coinGecko from './apis/coinGecko';
+import Escrow_main from "../Escrow_main";
 
 const PoolParticipant = () => {
   const  id  = "ethereum";
@@ -65,9 +66,18 @@ const PoolParticipant = () => {
       return <div>Loading....</div>;
     }
     return (
-      <div className="coinlist">
-        <HistoryChart data={coinData} />
-        <CoinData data={coinData.detail} />
+      <div>
+        <div className="row">
+          <div className="col col-md-12 col-lg-6 ps-4 mt-5">
+          <HistoryChart data={coinData} />
+          </div>
+          <div className="col col-md-12 col-lg-3 mt-5">
+          <CoinData data={coinData.detail} />
+          </div>
+          <div className="col col-md-12 col-lg-3">
+            <Escrow_main/>
+          </div>
+        </div>
       </div>
     );
   };

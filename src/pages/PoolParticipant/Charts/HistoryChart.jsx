@@ -65,10 +65,10 @@ const HistoryChart = ({ data }) => {
     }
   };
   return (
-    <div className="bg-white border mt-2 rounded p-3">
+    <div className="bg-white border rounded p-3">
       <div>{renderPrice()}</div>
       <div>
-        <canvas ref={chartRef} id="myChart" width={250} height={250}></canvas>
+        <canvas ref={chartRef} id="myChart" width={250} height={425}></canvas>
       </div>
 
       <div className="chart-button mt-1">

@@ -4,45 +4,41 @@ const CoinData = ({ data }) => {
   const renderData = () => {
     if (data) {
       return (
-        <div className="bg-white mt-3 p-2 rounded border row">
-          <div className="col-sm">
-            <div className="d-flex flex-column">
-              <span className="text-muted coin-data-category">Market Cap</span>
-              <span>{data.market_cap}</span>
-            </div>
-            <hr />
-            <div className="d-flex flex-column">
-              <span className="text-muted coin-data-category">
-                Total Supply
-              </span>
-              <span>{data.total_supply}</span>
-            </div>
-          </div>
+        <div className="bg-white rounded border">
 
-          <div className="col-sm">
-            <div className="d-flex flex-column">
-              <span className="text-muted coin-data-category">Volume(24H)</span>
-              <span>{data.total_volume}</span>
-            </div>
-            <hr />
-            <div className="d-flex flex-column">
-              <span className="text-muted coin-data-category">high 24h</span>
-              <span>{data.high_24h}</span>
-            </div>
+          <div className="row pt-3 ps-3">
+            <span className="text-muted col col-6 ">Market Cap</span>
+            <span className="col col-6">$ {data.market_cap}</span>
           </div>
+          <hr />
 
-          <div className="col-sm">
-            <div className="d-flex flex-column">
-              <span className="text-muted coin-data-category">
-                Circulating Supply
-              </span>
-              <span>{data.circulating_supply}</span>
-            </div>
-            <hr />
-            <div className="d-flex flex-column">
-              <span className="text-muted coin-data-category">low 24h</span>
-              <span>{data.low_24h}</span>
-            </div>
+          <div className="row pt-3 ps-3">
+            <span className="text-muted col col-6">Total Supply</span>
+            <span className="col col-6">{data.total_supply}</span>
+          </div>
+          <hr/>
+
+          <div className="row pt-3 ps-3">
+            <span className="text-muted col col-6">Volume(24H)</span>
+            <span className="col col-6">$ {data.total_volume}</span>
+          </div>
+          <hr/>
+
+          <div className="row pt-3 ps-3">
+            <span className="text-muted col col-6">high 24h</span>
+            <span className="col col-6">$ {data.high_24h}</span>
+          </div>
+          <hr/>
+
+          <div className="row pt-3 ps-3">
+            <span className="text-muted col col-6">Circulating Supply</span>
+            <span className="col col-6">{data.circulating_supply}</span>
+          </div>
+          <hr/>
+
+          <div className="row pt-3 ps-3 pb-4">
+            <span className="text-muted col col-6">low 24h</span>
+            <span className="col col-6">$ {data.low_24h}</span>
           </div>
         </div>
       );
