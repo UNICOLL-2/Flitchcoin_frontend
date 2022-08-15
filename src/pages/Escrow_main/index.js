@@ -1,12 +1,11 @@
 import React, { useState,useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
+import Order from "../Order";
 
 const Escrow_main = () => {
   const navigate = useNavigate();
   const [asset, setAsset] = useState([]);
   const [coin, setCoin] = useState("Select coin");
-  const [network, setNetwork] = useState("Select Network");
-  const [network1, setNetwork1] = useState("Select Network");
 
   function asset_list() {
     fetch("http://34.73.24.72/asset_list").then((result) => {
@@ -22,40 +21,9 @@ const Escrow_main = () => {
     });
   }
 
-  function network_list(){
-    var data = JSON.stringify({
-      "string":coin
-    })
-    fetch("http://34.73.24.72/network", {
-      method: "POST",
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-      },
-      body: data,
-    })
-      .then((res) => res.json()
-      .then((result) => {
-        let tmpArray = [];
-        result.map((items) => {
-          for (let i = 0; i < 1; i++) {
-            tmpArray.push(items);
-          }
-        });
-        setNetwork([...tmpArray]);
-      }))
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
   useEffect(() => {
     asset_list();
   }, []);
-
-  useEffect(() => {
-    network_list();
-  },[coin!='Select coin']);
 
   return (
     <div className="back shadow">
@@ -85,32 +53,6 @@ const Escrow_main = () => {
                     })}
                   </ul>
                 </div>
-                <h3 className="mb-3">Select a Network </h3>
-                <div className="col col-xs-12 col-lg-7 mb-5 btn-group">
-                  <button
-                    type="button"
-                    className="btn btn-dark dropdown-toggle w-100 "
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    <b>{network1}</b>
-                  </button>
-                  <ul className="dropdown-menu drop1 back" >
-                  {network === 'Select Network' ?
-                  <div> 
-                    <li className="list-items">Please select a Coin</li>
-                  </div>
-                  :
-                  <div>
-                  {network.map(items => {
-                    return (
-                      <li className="list-items" onClick={() => setNetwork1(items)}>{items}</li>
-                    )
-                  })} 
-                  </div>
-                  }
-                  </ul>
-                </div>
                 <h3 className="mb-3">Enter Amount</h3>
                 <div className="col col-xs-12 col-lg-7">
                 <div className="input1 w-100">
@@ -126,13 +68,13 @@ const Escrow_main = () => {
               </div>
               <div className="row">
                 <div className="d-flex justify-content-end mb-5">
-                  <button
-                    type="button"
+                  <Link
                     className="primary mt-4 ps-5 pe-5"
                     style={{ position: "absolute" }}
+                    to="/order"
                   >
                     NEXT
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>

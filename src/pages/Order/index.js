@@ -9,6 +9,8 @@ const Order = () => {
   const navigate = useNavigate();
   const [type, setType] = useState("otherUser");
   const [currentCoin, setCurrentCoin] = useState("");
+  const [network, setNetwork] = useState("Select Network");
+  const [network1, setNetwork1] = useState("Select Network");
   const [formData, setFormData] = useState({
     wallet_address_ours: "",
     memo: "",
@@ -132,6 +134,37 @@ const Order = () => {
     navigate("/escrow");
     setFormData({ ...formData });
   };
+
+  function network_list(){
+    var data = JSON.stringify({
+      "string":coin
+    })
+    fetch("http://34.73.24.72/network", {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      body: data,
+    })
+      .then((res) => res.json()
+      .then((result) => {
+        let tmpArray = [];
+        result.map((items) => {
+          for (let i = 0; i < 1; i++) {
+            tmpArray.push(items);
+          }
+        });
+        setNetwork([...tmpArray]);
+      }))
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  useEffect(() => {
+    network_list();
+  },[]);
 
   return (
 
@@ -266,7 +299,32 @@ const Order = () => {
                   />
                   <span className="underline"></span>
                 </div>
-                <div className="input1 w-100">
+                <div className="col col-xs-12 col-lg-7 mb-5 btn-group">
+                  <button
+                    type="button"
+                    className="btn btn-dark dropdown-toggle w-100 "
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <b>{network1}</b>
+                  </button>
+                  <ul className="dropdown-menu drop1 back" >
+                  {network === 'Select Network' ?
+                  <div> 
+                    <li className="list-items">Please select a Coin</li>
+                  </div>
+                  :
+                  <div>
+                  {network.map(items => {
+                    return (
+                      <li className="list-items" onClick={() => setNetwork1(items)}>{items}</li>
+                    )
+                  })} 
+                  </div>
+                  }
+                  </ul>
+                </div>
+                {/* <div className="input1 w-100">
                   <input
                     type="text"
                     className="txt-underline p-3 mb-3 w-100  input pressed"
@@ -276,7 +334,7 @@ const Order = () => {
                     value={phone_no}
                   />
                   <span className="underline"></span>
-                </div>
+                </div> */}
                 <div className="d-flex justify-content-end">
                   <button
                     type="button"
