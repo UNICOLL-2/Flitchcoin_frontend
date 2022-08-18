@@ -94,8 +94,8 @@ function SignUp() {
 
     <div className="back shadow">
       <div className="container">
-        <div className="row login__two" style={{marginBottom: "100px", paddingBottom:"100px"}}>
-          <div className="col col-sm-12 col-md-6 page_fill_1 pb-5">
+        <div className="row login__two" >
+          <div className="col col-sm-12 col-md-6 page_fill_3 pb-5">
             <form onSubmit={submitHandler}>
               <div className="card back">
                 <div className="card-body">
@@ -133,7 +133,7 @@ function SignUp() {
                     name="full_nameParticipant"
                     value={full_nameParticipant}
                     onChange={onChange}
-                    placeholder="Enter your Full_name"
+                    placeholder="Enter your Fullname"
                     className="pressed txt-underline p-2 mb-2 w-100"
                   />
                   <span class="underline"></span>
@@ -150,7 +150,7 @@ function SignUp() {
               </div>
             </form>
           </div>
-          <div className="col col-sm-12 col-md-6 page_fill_2 pb-5">
+          <div className="col col-sm-12 col-md-6 page_fill_3 pb-5">
             <form onSubmit={submitHandler}>
               <div className="card back">
                 <div className="card-body">
@@ -184,7 +184,7 @@ function SignUp() {
                     name="full_namePool"
                     value={full_namePool}
                     onChange={onChange}
-                    placeholder="Enter your Full_name"
+                    placeholder="Enter your Fullname"
                     className="pressed txt-underline p-2 mb-2 w-100"
                   />
                   <span class="underline"></span>

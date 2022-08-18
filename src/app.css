@@ -154,6 +154,14 @@ element.style {
 	box-shadow: 5px 5px 13px #2b2c2d, -5px -5px 5px #ffffff !important;
 }
 
+.vertical-center {
+	min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+	min-height: 100vh; /* These two lines are counted as one :-)       */
+  
+	display: flex;
+	align-items: center;
+  }
+
 .page_fill_1 {
 	padding-top: 180px;
 	padding-bottom: 50px;
@@ -172,6 +180,14 @@ element.style {
 .coin {
 	padding-left: 80%;
 	font-size: 20px;
+}
+
+.balance{
+	font-size:medium;
+}
+
+.news{
+	height: 350px!important;
 }
 
 /* modify content */
@@ -350,6 +366,8 @@ textarea {
 	padding: 3px 0px 3px 3px;
 	margin: 5px 1px 3px 0px;
 	border: 1px solid #DDDDDD;
+	border-radius: 4px;
+	padding: 15px!important;
 }
 
 input[type=text]:focus,
@@ -361,6 +379,8 @@ textarea:focus {
 	padding: 3px 0px 3px 3px;
 	margin: 5px 1px 3px 0px;
 	border: 1px solid rgba(81, 203, 238, 1);
+	border-radius: 4px;
+	padding: 15px;
 }
 
 .input {

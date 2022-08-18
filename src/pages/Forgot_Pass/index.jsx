@@ -98,7 +98,7 @@ function Forgot_Pass() {
                                         name="full_name"
                                         value={full_name}
                                         onChange={onChange}
-                                        placeholder="Enter your Full_name"
+                                        placeholder="Enter your Fullname"
                                         className="pressed p-2 mb-2 w-100 txt-underline"
                                     />
                                     <span class="underline"></span>

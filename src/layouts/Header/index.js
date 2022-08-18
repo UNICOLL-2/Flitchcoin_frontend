@@ -62,23 +62,11 @@ function Header() {
                 <Link to="/api" className="nav-link">
                   API
                 </Link>
-                <Link to="/contact" className="nav-link">
-                  Contact
-                </Link>
                 <Link to="/Dashboard" className="nav-link">
                   Dashboard
                 </Link>
-                <Link to="/order" className="nav-link">
-                  Order
-                </Link>
-                <Link to="/escrow" className="nav-link">
-                  Escrow
-                </Link>
-                <Link to="/escrow_account" className="nav-link">
-                  Escrow account status
-                </Link>
-                <Link to="/pool_participant" className="nav-link">
-                  Pool and Participants
+                <Link to="/place_order" className="nav-link">
+                  Place order
                 </Link>
                 <Link to="/" type="button" className="btn btn-dark m_l_" onClick={onClick}>
                   Sign Out

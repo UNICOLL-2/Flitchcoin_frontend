@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import CryptoJS from "crypto-js";
 import { Button, Modal } from "react-bootstrap";
 import './login.css';
+import { loginUser } from '../../Feature/Auth/authSlice';
 
 function Login() {
   const dispatch = useDispatch();
@@ -110,6 +111,7 @@ function Login() {
 
   const poolHandler = (e) => {
     e.preventDefault();
+    console.log("clicked");
     setFormData((prevData) => ({
       ...prevData,
       type: 'participant',
@@ -131,7 +133,7 @@ function Login() {
             if (data.access_token) {
               setToken(data.access_token);
               console.log(fetchToken());
-              // dispatch(loginUser(formData));
+              dispatch(loginUser(formData));
               navigate("/");
             }
           })
@@ -152,21 +154,9 @@ function Login() {
 
   return (
     <div>
-      {/* {fetchToken() ? (
-        <div className="back shadow">
-          <div className="container">
-            <div className="text-center page_fill_1">
-              <h1>YOU ARE LOGGED IN.</h1>
-              <Link to='/' className="btn btn-dark" onClick={onClick}>Sign Out</Link>
-            </div>
-          </div>
-        </div>
-      ) : ( */}
       <div className="back shadow">
         <div className="container">
-          <div
-            className="row login__two"
-          >
+          <div className="row login__two">
             <div className="col col-sm-12 col-md-6 page_fill_1 pb-5">
               <form onSubmit={participantHandler}>
                 <div className="back-shadow back card">
@@ -196,64 +186,7 @@ function Login() {
                       <span class="underline"></span>
                     </div>
                     <Link to='/forgot_Password' className="text-dark text-underline"><u>Forgot password ?</u></Link>
-                    {/* <div className="d-flex justify-content-end">
-                      <button
-                        type="button"
-                        className="btn btn-dark w-100 mt-5 mb-2"
-                        data-bs-toggle="modal"
-                        data-bs-target="#staticBackdrop1"
-                      >
-                        Log In
-                      </button>
-                      <div
-                        className="modal fade shadow "
-                        id="staticBackdrop1"
-                        data-bs-backdrop="static"
-                        data-bs-keyboard="false"
-                        tabindex="-1"
-                        aria-labelledby="staticBackdropLabel"
-                        aria-hidden="true"
-                        
-                      >
-                        <div className="modal-dialog modal-dialog-centered dialog">
-                          <div className="modal-content back shadow">
-                            <div className="modal-body">
-                              <b>Please Enter the OTP</b>
-                              <div className="input1 w-100">
-                                <input
-                                  type="text"
-                                  className="txt-underline p-3 mb-3 w-100 input pressed"
-                                  placeholder="OTP"
-                                  onChange={onChange}
-                                  name="otp"
-                                  value={otp}
-                                />
-                                <span className="underline"></span>
-                              </div>
-                              <button
-                                type="button"
-                                className="primary me-4"
-                                data-bs-dismiss="modal"
-                                onClick={() => setShow(false)}
-                              >
-                                Cancel
-                              </button>
-                              <button type="button" className="primary" onClick={otpHandler}>
-                                Confirm
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div> */}
-                    <input type="submit" className="btn btn-dark w-100 mt-4" value="Log In" name="Sign In" id="danger-outlined" autoComplete="off"
-                    // onClick={() =>
-                    //   setFormData({
-                    //     ...formData,
-                    //     type: "participant",
-                    //   })
-                    // }
-                    />
+                    <input type="submit" className="btn btn-dark w-100 mt-4" value="Log In" name="Sign In" id="danger-outlined" autoComplete="off" />
                   </div>
                 </div>
               </form>
@@ -287,61 +220,7 @@ function Login() {
                       <span class="underline"></span>
                     </div>
                     <Link to='/forgot_Password' className="text-dark text-underline"><u>Forgot password ?</u></Link>
-                    {/* <div className="d-flex justify-content-end">
-                      <button
-                        type="button"
-                        className="btn btn-dark w-100 mt-5 mb-2"
-                        data-bs-toggle="modal"
-                        data-bs-target="#staticBackdrop2"
-                      >
-                        Log In
-                      </button>
-                      <div
-                        className="modal fade shadow"
-                        id="staticBackdrop2"
-                        data-bs-backdrop="static"
-                        data-bs-keyboard="false"
-                        tabindex="-1"
-                        aria-labelledby="staticBackdropLabel"
-                        aria-hidden="true"
-                      >
-                        <div className="modal-dialog modal-dialog-centered dialog">
-                          <div className="modal-content back shadow">
-                            <div className="modal-body">
-                              <b>Please Enter the OTP</b>
-                              <div className="input1 w-100">
-                                <input
-                                  type="text"
-                                  className="txt-underline p-3 mb-3 w-100 input pressed"
-                                  placeholder="OTP"
-                                  onChange={onChange}
-                                  name="pay_id"
-                                />
-                                <span className="underline"></span>
-                              </div>
-                              <button
-                                type="button"
-                                className="primary me-4"
-                                data-bs-dismiss="modal"
-                              >
-                                Cancel
-                              </button>
-                              <button type="button" className="primary">
-                                Confirm
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div> */}
-                    <input type="submit" className="btn btn-dark w-100 mt-4" value="Log In" name="Sign In" id="danger-outlined" autoComplete="off"
-                    // onClick={() =>
-                    //   setFormData({
-                    //     ...formData,
-                    //     type: "pool",
-                    //   })
-                    // }
-                    />
+                    <input type="submit" className="btn btn-dark w-100 mt-4" value="Log In" name="Sign In" id="danger-outlined" autoComplete="off" />
                   </div>
                 </div>
               </form>
@@ -351,27 +230,13 @@ function Login() {
             <p>
               Don't have an account?
               <span className="text-warning px-2 text" role="button">
-                <Link to="/sign-up" className="text-warning" >Register here . </Link>
+                <Link to="/sign-up" className="text-warning" style={{ position: "absolute" }}>Register here . </Link>
               </span>
             </p>
           </div>
         </div>
       </div>
-      <Modal show={show} onHide={() => setShow(false)} className="modal fade shadow ">
-        {/* <Modal.Header closeButton>
-          <Modal.Title>Please Enter the OTP</Modal.Title>
-        </Modal.Header> */}
-        {/* <Modal.Body>
-          <input type="text" placeholder="Enter your OTP" onChange={onChange} name="otp" value={otp} />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShow(false)}>
-            Cancel
-          </Button>
-          <Button variant="primary" onClick={otpHandler}>
-            Confirm
-          </Button>
-        </Modal.Footer> */}
+      <Modal show={show} onHide={() => setShow(false)} className="mt-5 modal fade shadow">
           <div className="back shadow">
             <div className="modal-body">
               <b>Please Enter the OTP</b>
@@ -389,17 +254,16 @@ function Login() {
               <button
                 type="button"
                 className="primary me-4"
-                data-bs-dismiss="modal"
                 onClick={() => setShow(false)}
               >
                 Cancel
               </button>
               <button type="button" className="primary"
-               onClick={otpHandler} >
+                onClick={otpHandler} >
                 Confirm
               </button>
             </div>
-          </div>
+        </div>
       </Modal>
     </div>
   );

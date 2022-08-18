@@ -43,8 +43,8 @@ const HistoryChart = ({ data }) => {
         },
       });
     }
-    
-  },[]);
+    determineTimeFormat();
+  },[timeFormat]);
 
   const renderPrice = () => {
     if (detail) {
@@ -68,25 +68,31 @@ const HistoryChart = ({ data }) => {
     <div className="bg-white border rounded p-3">
       <div>{renderPrice()}</div>
       <div>
-        <canvas ref={chartRef} id="myChart" width={250} height={425}></canvas>
+        <canvas ref={chartRef} id="myChart" width={250} height={425}
+        //  style={{ position: "absolute"}} 
+         >
+         </canvas>
       </div>
 
       <div className="chart-button mt-1">
         <button
           onClick={() => setTimeFormat("24h")}
-          className="btn btn-outline-secondary btn-sm"
+          className="btn btn-outline-secondary btn-sm my-4"
+          style={{ position: "absolute"}} 
         >
           24h
         </button>
         <button
           onClick={() => setTimeFormat("7d")}
-          className="btn btn-outline-secondary btn-sm mx-1"
+          className="btn btn-outline-secondary btn-sm mx-5 my-4"
+          style={{ position: "absolute"}} 
         >
           7d
         </button>
         <button
           onClick={() => setTimeFormat("1y")}
-          className="btn btn-outline-secondary btn-sm"
+          className="btn btn-outline-secondary btn-sm my-4"
+          style={{ position: "absolute", marginLeft: "90px"}} 
         >
           1y
         </button>
