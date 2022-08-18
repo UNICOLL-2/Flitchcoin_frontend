@@ -31,7 +31,7 @@ function Footer() {
   if (selectedType === "decline") {
     return (
       <div className="back shadow">
-        <ul className="py-3 d-flex list-unstyled border border-dark footer_decline d-flex flex-wrap">
+        <ul className="py-3 d-flex list-unstyled border border-dark footer_decline flex-wrap">
           <li className="mx-2" role="button">
             Terms & Condition
           </li>

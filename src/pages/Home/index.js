@@ -35,6 +35,8 @@ function Home() {
 
   const show = false;
   return (
+    <>
+    <Animation/>
     <div className="back shadow">
       <div className="container">
         <section className="row pt-3">
@@ -209,6 +211,7 @@ function Home() {
         </section>
       </div>
     </div>
+    </>
   );
 }
 

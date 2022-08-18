@@ -4,7 +4,7 @@ import { signinUser } from "../../Feature/Auth/authSlice";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import Animation from "../../Animation";
 
 const QRVerify = () => {
 
@@ -81,6 +81,8 @@ const QRVerify = () => {
     };
 
     return (
+        <>
+        <Animation/>
         <div className='back'>
             <div className="container">
                 <div className="row page_fill_3">
@@ -155,6 +157,7 @@ const QRVerify = () => {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 

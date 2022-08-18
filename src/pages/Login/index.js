@@ -10,6 +10,7 @@ import CryptoJS from "crypto-js";
 import { Button, Modal } from "react-bootstrap";
 import './login.css';
 import { loginUser } from '../../Feature/Auth/authSlice';
+import Animation from "../../Animation";
 
 function Login() {
   const dispatch = useDispatch();
@@ -154,10 +155,11 @@ function Login() {
 
   return (
     <div>
+      <Animation/>
       <div className="back shadow">
         <div className="container">
           <div className="row login__two">
-            <div className="col col-sm-12 col-md-6 page_fill_1 pb-5">
+            <div className="col col-sm-12 col-md-6 page_fill_3 pb-5">
               <form onSubmit={participantHandler}>
                 <div className="back-shadow back card">
                   <div className="card-body">
@@ -191,7 +193,7 @@ function Login() {
                 </div>
               </form>
             </div>
-            <div className="col col-sm-12 col-md-6 page_fill_2 pb-5">
+            <div className="col col-sm-12 col-md-6 page_fill_3 pb-5">
               <form onSubmit={poolHandler}>
                 <div className="back-shadow back card">
                   <div className="card-body">

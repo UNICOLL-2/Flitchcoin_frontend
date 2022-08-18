@@ -1,7 +1,10 @@
 import React from 'react';
+import Animation from "../../Animation";
 
 const Verifictaion = () => {
     return (
+      <>
+      <Animation/>
         <div className="back">
         <div className="container">
           <div className="row">
@@ -56,6 +59,7 @@ const Verifictaion = () => {
           </div>
         </div>
       </div>
+      </>
     )
 }
 

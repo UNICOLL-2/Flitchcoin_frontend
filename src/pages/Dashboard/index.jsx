@@ -26,7 +26,7 @@ function Dashboard() {
           <p>Username / Profile <span className="ps-5"> User Id</span></p>
         </div>
       </div>
-      <div className="container mt-4">
+      <div className="container mt-4 mb-5">
         <div className="row">
           <div className="col col-md-12 col-lg-8 back shadow  mt-3 p-3">
             <div className="row">

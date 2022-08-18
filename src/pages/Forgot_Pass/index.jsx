@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../Feature/Auth/authSlice";
+import Animation from "../../Animation";
 
 function Forgot_Pass() {
     const { selectedType } = useSelector((state) => state.auth);
@@ -59,7 +60,8 @@ function Forgot_Pass() {
         }));
     };
     return (
-
+        <>
+        <Animation/>
         <div className="back shadow">
             <div className="container">
                 <div className="row">
@@ -118,6 +120,7 @@ function Forgot_Pass() {
                 </div>
             </div>
         </div>
+        </>
     );
 }
 

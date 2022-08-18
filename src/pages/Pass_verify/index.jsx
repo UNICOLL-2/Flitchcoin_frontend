@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../Feature/Auth/authSlice";
+import Animation from "../../Animation";
 
 const Pass_verify = () => {
     const { selectedType } = useSelector((state) => state.auth);
@@ -67,6 +68,8 @@ const Pass_verify = () => {
     };
 
     return (
+        <>
+        <Animation/>
         <div className='back'>
             <div className="container">
                 <div className="row page_fill_1">
@@ -97,6 +100,7 @@ const Pass_verify = () => {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 

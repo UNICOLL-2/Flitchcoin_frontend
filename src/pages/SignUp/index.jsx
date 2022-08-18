@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { signinUser } from "../../Feature/Auth/authSlice";
+import Animation from "../../Animation";
 
 function SignUp() {
   const { selectedType } = useSelector((state) => state.auth);
@@ -21,12 +22,6 @@ function SignUp() {
   });
   const { usernameParticipant, passwordParticipant, type, full_nameParticipant, usernamePool, passwordPool, full_namePool } = formData;
 
-  var data = JSON.stringify({
-    "username": usernameParticipant,
-    "password": passwordParticipant,
-    "full_name": full_nameParticipant
-  });
-
   const submitHandler = (e) => {
     e.preventDefault();
     if (type === 'participant') {
@@ -36,9 +31,10 @@ function SignUp() {
         var data = JSON.stringify({
           "username": usernameParticipant,
           "password": passwordParticipant,
-          "full_name": full_nameParticipant
+          "full_name": full_nameParticipant,
+          "is_pool":false
         })
-        fetch("http://127.0.0.1:8000/Signup", {
+        fetch("http://34.73.24.72/Signup", {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
@@ -62,9 +58,10 @@ function SignUp() {
         var data = JSON.stringify({
           "username": usernamePool,
           "password": passwordPool,
-          "full_name": full_namePool
+          "full_name": full_namePool,
+          "is_pool":true
         })
-        fetch("http://127.0.0.1:8000/Signup", {
+        fetch("http://34.73.24.72/Signup", {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
@@ -91,7 +88,8 @@ function SignUp() {
     }));
   };
   return (
-
+    <>
+    <Animation/>
     <div className="back shadow">
       <div className="container">
         <div className="row login__two" >
@@ -204,6 +202,7 @@ function SignUp() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

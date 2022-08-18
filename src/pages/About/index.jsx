@@ -1,7 +1,10 @@
 import React from "react";
+import Animation from "../../Animation";
 
 function About() {
   return (
+    <>
+    <Animation/>
     <div className="back shadow">
     <div className="container">
       <section className="row pt-5">
@@ -51,6 +54,7 @@ function About() {
       </section>
     </div>
     </div>
+    </>
   );
 }
 

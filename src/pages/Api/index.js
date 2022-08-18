@@ -1,7 +1,10 @@
 import React from "react";
+import Animation from "../../Animation";
 
 function Api() {
   return (
+    <>
+    <Animation/>
     <div className="back shadow">
       <div className="container">
         <section className="row pt-5">
@@ -355,6 +358,7 @@ function Api() {
       </div>
       <div className="mb-3"></div>
     </div>
+    </>
   );
 }
 

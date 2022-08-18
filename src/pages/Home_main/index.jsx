@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Animation from "../../Animation";
 
 function Home_main() {
   const [eFront, seteFront] = useState(false);
@@ -31,6 +32,8 @@ useEffect(() => {
   }
 
   return (
+    <>
+    <Animation/>
     <div className="back shadow">
     <div className="container">
       <section className="row pt-5">
@@ -196,6 +199,7 @@ useEffect(() => {
       </section>
     </div>
     </div>
+    </>
   );
 }
 

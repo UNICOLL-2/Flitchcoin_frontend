@@ -11,16 +11,14 @@ function Header() {
 
   const dispatch = useDispatch();
 
-
   const [formData, setFormData] = useState({
     type: null
   });
   const { type } = formData;
 
   function rel_login(e) {
-    fetch("http://127.0.0.1:8000/rel_login").then((result) => {
+    fetch("http://34.73.24.72/rel_login").then((result) => {
       result.json().then((res) => {
-        console.log("result", res);
       })
     });
     setFormData((prevData) => ({
@@ -37,7 +35,7 @@ function Header() {
 
   return (
     <div>
-      <Navbar bg="light" expand="lg" className="shadow" >
+      <Navbar bg="light" expand="lg" className="shadow m-4 nav-bar" >
         <Link className="logo" to="/">LLC</Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse

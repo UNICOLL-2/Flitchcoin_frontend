@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
 import { defaultType, userLogin  } from "./Feature/Auth/authSlice";
 import "./app.css";
 import wave from "./66615-wave-blue-lines.gif";
-import Animation from "./Animation";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -21,7 +20,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="">
+    <div>
       {!selectedType && (
         <Modal
           show={show}
