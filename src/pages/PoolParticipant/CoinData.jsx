@@ -4,7 +4,7 @@ const CoinData = ({ data }) => {
   const renderData = () => {
     if (data) {
       return (
-        <div className="bg-white rounded border">
+        <div className="bg-white rounded border back card">
 
           <div className="row pt-3 ps-3">
             <span className="text-muted col col-6 ">Market Cap</span>

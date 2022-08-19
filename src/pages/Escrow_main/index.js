@@ -1,6 +1,5 @@
 import React, { useState,useEffect } from "react";
 import { useNavigate,Link } from "react-router-dom";
-import Order from "../Order";
 
 const Escrow_main = () => {
   const navigate = useNavigate();
@@ -26,14 +25,13 @@ const Escrow_main = () => {
   }, []);
 
   return (
-    <div className="">
       <div className="container">
         <div className="row pt-5 pb-5">
-          <div className="back shadow">
+          <div className="back card">
             <div className="container pt-5 pb-5">
               <div className="row order__body mt-4">
                 <h2 className="text-center mb-5">Place Order</h2>
-                <h3 className="mb-3">Select a Coin</h3>
+                <h5 className="mb-3">Select a Coin</h5>
                 <div className="col col-12 mb-5 btn-group">
                   <button
                     type="button"
@@ -53,7 +51,7 @@ const Escrow_main = () => {
                     })}
                   </ul>
                 </div>
-                <h3 className="mb-3">Enter Amount</h3>
+                <h5 className="mb-3">Enter Amount</h5>
                 <div className="col col-12">
                 <div className="input1 w-100">
                       <input
@@ -81,7 +79,6 @@ const Escrow_main = () => {
           </div>
         </div>
       </div>
-    </div>
   );
 };
 

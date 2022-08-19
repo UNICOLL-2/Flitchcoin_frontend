@@ -17,6 +17,7 @@ import QRVerify from "../../pages/QRVerify";
 import Forgot_Pass from "../../pages/Forgot_Pass";
 import Pass_verify from "../../pages/Pass_verify";
 import ProtectedRoutes from "../../pages/ProtectedRoutes";
+import Withdraw from "../../pages/Withdraw";
 
 function Content() {
   return (
@@ -36,6 +37,7 @@ function Content() {
         <Route path="/qr_verify" element={<QRVerify />} />
         <Route path="/forgot_password" element={<Forgot_Pass />} />
         <Route path="/pass_verify" element={<Pass_verify />} />
+        <Route path="/withdraw" element={<Withdraw/>} />
         <Route path="*" element={<Invalid />} />
       </Routes>
     </div>

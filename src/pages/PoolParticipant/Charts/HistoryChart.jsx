@@ -9,7 +9,6 @@ const HistoryChart = ({ data }) => {
   const { day, week, year, detail } = data;
   const [timeFormat, setTimeFormat] = useState("24h");
 
-
   const determineTimeFormat = () => {
     switch (timeFormat) {
       case "24h":
@@ -65,11 +64,10 @@ const HistoryChart = ({ data }) => {
     }
   };
   return (
-    <div className="bg-white border rounded p-3">
+    <div className="bg-white border rounded p-3 back card">
       <div>{renderPrice()}</div>
       <div>
         <canvas ref={chartRef} id="myChart" width={250} height={425}
-        //  style={{ position: "absolute"}} 
          >
          </canvas>
       </div>

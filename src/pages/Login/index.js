@@ -161,7 +161,7 @@ function Login() {
           <div className="row login__two">
             <div className="col col-sm-12 col-md-6 page_fill_3 pb-5">
               <form onSubmit={participantHandler}>
-                <div className="back-shadow back card">
+                <div className="back card">
                   <div className="card-body">
                     <h5 className="card-title text-center">I am a Borrower!</h5>
                     <h5 className="card-title mt-5 mb-3">Login as Participants</h5>
@@ -195,7 +195,7 @@ function Login() {
             </div>
             <div className="col col-sm-12 col-md-6 page_fill_3 pb-5">
               <form onSubmit={poolHandler}>
-                <div className="back-shadow back card">
+                <div className="back card">
                   <div className="card-body">
                     <h5 className="card-title text-center">I am a lender!</h5>
                     <h5 className="card-title mt-5 mb-3">Login as Pool</h5>

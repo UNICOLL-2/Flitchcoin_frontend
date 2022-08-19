@@ -27,7 +27,7 @@ const App = () => {
           onHide={() => setShow(false)}
           backdrop="static"
           keyboard={false}
-          className="w-100 h-100 d-flex justify-content-center align-items-center modal_main shadow"
+          className="w-100 h-100 d-flex justify-content-center align-items-center"
         >
           <div className="row shadow back back__content">
             <div className="col-4 p_50 fs-2 fw-bold back back__animation">
@@ -41,7 +41,7 @@ const App = () => {
                     Welcome to the Aladdin® site
                   </h1>
                 </div>
-                <div className="modal__body">
+                <div className="modal__body pressed">
                   <p className="h6">
                     Please read this page before proceeding, as it explains
                     certain restrictions imposed by law on the distribution of

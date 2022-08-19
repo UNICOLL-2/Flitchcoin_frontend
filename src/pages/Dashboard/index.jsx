@@ -21,14 +21,16 @@ function Dashboard() {
 
   return (
     <>
-      <div className="back shadow container">
-        <div className="row back shadow mt-4 p-4">
+      <div className="container">
+        <div className="row mt-4">
+          <div className="card back p-4">
           <p>Username / Profile <span className="ps-5"> User Id</span></p>
+        </div>
         </div>
       </div>
       <div className="container mt-4 mb-5">
         <div className="row">
-          <div className="col col-md-12 col-lg-8 back shadow  mt-3 p-3">
+          <div className="col col-md-12 col-lg-8 card back mt-3 p-3">
             <div className="row">
               <div className="col col-8">
                 <h3>Balance Details</h3>
@@ -37,7 +39,7 @@ function Dashboard() {
                 <button type='button' style={{ position: "absolute" }} className='btn btn-warning' onClick={() => navigate("/pool_participant")} >Deposit</button>
               </div>
               <div className="col col-2">
-                <button type='button' className='btn btn-light' style={{ position: "absolute" }} >Withdraw</button>
+                <button type='button' className='primary' style={{ position: "absolute" }} onClick={() => (navigate('/withdraw'))} >Withdraw</button>
               </div>
             </div>
             <hr />
@@ -48,7 +50,7 @@ function Dashboard() {
               <h3>$ 1,606.25</h3>
             </div>
           </div>
-          <div className="col col md-6 col lg-4 mt-3 pt-2 back shadow ms-3 news" >
+          <div className="col col md-6 col lg-4 mt-3 pt-2 card back ms-3 news" >
             <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
                 <div className="carousel-inner">
                 <div class="carousel-item active">

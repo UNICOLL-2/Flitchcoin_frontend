@@ -35,7 +35,7 @@ function Header() {
 
   return (
     <div>
-      <Navbar bg="light" expand="lg" className="shadow m-4 nav-bar" >
+      <Navbar bg="light" expand="lg" className="shadow m-4 nav-bar back" >
         <Link className="logo" to="/">LLC</Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse

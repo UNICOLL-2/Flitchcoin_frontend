@@ -6,6 +6,7 @@ import coinGecko from './apis/coinGecko';
 import Escrow_main from "../Escrow_main";
 
 const PoolParticipant = () => {
+
   const  id  = "ethereum";
   const [coinData, setCoinData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -70,6 +71,7 @@ const PoolParticipant = () => {
         <div className="row">
           <div className="col col-md-12 col-lg-6 ps-4 mt-5">
           <HistoryChart data={coinData} />
+
           </div>
           <div className="col col-md-12 col-lg-3 mt-5">
           <CoinData data={coinData.detail} />
@@ -78,6 +80,7 @@ const PoolParticipant = () => {
             <Escrow_main/>
           </div>
         </div>
+        <div id="chart"></div>
       </div>
     );
   };

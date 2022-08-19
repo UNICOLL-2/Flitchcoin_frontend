@@ -11,8 +11,9 @@ const Order = () => {
   const [type, setType] = useState("otherUser");
   const [network, setNetwork] = useState("Select Network");
   const [network1, setNetwork1] = useState("Select Network");
-  const [qr,setQr] = useState();
+  const [qr, setQr] = useState();
   const [trans_id, setTrans_id] = useState();
+  const [memo, setMemo] = useState();
 
   const coinHandler = (e) => {
     var data = JSON.stringify({
@@ -31,7 +32,8 @@ const Order = () => {
       .then((res) => res.json())
       .then((result) => {
         console.log("result from wallet_address", result);
-        setQr(result.address)
+        setQr(result.address);
+        setMemo(result.tag);
       })
       .catch((err) => {
         console.log(err);
@@ -98,27 +100,23 @@ const Order = () => {
   }, [network1 != 'Select Network'])
 
   return (
-
-
     <div className="back shadow">
       <div className="container">
         <div className="row">
-          <div className="col col-md-8">
+          <div className="col col-1"></div>
+          <div className="col col-md-6">
             <div className="card back mt-5 mb-5 p-2">
               <div className="card-body">
                 <div className="escrow__body">
                   <div className=" text-center">
-                    <h4>
-                      <u>
-                        <b>USER</b>
-                      </u>
-                    </h4>
+                    <h6>USER</h6>
                     <div className="d-flex justify-content-end">
                       <button
                         type="button"
-                        className="primary mt-5 mb-2"
+                        className="primary mt-5 mb-2 ps-4 pe-4"
                         data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop"
+                        style={{fontSize: '12px'}}
                       >
                         CANCEL
                       </button>
@@ -139,12 +137,12 @@ const Order = () => {
                               <br />
                               <button
                                 type="button"
-                                className="primary me-4"
+                                className="primary me-4 ps-4 pe-4"
                                 data-bs-dismiss="modal"
                               >
                                 No
                               </button>
-                              <button type="button" className="primary">
+                              <button type="button" className="primary ps-4 pe-4">
                                 Yes
                               </button>
                             </div>
@@ -153,44 +151,37 @@ const Order = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="">
+                  {/* <div className="">
                     <div className="vl"></div>
-                  </div>
+                  </div> */}
                   <div className="text-center">
-                    <h4>
-                      <u>
-                        <b>Memo of Transaction</b>
-                      </u>
-                    </h4>
+                    <h6>Memo of Transaction</h6>
                     <button
-                      className="primary mt-5 mb-2 "
+                      className="primary mt-5 mb-2 ps-4 pe-4"
                       onClick={() => navigate("/Dashboard")}
+                      style={{fontSize: '12px'}}
                     >
                       Go to Dashboard
                     </button>
                   </div>
-                  <div className="">
+                  {/* <div className="">
                     <div className="vl"></div>
-                  </div>
-                  <div className="">
-                    <h4>
-                      <u>
-                        <b>POOLS</b>
-                      </u>
-                    </h4>
+                  </div> */}
+                  <div className="text-center">
+                    <h6>POOLS</h6>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="col col-md-4 card mt-5 back mb-3">
+          <div className="col col-md-1"></div>
+          <div className="col col-md-3 card mt-5 back mb-3">
             <div className="row pt-3 pb-3">
-              <div className="col col-5">
+              <div className="col col-6">
                 <input type="radio" className="btn-check" name="options-outlined" id="success-outlined" autoComplete="off" checked />
                 <label className="btn btn-outline-light text-dark shadow w-100" htmlFor="success-outlined" onClick={() => setType("otherUser")}>Other User</label>
               </div>
-              <div className="col col-2"></div>
-              <div className="col col-5">
+              <div className="col col-6">
                 <input type="radio" className="btn-check" name="options-outlined" id="danger-outlined" autoComplete="off" />
                 <label className="btn btn-outline-light text-dark shadow w-100" htmlFor="danger-outlined" onClick={() => setType("binanceUser")}>Binance User</label>
               </div>
@@ -201,13 +192,7 @@ const Order = () => {
             </div>
             {type === "otherUser" ? (
               <div>
-                <h6 className="mt-4"><u>Wallet address :</u></h6>
-                <h4>h45bhjhlb4lbb4h5664hvjrk4v4kk</h4>
-                <h6 className="mt-4"><u>Wallet memo :</u></h6>
-                <h4>h45bhjhlb4lbb4h5664hvjrk4v4kk</h4>
-                <h6 className="mt-4"><u>Inserted Coin :</u></h6>
-                <h4>BTC</h4>
-                <div className="col col-xs-12 col-lg-7 mb-5 mt-4 btn-group">
+                <div className="col col-xs-12 col-lg-7 mt-4 w-100 btn-group">
                   <button
                     type="button"
                     className="btn btn-dark dropdown-toggle w-100 "
@@ -232,71 +217,78 @@ const Order = () => {
                     }
                   </ul>
                 </div>
+                <h6 className="mt-4 text-info"><u>Wallet address :</u></h6>
+                <h5>{qr == undefined ? (<div className="text-center">-----</div>) : `${qr}`}</h5>
+                <h6 className="mt-4 text-info"><u>Wallet memo :</u></h6>
+                <h5>{memo == undefined ? (<div className="text-center">-----</div>) : `${memo}`}</h5>
+                <h6 className="mt-4 text-info"><u>Inserted Coin :</u></h6>
+                <h5 className="mb-4">BTC</h5>
               </div>
             ) : (
               <div>
-                <h6 className="mt-4"><u>Our Pay Id :</u></h6>
-                <h4>h45bhjhlb4lbb4h5664hvjrk4v4kk</h4>
-                <h6 className="mt-4"><u>Our Email address :</u></h6>
-                <h4>logicallops@gmail.com</h4>
-                <h6 className="mt-4"><u>Our Phone no. :</u></h6>
-                <h4>xxx - xxxx - xxx</h4>
-                <h6 className="mt-4"><u>Our Binance Id :</u></h6>
-                <h4>h45bhjhlb4lbb4h5664hvjrk4v4kk</h4>
+                <h6 className="mt-4 text-info"><u>Our Pay Id :</u></h6>
+                <h5>h45bhjhlb4lbb4h5664hvjrk4v4kk</h5>
+                <h6 className="mt-4 text-info"><u>Our Email address :</u></h6>
+                <h5>logicallops@gmail.com</h5>
+                <h6 className="mt-4 text-info"><u>Our Phone no. :</u></h6>
+                <h5>xxx - xxxx - xxx</h5>
+                <h6 className="mt-4 text-info"><u>Our Binance Id :</u></h6>
+                <h5>h45bhjhlb4lbb4h5664hvjrk4v4kk</h5>
               </div>
             )}
             <div className="d-flex justify-content-end">
-                  <button
-                    type="button"
-                    className="primary mt-3 mb-3"
-                    data-bs-toggle="modal"
-                    data-bs-target="#staticBackdrop2"
-                  >
-                    Confirm
-                  </button>
-                  <div
-                    className="modal fade shadow"
-                    id="staticBackdrop2"
-                    data-bs-backdrop="static"
-                    data-bs-keyboard="false"
-                    tabIndex="-1"
-                    aria-labelledby="staticBackdropLabel"
-                    aria-hidden="true"
-                  >
-                    <div className="modal-dialog modal-dialog-centered dialog">
-                      <div className="modal-content back shadow">
-                        <div className="modal-body">
-                          <form onSubmit={submitHandler}>
-                          <div className="input1 w-100">
-                            <input
-                              type="text"
-                              className="txt-underline p-3 mb-3 w-100  input pressed"
-                              placeholder="Place Transaction id"
+              <button
+                type="button"
+                className="primary mt-3 mb-3"
+                data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop2"
+              >
+                Confirm
+              </button>
+              <div
+                className="modal fade shadow"
+                id="staticBackdrop2"
+                data-bs-backdrop="static"
+                data-bs-keyboard="false"
+                tabIndex="-1"
+                aria-labelledby="staticBackdropLabel"
+                aria-hidden="true"
+              >
+                <div className="modal-dialog modal-dialog-centered dialog">
+                  <div className="modal-content back shadow">
+                    <div className="modal-body">
+                      <form onSubmit={submitHandler}>
+                        <div className="input1 w-100">
+                          <input
+                            type="text"
+                            className="txt-underline p-3 mb-3 w-100  input pressed"
+                            placeholder="Place Transaction id"
                             onChange={onChange}
                             name="trans_id"
                             value={trans_id}
-                            />
-                            <span className="underline"></span>
-                          </div>
-                          <br />
-                          <br />
-                          <button
-                            type="button"
-                            className="primary me-4"
-                            data-bs-dismiss="modal"
-                          >
-                            Cancel
-                          </button>
-                          <button type="submit" className="primary">
-                            Confirm
-                          </button>
-                          </form>
+                          />
+                          <span className="underline"></span>
                         </div>
-                      </div>
+                        <br />
+                        <br />
+                        <button
+                          type="button"
+                          className="primary me-4"
+                          data-bs-dismiss="modal"
+                        >
+                          Cancel
+                        </button>
+                        <button type="submit" className="primary">
+                          Confirm
+                        </button>
+                      </form>
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
           </div>
+          <div className="col col-md-1"></div>
         </div>
       </div>
     </div>
