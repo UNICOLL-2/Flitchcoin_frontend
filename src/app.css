@@ -644,3 +644,9 @@ textarea:focus {
 canvas {
 	background-color: transparent;
 }
+
+/* TradeView CSS */
+
+.header-i7yYYmGG{
+	display: none!important;
+}

@@ -1,26 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import { Timeline } from "react-ts-tradingview-widgets";
+import { CryptoCurrencyMarket } from "react-ts-tradingview-widgets";
+import { TickerTape } from "react-ts-tradingview-widgets";
 
 function Dashboard() {
 
   const navigate = useNavigate();
-
-  const [cryptoNews, setCryptoNews] = useState([]);
-
-  const fetchNews = async () => {
-    const url = 'https://newsapi.org/v2/everything?q=cryptocurrency&apiKey=5a4d5991089d406e8117d408dc2cfead';
-    let data = await fetch(url);
-    let response = await data.json();
-    setCryptoNews(response.articles);
-  }
-  useEffect(() => {
-    fetchNews();
-  }, []);
-
-  const defaultImage = 'https://i.morioh.com/200702/b3154d32.jpg';
-
   return (
     <>
+    <TickerTape colorTheme="light" symbols={[
+            {
+              "proName": "BITSTAMP:BTCUSD",
+              "title": "BTC/USD"
+            },
+            {
+              "proName": "BITSTAMP:ETHUSDT",
+              "title": "ETH/USDT"
+            },
+            {
+              "proName": "BINANCE:SOLUSDT",
+              "title": "SOL/USDT"
+            },
+            {
+              "proName": "BINANCE:MATICUSDT",
+              "title": "MATIC/USDT"
+            },
+            {
+              "proName": "BINANCE:AVAXUSDT",
+              "title": "AVAX/USDT"
+            },
+            {
+              "proName": "BINANCE:XRPUSDT",
+              "title": "XRP/USDT"
+            },
+        ]} ></TickerTape>
       <div className="container">
         <div className="row mt-4">
           <div className="card back p-4">
@@ -30,7 +44,7 @@ function Dashboard() {
       </div>
       <div className="container mt-4 mb-5">
         <div className="row">
-          <div className="col col-md-12 col-lg-8 card back mt-3 p-3">
+          <div className="col col-md-12 col-lg-7 card back mt-3 p-3">
             <div className="row">
               <div className="col col-8">
                 <h3>Balance Details</h3>
@@ -50,25 +64,13 @@ function Dashboard() {
               <h3>$ 1,606.25</h3>
             </div>
           </div>
-          <div className="col col md-6 col lg-4 mt-3 pt-2 card back ms-3 news" >
-            <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
-                <div className="carousel-inner">
-                <div class="carousel-item active">
-      <img height={300} src="https://tokenplace.com/wp-content/uploads/2019/09/cryptonews-digest-16-26-September.jpeg" class="d-block w-100" alt="news"/>
-    </div>
-              {cryptoNews.map((news) => {
-                return (
-                  <div className="carousel-item " >
-                  <img height={240} src={news?.urlToImage || defaultImage} className="d-block w-100" alt="news"/>
-                    <div>
-                      <h5 className="mt-2">{news.title}</h5>
-                    </div>
-                </div>
-                )
-              })}
-              </div>
-              </div>
+          <div className="col-lg-1"></div>
+          <div className="col col-md-6 col-lg-4 mt-3 card back" >
+              <Timeline colorTheme="light" feedMode="market" displayMode="compact" market="crypto" height={300} width="100%" symbol="BTCUSD" isTransparent></Timeline>
             </div>
+          </div>
+          <div className="row mt-5 card back">
+          <CryptoCurrencyMarket colorTheme="light" width="100%" height={400} isTransparent ></CryptoCurrencyMarket>
           </div>
         </div>
     </>

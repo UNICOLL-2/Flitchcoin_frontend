@@ -1,8 +1,11 @@
 import React, { useState,useEffect } from "react";
 import { useNavigate,Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { coinType } from "../../Feature/Order/orderSlice";
 
 const Escrow_main = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [asset, setAsset] = useState([]);
   const [coin, setCoin] = useState("Select coin");
 
@@ -19,6 +22,11 @@ const Escrow_main = () => {
       });
     });
   }
+
+  const nextHanlder = () => {
+    dispatch(coinType(coin));
+    navigate("/order");
+  };
 
   useEffect(() => {
     asset_list();
@@ -66,13 +74,20 @@ const Escrow_main = () => {
               </div>
               <div className="row">
                 <div className="d-flex justify-content-center mb-5">
-                  <Link
+                  {/* <Link
                     className="primary mt-4 ps-5 pe-5"
                     style={{ position: "absolute" }}
                     to="/order"
                   >
                     NEXT
-                  </Link>
+                  </Link> */}
+                  <button
+                    className="primary mt-4 ps-5 pe-5"
+                    style={{ position: "absolute" }}
+                    onClick={nextHanlder}
+                  >
+                    NEXT
+                  </button>
                 </div>
               </div>
             </div>

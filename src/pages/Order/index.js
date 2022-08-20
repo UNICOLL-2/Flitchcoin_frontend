@@ -6,6 +6,7 @@ import { QRCodeSVG } from 'qrcode.react';
 
 const Order = () => {
   const { selectedType } = useSelector((state) => state.auth);
+  const { selectedCoin } = useSelector((state) => state.order);
 
   const navigate = useNavigate();
   const [type, setType] = useState("otherUser");
@@ -222,7 +223,7 @@ const Order = () => {
                 <h6 className="mt-4 text-info"><u>Wallet memo :</u></h6>
                 <h5>{memo == undefined ? (<div className="text-center">-----</div>) : `${memo}`}</h5>
                 <h6 className="mt-4 text-info"><u>Inserted Coin :</u></h6>
-                <h5 className="mb-4">BTC</h5>
+                <h5 className="mb-4">{selectedCoin}</h5>
               </div>
             ) : (
               <div>
