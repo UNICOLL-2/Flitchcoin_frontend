@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { loginToken, userLogin } from "../../Feature/Auth/authSlice";
 import { Link } from "react-router-dom";
 import { fetchToken, setToken } from "../../Auth";
-// import { logOutUser } from "../../Feature/Auth/authSlice";
 import { useSelector } from "react-redux";
 import {  Modal } from "react-bootstrap";
 import './login.css';
@@ -25,25 +24,6 @@ function Login() {
       dispatch(userLogin());
     }
   }, [userToken]);
-
-  // function rel_login(e) {
-  //   fetch("/rel_login").then((result) => {
-  //     result.json().then((res) => {
-  //       console.log("result", res);
-  //     })
-  //   });
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     type: null
-  //   }));
-  //   console.log(selectedType);
-  // };
-
-  // const onClick = (e) => {
-  //   localStorage.removeItem("token");
-  //   rel_login();
-  //   dispatch(logOutUser(formData));
-  // }
 
   var [formData, setFormData] = useState({
     usernamePool: "",
@@ -79,38 +59,17 @@ function Login() {
 
   const poolHandler = (e) => {
     e.preventDefault();
-    console.log("clicked");
     setFormData((prevData) => ({
       ...prevData,
-      type: 'participant',
+      type: 'pool',
     }))
     if (type === 'pool') {
       if (usernamePool === "" || passwordPool === "") {
         alert("Please fill in the above information in POOL");
       } else {
-        var logInData = new FormData();
-        logInData.append('username', usernamePool);
-        logInData.append('password', passwordPool);
-        fetch("/token", {
-          method: 'POST',
-          body: logInData
-        }).then(res => res.json())
-          .then((data) => {
-            console.log("data is ", data);
-            console.log(data.access_token);
-            if (data.access_token) {
-              setToken(data.access_token);
-              console.log(fetchToken());
-              dispatch(loginUser(formData));
-              navigate("/");
-            }
-          })
-          .catch((err) => {
-            console.log("error", err);
-            alert("Incorrect Username / Password");
-          })
+        setShow(true);
       }
-    }
+    };
   }
 
   const onChange = (e) => {
@@ -204,9 +163,8 @@ function Login() {
             </p>
           </div>
         </div>
-      <Modal show={show} onHide={() => setShow(false)} className="mt-5 modal fade shadow">
-          <div className="back shadow">
-            <div className="modal-body">
+      <Modal show={show} onHide={() => setShow(false)} className="mt-5">
+          <div className="back p-3">
               <b>Please Enter the OTP</b>
               <div className="input1 w-100">
                 <input
@@ -230,7 +188,6 @@ function Login() {
                 onClick={otpHandler} >
                 Confirm
               </button>
-            </div>
         </div>
       </Modal>
       <Footer/>

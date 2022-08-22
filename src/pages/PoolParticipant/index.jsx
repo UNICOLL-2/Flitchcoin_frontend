@@ -7,6 +7,7 @@ import { CryptoCurrencyMarket } from "react-ts-tradingview-widgets";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { coinType } from "../../Feature/Order/orderSlice";
+import { fetchToken } from "../../Auth";
 
 const PoolParticipant = () => {
 
@@ -16,9 +17,14 @@ const PoolParticipant = () => {
   const [coin, setCoin] = useState("Select coin");
 
   function asset_list() {
-    fetch("http://34.73.24.72/asset_list").then((result) => {
+    fetch("http://34.73.24.72/asset_list",{
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        Authorization: `Bearer ${fetchToken()}`
+      }
+    }).then((result) => {
       result.json().then((res) => {
-        console.log("res",res);
         let tmpArray = [];
         res.map((items) => {
           for (let i = 0; i < 1; i++) {
@@ -37,7 +43,6 @@ const PoolParticipant = () => {
 
   useEffect(() => {
     asset_list();
-    console.log("asset",asset)
   }, []);
 
   const { selectedCoin } = useSelector((state) => state.order);
@@ -45,23 +50,24 @@ const PoolParticipant = () => {
   const [coinsNet , setCoinsNet] = useState('');
 
   const coin1 = () => {
-    {selectedCoin === null ? 
-    setCoins('BTC') : setCoins(selectedCoin)}
+    {coin === "Select coin" ? 
+    setCoins('BTC') : setCoins(coin)}
   }
 
   const coinNet = () => {
     {selectedCoin === null ? 
-      setCoinsNet(`BTCUSDT`) : setCoinsNet(`${selectedCoin}USDT`)
+      setCoinsNet(`BTCUSDT`) : setCoinsNet(`${coin}USDT`)
     }
   }
 
   useEffect(() => {
     coin1();
-  },[selectedCoin,coin,coinsNet,coins,asset]);
+  },[coin]);
 
   useEffect(() => {
     coinNet();
-  },[selectedCoin,coin,coinsNet,coins,asset]);
+    console.log(coinsNet);
+  },[coin]);
 
   const renderData = () => {
     return (

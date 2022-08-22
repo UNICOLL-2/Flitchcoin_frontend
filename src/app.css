@@ -109,6 +109,10 @@ element.style {
 	background: linear-gradient(to right, rgb(46, 47, 61), rgb(113, 204, 175)) !important;
 }
 
+.account{
+	border: 1px solid #d7d7d7;
+}
+
 .m_l {
 	margin-left: 110px;
 }

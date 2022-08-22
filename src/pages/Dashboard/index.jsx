@@ -1,9 +1,30 @@
-import React from 'react';
+import React,{ useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Timeline } from "react-ts-tradingview-widgets";
 import { TickerTape } from "react-ts-tradingview-widgets";
+import { fetchToken } from "../../Auth";
 
 function Dashboard() {
+
+  const account = () => {
+    fetch("http://34.73.24.72/account",{
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        Authorization: `Bearer ${fetchToken()}`
+      }
+    }).then((result) => result.json()
+    .then((res) => {
+      console.log(res);
+    })
+    ).catch((err) => {
+      console.log(err);
+    })
+  };
+
+  useEffect(() => {
+    account();
+  },[])
 
   const navigate = useNavigate();
   return (
@@ -66,6 +87,17 @@ function Dashboard() {
           <div className="col-lg-1"></div>
           <div className="col col-md-6 col-lg-4 mt-3 card back" >
               <Timeline colorTheme="light" feedMode="market" displayMode="compact" market="crypto" height={300} width="100%" symbol="BTCUSD" isTransparent></Timeline>
+            </div>
+          </div>
+          <div className="container card back mt-4">
+            <div className="row">
+              <div className="col-6 text-muted account p-3">Name</div>
+              <div className="col-2 text-muted account p-3">Total</div>
+              <div className="col-2 text-muted account p-3">Used</div>
+              <div className="col-2 text-muted account p-3">Yield</div>
+            </div>
+            <div className="row">
+
             </div>
           </div>
         </div>

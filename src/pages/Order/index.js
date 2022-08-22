@@ -18,7 +18,7 @@ const Order = () => {
 
   const coinHandler = (e) => {
     var data = JSON.stringify({
-      "coin_name": "btc",
+      "coin_name": {selectedCoin},
       "network": network1
     });
     fetch("http://34.73.24.72/wallet_address/", {
@@ -32,7 +32,6 @@ const Order = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log("result from wallet_address", result);
         setQr(result.address);
         setMemo(result.tag);
       })
@@ -56,14 +55,13 @@ const Order = () => {
     })
       .then((res) => res.json())
       .then((result) => {
-        console.log(result);
       })
       .catch((err) => console.log(err));
   };
 
   function network_list() {
     var data = JSON.stringify({
-      "string": "btc"
+      "string": {selectedCoin}
     })
     fetch("http://34.73.24.72/network", {
       method: "POST",
@@ -152,9 +150,6 @@ const Order = () => {
                       </div>
                     </div>
                   </div>
-                  {/* <div className="">
-                    <div className="vl"></div>
-                  </div> */}
                   <div className="text-center">
                     <h6>Memo of Transaction</h6>
                     <button
@@ -165,9 +160,6 @@ const Order = () => {
                       Go to Dashboard
                     </button>
                   </div>
-                  {/* <div className="">
-                    <div className="vl"></div>
-                  </div> */}
                   <div className="text-center">
                     <h6>POOLS</h6>
                   </div>

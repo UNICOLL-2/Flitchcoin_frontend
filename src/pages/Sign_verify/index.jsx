@@ -12,7 +12,7 @@ const Sign_verify = () => {
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
-        otp: "",
+        otp: 0,
         type: null,
     });
     const { otp, type } = formData;
@@ -21,17 +21,9 @@ const Sign_verify = () => {
         "otp": otp
     });
 
-    function rel_signup(){
-        fetch("http://34.73.24.72/rel_signup").then((result) => {
-          result.json().then((res) => {
-            console.log("result", res);
-          })
-        })
-      };
-
     const submitHandler = (e) => {
         e.preventDefault();
-        if (otp === "") {
+        if (otp === 0) {
             alert("Enter OTP");
         } else {
             fetch("http://34.73.24.72/verify_email", {
@@ -53,7 +45,6 @@ const Sign_verify = () => {
                     } else {
                         alert("Max tries Reached. Try again !!");
                         navigate("/sign-up");
-                        rel_signup();
                     }
                 }).catch((err) => {
                     console.log(err);
@@ -84,7 +75,7 @@ const Sign_verify = () => {
                                         <h5 className="text-info mt-5 mb-3">Signing up as Participant</h5>
                                         <div className='input1 w-100'>
                                         <input
-                                            type="text"
+                                            type="number"
                                             name="otp"
                                             value={otp}
                                             onChange={onChange}
@@ -114,7 +105,7 @@ const Sign_verify = () => {
                                         <h5 className="text-info mt-5 mb-3">Signing up as Pool</h5>
                                         <div className='input1 w-100'>
                                         <input
-                                            type="text"
+                                            type="number"
                                             name="otp"
                                             value={otp}
                                             onChange={onChange}
