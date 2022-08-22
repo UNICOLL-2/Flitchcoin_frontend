@@ -6,6 +6,8 @@ import { fetchToken } from "../../Auth";
 
 function Dashboard() {
 
+  const coins = ["ATOM","AVAX","BNB","BTC","BUSD","DOT","EOS","ETH","LINK","LTC","MATIC","NEAR","RVN","SOL","TRX","USDC","USDT","XLM","XMR","XRP","ZEC"]
+
   const account = () => {
     fetch("http://34.73.24.72/account",{
       method: 'GET',
@@ -15,7 +17,12 @@ function Dashboard() {
       }
     }).then((result) => result.json()
     .then((res) => {
-      console.log(res);
+      const tmpArray = [];
+      coins.map((items) => {
+       console.log(items)
+        console.log(res.items);
+        tmpArray.push(res.items);
+      })
     })
     ).catch((err) => {
       console.log(err);
@@ -89,7 +96,7 @@ function Dashboard() {
               <Timeline colorTheme="light" feedMode="market" displayMode="compact" market="crypto" height={300} width="100%" symbol="BTCUSD" isTransparent></Timeline>
             </div>
           </div>
-          <div className="container card back mt-4">
+          <div className="container card back mt-5">
             <div className="row">
               <div className="col-6 text-muted account p-3">Name</div>
               <div className="col-2 text-muted account p-3">Total</div>
