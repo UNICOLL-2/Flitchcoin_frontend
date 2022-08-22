@@ -1,43 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Animation from "../../Animation";
+import Footer from '../../layouts/Footer/index';
+import { SymbolOverview } from "react-ts-tradingview-widgets";
+import { SymbolInfo } from "react-ts-tradingview-widgets";
+import { MiniChart } from "react-ts-tradingview-widgets";
+import { ForexCrossRates } from "react-ts-tradingview-widgets";
 
 function Home() {
   const [eFront, seteFront] = useState(false);
   const [clientStory, setClientStory] = useState(false);
 
-  const data = JSON.stringify({
-    Perm_ID: "test001",
-    Pool_trans_ID: "test001",
-    Demand: 1,
-    Post_timestamp: "2022-06-05T23:05:05Z",
-  });
-
-  useEffect(() => {
-    console.log(typeof data);
-  });
-
-  const onTest = (e) => {
-    fetch("http://127.0.0.1:8000/L_demand", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: data,
-    })
-      .then((result) => {
-        console.log("result", result);
-      })
-      .catch((err) => {
-        console.log("error", err);
-      });
-  };
-
-  const show = false;
   return (
     <>
-    <Animation/>
-    <div className="back shadow">
+    <div className="back shadow pb-3">
       <div className="container">
         <section className="row pt-3">
           <div className="col-sm-12 col-md-6 col-lg-5 d-flex flex-column justify-content-center h_get_to_know">
@@ -58,12 +33,22 @@ function Home() {
             </div>
           </div>
           <div className="spacer col-lg-1"></div>
-          <div className="img-block col-sm-12 col-md-6 mt-5 h_get_to_know_img">
-            <img
-              src="https://www.blackrock.com/blk-inst-assets/cache-1635526326000/images/media-bin/web/global/full-bleed-banners/ala-sit-action-ski-hero.webp"
-              alt=""
-              className="h-100 w-100"
-            />
+          <div className="col-sm-12 col-md-6 mt-5 card back">
+            <SymbolOverview colorTheme="light"
+                height={300}
+                width="100%"
+                chartType="area"
+                downColor="#800080"
+                borderDownColor="#800080"
+                wickDownColor="#800080"
+                isTransparent
+                symbols={
+                  [
+                    ["BTC", "BTCUSDT"],
+                    ["ETH", "ETHUSDT"],
+                    ["MATIC", "MATICUSDT"]
+                  ]
+                } />
           </div>
         </section>
         <section className="my_50">
@@ -124,20 +109,13 @@ function Home() {
             </div>
           </div>
         </section>
+        <Animation/>
         <section className="my_50">
           <div className="row">
-            <div className="col-md-6 col-sm-12">
-              <iframe
-                // width="727"
-                height="350"
-                className="w-100"
-                src="https://www.youtube.com/embed/0f_hewSrAH4"
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
+            <div className="col-md-5 col-sm-12 mt-5 card back">
+            <SymbolInfo colorTheme="dark" autosize symbol="XRPUSDT" isTransparent></SymbolInfo>
             </div>
+            <div className="col-md-1"></div>
             <div className="col-md-6 col-sm-12 d-flex flex-column justify-content-center">
               <div className="pt-3">
                 <p className="h3">THE POWER OF ALADDIN + EFRONT</p>
@@ -198,19 +176,17 @@ function Home() {
                 </div>
               </div>
             </div>
-            <div className="col-md-6 col-sm-12 pb-5">
-              <div className="img-block">
-                <img
-                  src="https://www.blackrock.com/blk-inst-assets/cache-1640697450000/images/media-bin/web/institutional/casestudy.webp"
-                  alt=""
-                  className="h-100 w-100"
-                />
-              </div>
+            <div className="col-md-6 col-sm-12 pb-5 card back">
+              <MiniChart colorTheme="dark" width="100%" symbol="SOLUSDT" isTransparent></MiniChart>
             </div>
           </div>
         </section>
+        <div className="card back mt-5">
+        <ForexCrossRates colorTheme="light" height={400} width="100%" isTransparent></ForexCrossRates>
+        </div>
       </div>
     </div>
+    <Footer/>
     </>
   );
 }

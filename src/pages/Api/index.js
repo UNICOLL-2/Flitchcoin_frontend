@@ -1,5 +1,6 @@
 import React from "react";
 import Animation from "../../Animation";
+import Footer from '../../layouts/Footer/index';
 
 function Api() {
   return (
@@ -358,6 +359,7 @@ function Api() {
       </div>
       <div className="mb-3"></div>
     </div>
+    <Footer/>
     </>
   );
 }

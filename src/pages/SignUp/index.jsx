@@ -4,9 +4,15 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { signinUser } from "../../Feature/Auth/authSlice";
 import Animation from "../../Animation";
+import Footer from '../../layouts/Footer/index';
+import { useEffect } from "react";
 
 function SignUp() {
-  const { selectedType } = useSelector((state) => state.auth);
+  var { selectedType } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    console.log(selectedType);
+  },[selectedType]);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,7 +31,7 @@ function SignUp() {
   const submitHandler = (e) => {
     e.preventDefault();
     if (type === 'participant') {
-      if ((usernameParticipant == "") || (passwordParticipant == "") || (full_nameParticipant == "")) {
+      if ((usernameParticipant === "") || (passwordParticipant === "") || (full_nameParticipant === "")) {
         alert("Please fill in the above information in PARTICIPANT");
       } else {
         var data = JSON.stringify({
@@ -52,7 +58,7 @@ function SignUp() {
           })
       }
     } else if (type === 'pool') {
-      if ((usernamePool == "") || (passwordPool == "") || (full_namePool == "")) {
+      if ((usernamePool === "") || (passwordPool === "") || (full_namePool === "")) {
         alert("Please fill in the above information in Pool");
       } else {
         var data = JSON.stringify({
@@ -90,10 +96,10 @@ function SignUp() {
   return (
     <>
     <Animation/>
-    <div className="back shadow">
       <div className="container">
         <div className="row login__two" >
-          <div className="col col-sm-12 col-md-6 page_fill_3 pb-5">
+          <div className="col col-3"></div>
+          <div className="col col-sm-12 col-md-3 page_fill_3 pb-5">
             <form onSubmit={submitHandler}>
               <div className="card back">
                 <div className="card-body">
@@ -148,7 +154,7 @@ function SignUp() {
               </div>
             </form>
           </div>
-          <div className="col col-sm-12 col-md-6 page_fill_3 pb-5">
+          <div className="col col-sm-12 col-md-3 page_fill_3 pb-5">
             <form onSubmit={submitHandler}>
               <div className="card back">
                 <div className="card-body">
@@ -201,7 +207,7 @@ function SignUp() {
           </div>
         </div>
       </div>
-    </div>
+    <Footer/>
     </>
   );
 }

@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../Feature/Auth/authSlice";
 import Animation from "../../Animation";
 
 function Forgot_Pass() {
-    const { selectedType } = useSelector((state) => state.auth);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -26,7 +24,7 @@ function Forgot_Pass() {
 
     const submitHandler = (e) => {
         e.preventDefault();
-            if ((username == "") || (password == "") || (full_name == "")) {
+            if ((username === "") || (password === "") || (full_name === "")) {
                 alert("Please fill in the above information in ");
             } else {
                 var data = JSON.stringify({
@@ -34,7 +32,7 @@ function Forgot_Pass() {
                     "password": password,
                     "full_name": full_name
                 })
-                fetch("http://127.0.0.1:8000/forgot_pass", {
+                fetch("http://34.73.24.72/forgot_pass", {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
@@ -60,14 +58,12 @@ function Forgot_Pass() {
         }));
     };
     return (
-        <>
+        <div>
         <Animation/>
-        <div className="back shadow">
             <div className="container">
-                <div className="row">
-                    <div className="col col-md-3"></div>
-                    <div className="col col-md-6">
-                    <div className="page_fill_1 ">
+                <div className="row ">
+                    <div className="col col-md-4"></div>
+                    <div className="col col-md-3 ms-5 mt-5">
                         <form onSubmit={submitHandler}>
                             <div className="card back ">
                                 <div className="card-body ">
@@ -115,12 +111,11 @@ function Forgot_Pass() {
                                 </div>
                             </div>
                         </form>
-                    </div>
                 </div>
+                <div className="col col-4"></div>
                 </div>
             </div>
         </div>
-        </>
     );
 }
 

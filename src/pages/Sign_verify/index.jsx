@@ -6,7 +6,7 @@ import { signinUser } from "../../Feature/Auth/authSlice";
 import Animation from "../../Animation";
 
 const Sign_verify = () => {
-    const { selectedType } = useSelector((state) => state.auth);
+    var { selectedType } = useSelector((state) => state.auth);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -22,7 +22,7 @@ const Sign_verify = () => {
     });
 
     function rel_signup(){
-        fetch("http://127.0.0.1:8000/rel_signup").then((result) => {
+        fetch("http://34.73.24.72/rel_signup").then((result) => {
           result.json().then((res) => {
             console.log("result", res);
           })
@@ -31,10 +31,10 @@ const Sign_verify = () => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        if (otp == "") {
+        if (otp === "") {
             alert("Enter OTP");
         } else {
-            fetch("http://127.0.0.1:8000/verify_email", {
+            fetch("http://34.73.24.72/verify_email", {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

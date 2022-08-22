@@ -1,5 +1,6 @@
 import React from "react";
 import Animation from "../../Animation";
+import Footer from '../../layouts/Footer/index';
 
 function About() {
   return (
@@ -54,6 +55,7 @@ function About() {
       </section>
     </div>
     </div>
+    <Footer/>
     </>
   );
 }

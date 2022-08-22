@@ -7,11 +7,15 @@ element.style {
 	background: #ededed;
 }
 
-.modal_main{
+.forgot_pass {
+	overflow: hidden;
+}
+
+.modal_main {
 	border-radius: 8px;
 }
 
-.nav-bar{
+.nav-bar {
 	border-radius: 12px;
 }
 
@@ -110,11 +114,60 @@ element.style {
 }
 
 .m_l_ {
-	margin-left: 760px;
+	margin-left: 870px;
 }
 
-.m_r {
-	margin-right: 85px;
+.m_l__{
+	margin-left: 600px;
+}
+
+.navbar {
+	border-radius: 5px;
+	font-family: 'Lato', sans-serif;
+	background: transparent;
+	transition: all 0.3s ease;
+	position: relative;
+	display: inline-block;
+	box-shadow: inset 2px 2px 2px 0px rgba(255, 255, 255, .5),
+		7px 7px 20px 0px rgba(0, 0, 0, .1),
+		4px 4px 5px 0px rgba(0, 0, 0, .1);
+	outline: none;
+}
+
+.navbar {
+	border: none !important;
+	color: #000 !important;
+}
+
+.navbar:after {
+	position: absolute !important;
+	content: "" !important;
+	width: 0 !important;
+	height: 100% !important;
+	top: 0 !important;
+	left: 0 !important;
+	direction: rtl !important;
+	z-index: -1 !important;
+	box-shadow:
+		-7px -7px 20px 0px #fff9,
+		-4px -4px 5px 0px #fff9,
+		7px 7px 20px 0px #0002,
+		4px 4px 5px 0px #0001 !important;
+	transition: all 0.3s ease !important;
+}
+
+.navbar:hover {
+	color: #000 !important;
+}
+
+.navbar:hover:after {
+	left: auto !important;
+	right: 0 !important;
+	width: 100% !important;
+}
+
+.navbar:active {
+	top: 2px !important;
 }
 
 .annexure {
@@ -142,15 +195,18 @@ element.style {
 	overflow-y: scroll;
 }
 
-.drop::-webkit-scrollbar, .drop1::-webkit-scrollbar{
+.drop::-webkit-scrollbar,
+.drop1::-webkit-scrollbar {
 	width: 20px;
 }
 
-.drop::-webkit-scrollbar-track, .drop1::-webkit-scrollbar-track{
+.drop::-webkit-scrollbar-track,
+.drop1::-webkit-scrollbar-track {
 	background-color: #ededed;
 }
 
-.drop::-webkit-scrollbar-thumb,.drop1::-webkit-scrollbar-thumb {
+.drop::-webkit-scrollbar-thumb,
+.drop1::-webkit-scrollbar-thumb {
 	background-color: #000000;
 	border-radius: 20px;
 	border: 6px solid transparent;
@@ -164,12 +220,14 @@ element.style {
 }
 
 .vertical-center {
-	min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-	min-height: 100vh; /* These two lines are counted as one :-)       */
-  
+	min-height: 100%;
+	/* Fallback for browsers do NOT support vh unit */
+	min-height: 100vh;
+	/* These two lines are counted as one :-)       */
+
 	display: flex;
 	align-items: center;
-  }
+}
 
 .page_fill_1 {
 	padding-top: 180px;
@@ -191,12 +249,12 @@ element.style {
 	font-size: 20px;
 }
 
-.balance{
-	font-size:medium;
+.balance {
+	font-size: medium;
 }
 
-.news{
-	height: 350px!important;
+.news {
+	height: 350px !important;
 }
 
 /* modify content */
@@ -310,6 +368,23 @@ element.style {
 
 }
 
+/* .btn-dark {
+	background: linear-gradient(145deg, #353535, #0e0e0e);
+	box-shadow: 8px 8px 16px #000000, -8px -8px 16px #505050;
+  }
+  .btn-dark:hover {
+	background: linear-gradient(145deg, #353535, #0e0e0e);
+	box-shadow: 12px 12px 24px #000000, -12px -12px 24px #505050;
+  }
+  .btn-dark:focus {
+	background: linear-gradient(145deg, #353535, #0e0e0e);
+	box-shadow: 12px 12px 24px #000000, -12px -12px 24px #505050;
+  }
+  .btn-dark:active {
+	background: linear-gradient(145deg, #353535, #0e0e0e);
+	box-shadow: 4px 4px 8px #000000, -4px -4px 8px #505050;
+  } */
+
 /* ul Term */
 .border-dark {
 	display: flex;
@@ -376,7 +451,7 @@ textarea {
 	margin: 5px 1px 3px 0px;
 	border: 1px solid #DDDDDD;
 	border-radius: 4px;
-	padding: 15px!important;
+	padding: 15px !important;
 }
 
 input[type=text]:focus,
@@ -647,6 +722,6 @@ canvas {
 
 /* TradeView CSS */
 
-.header-i7yYYmGG{
-	display: none!important;
+.header-i7yYYmGG {
+	display: none !important;
 }

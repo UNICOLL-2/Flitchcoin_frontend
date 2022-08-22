@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from "react-router-dom";
 import { Timeline } from "react-ts-tradingview-widgets";
-import { CryptoCurrencyMarket } from "react-ts-tradingview-widgets";
 import { TickerTape } from "react-ts-tradingview-widgets";
 
 function Dashboard() {
@@ -68,9 +67,6 @@ function Dashboard() {
           <div className="col col-md-6 col-lg-4 mt-3 card back" >
               <Timeline colorTheme="light" feedMode="market" displayMode="compact" market="crypto" height={300} width="100%" symbol="BTCUSD" isTransparent></Timeline>
             </div>
-          </div>
-          <div className="row mt-5 card back">
-          <CryptoCurrencyMarket colorTheme="light" width="100%" height={400} isTransparent ></CryptoCurrencyMarket>
           </div>
         </div>
     </>

@@ -4,13 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { loginToken, userLogin } from "../../Feature/Auth/authSlice";
 import { Link } from "react-router-dom";
 import { fetchToken, setToken } from "../../Auth";
-import { logOutUser } from "../../Feature/Auth/authSlice";
+// import { logOutUser } from "../../Feature/Auth/authSlice";
 import { useSelector } from "react-redux";
-import CryptoJS from "crypto-js";
-import { Button, Modal } from "react-bootstrap";
+import {  Modal } from "react-bootstrap";
 import './login.css';
 import { loginUser } from '../../Feature/Auth/authSlice';
 import Animation from "../../Animation";
+import Footer from '../../layouts/Footer/index';
 
 function Login() {
   const dispatch = useDispatch();
@@ -21,47 +21,29 @@ function Login() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    // ping_pong();
     if (userToken?.access_token) {
       dispatch(userLogin());
     }
   }, [userToken]);
 
-  function rel_login(e) {
-    fetch("/rel_login").then((result) => {
-      result.json().then((res) => {
-        console.log("result", res);
-      })
-    });
-    setFormData((prevData) => ({
-      ...prevData,
-      type: null
-    }));
-    console.log(selectedType);
-  };
+  // function rel_login(e) {
+  //   fetch("/rel_login").then((result) => {
+  //     result.json().then((res) => {
+  //       console.log("result", res);
+  //     })
+  //   });
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     type: null
+  //   }));
+  //   console.log(selectedType);
+  // };
 
-  function ping_pong() {
-    fetch('/ping', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${fetchToken()}`,
-      },
-      body: "ping"
-    }).then((res) => {
-      console.log(res);
-      if (res.status != 200) {
-        onClick();
-      }
-    })
-  };
-
-  const onClick = (e) => {
-    localStorage.removeItem("token");
-    rel_login();
-    dispatch(logOutUser(formData));
-  }
+  // const onClick = (e) => {
+  //   localStorage.removeItem("token");
+  //   rel_login();
+  //   dispatch(logOutUser(formData));
+  // }
 
   var [formData, setFormData] = useState({
     usernamePool: "",
@@ -72,21 +54,7 @@ function Login() {
     otp: ''
   });
 
-  const [reactKey, setReactKey] = useState(process.env.REACT_APP_SECRET_KEY)
-
   var { usernamePool, usernameParticipant, passwordPool, passwordParticipant, type, otp } = formData;
-  const encryptedPassword = CryptoJS.AES.encrypt(passwordParticipant, "W_F8slNJSgODGHH3gNWMtMeGFmrmNVe1phDc_dTXRHI=").toString();
-
-  //String to  Base 64 string
-  var words = CryptoJS.enc.Utf8.parse(encryptedPassword);
-  const base64 = CryptoJS.enc.Base64.stringify(words);
-
-  //Base 64 string to String
-  // var words = CryptoJS.enc.Base64.parse(base64);
-  // var textString = CryptoJS.enc.Utf8.stringify(words);
-
-  const bytes = CryptoJS.AES.decrypt(encryptedPassword, "W_F8slNJSgODGHH3gNWMtMeGFmrmNVe1phDc_dTXRHI=");
-  const password = bytes.toString(CryptoJS.enc.Utf8)
 
   const participantHandler = (e) => {
     e.preventDefault();
@@ -109,7 +77,6 @@ function Login() {
     setShow(false);
   }
 
-
   const poolHandler = (e) => {
     e.preventDefault();
     console.log("clicked");
@@ -118,7 +85,7 @@ function Login() {
       type: 'participant',
     }))
     if (type === 'pool') {
-      if (usernamePool == "" || passwordPool == "") {
+      if (usernamePool === "" || passwordPool === "") {
         alert("Please fill in the above information in POOL");
       } else {
         var logInData = new FormData();
@@ -156,10 +123,10 @@ function Login() {
   return (
     <div>
       <Animation/>
-      <div className="back shadow">
         <div className="container">
           <div className="row login__two">
-            <div className="col col-sm-12 col-md-6 page_fill_3 pb-5">
+            <div className="col col-md-2"></div>
+            <div className="col col-sm-12 col-md-4 page_fill_3 pb-5">
               <form onSubmit={participantHandler}>
                 <div className="back card">
                   <div className="card-body">
@@ -193,7 +160,7 @@ function Login() {
                 </div>
               </form>
             </div>
-            <div className="col col-sm-12 col-md-6 page_fill_3 pb-5">
+            <div className="col col-sm-12 col-md-4 page_fill_3 pb-5">
               <form onSubmit={poolHandler}>
                 <div className="back card">
                   <div className="card-body">
@@ -237,7 +204,6 @@ function Login() {
             </p>
           </div>
         </div>
-      </div>
       <Modal show={show} onHide={() => setShow(false)} className="mt-5 modal fade shadow">
           <div className="back shadow">
             <div className="modal-body">
@@ -267,6 +233,7 @@ function Login() {
             </div>
         </div>
       </Modal>
+      <Footer/>
     </div>
   );
 }
