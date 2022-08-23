@@ -8,30 +8,37 @@ function Dashboard() {
 
   const coins = ["ATOM","AVAX","BNB","BTC","BUSD","DOT","EOS","ETH","LINK","LTC","MATIC","NEAR","RVN","SOL","TRX","USDC","USDT","XLM","XMR","XRP","ZEC"]
 
-  const account = () => {
-    fetch("http://34.73.24.72/account",{
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        Authorization: `Bearer ${fetchToken()}`
-      }
-    }).then((result) => result.json()
-    .then((res) => {
-      const tmpArray = [];
-      coins.map((items) => {
-       console.log(items)
-        console.log(res.items);
-        tmpArray.push(res.items);
-      })
-    })
-    ).catch((err) => {
-      console.log(err);
-    })
-  };
-
   useEffect(() => {
+    const account = () => {
+      fetch("http://34.73.24.72/account", {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          Authorization: `Bearer ${fetchToken()}`
+        }
+      })
+        .then((result) => result.json()
+          .then(res => {
+
+            // if we have to convert object to array we have to use Object.keys or Object.entries 
+            // Object.keys will return keys of object 
+            // Object.entries will return array of key with value
+            // Object.values will return array of values of all keys
+
+            const data = Object.entries(res);
+            data.map((item) => {
+              console.log("ITEM", item);
+              if(item[0] === "BTC"){
+                console.log(item[1]);
+              }
+            })
+          })
+        ).catch((err) => {
+          console.log(err);
+        })
+    };
     account();
-  },[])
+  }, [])
 
   const navigate = useNavigate();
   return (

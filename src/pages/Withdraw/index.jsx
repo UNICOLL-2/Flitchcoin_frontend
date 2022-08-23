@@ -139,15 +139,27 @@ const Withdraw = () => {
     network_list();
   }, [coin!="Select coin"]);
 
+  const [sym, setSym] = useState("");
+
+  useEffect(() => {
+    setSym(coin);
+  },[coin!=="Select coin"]);
+
+  const [net, setNet] = useState("");
+
+  useEffect(() => {
+    setNet(network1);
+  },[network1!=="Select Network"]);
+
   const onSubmit = (e) => {
     e.preventDefault();
     var data = JSON.stringify({
       "nick_name": nick_name,
-      "sym": {coin},
+      "sym": sym ,
       "wallet_add": wallet_add,
       "phone_no": phone_no,
       "pay_id": pay_id,
-      "network": {network1},
+      "network": net,
       "memo": memo,
       "is_binance_pay": is_binance_pay,
       "email_id": email_id,
@@ -361,27 +373,27 @@ const Withdraw = () => {
           <div className="row">
             <h3 className="text-center mb-4">Select Wallet</h3>
           </div>
-         <div>
+         <div className='container save_wallet card back p-3'>
           {walletData.map((items) => {
             return (
-              <div className='back card mt-4 p-3' onClick={(walletData)=> gettingWallet(walletData)} >
+              <div className='back card mt-4 p-3' onClick={()=> gettingWallet(items)} >
+                {is_binance_pay === true ? <>
+                </> : 
+                <>
               <div>- Name : {items.name}</div>
               <div>- Memo : {items.memo}</div>
               <div>- Network : {items.network}</div>
               <div>- Coin : {items.sym}</div>
               <div>- Wallet address : {items.wallet_add}</div> 
               <div>- Transaction id : {items.tnx_id}</div> 
+              </>
+                }
               </div>
             )
           })}
          </div>
         </div>
-      </div>
-    </div>
-  )
-}
-
-export default Withdraw
+        <div className="col col-sm-12 col-md-3">
 
  {/* <form onSubmit={onWithdraw}>
             <div className="row p-4">
@@ -445,3 +457,10 @@ export default Withdraw
               </div>
             </div>
           </form> */}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default Withdraw

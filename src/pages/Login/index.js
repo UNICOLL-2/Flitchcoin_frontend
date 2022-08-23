@@ -163,13 +163,13 @@ function Login() {
             </p>
           </div>
         </div>
-      <Modal show={show} onHide={() => setShow(false)} className="mt-5">
+      <Modal show={show} onHide={() => setShow(false)} className="modal-dialog1">
           <div className="back p-3">
               <b>Please Enter the OTP</b>
               <div className="input1 w-100">
                 <input
                   type="text"
-                  className="txt-underline p-3 mb-3 w-100 input pressed"
+                  className="txt-underline p-3 mb-3 w-100 input pressed mt-3"
                   placeholder="Enter your OTP"
                   onChange={onChange}
                   name="otp"

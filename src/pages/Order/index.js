@@ -102,8 +102,8 @@ const Order = () => {
     <div className="back shadow">
       <div className="container">
         <div className="row">
-          <div className="col col-1"></div>
-          <div className="col col-md-6">
+          <div className="col col-md-1"></div>
+          <div className="col col-md-6 col-xs-12">
             <div className="card back mt-5 mb-5 p-2">
               <div className="card-body">
                 <div className="escrow__body">
@@ -168,7 +168,7 @@ const Order = () => {
             </div>
           </div>
           <div className="col col-md-1"></div>
-          <div className="col col-md-3 card mt-5 back mb-3">
+          <div className="col col-md-3 col-sm-12 card mt-5 back mb-3">
             <div className="row pt-3 pb-3">
               <div className="col col-6">
                 <input type="radio" className="btn-check" name="options-outlined" id="success-outlined" autoComplete="off" checked />

@@ -1,9 +1,15 @@
-.modal-dialog {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.modal-dialog1 {
+  display: flex!important;
+  align-items: center!important;
+  justify-content: center!important;
+  width: 20%!important;
+  border-radius: 0%!important;
+  margin-left: 40%;
+  height: 30%!important;
+  margin-top: 18%;
+  overflow-y: hidden!important;
 }
 
 .modal-content {
-  width: 50%;
+  width: 100%!important;
 }

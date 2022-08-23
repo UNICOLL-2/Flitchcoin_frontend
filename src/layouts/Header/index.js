@@ -41,7 +41,7 @@ function Header() {
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item ms-5"><Link className="nav-link active" aria-current="page" to="/">Home</Link></li>
-              <li className="nav-item ms-4"><Link to="/about" className="nav-link">About</Link></li>
+              <li className="nav-item ms-5"><Link to="/about" className="nav-link">About</Link></li>
               {selectedType === null ? (
                 <>
                 </>
