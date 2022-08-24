@@ -6,8 +6,6 @@ import { fetchToken } from "../../Auth";
 
 function Dashboard() {
 
-  const coins = ["ATOM","AVAX","BNB","BTC","BUSD","DOT","EOS","ETH","LINK","LTC","MATIC","NEAR","RVN","SOL","TRX","USDC","USDT","XLM","XMR","XRP","ZEC"]
-
   const [item, setItem] = useState();
 
   useEffect(() => {
@@ -33,9 +31,6 @@ function Dashboard() {
               for(let i = 0 ; i < 1 ; i++){
                 tempArray.push(items);
               }
-              // if(item[0] === item){
-              //   console.log("item ",item[1]);
-              // }
             })
             setItem([...tempArray])
           })
@@ -44,12 +39,33 @@ function Dashboard() {
         })
     };
     account();
-    console.log("clled")
   }, []);
 
+  const [arr,setArr] = useState([]);
+  const [arr1,setArr1] = useState([]);
+  const [arr2,setArr2] = useState([]);
+  const [arr3,setArr3] = useState([]);
+
+  const table = () => {
+    const out = [];
+    const out1 = [];
+    const out2 = [];
+    const out3 = [];
+    for (let index = 3; index < 24; index++) {
+      out.push((item[index])[0]); 
+      out1.push((item[index])[1].total);
+      out2.push((item[index])[1].used);
+      out3.push((item[index])[1].yield);
+    }
+    setArr([...out]);
+    setArr1([...out1]);
+    setArr2([...out2]);
+    setArr3([...out3]);
+  }
+
   useEffect(() => {
-    console.log("arr",item);
-  },[item])
+    // table();
+  },[]);
 
   const navigate = useNavigate();
   return (
@@ -122,7 +138,46 @@ function Dashboard() {
               <div className="col-2 text-muted account p-3">Yield</div>
             </div>
             <div className="row">
-              {/* <div className="col-6 p-3">{(item[3])[0]}</div> */}
+                {/* <div className="col col-md-6 p-3">
+              {arr.map(names => {
+                return(
+                  <>
+                 <div className="row p-3">{names}</div>
+                 <hr/>
+                 </>
+                )
+              })}
+              </div>
+              <div className="col col md-2 p-3">
+              {arr1.map(names => {
+                return(
+                  <>
+                 <div className="row p-3">{names}</div>
+                 <hr/>
+                 </>
+                )
+              })}
+              </div>
+              <div className="col col md-2 p-3">
+              {arr2.map(names => {
+                return(
+                  <>
+                 <div className="row p-3">{names}</div>
+                 <hr/>
+                 </>
+                )
+              })}
+              </div>
+              <div className="col col md-2 p-3">
+              {arr3.map(names => {
+                return(
+                  <>
+                 <div className="row p-3">{names}</div>
+                 <hr/>
+                 </>
+                )
+              })}
+              </div> */}
             </div>
           </div>
         </div>
