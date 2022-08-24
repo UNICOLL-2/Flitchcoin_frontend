@@ -5,7 +5,45 @@ const initialState = {
   selectedType: null,
   userToken: null,
   user: null,
+  loginString: null,
+  verifyString: null,
 };
+
+// signup user
+export const signupUser = createAsyncThunk(
+  "auth/signup",
+  async (data, thunkAPI) => {
+    try {
+      return authService.signupUser(data);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// otp verify
+export const verifyEmail = createAsyncThunk(
+  "auth/verify_email",
+  async (data, thunkAPI) => {
+    try {
+      return authService.verifyEmail(data);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 
 export const defaultType = createAsyncThunk(
   "auth/type",
@@ -120,6 +158,24 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(verifyEmail.pending, (state) => {
+        state.verifyString = null;
+      })
+      .addCase(verifyEmail.fulfilled, (state, action) => {
+        state.verifyString = action.payload;
+      })
+      .addCase(verifyEmail.rejected, (state, action) => {
+        state.verifyString = action.payload;
+      })
+      .addCase(signupUser.pending, (state) => {
+        state.loginString = null;
+      })
+      .addCase(signupUser.fulfilled, (state, action) => {
+        state.loginString = action.payload;
+      })
+      .addCase(signupUser.rejected, (state) => {
+        state.loginString = null;
+      })
       .addCase(defaultType.fulfilled, (state, action) => {
         state.selectedType = action.payload;
       })

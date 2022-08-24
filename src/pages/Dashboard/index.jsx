@@ -1,4 +1,4 @@
-import React,{ useEffect } from 'react';
+import React,{ useEffect,useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Timeline } from "react-ts-tradingview-widgets";
 import { TickerTape } from "react-ts-tradingview-widgets";
@@ -7,6 +7,8 @@ import { fetchToken } from "../../Auth";
 function Dashboard() {
 
   const coins = ["ATOM","AVAX","BNB","BTC","BUSD","DOT","EOS","ETH","LINK","LTC","MATIC","NEAR","RVN","SOL","TRX","USDC","USDT","XLM","XMR","XRP","ZEC"]
+
+  const [item, setItem] = useState();
 
   useEffect(() => {
     const account = () => {
@@ -26,19 +28,28 @@ function Dashboard() {
             // Object.values will return array of values of all keys
 
             const data = Object.entries(res);
-            data.map((item) => {
-              console.log("ITEM", item);
-              if(item[0] === "BTC"){
-                console.log(item[1]);
+            let tempArray = [];
+            data.map((items) => {
+              for(let i = 0 ; i < 1 ; i++){
+                tempArray.push(items);
               }
+              // if(item[0] === item){
+              //   console.log("item ",item[1]);
+              // }
             })
+            setItem([...tempArray])
           })
         ).catch((err) => {
           console.log(err);
         })
     };
     account();
-  }, [])
+    console.log("clled")
+  }, []);
+
+  useEffect(() => {
+    console.log("arr",item);
+  },[item])
 
   const navigate = useNavigate();
   return (
@@ -111,7 +122,7 @@ function Dashboard() {
               <div className="col-2 text-muted account p-3">Yield</div>
             </div>
             <div className="row">
-
+              {/* <div className="col-6 p-3">{(item[3])[0]}</div> */}
             </div>
           </div>
         </div>

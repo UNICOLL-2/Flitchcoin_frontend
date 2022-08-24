@@ -8,6 +8,59 @@ const loginUser = async (data) => {
   return data.type;
 };
 
+// signup user
+const signupUser = async (data) => {
+  let response;
+  let userValue = {
+    username: "",
+    password: "",
+    full_name: "",
+    is_pool: null,
+  };
+
+  if (data.type === "participant") {
+    userValue = {
+      username: data.formData.usernameParticipant,
+      password: data.formData.passwordParticipant,
+      full_name: data.formData.fullNameParticipant,
+      is_pool: false,
+    };
+  } else {
+    userValue = {
+      username: data.formData.usernamePool,
+      password: data.formData.passwordPool,
+      full_name: data.formData.fullNamePool,
+      is_pool: true,
+    };
+  }
+
+  console.log(userValue);
+
+  try {
+    response = await axios.post("http://34.73.24.72/Signup", userValue);
+  } catch (error) {
+    response = error.response;
+  }
+  return response.data;
+};
+
+// otp verify
+const verifyEmail = async (data) => {
+  let response;
+  console.log(data);
+
+  try {
+    response = await axios.post("http://34.73.24.72/verify_email", data);
+  } catch (error) {
+    response = error.response;
+  }
+
+  // if (response?.data?.detail[0]?.msg) return response.data.detail[0].msg;
+
+  console.log("RES", response.data);
+  return response.data;
+};
+
 // login user
 const loginToken = async (data) => {
   let response;
@@ -64,6 +117,8 @@ const authService = {
   logOutUser,
   loginToken,
   userLogin,
+  signupUser,
+  verifyEmail,
 };
 
 export default authService;
