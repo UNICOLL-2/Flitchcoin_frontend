@@ -3,49 +3,6 @@ import { fetchToken } from "../../Auth";
 
 const Withdraw = () => {
 
-
-  // var [withdrawData, setWithdrawData] = useState({
-  //   address: "",
-  //   amt: 0,
-  //   coin: "",
-  //   network1: "",
-  //   tag: 0
-  // });
-
-  // var { address, amt, coin, network1, tag } = withdrawData;
-
-  // const onWalletChange = (e) => {
-  //   setWithdrawData((prevData) => ({
-  //     ...prevData,
-  //     [e.target.name]: e.target.value,
-  //   }));
-  // };
-
-  const onWithdraw = (e) => {
-    e.preventDefault();
-    // var data = JSON.stringify({
-    //   "address": address,
-    //   "amt": amt,
-    //   "coin": coin,
-    //   "network": network1,
-    //   "tag": tag
-    // });
-    // fetch("http://34.73.24.72/withdraw", {
-    //   method: 'POST',
-    //   headers: {
-    //     Authorization: `Bearer ${fetchToken()}`,
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: data
-    // }).then(res => res.json())
-    //   .then((result) => {
-    //     console.log(result);
-    //   }).catch((err) => {
-    //     console.log(err);
-    //   });
-  }
-
   var [formData, setFormData] = useState({
     nick_name: "",
     wallet_add: "",
@@ -133,39 +90,127 @@ const Withdraw = () => {
 
   useEffect(() => {
     asset_list();
-  },[coin])
+  }, [coin])
 
   useEffect(() => {
     network_list();
-  }, [coin!="Select coin"]);
+  }, [coin !== "Select coin"]);
 
   const [sym, setSym] = useState("");
 
   useEffect(() => {
     setSym(coin);
-  },[coin!=="Select coin"]);
+  }, [coin !== "Select coin"]);
 
   const [net, setNet] = useState("");
 
   useEffect(() => {
     setNet(network1);
-  },[network1!=="Select Network"]);
+  }, [network1 !== "Select Network"]);
 
   const onSubmit = (e) => {
     e.preventDefault();
+    if (is_binance_pay) {
+      var data = JSON.stringify({
+        "nick_name": nick_name,
+        "phone_no": phone_no,
+        "pay_id": pay_id,
+        "is_binance_pay": is_binance_pay,
+        "email_id": email_id,
+        "binance_id": binance_id
+      })
+    } else {
+      var data = JSON.stringify({
+        "nick_name": nick_name,
+        "sym": sym,
+        "wallet_add": wallet_add,
+        "network": net,
+        "memo": memo,
+        "is_binance_pay": is_binance_pay
+      })
+    }
+      fetch("http://34.73.24.72/insert_wallet", {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${fetchToken()}`,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: data
+      }).then(res => res.json())
+        .then((result) => {
+          console.log(result);
+        }).catch((err) => {
+          console.log(err);
+        })
+  };
+
+  const [walletData, setWalletData] = useState([]);
+
+  const getWallet = () => {
+    fetch('http://34.73.24.72/get_wallets', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${fetchToken()}`,
+      }
+    }).then(res => res.json()
+      .then((result) => {
+        let tempArray = [];
+        result.map((items) => {
+          for (let i = 0; i < 1; i++) {
+            tempArray.push(items);
+          }
+        });
+        setWalletData([...tempArray]);
+      })).catch((err) => {
+        console.log(err);
+      })
+  }
+
+  useEffect(() => {
+    getWallet();
+  }, [onSubmit])
+
+  useEffect(() => {
+    getWallet();
+  }, [])
+
+
+  var [withdrawData, setWithdrawData] = useState({
+    WithdrawAddress: "",
+    WithdrawCoin: "",
+    WithdrawNetwork: "",
+    WithdrawTag: 0
+  });
+
+  const [withdrawAmt, setWithdrawAmt] = useState();
+
+  var { WithdrawAddress, WithdrawCoin, WithdrawNetwork, WithdrawTag } = withdrawData;
+
+  const gettingWallet = (items) => {
+    setWithdrawData(() => ({
+      WithdrawAddress: items.wallet_add,
+      WithdrawCoin: items.sym,
+      WithdrawNetwork: items.network,
+      WithdrawTag: items.memo
+    }))
+    console.log(withdrawData)
+  };
+
+  const onWithdrawChange = (e) => {
+    setWithdrawAmt(e.target.value)
+  }
+
+  const onWithdraw = (e) => {
+    e.preventDefault();
     var data = JSON.stringify({
-      "nick_name": nick_name,
-      "sym": sym ,
-      "wallet_add": wallet_add,
-      "phone_no": phone_no,
-      "pay_id": pay_id,
-      "network": net,
-      "memo": memo,
-      "is_binance_pay": is_binance_pay,
-      "email_id": email_id,
-      "binance_id": binance_id
-    })
-    fetch("http://34.73.24.72/insert_wallet", {
+      "address": WithdrawAddress,
+      "amt": withdrawAmt,
+      "coin": WithdrawCoin,
+      "network": WithdrawNetwork,
+      "tag": WithdrawTag
+    });
+    fetch("http://34.73.24.72/withdraw", {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${fetchToken()}`,
@@ -178,43 +223,8 @@ const Withdraw = () => {
         console.log(result);
       }).catch((err) => {
         console.log(err);
-      })
-  };
-
-  const [walletData, setWalletData] = useState([]);
-
-  const getWallet = () => {
-    fetch('http://34.73.24.72/get_wallets',{
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${fetchToken()}`,
-      }
-    }).then(res => res.json()
-    .then((result) => {
-      let tempArray =[] ;
-      result.map((items) => {
-        for (let i = 0; i < 1; i++) {
-        tempArray.push(items);
-        }
       });
-      setWalletData([...tempArray]);
-    })).catch((err) => {
-      console.log(err);
-    })
   }
-
-  const gettingWallet = (items) => {
-    console.log("clicked");
-    console.log("wallet",items);
-  }
-
-  useEffect(() => {
-    getWallet();
-  },[onSubmit])
-
-  useEffect(() => {
-    getWallet();
-  },[])
 
   return (
     <div className='container'>
@@ -315,6 +325,17 @@ const Withdraw = () => {
                   </>
                 ) : (
                   <>
+                    <div className="input1 w-100 mt-4">
+                      <input
+                        type="text"
+                        className="txt-underline p-3 mb-3 w-100  input pressed"
+                        placeholder="Full name"
+                        onChange={onChange}
+                        name="nick_name"
+                        value={nick_name}
+                      />
+                      <span className="underline"></span>
+                    </div>
                     <div className="input1 w-100 mt-3">
                       <input
                         type="text"
@@ -373,90 +394,54 @@ const Withdraw = () => {
           <div className="row">
             <h3 className="text-center mb-4">Select Wallet</h3>
           </div>
-         <div className='container save_wallet card back p-3'>
-          {walletData.map((items) => {
-            return (
-              <div className='back card mt-4 p-3' onClick={()=> gettingWallet(items)} >
-                {is_binance_pay === true ? <>
-                </> : 
-                <>
-              <div>- Name : {items.name}</div>
-              <div>- Memo : {items.memo}</div>
-              <div>- Network : {items.network}</div>
-              <div>- Coin : {items.sym}</div>
-              <div>- Wallet address : {items.wallet_add}</div> 
-              <div>- Transaction id : {items.tnx_id}</div> 
-              </>
-                }
-              </div>
-            )
-          })}
-         </div>
+          <div className='container save_wallet card back p-3'>
+            {walletData.map((items) => {
+              return (
+                <div className='back card mt-4 p-3' onClick={() => gettingWallet(items)} >
+                  <>
+                    <div>- Name : {items.name}</div>
+                    <div>- Memo : {items.memo}</div>
+                    <div>- Network : {items.network}</div>
+                    <div>- Coin : {items.sym}</div>
+                    <div>- Wallet address : {items.wallet_add}</div>
+                    <div>- Transaction id : {items.tnx_id}</div>
+                  </>
+                </div>
+              )
+            })}
+          </div>
         </div>
         <div className="col col-sm-12 col-md-3">
-
- {/* <form onSubmit={onWithdraw}>
+          <form onSubmit={onWithdraw}>
             <div className="row p-4">
               <div className="card back pb-4">
-                <div className="input1 w-100 mt-4">
-                  <input
-                    type="text"
-                    className="txt-underline p-3 mb-3 w-100  input pressed"
-                    placeholder="Address"
-                    onChange={onWalletChange}
-                    name="address"
-                    value={address}
-                  />
-                  <span className="underline"></span>
-                </div>
+                <div className="text-muted">Wallet Address :</div>
+                <h5>{withdrawData.WithdrawAddress === "" ?
+                <div> Please Select a Wallet </div> :<div>{withdrawData.WithdrawAddress}</div> }</h5>
+                <div className="text-muted">Coin :</div>
+                <h5>{withdrawData.WithdrawCoin === "" ?
+                <div> Please Select a Wallet </div> :<div>{withdrawData.WithdrawCoin}</div> }</h5>
+                <div className="text-muted">Network :</div>
+                <h5>{withdrawData.WithdrawNetwork === "" ?
+                <div> Please Select a Wallet </div> :<div>{withdrawData.WithdrawNetwork}</div> }</h5>
+                <div className="text-muted">Tag :</div>
+                <h5>{withdrawData.WithdrawTag === "" ?
+                <div> Please Select a Wallet </div> :<div>{withdrawData.WithdrawTag}</div> }</h5>
                 <div className="input1 w-100 mt-4">
                   <input
                     type="number"
                     className="txt-underline p-3 mb-3 w-100  input pressed"
                     placeholder="Amount ($)"
-                    onChange={onWalletChange}
-                    name="amt"
-                    value={amt}
-                  />
-                  <span className="underline"></span>
-                </div>
-                <div className="input1 w-100 mt-4">
-                  <input
-                    type="text"
-                    className="txt-underline p-3 mb-3 w-100  input pressed"
-                    placeholder="Coin"
-                    onChange={onWalletChange}
-                    name="coin"
-                    value={coin}
-                  />
-                  <span className="underline"></span>
-                </div>
-                <div className="input1 w-100 mt-4">
-                  <input
-                    type="number"
-                    className="txt-underline p-3 mb-3 w-100  input pressed"
-                    placeholder="Network"
-                    onChange={onWalletChange}
-                    name="network1"
-                    value={network1}
-                  />
-                  <span className="underline"></span>
-                </div>
-                <div className="input1 w-100 mt-4">
-                  <input
-                    type="number"
-                    className="txt-underline p-3 mb-3 w-100  input pressed"
-                    placeholder="Tag"
-                    onChange={onWalletChange}
-                    name="tag"
-                    value={tag}
+                    onChange={onWithdrawChange}
+                    name="withdrawAmt"
+                    value={withdrawAmt}
                   />
                   <span className="underline"></span>
                 </div>
                 <button type='submit' className='primary w-100'>Withdraw</button>
               </div>
             </div>
-          </form> */}
+          </form>
         </div>
       </div>
     </div>

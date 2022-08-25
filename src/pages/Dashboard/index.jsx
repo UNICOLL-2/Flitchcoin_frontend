@@ -64,8 +64,8 @@ function Dashboard() {
   }
 
   useEffect(() => {
-    // table();
-  },[]);
+  item && table();
+  },[item]);
 
   const navigate = useNavigate();
   return (
@@ -138,7 +138,7 @@ function Dashboard() {
               <div className="col-2 text-muted account p-3">Yield</div>
             </div>
             <div className="row">
-                {/* <div className="col col-md-6 p-3">
+                <div className="col col-md-6 p-3">
               {arr.map(names => {
                 return(
                   <>
@@ -177,7 +177,7 @@ function Dashboard() {
                  </>
                 )
               })}
-              </div> */}
+              </div>
             </div>
           </div>
         </div>
