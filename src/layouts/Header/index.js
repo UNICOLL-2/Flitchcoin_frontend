@@ -14,11 +14,7 @@ function Header() {
   });
   const { type } = formData;
 
-  function rel_login(e) {
-    fetch("http://34.73.24.72/rel_login").then((result) => {
-      result.json().then((res) => {
-      })
-    });
+  function rel_login() {
     setFormData((prevData) => ({
       ...prevData,
       type: null

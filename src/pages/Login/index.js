@@ -3,11 +3,9 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginToken, userLogin } from "../../Feature/Auth/authSlice";
 import { Link } from "react-router-dom";
-import { fetchToken, setToken } from "../../Auth";
 import { useSelector } from "react-redux";
 import {  Modal } from "react-bootstrap";
 import './login.css';
-import { loginUser } from '../../Feature/Auth/authSlice';
 import Animation from "../../Animation";
 import Footer from '../../layouts/Footer/index';
 

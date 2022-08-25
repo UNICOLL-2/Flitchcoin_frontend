@@ -129,32 +129,33 @@ const Withdraw = () => {
         "is_binance_pay": is_binance_pay
       })
     }
-      fetch("http://34.73.24.72/insert_wallet", {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${fetchToken()}`,
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: data
-      }).then(res => res.json())
-        .then((result) => {
-          console.log(result);
-        }).catch((err) => {
-          console.log(err);
-        })
+    fetch("http://34.73.24.72/user_wallet", {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${fetchToken()}`,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: data
+    }).then(res => res.json())
+      .then((result) => {
+        console.log(result);
+      }).catch((err) => {
+        console.log(err);
+      })
   };
 
   const [walletData, setWalletData] = useState([]);
 
   const getWallet = () => {
-    fetch('http://34.73.24.72/get_wallets', {
+    fetch('http://34.73.24.72/user_wallet', {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${fetchToken()}`,
       }
     }).then(res => res.json()
       .then((result) => {
+        console.log(result);
         let tempArray = [];
         result.map((items) => {
           for (let i = 0; i < 1; i++) {
@@ -212,6 +213,26 @@ const Withdraw = () => {
     });
     fetch("http://34.73.24.72/withdraw", {
       method: 'POST',
+      headers: {
+        Authorization: `Bearer ${fetchToken()}`,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: data
+    }).then(res => res.json())
+      .then((result) => {
+        console.log(result);
+      }).catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const onDelete = (uid) => {
+    var data = JSON.stringify({
+      "uid":uid
+    })
+    fetch('http://34.73.24.72/user_wallet', {
+      method: 'DELETE',
       headers: {
         Authorization: `Bearer ${fetchToken()}`,
         'Accept': 'application/json',
@@ -397,16 +418,20 @@ const Withdraw = () => {
           <div className='container save_wallet card back p-3'>
             {walletData.map((items) => {
               return (
-                <div className='back card mt-4 p-3' onClick={() => gettingWallet(items)} >
-                  <>
-                    <div>- Name : {items.name}</div>
-                    <div>- Memo : {items.memo}</div>
-                    <div>- Network : {items.network}</div>
-                    <div>- Coin : {items.sym}</div>
-                    <div>- Wallet address : {items.wallet_add}</div>
-                    <div>- Transaction id : {items.tnx_id}</div>
-                  </>
-                </div>
+                <>
+                  <div className='back card mt-4 p-3' onClick={() => gettingWallet(items)} >
+                    <>
+                      <div>- Name : {items.name}</div>
+                      <div>- Memo : {items.memo}</div>
+                      <div>- Network : {items.network}</div>
+                      <div>- Coin : {items.sym}</div>
+                      <div>- Wallet address : {items.wallet_add}</div>
+                      <div>- Transaction id : {items.tnx_id}</div>
+                      <div>- UID : {items.uid}</div>
+                    </>
+                  </div>
+                  <button type='button' className='btn btn-dark mt-3' onClick={() => onDelete(items.uid)}>Delete</button>
+                </>
               )
             })}
           </div>
@@ -417,16 +442,16 @@ const Withdraw = () => {
               <div className="card back pb-4">
                 <div className="text-muted">Wallet Address :</div>
                 <h5>{withdrawData.WithdrawAddress === "" ?
-                <div> Please Select a Wallet </div> :<div>{withdrawData.WithdrawAddress}</div> }</h5>
+                  <div> Please Select a Wallet </div> : <div>{withdrawData.WithdrawAddress}</div>}</h5>
                 <div className="text-muted">Coin :</div>
                 <h5>{withdrawData.WithdrawCoin === "" ?
-                <div> Please Select a Wallet </div> :<div>{withdrawData.WithdrawCoin}</div> }</h5>
+                  <div> Please Select a Wallet </div> : <div>{withdrawData.WithdrawCoin}</div>}</h5>
                 <div className="text-muted">Network :</div>
                 <h5>{withdrawData.WithdrawNetwork === "" ?
-                <div> Please Select a Wallet </div> :<div>{withdrawData.WithdrawNetwork}</div> }</h5>
+                  <div> Please Select a Wallet </div> : <div>{withdrawData.WithdrawNetwork}</div>}</h5>
                 <div className="text-muted">Tag :</div>
                 <h5>{withdrawData.WithdrawTag === "" ?
-                <div> Please Select a Wallet </div> :<div>{withdrawData.WithdrawTag}</div> }</h5>
+                  <div> Please Select a Wallet </div> : <div>{withdrawData.WithdrawTag}</div>}</h5>
                 <div className="input1 w-100 mt-4">
                   <input
                     type="number"
