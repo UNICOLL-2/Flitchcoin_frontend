@@ -1,11 +1,16 @@
 import React,{ useEffect,useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { Timeline } from "react-ts-tradingview-widgets";
 import { TickerTape } from "react-ts-tradingview-widgets";
 import { fetchToken } from "../../Auth";
+import { orderType } from "../../Feature/Order/orderSlice";
+import { memoType } from "../../Feature/Order/orderSlice";
 
 function Dashboard() {
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [item, setItem] = useState();
 
   useEffect(() => {
@@ -67,7 +72,18 @@ function Dashboard() {
   item && table();
   },[item]);
 
-  const navigate = useNavigate();
+  const onRepayment = () => {
+    dispatch(orderType("repayment"));
+    dispatch(memoType("memoRepayment"));
+    navigate("/order");
+  };
+
+  const onMargin = () => {
+    dispatch(orderType("margin"));
+    dispatch(memoType("memoMargin"));
+    navigate("/order");
+  }
+
   return (
     <>
     <TickerTape colorTheme="light" symbols={[
@@ -132,13 +148,15 @@ function Dashboard() {
           </div>
           <div className="container card back mt-5">
             <div className="row">
-              <div className="col-6 text-muted account p-3">Name</div>
-              <div className="col-2 text-muted account p-3">Total</div>
-              <div className="col-2 text-muted account p-3">Used</div>
-              <div className="col-2 text-muted account p-3">Yield</div>
+              <div className="col-2 text-muted account text-center p-3">Name</div>
+              <div className="col-2 text-muted account text-center p-3">Liquidate</div>
+              <div className="col-2 text-muted account text-center p-3">Total</div>
+              <div className="col-2 text-muted account text-center p-3">Used</div>
+              <div className="col-2 text-muted account text-center p-3">Yield</div>
+              <div className="col-2 text-muted account text-center p-3">Duration</div>
             </div>
             <div className="row">
-                <div className="col col-md-6 p-3">
+                <div className="col col-md-2 p-3">
               {arr.map(names => {
                 return(
                   <>
@@ -148,7 +166,12 @@ function Dashboard() {
                 )
               })}
               </div>
-              <div className="col col md-2 p-3">
+              <div className='col col-md-2 p-3'>
+                <div className='row p-3'>memoMargin</div>
+                <button type='button' className='btn btn-dark' onClick={onMargin}>Add Margin</button>
+                <hr />
+              </div>
+              <div className="col col-md-2 p-3">
               {arr1.map(names => {
                 return(
                   <>
@@ -158,7 +181,7 @@ function Dashboard() {
                 )
               })}
               </div>
-              <div className="col col md-2 p-3">
+              <div className="col col-md-2 p-3">
               {arr2.map(names => {
                 return(
                   <>
@@ -168,7 +191,7 @@ function Dashboard() {
                 )
               })}
               </div>
-              <div className="col col md-2 p-3">
+              <div className="col col-md-2 p-3">
               {arr3.map(names => {
                 return(
                   <>
@@ -177,6 +200,11 @@ function Dashboard() {
                  </>
                 )
               })}
+              </div>
+              <div className='col col-md-2 p-3'>
+                <div className='row p-3'>memoRepayment</div>
+                <button type='button' className='btn btn-dark' onClick={onRepayment}>Repayment</button>
+                <hr />
               </div>
             </div>
           </div>

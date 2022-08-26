@@ -31,12 +31,6 @@ element.style {
 	color: black;
 }
 
-.modal-dialog {
-	border-radius: 30px;
-	width: 75% !important;
-	height: 75%;
-}
-
 .dialog {
 	width: 30% !important;
 
@@ -51,7 +45,9 @@ element.style {
 	align-items: center;
 	justify-content: center;
 	box-shadow: 5px 5px 13px #2b2c2d, -3px -3px 5px #ffffff !important;
-	border-radius: 0% !important;
+	border-radius: 30px!important;
+	width: 75% !important;
+	height: 75%;
 }
 
 .card {
@@ -191,6 +187,14 @@ element.style {
 	border-left: 5px solid rgb(0, 0, 0);
 	height: 100px;
 	margin-top: 20px;
+}
+
+.back1{
+	background-color: red!important;
+}
+
+.back2{
+	background-color: green!important;
 }
 
 .save_wallet{

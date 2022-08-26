@@ -7,6 +7,7 @@ import { CryptoCurrencyMarket } from "react-ts-tradingview-widgets";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { coinType } from "../../Feature/Order/orderSlice";
+import { orderType } from "../../Feature/Order/orderSlice";
 import { fetchToken } from "../../Auth";
 
 const PoolParticipant = () => {
@@ -35,9 +36,9 @@ const PoolParticipant = () => {
       });
     });
   }
-
   const nextHanlder = () => {
     dispatch(coinType(coin));
+    dispatch(orderType("order"));
     navigate("/order");
   };
 
@@ -66,7 +67,6 @@ const PoolParticipant = () => {
 
   useEffect(() => {
     coinNet();
-    console.log(coinsNet);
   },[coin]);
 
   const renderData = () => {

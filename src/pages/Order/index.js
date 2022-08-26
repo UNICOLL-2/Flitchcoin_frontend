@@ -5,9 +5,10 @@ import { fetchToken } from "../../Auth";
 import { QRCodeSVG } from 'qrcode.react';
 
 const Order = () => {
-  const { selectedType } = useSelector((state) => state.auth);
   const { selectedCoin } = useSelector((state) => state.order);
-
+  const { selectedOrderType } = useSelector((state) => state.order);
+  const { selectedMemo } = useSelector((state) => state.order);
+ 
   const navigate = useNavigate();
   const [type, setType] = useState("otherUser");
   const [network, setNetwork] = useState("Select Network");
@@ -40,11 +41,36 @@ const Order = () => {
       });
   };
 
+  const [isRepayment, setIsRepayment] = useState(false);
+  const [isMargin, setIsMargin] = useState(false);
+
+  useEffect(() => {
+    console.log(selectedOrderType);
+    if(selectedOrderType === "repayment"){
+      setIsRepayment(true);
+    }
+    if(selectedOrderType === "margin"){
+      setIsMargin(true);
+    }
+  },[coinHandler]);
+
   const submitHandler = (e) => {
+    e.preventDefault();
+    if(selectedOrderType === "order"){
     var trans = JSON.stringify({
-      trans_id: trans_id,
+      "trans_id": trans_id,
+      "memo": memo
     });
-    fetch("http://34.73.24.72/trans_id", {
+  }else{
+    var trans = JSON.stringify({
+      "trans_id": trans_id,
+      "memo": selectedMemo,
+      "repayment": isRepayment,
+      "margin":isMargin
+    });
+  }
+  console.log(trans);
+    fetch("http://34.73.24.72/validate_transaction", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -55,6 +81,7 @@ const Order = () => {
     })
       .then((res) => res.json())
       .then((result) => {
+        console.log(result);
       })
       .catch((err) => console.log(err));
   };
@@ -103,6 +130,7 @@ const Order = () => {
       <div className="container">
         <div className="row">
           <div className="col col-md-1"></div>
+          {selectedOrderType === "order" ? (
           <div className="col col-md-6 col-xs-12">
             <div className="card back mt-5 mb-5 p-2">
               <div className="card-body">
@@ -167,6 +195,141 @@ const Order = () => {
               </div>
             </div>
           </div>
+):<></>}
+          {selectedOrderType === "margin" ? (
+          <div className="col col-md-6 col-xs-12">
+            <div className="card back1 mt-5 mb-5 p-2">
+              <div className="card-body">
+                <div className="escrow__body">
+                  <div className=" text-center">
+                    <h6 className="text-white">USER</h6>
+                    <div className="d-flex justify-content-end">
+                      <button
+                        type="button"
+                        className="primary mt-5 mb-2 ps-4 pe-4"
+                        data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop"
+                        style={{fontSize: '12px'}}
+                      >
+                        CANCEL
+                      </button>
+                      <div
+                        className="modal fade shadow"
+                        id="staticBackdrop"
+                        data-bs-backdrop="static"
+                        data-bs-keyboard="false"
+                        tabIndex="-1"
+                        aria-labelledby="staticBackdropLabel"
+                        aria-hidden="true"
+                      >
+                        <div className="modal-dialog modal-dialog-centered dialog">
+                          <div className="modal-content back shadow">
+                            <div className="modal-body">
+                              <b>Are you sure you want to cancel?</b>
+                              <br />
+                              <br />
+                              <button
+                                type="button"
+                                className="primary me-4 ps-4 pe-4"
+                                data-bs-dismiss="modal"
+                              >
+                                No
+                              </button>
+                              <button type="button" className="primary ps-4 pe-4">
+                                Yes
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <h6 className="text-white">Memo of Transaction</h6>
+                    <h4 className="text-white">{selectedMemo}</h4>
+                    <button
+                      className="primary mt-5 mb-2 ps-4 pe-4"
+                      onClick={() => navigate("/Dashboard")}
+                      style={{fontSize: '12px'}}
+                    >
+                      Go to Dashboard
+                    </button>
+                  </div>
+                  <div className="text-center">
+                    <h6 className="text-white">POOLS</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+):<></>}
+          {selectedOrderType === "repayment" ? (
+          <div className="col col-md-6 col-xs-12">
+            <div className="card back2 mt-5 mb-5 p-2">
+              <div className="card-body">
+                <div className="escrow__body">
+                  <div className=" text-center">
+                    <h6 className="text-white">USER</h6>
+                    <div className="d-flex justify-content-end">
+                      <button
+                        type="button"
+                        className="primary mt-5 mb-2 ps-4 pe-4"
+                        data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop"
+                        style={{fontSize: '12px'}}
+                      >
+                        CANCEL
+                      </button>
+                      <div
+                        className="modal fade shadow"
+                        id="staticBackdrop"
+                        data-bs-backdrop="static"
+                        data-bs-keyboard="false"
+                        tabIndex="-1"
+                        aria-labelledby="staticBackdropLabel"
+                        aria-hidden="true"
+                      >
+                        <div className="modal-dialog modal-dialog-centered dialog">
+                          <div className="modal-content back shadow">
+                            <div className="modal-body">
+                              <b>Are you sure you want to cancel?</b>
+                              <br />
+                              <br />
+                              <button
+                                type="button"
+                                className="primary me-4 ps-4 pe-4"
+                                data-bs-dismiss="modal"
+                              >
+                                No
+                              </button>
+                              <button type="button" className="primary ps-4 pe-4">
+                                Yes
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <h6 className="text-white">Memo of Transaction</h6>
+                    <h4 className="text-white">{selectedMemo}</h4>
+                    <button
+                      className="primary mt-5 mb-2 ps-4 pe-4"
+                      onClick={() => navigate("/Dashboard")}
+                      style={{fontSize: '12px'}}
+                    >
+                      Go to Dashboard
+                    </button>
+                  </div>
+                  <div className="text-center">
+                    <h6 className="text-white">POOLS</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+):<></>}
           <div className="col col-md-1"></div>
           <div className="col col-md-3 col-sm-12 card mt-5 back mb-3">
             <div className="row pt-3 pb-3">
@@ -247,8 +410,8 @@ const Order = () => {
                 aria-labelledby="staticBackdropLabel"
                 aria-hidden="true"
               >
-                <div className="modal-dialog modal-dialog-centered dialog">
-                  <div className="modal-content back shadow">
+                <div className="modal-dialog dialog">
+                  <div className="modal-content back card">
                     <div className="modal-body">
                       <form onSubmit={submitHandler}>
                         <div className="input1 w-100">
