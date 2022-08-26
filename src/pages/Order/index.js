@@ -130,7 +130,7 @@ const Order = () => {
       <div className="container">
         <div className="row">
           <div className="col col-md-1"></div>
-          {selectedOrderType === "order" ? (
+          {selectedOrderType === "order" || selectedOrderType === null ? (
           <div className="col col-md-6 col-xs-12">
             <div className="card back mt-5 mb-5 p-2">
               <div className="card-body">
@@ -148,7 +148,7 @@ const Order = () => {
                         CANCEL
                       </button>
                       <div
-                        className="modal fade shadow"
+                        className="modal1 modal fade shadow"
                         id="staticBackdrop"
                         data-bs-backdrop="static"
                         data-bs-keyboard="false"
@@ -402,7 +402,7 @@ const Order = () => {
                 Confirm
               </button>
               <div
-                className="modal fade shadow"
+                className="modal modal2 fade shadow"
                 id="staticBackdrop2"
                 data-bs-backdrop="static"
                 data-bs-keyboard="false"
@@ -410,7 +410,7 @@ const Order = () => {
                 aria-labelledby="staticBackdropLabel"
                 aria-hidden="true"
               >
-                <div className="modal-dialog dialog">
+                <div className="modal-dialog modal-dialog-centered dialog">
                   <div className="modal-content back card">
                     <div className="modal-body">
                       <form onSubmit={submitHandler}>

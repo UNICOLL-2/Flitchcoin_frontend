@@ -45,9 +45,22 @@ element.style {
 	align-items: center;
 	justify-content: center;
 	box-shadow: 5px 5px 13px #2b2c2d, -3px -3px 5px #ffffff !important;
-	border-radius: 30px!important;
 	width: 75% !important;
 	height: 75%;
+}
+
+.modal1{
+    width: auto!important;
+    height: auto!important;
+	margin-top: 18%!important;
+	margin-left: 40%!important;
+}
+
+.modal2{
+	width: 20%!important;
+    height: auto!important;
+	margin-top: 18%!important;
+	margin-left: 40%!important;
 }
 
 .card {
