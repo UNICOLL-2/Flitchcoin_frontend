@@ -16,6 +16,7 @@ const Order = () => {
   const [qr, setQr] = useState();
   const [trans_id, setTrans_id] = useState();
   const [memo, setMemo] = useState();
+  const [state,setState] = useState();
 
   const coinHandler = (e) => {
     var data = JSON.stringify({
@@ -123,7 +124,15 @@ const Order = () => {
 
   useEffect(() => {
     coinHandler();
-  }, [network1 != 'Select Network'])
+  }, [network1 != 'Select Network']);
+
+  const display_card = () => {
+    if(state === "add_card"){
+      setState("");
+    }else{
+      setState("add_card");
+    }
+  }
 
   return (
     <div className="back shadow">
@@ -133,7 +142,7 @@ const Order = () => {
           {selectedOrderType === "order" || selectedOrderType === null ? (
           <div className="col col-md-6 col-xs-12">
             <div className="card back mt-5 mb-5 p-2">
-              <div className="card-body">
+              <div className="card-body" onClick={display_card}>
                 <div className="escrow__body">
                   <div className=" text-center">
                     <h6>USER</h6>
@@ -194,6 +203,136 @@ const Order = () => {
                 </div>
               </div>
             </div>
+            {state === "add_card" ? 
+            <>
+            <div className="card back1 mt-5 mb-5 p-2">
+              <div className="card-body">
+                <div className="escrow__body">
+                  <div className=" text-center">
+                    <h6 className="text-white">USER</h6>
+                    <div className="d-flex justify-content-end">
+                      <button
+                        type="button"
+                        className="primary mt-5 mb-2 ps-4 pe-4"
+                        data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop"
+                        style={{fontSize: '12px'}}
+                      >
+                        CANCEL
+                      </button>
+                      <div
+                        className="modal fade shadow"
+                        id="staticBackdrop"
+                        data-bs-backdrop="static"
+                        data-bs-keyboard="false"
+                        tabIndex="-1"
+                        aria-labelledby="staticBackdropLabel"
+                        aria-hidden="true"
+                      >
+                        <div className="modal-dialog modal-dialog-centered dialog">
+                          <div className="modal-content back shadow">
+                            <div className="modal-body">
+                              <b>Are you sure you want to cancel?</b>
+                              <br />
+                              <br />
+                              <button
+                                type="button"
+                                className="primary me-4 ps-4 pe-4"
+                                data-bs-dismiss="modal"
+                              >
+                                No
+                              </button>
+                              <button type="button" className="primary ps-4 pe-4">
+                                Yes
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <h6 className="text-white">Memo of Transaction</h6>
+                    <h4 className="text-white">{selectedMemo}</h4>
+                    <button
+                      className="primary mt-5 mb-2 ps-4 pe-4"
+                      onClick={() => navigate("/Dashboard")}
+                      style={{fontSize: '12px'}}
+                    >
+                      Go to Dashboard
+                    </button>
+                  </div>
+                  <div className="text-center">
+                    <h6 className="text-white">POOLS</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="card back2 mt-5 mb-5 p-2">
+              <div className="card-body">
+                <div className="escrow__body">
+                  <div className=" text-center">
+                    <h6 className="text-white">USER</h6>
+                    <div className="d-flex justify-content-end">
+                      <button
+                        type="button"
+                        className="primary mt-5 mb-2 ps-4 pe-4"
+                        data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop"
+                        style={{fontSize: '12px'}}
+                      >
+                        CANCEL
+                      </button>
+                      <div
+                        className="modal fade shadow"
+                        id="staticBackdrop"
+                        data-bs-backdrop="static"
+                        data-bs-keyboard="false"
+                        tabIndex="-1"
+                        aria-labelledby="staticBackdropLabel"
+                        aria-hidden="true"
+                      >
+                        <div className="modal-dialog modal-dialog-centered dialog">
+                          <div className="modal-content back shadow">
+                            <div className="modal-body">
+                              <b>Are you sure you want to cancel?</b>
+                              <br />
+                              <br />
+                              <button
+                                type="button"
+                                className="primary me-4 ps-4 pe-4"
+                                data-bs-dismiss="modal"
+                              >
+                                No
+                              </button>
+                              <button type="button" className="primary ps-4 pe-4">
+                                Yes
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <h6 className="text-white">Memo of Transaction</h6>
+                    <h4 className="text-white">{selectedMemo}</h4>
+                    <button
+                      className="primary mt-5 mb-2 ps-4 pe-4"
+                      onClick={() => navigate("/Dashboard")}
+                      style={{fontSize: '12px'}}
+                    >
+                      Go to Dashboard
+                    </button>
+                  </div>
+                  <div className="text-center">
+                    <h6 className="text-white">POOLS</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </>
+            :<></>}
           </div>
 ):<></>}
           {selectedOrderType === "margin" ? (

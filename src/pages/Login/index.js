@@ -156,7 +156,7 @@ function Login() {
             <p>
               Don't have an account?
               <span className="text-warning px-2 text" role="button">
-                <Link to="/sign-up" className="text-warning" style={{ position: "absolute" }}>Register here . </Link>
+                <Link to="/sign-up" className="text-warning" style={{ position: "absolute", marginTop: "-20px" }}>Signup</Link>
               </span>
             </p>
           </div>
