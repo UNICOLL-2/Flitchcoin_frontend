@@ -15,9 +15,9 @@ import Home_main from "../../pages/Home_main";
 import Sign_verify from "../../pages/Sign_verify";
 import QRVerify from "../../pages/QRVerify";
 import Forgot_Pass from "../../pages/Forgot_Pass";
-import Pass_verify from "../../pages/Pass_verify";
 import ProtectedRoutes from "../../pages/ProtectedRoutes";
 import Withdraw from "../../pages/Withdraw";
+import Test from '../../pages/Test';
 
 function Content() {
   return (
@@ -36,8 +36,8 @@ function Content() {
         <Route path="/sign_verify" element={<Sign_verify />} />
         <Route path="/qr_verify" element={<QRVerify />} />
         <Route path="/forgot_password" element={<Forgot_Pass />} />
-        <Route path="/pass_verify" element={<Pass_verify />} />
         <Route path="/withdraw" element={<Withdraw/>} />
+        <Route path="/test" element={<Test/>}/>
         <Route path="*" element={<Invalid />} />
       </Routes>
     </div>

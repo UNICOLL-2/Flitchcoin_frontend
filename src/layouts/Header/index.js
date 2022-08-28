@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logOutUser } from "../../Feature/Auth/authSlice";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHomeUser } from "@fortawesome/free-solid-svg-icons";
 
 function Header() {
   const { selectedType } = useSelector((state) => state.auth);
