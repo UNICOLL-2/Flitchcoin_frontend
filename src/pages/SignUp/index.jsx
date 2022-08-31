@@ -81,8 +81,8 @@ function SignUp() {
       <Animation />
       <div className="container">
         <div className="row login__two" >
-          <div className="col col-3"></div>
-          <div className="col col-sm-12 col-md-3 page_fill_3 pb-5">
+          <div className="col col-2"></div>
+          <div className="col col-sm-12 col-md-4 page_fill_3 pb-5">
             <form onSubmit={(e) => {
               e.preventDefault();
               submitHandler('participant')
@@ -123,7 +123,7 @@ function SignUp() {
                       name="fullNameParticipant"
                       value={fullNameParticipant}
                       onChange={onChange}
-                      placeholder="Enter your Fullname"
+                      placeholder="Enter your Full Name"
                       className="pressed txt-underline p-2 mb-2 w-100"
                     />
                     <span class="underline"></span>
@@ -133,7 +133,7 @@ function SignUp() {
               </div>
             </form>
           </div>
-          <div className="col col-sm-12 col-md-3 page_fill_3 pb-5">
+          <div className="col col-sm-12 col-md-4 page_fill_3 pb-5">
             <form onSubmit={(e) => {
               e.preventDefault();
               submitHandler('pool')
@@ -170,7 +170,7 @@ function SignUp() {
                       name="fullNamePool"
                       value={fullNamePool}
                       onChange={onChange}
-                      placeholder="Enter your Fullname"
+                      placeholder="Enter your Full Name"
                       className="pressed txt-underline p-2 mb-2 w-100"
                     />
                     <span class="underline"></span>

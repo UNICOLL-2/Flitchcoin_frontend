@@ -63,7 +63,7 @@ const Order = () => {
       "memo": memo
     });
   }else{
-    var trans = JSON.stringify({
+     trans = JSON.stringify({
       "trans_id": trans_id,
       "memo": selectedMemo,
       "repayment": isRepayment,
@@ -124,7 +124,7 @@ const Order = () => {
 
   useEffect(() => {
     coinHandler();
-  }, [network1 != 'Select Network']);
+  }, [network1 !== 'Select Network']);
 
   const display_card = () => {
     if(state === "add_card"){
@@ -513,9 +513,9 @@ const Order = () => {
                   </ul>
                 </div>
                 <h6 className="mt-4 text-info"><u>Wallet address :</u></h6>
-                <h5>{qr == undefined ? (<div className="text-center">-----</div>) : `${qr}`}</h5>
+                <h5>{qr === undefined ? (<div className="text-center">-----</div>) : `${qr}`}</h5>
                 <h6 className="mt-4 text-info"><u>Wallet memo :</u></h6>
-                <h5>{memo == undefined ? (<div className="text-center">-----</div>) : `${memo}`}</h5>
+                <h5>{memo === undefined ? (<div className="text-center">-----</div>) : `${memo}`}</h5>
                 <h6 className="mt-4 text-info"><u>Inserted Coin :</u></h6>
                 <h5 className="mb-4">{selectedCoin}</h5>
               </div>

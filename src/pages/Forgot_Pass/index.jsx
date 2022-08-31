@@ -15,12 +15,8 @@ function Forgot_Pass() {
         password: "",
     });
     const { username, password } = formData;
-
-    var data = JSON.stringify({
-        "username": username,
-        "password": password,
-    });
     const [msg,setMsg] = useState();
+    
     const submitHandler = (e) => {
         e.preventDefault();
         if ((username === "") || (password === "")) {
@@ -95,7 +91,7 @@ function Forgot_Pass() {
         <div>
             <Animation />
             <div className="container">
-                <div className="row ">
+                <div className="row page_fill_3">
                     <div className="col col-md-4"></div>
                     <div className="col col-md-3 ms-5 mt-5">
                         <form onSubmit={submitHandler}>

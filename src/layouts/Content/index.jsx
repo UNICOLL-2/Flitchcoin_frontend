@@ -17,7 +17,7 @@ import QRVerify from "../../pages/QRVerify";
 import Forgot_Pass from "../../pages/Forgot_Pass";
 import ProtectedRoutes from "../../pages/ProtectedRoutes";
 import Withdraw from "../../pages/Withdraw";
-import Test from '../../pages/Test';
+import PrivateRoute from "../../pages/PrivateRoute";
 
 function Content() {
   return (
@@ -27,17 +27,18 @@ function Content() {
         <Route path="/" element={<Home />} />
         <Route path="/order" element={<Order />} />
         <Route path="/verification" element={<Verification />} />
-        <Route path="/place_order" element={<PoolParticipant />} />
-        <Route path="/Api" element={<Api />} />
-        <Route path="/Dashboard" element={<Dashboard />} />
-        <Route path="/about" element={<About />} />
         <Route path="/login" element={<ProtectedRoutes><Login /></ProtectedRoutes>} />
+        <Route element={<PrivateRoute />}>
+          <Route path="/Dashboard" element={<Dashboard />} />
+          <Route path="/place_order" element={<PoolParticipant />} />
+          <Route path="/Api" element={<Api />} />
+        </Route>
+        <Route path="/about" element={<About />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign_verify" element={<Sign_verify />} />
         <Route path="/qr_verify" element={<QRVerify />} />
         <Route path="/forgot_password" element={<Forgot_Pass />} />
-        <Route path="/withdraw" element={<Withdraw/>} />
-        <Route path="/test" element={<Test/>}/>
+        <Route path="/withdraw" element={<Withdraw />} />
         <Route path="*" element={<Invalid />} />
       </Routes>
     </div>
