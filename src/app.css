@@ -200,6 +200,11 @@ element.style {
 	background-color: #E0E5EC;
 }
 
+.dashboard_table{
+	height: 400px;
+	overflow-y: scroll;
+}
+
 .vl {
 	border-left: 5px solid rgb(0, 0, 0);
 	height: 100px;

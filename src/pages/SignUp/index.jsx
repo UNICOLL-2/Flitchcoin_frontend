@@ -183,7 +183,7 @@ function SignUp() {
         </div>
       </div>
       <Footer />
-      <Modal show={show} onHide={() => setShow(false)} className="modal-dialog1">
+      <Modal show={show} onHide={() => setShow(false)}  backdrop="static" keyboard={false} className="modal-dialog1">
         <div className="back p-3">
           <b>Please Enter the OTP</b>
           <div className="input1 w-100">

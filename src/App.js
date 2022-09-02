@@ -20,7 +20,7 @@ const App = () => {
 
   return (
     <div>
-      {!selectedType && (
+      {selectedType === undefined && (
         <Modal
           show={show}
           onHide={() => setShow(false)}

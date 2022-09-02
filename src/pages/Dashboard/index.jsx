@@ -146,7 +146,7 @@ function Dashboard() {
               <Timeline colorTheme="light" feedMode="market" displayMode="compact" market="crypto" height={300} width="100%" symbol="BTCUSD" isTransparent></Timeline>
             </div>
           </div>
-          <div className="container card back mt-5">
+          <div className="container card back mt-5 dashboard_table">
             <div className="row">
               <div className="col-2 text-muted account text-center p-3">Name</div>
               <div className="col-2 text-muted account text-center p-3">Liquidate</div>
