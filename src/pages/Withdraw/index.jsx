@@ -168,8 +168,12 @@ const Withdraw = () => {
       })
   }
 
+  // bombarding
+
+  
   useEffect(() => {
     getWallet();
+    console.log("calling wallet inside onsubmit")
   }, [onSubmit])
 
   useEffect(() => {

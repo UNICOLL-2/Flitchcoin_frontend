@@ -46,7 +46,6 @@ const Order = () => {
   const [isMargin, setIsMargin] = useState(false);
 
   useEffect(() => {
-    console.log(selectedOrderType);
     if(selectedOrderType === "repayment"){
       setIsRepayment(true);
     }
@@ -89,7 +88,7 @@ const Order = () => {
 
   function network_list() {
     var data = JSON.stringify({
-      "string": {selectedCoin}
+      "string": selectedCoin
     })
     fetch("http://34.73.24.72/network", {
       method: "POST",
@@ -118,6 +117,9 @@ const Order = () => {
     setTrans_id(e.target.value);
   }
 
+
+
+  // not calling after coinHandler hence not showing networks
   useEffect(() => {
     network_list();
   }, []);
