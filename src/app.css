@@ -2,8 +2,8 @@
 	background-color: #eff0f0 !important;
 }
 
-.container{
-	overflow-x: hidden!important;
+.container {
+	overflow-x: hidden !important;
 }
 
 element.style {
@@ -53,18 +53,18 @@ element.style {
 	height: 75%;
 }
 
-.modal1{
-    width: auto!important;
-    height: auto!important;
-	margin-top: 18%!important;
-	margin-left: 40%!important;
+.modal1 {
+	width: auto !important;
+	height: auto !important;
+	margin-top: 18% !important;
+	margin-left: 40% !important;
 }
 
-.modal2{
-	width: 20%!important;
-    height: auto!important;
-	margin-top: 18%!important;
-	margin-left: 40%!important;
+.modal2 {
+	width: 20% !important;
+	height: auto !important;
+	margin-top: 18% !important;
+	margin-left: 40% !important;
 }
 
 .card {
@@ -200,7 +200,7 @@ element.style {
 	background-color: #E0E5EC;
 }
 
-.dashboard_table{
+.dashboard_table {
 	height: 400px;
 	overflow-y: scroll;
 }
@@ -211,15 +211,15 @@ element.style {
 	margin-top: 20px;
 }
 
-.back1{
-	background-color: red!important;
+.back1 {
+	background-color: red !important;
 }
 
-.back2{
-	background-color: green!important;
+.back2 {
+	background-color: green !important;
 }
 
-.save_wallet{
+.save_wallet {
 	height: 590px;
 	overflow-y: scroll;
 }
@@ -611,12 +611,12 @@ textarea:focus {
 		display: none;
 	}
 
-	.m_l_{
+	.m_l_ {
 		margin-left: 70px;
 		margin-top: 20px;
 	}
 
-	.m_l__{
+	.m_l__ {
 		margin-left: 70px;
 		margin-top: 20px;
 	}
@@ -774,3 +774,4 @@ canvas {
 .header-i7yYYmGG {
 	display: none !important;
 }
+

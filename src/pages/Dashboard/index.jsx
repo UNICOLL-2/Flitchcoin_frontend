@@ -69,7 +69,7 @@ function Dashboard() {
   }
 
   useEffect(() => {
-  item && table();
+  // item && table();
   },[item]);
 
   const onRepayment = () => {

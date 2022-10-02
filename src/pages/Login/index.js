@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { loginToken, userLogin } from "../../Feature/Auth/authSlice";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import {  Modal } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import './login.css';
 import Animation from "../../Animation";
 import Footer from '../../layouts/Footer/index';
@@ -78,8 +78,8 @@ function Login() {
 
   return (
     <div>
-      <Animation/>
-        <div className="container">
+      <Animation />
+      {/* <div className="container">
           <div className="row login__two">
             <div className="col col-md-2"></div>
             <div className="col col-sm-12 col-md-4 page_fill_3 pb-5">
@@ -97,7 +97,7 @@ function Login() {
                         placeholder="Enter your username"
                         className="input pressed txt-underline w-100 p-2 mb-3 "
                       />
-                      <span class="underline"></span>
+                      <span className="underline"></span>
                     </div>
                     <div className="input1 w-100">
                       <input
@@ -108,7 +108,7 @@ function Login() {
                         placeholder="Enter your Password"
                         className="pressed txt-underline p-2 mb-3 w-100"
                       />
-                      <span class="underline"></span>
+                      <span className="underline"></span>
                     </div>
                     <Link to='/forgot_Password' className="text-dark text-underline"><u>Forgot password ?</u></Link>
                     <input type="submit" className="btn btn-dark w-100 mt-4" value="Log In" name="Sign In" id="danger-outlined" autoComplete="off" />
@@ -131,7 +131,7 @@ function Login() {
                         placeholder="Enter your username "
                         className="pressed txt-underline p-2 mb-3  w-100"
                       />
-                      <span class="underline"></span>
+                      <span className="underline"></span>
                     </div>
                     <div className="input1 w-100">
                       <input
@@ -142,7 +142,7 @@ function Login() {
                         placeholder="Enter your Password"
                         className="pressed txt-underline p-2 mb-3 w-100"
                       />
-                      <span class="underline"></span>
+                      <span className="underline"></span>
                     </div>
                     <Link to='/forgot_Password' className="text-dark text-underline"><u>Forgot password ?</u></Link>
                     <input type="submit" className="btn btn-dark w-100 mt-4" value="Log In" name="Sign In" id="danger-outlined" autoComplete="off" />
@@ -159,35 +159,71 @@ function Login() {
               </span>
             </p>
           </div>
+        </div> */}
+
+
+      <form className="form" onSubmit={participantHandler}>
+        <div className="segment">
+          <h1>Log In</h1>
         </div>
+
+        <label className="label">
+          <input className="input"
+            type="email"
+            name="usernameParticipant"
+            value={usernameParticipant}
+            onChange={onChange}
+            placeholder="Enter your Username" />
+        </label>
+        <label className="label">
+          <input className="input"
+            type="password"
+            name="passwordParticipant"
+            value={passwordParticipant}
+            onChange={onChange}
+            placeholder="Enter your Password" />
+        </label>
+        <Link to='/forgot_Password' className="text-danger forgot text-underline"><u>Forgot password ?</u></Link>
+        <button className="red button" type="submit" value="Log In" name="Sign In">Log in</button>
+        <div className="row text-center pb-5 to_sign me-4">
+          <p>
+            Don't have an account?
+            <span className="text-warning px-2 text" role="button">
+              <Link to="/sign-up" className="text-warning" style={{ position: "absolute" }}>Signup</Link>
+            </span>
+          </p>
+        </div>
+      </form>
+
+
       <Modal show={show} onHide={() => setShow(false)} backdrop="static" keyboard={false} className="modal-dialog1">
-          <div className="back p-3">
-              <b>Please Enter the OTP</b>
-              <div className="input1 w-100">
-                <input
-                  type="text"
-                  className="txt-underline p-3 mb-3 w-100 input pressed mt-3"
-                  placeholder="Enter your OTP"
-                  onChange={onChange}
-                  name="otp"
-                  value={otp}
-                />
-                <span className="underline"></span>
-              </div>
-              <button
-                type="button"
-                className="primary me-4"
-                onClick={() => setShow(false)}
-              >
-                Cancel
-              </button>
-              <button type="button" className="primary"
-                onClick={otpHandler} >
-                Confirm
-              </button>
+        <div className="back p-3">
+          <b>Please Enter the OTP</b>
+          <div className="input1 w-100">
+            <input
+              type="text"
+              className="txt-underline p-3 mb-3 w-100 input pressed mt-3"
+              placeholder="Enter your OTP"
+              onChange={onChange}
+              name="otp"
+              value={otp}
+            />
+            <span className="underline"></span>
+          </div>
+          <button
+            type="button"
+            className="primary me-4"
+            onClick={() => setShow(false)}
+          >
+            Cancel
+          </button>
+          <button type="button" className="primary"
+            onClick={otpHandler} >
+            Confirm
+          </button>
         </div>
       </Modal>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

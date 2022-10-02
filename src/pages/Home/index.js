@@ -32,8 +32,8 @@ function Home() {
                 </button>
               </div>
             </div>
-            <div className="spacer col-lg-1"></div>
-            <div className="col-sm-12 col-md-6 mt-5 card back">
+            {/* <div className="spacer col-lg-1"></div> */}
+            <div className="col-sm-12 col-md-6 mt-5 ms-5 card back">
               <SymbolOverview colorTheme="light"
                 height={300}
                 width="100%"
@@ -112,11 +112,11 @@ function Home() {
           <Animation />
           <section className="my_50">
             <div className="row">
-              <div className="col-md-5 col-sm-12 mt-5 card back">
+              <div className="col-md-5 col-sm-12 mt-5 ms-2 card back">
                 <SymbolInfo colorTheme="dark" autosize symbol="XRPUSDT" isTransparent></SymbolInfo>
               </div>
-              <div className="col-md-1"></div>
-              <div className="col-md-6 col-sm-12 d-flex flex-column justify-content-center">
+              {/* <div className="col-md-1"></div> */}
+              <div className="col-md-6 col-sm-12 ms-5 d-flex flex-column justify-content-center">
                 <div className="pt-3">
                   <p className="h3">THE POWER OF ALADDIN + EFRONT</p>
                 </div>
@@ -174,41 +174,16 @@ function Home() {
                   </div>
                 </div>
               </div>
-              <div className="col-md-6 col-sm-12 pb-5 card back">
+              <div className="col-md-5 col-sm-12 pb-5 card back">
                 <MiniChart colorTheme="dark" width="100%" symbol="SOLUSDT" isTransparent></MiniChart>
               </div>
             </div>
           </section>
-          <div className="card back mt-5">
+          <div className="card back mt-5 mb-3">
             <ForexCrossRates colorTheme="light" height={400} width="100%" isTransparent></ForexCrossRates>
           </div>
         </div>
       </div>
-      {/* <svg width="63" height="99" viewBox="0 0 63 99" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g filter="url(#filter0_dd_2_19)">
-<circle cx="30" cy="47.9996" r="13.2156" fill="white"/>
-<path d="M49.6242 74.2203C53.4902 74.2203 56.6242 71.0863 56.6242 67.2203V4.82263C56.6242 4.27035 56.1765 3.82263 55.6242 3.82263C55.0719 3.82263 54.6242 4.27035 54.6242 4.82263V67.2203C54.6242 69.9817 52.3856 72.2203 49.6242 72.2203H16.7843C16.232 72.2203 15.7843 72.668 15.7843 73.2203C15.7843 73.7726 16.232 74.2203 16.7843 74.2203H49.6242Z" fill="white"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M3.37576 28.7789C3.37576 24.9129 6.50977 21.7789 10.3758 21.7789H43.2156C43.7679 21.7789 44.2156 22.2266 44.2156 22.7789C44.2156 23.3312 43.7679 23.7789 43.2156 23.7789H10.3758C7.61434 23.7789 5.37576 26.0175 5.37576 28.7789V91.1774C5.37576 91.7297 4.92805 92.1774 4.37576 92.1774C3.82348 92.1774 3.37576 91.7297 3.37576 91.1774V28.7789Z" fill="white"/>
-</g>
-<defs>
-<filter id="filter0_dd_2_19" x="0.375763" y="0.822632" width="62.2484" height="97.3548" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-<feOffset dx="2" dy="2"/>
-<feGaussianBlur stdDeviation="2"/>
-<feComposite in2="hardAlpha" operator="out"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0"/>
-<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2_19"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-<feOffset dx="-1" dy="-1"/>
-<feGaussianBlur stdDeviation="1"/>
-<feComposite in2="hardAlpha" operator="out"/>
-<feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.18 0"/>
-<feBlend mode="normal" in2="effect1_dropShadow_2_19" result="effect2_dropShadow_2_19"/>
-<feBlend mode="normal" in="SourceGraphic" in2="effect2_dropShadow_2_19" result="shape"/>
-</filter>
-</defs>
-</svg> */}
       <Footer />
     </>
   );

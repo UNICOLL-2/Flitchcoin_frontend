@@ -13,3 +13,79 @@
 .modal-content {
   width: 100%!important;
 }
+
+.form {
+  padding: 16px;
+  width: 500px;
+  margin: 0 auto;
+}
+
+.segment {
+  padding: 32px 0;
+  text-align: center;
+  color: #BABECC;
+}
+
+.button{
+  margin-top: 60px!important;
+  padding: 16px;
+}
+
+.button, .input {
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+  border-radius: 320px!important;
+  background-color: #EBECF0;
+  text-shadow: 1px 1px 0 #FFF;
+}
+
+.label {
+  display: block;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+.input {
+  margin-right: 8px;
+  background-color: #EBECF0!important;
+  box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF!important;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.input:focus {
+  box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF!important;
+}
+
+.button {
+  color: #61677C;
+  font-weight: bold;
+  box-shadow: -5px -5px 20px #FFF, 5px 5px 20px #BABECC;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  font-weight: 600;
+  position:absolute;
+}
+.button:hover {
+  box-shadow: -2px -2px 5px #FFF, 2px 2px 5px #BABECC;
+}
+.button:active {
+  box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
+}
+.button.red {
+  display: block;
+  width: 31%;
+  color: #AE1100;
+}
+
+.forgot{
+  margin-left: 22%;
+  position: fixed;
+}
+
+.to_sign{
+  margin-top: 200px!important;
+}
