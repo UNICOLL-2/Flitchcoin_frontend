@@ -56,7 +56,7 @@ const PoolParticipant = () => {
   }
 
   const coinNet = () => {
-    {selectedCoin === null ? 
+    {coin === "Select coin" ? 
       setCoinsNet(`BTCUSDT`) : setCoinsNet(`${coin}USDT`)
     }
   }
