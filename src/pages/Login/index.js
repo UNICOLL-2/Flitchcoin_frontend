@@ -168,7 +168,7 @@ function Login() {
         </div>
 
         <label className="label">
-          <input className="input"
+          <input className="input_login"
             type="email"
             name="usernameParticipant"
             value={usernameParticipant}
@@ -176,12 +176,13 @@ function Login() {
             placeholder="Enter your Username" />
         </label>
         <label className="label">
-          <input className="input"
+          <input className="input_login"
             type="password"
             name="passwordParticipant"
             value={passwordParticipant}
             onChange={onChange}
-            placeholder="Enter your Password" />
+            placeholder="Enter your Password"
+            style={{marginTop: "4%"}} />
         </label>
         <Link to='/forgot_Password' className="text-danger forgot text-underline"><u>Forgot password ?</u></Link>
         <button className="red button" type="submit" value="Log In" name="Sign In">Log in</button>
@@ -196,7 +197,7 @@ function Login() {
       </form>
 
 
-      <Modal show={show} onHide={() => setShow(false)} backdrop="static" keyboard={false} className="modal-dialog1">
+      <Modal show={show} onHide={() => setShow(false)} backdrop="static" keyboard={false} className="modal-dialog-login">
         <div className="back p-3">
           <b>Please Enter the OTP</b>
           <div className="input1 w-100">

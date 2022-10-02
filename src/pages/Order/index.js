@@ -425,7 +425,7 @@ const Order = () => {
                           CANCEL
                         </button>
                         <div
-                          className="modal fade shadow"
+                          className="modal fade"
                           id="staticBackdrop"
                           data-bs-backdrop="static"
                           data-bs-keyboard="false"
@@ -434,7 +434,7 @@ const Order = () => {
                           aria-hidden="true"
                         >
                           <div className="modal-dialog modal-dialog-centered dialog">
-                            <div className="modal-content back shadow">
+                            <div className="modal-content back card">
                               <div className="modal-body">
                                 <b>Are you sure you want to cancel?</b>
                                 <br />
@@ -546,7 +546,7 @@ const Order = () => {
                 Confirm
               </button>
               <div
-                className="modal modal2 fade shadow"
+                className="modal fade"
                 id="staticBackdrop2"
                 data-bs-backdrop="static"
                 data-bs-keyboard="false"

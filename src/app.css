@@ -35,25 +35,19 @@ element.style {
 	color: black;
 }
 
-.dialog {
+/* .dialog {
 	width: 30% !important;
-
-}
+} */
 
 .shadow {
 	box-shadow: 5px 5px 13px #2b2c2d, -5px -5px 5px #ffffff !important;
 }
 
 .modal-dialog {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	box-shadow: 5px 5px 13px #2b2c2d, -3px -3px 5px #ffffff !important;
-	width: 75% !important;
-	height: 75%;
+	width: 25% !important;
 }
 
-.modal1 {
+/* .modal1 {
 	width: auto !important;
 	height: auto !important;
 	margin-top: 18% !important;
@@ -61,11 +55,11 @@ element.style {
 }
 
 .modal2 {
-	width: 20% !important;
+	width: 30% !important;
 	height: auto !important;
 	margin-top: 18% !important;
 	margin-left: 40% !important;
-}
+} */
 
 .card {
 	border-radius: 0 !important;
@@ -74,7 +68,7 @@ element.style {
 	box-shadow: 4px 4px 8px #cbcbcb, -4px -4px 8px #ffffff;
 }
 
-.modal-content {
+/* .modal-content {
 	max-width: 100% !important;
 	max-height: 100% !important;
 	overflow-x: hidden !important;
@@ -82,7 +76,7 @@ element.style {
 	border: none !important;
 	border-radius: 0 !important;
 	box-shadow: 5px;
-}
+} */
 
 .p_50 {
 	padding: 50px !important;

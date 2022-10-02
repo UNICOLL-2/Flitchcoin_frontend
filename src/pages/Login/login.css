@@ -1,10 +1,10 @@
-.modal-dialog1 {
+.modal-dialog-login {
   display: flex!important;
   align-items: center!important;
   justify-content: center!important;
-  width: 20%!important;
+  width: 30%!important;
   border-radius: 0%!important;
-  margin-left: 40%;
+  margin-left: 35%;
   height: 30%!important;
   margin-top: 18%;
   overflow-y: hidden!important;
@@ -31,7 +31,7 @@
   padding: 16px;
 }
 
-.button, .input {
+.button, .input_login {
   border: 0;
   outline: 0;
   font-size: 16px;
@@ -46,17 +46,19 @@
   width: 100%;
 }
 
-.input {
+.input_login {
   margin-right: 8px;
   background-color: #EBECF0!important;
   box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF!important;
-  width: 100%;
+  width: 31%;
   box-sizing: border-box;
   transition: all 0.2s ease-in-out;
   appearance: none;
   -webkit-appearance: none;
+  position: absolute;
+  margin-bottom: 100px!important;
 }
-.input:focus {
+.input_login:focus {
   box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF!important;
 }
 
@@ -79,13 +81,15 @@
   display: block;
   width: 31%;
   color: #AE1100;
+  margin-top: 12%!important;
 }
 
 .forgot{
+  margin-top: 9%;
   margin-left: 22%;
-  position: fixed;
+  position: absolute;
 }
 
 .to_sign{
-  margin-top: 200px!important;
+  margin-top: 60%!important;
 }
