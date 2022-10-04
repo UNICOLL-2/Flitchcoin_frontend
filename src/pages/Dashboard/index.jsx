@@ -139,7 +139,7 @@ function Dashboard() {
                 <h3>Balance Details</h3>
               </div>
               <div className="col col-2">
-                <button type='button' style={{ position: "absolute" }} className='btn btn-warning' onClick={() => navigate("/pool_participant")} >Deposit</button>
+                <button type='button' style={{ position: "absolute" }} className='btn btn-warning' onClick={() => navigate("/place_order")} >Deposit</button>
               </div>
               <div className="col col-2">
                 <button type='button' className='primary' style={{ position: "absolute" }} onClick={() => (navigate('/withdraw'))} >Withdraw</button>

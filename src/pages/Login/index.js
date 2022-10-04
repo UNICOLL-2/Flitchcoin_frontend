@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import './login.css';
 import Animation from "../../Animation";
-import Footer from '../../layouts/Footer/index';
 
 function Login() {
   const dispatch = useDispatch();
@@ -78,89 +77,6 @@ function Login() {
   return (
     <div>
       <Animation />
-      {/* <div className="container">
-          <div className="row login__two">
-            <div className="col col-md-2"></div>
-            <div className="col col-sm-12 col-md-4 page_fill_3 pb-5">
-              <form onSubmit={participantHandler}>
-                <div className="back card">
-                  <div className="card-body">
-                    <h5 className="card-title text-center">I am a Borrower!</h5>
-                    <h5 className="card-title mt-5 mb-3">Login as Participants</h5>
-                    <div className="input1 w-100">
-                      <input
-                        type="email"
-                        name="usernameParticipant"
-                        value={usernameParticipant}
-                        onChange={onChange}
-                        placeholder="Enter your username"
-                        className="input pressed txt-underline w-100 p-2 mb-3 "
-                      />
-                      <span className="underline"></span>
-                    </div>
-                    <div className="input1 w-100">
-                      <input
-                        type="password"
-                        name="passwordParticipant"
-                        value={passwordParticipant}
-                        onChange={onChange}
-                        placeholder="Enter your Password"
-                        className="pressed txt-underline p-2 mb-3 w-100"
-                      />
-                      <span className="underline"></span>
-                    </div>
-                    <Link to='/forgot_Password' className="text-dark text-underline"><u>Forgot password ?</u></Link>
-                    <input type="submit" className="btn btn-dark w-100 mt-4" value="Log In" name="Sign In" id="danger-outlined" autoComplete="off" />
-                  </div>
-                </div>
-              </form>
-            </div>
-            <div className="col col-sm-12 col-md-4 page_fill_3 pb-5">
-              <form onSubmit={poolHandler}>
-                <div className="back card">
-                  <div className="card-body">
-                    <h5 className="card-title text-center">I am a lender!</h5>
-                    <h5 className="card-title mt-5 mb-3">Login as Pool</h5>
-                    <div className="input1 w-100">
-                      <input
-                        type="email"
-                        name="usernamePool"
-                        value={usernamePool}
-                        onChange={onChange}
-                        placeholder="Enter your username "
-                        className="pressed txt-underline p-2 mb-3  w-100"
-                      />
-                      <span className="underline"></span>
-                    </div>
-                    <div className="input1 w-100">
-                      <input
-                        type="password"
-                        name="passwordPool"
-                        value={passwordPool}
-                        onChange={onChange}
-                        placeholder="Enter your Password"
-                        className="pressed txt-underline p-2 mb-3 w-100"
-                      />
-                      <span className="underline"></span>
-                    </div>
-                    <Link to='/forgot_Password' className="text-dark text-underline"><u>Forgot password ?</u></Link>
-                    <input type="submit" className="btn btn-dark w-100 mt-4" value="Log In" name="Sign In" id="danger-outlined" autoComplete="off" />
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div className="row text-center pb-5">
-            <p>
-              Don't have an account?
-              <span className="text-warning px-2 text" role="button">
-                <Link to="/sign-up" className="text-warning" style={{ position: "absolute"}}>Signup</Link>
-              </span>
-            </p>
-          </div>
-        </div> */}
-
-
       <form className="form" onSubmit={participantHandler}>
         <div className="segment">
           <h1>Log In</h1>
@@ -181,7 +97,7 @@ function Login() {
             value={passwordParticipant}
             onChange={onChange}
             placeholder="Enter your Password"
-            style={{marginTop: "4%"}} />
+            style={{ marginTop: "4%" }} />
         </label>
         <Link to='/forgot_Password' className="text-danger forgot text-underline"><u>Forgot password ?</u></Link>
         <button className="red button" type="submit" value="Log In" name="Log In">Log in</button>
@@ -222,7 +138,6 @@ function Login() {
           </button>
         </div>
       </Modal>
-      <Footer />
     </div>
   );
 }

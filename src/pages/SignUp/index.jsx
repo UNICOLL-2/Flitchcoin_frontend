@@ -69,13 +69,13 @@ function SignUp() {
     }));
   };
 
-  const onRadioChange = ( data ) => {
+  const onRadioChange = (data) => {
     setSignType(data)
   };
 
   useEffect(() => {
     console.log(signType);
-  },[signType])
+  }, [signType])
 
   return (
     <>
@@ -219,26 +219,35 @@ function SignUp() {
             style={{ marginTop: "9%" }} />
         </label>
         <div className="row checks">
+          <div className="col-6">
           <div className="form-check">
-            <input className="form-check-input" type="radio" name="flexRadioDefault" value='participant' id="flexRadioDefault1" onChange={e =>onRadioChange(e.target.value)} />
+            <h5 className="text-muted">
+              <input className="form-check-input" type="radio" name="flexRadioDefault" value='participant' id="flexRadioDefault1" onChange={e => onRadioChange(e.target.value)} />
               <label className="form-check-label" htmlFor="flexRadioDefault1">
                 Become a Participant
               </label>
+            </h5>
           </div>
+          <div className="form-check mt-5">
+            <h5 className="text-muted">
+              <input className="form-check-input" type="radio" name="flexRadioDefault" value='pool' id="flexRadioDefault2" onChange={e => onRadioChange(e.target.value)} />
+              <label className="form-check-label" htmlFor="flexRadioDefault2">
+                Become a Pool
+              </label>
+            </h5>
+          </div>
+          </div>
+          <div className="col-6">
           {
             signType === 'participant' ? 
             <div>
               <p> &#x2714; it provides</p>
               <p> &#x2714; it provides</p>
               <p> &#x2716; it does not provides</p>
+              <p> &#x2714; it provides</p>
+
             </div> : <div></div>
-          }
-          <div className="form-check">
-            <input className="form-check-input" type="radio" name="flexRadioDefault" value='pool' id="flexRadioDefault2" onChange={e =>onRadioChange(e.target.value)}  />
-              <label className="form-check-label" htmlFor="flexRadioDefault2">
-                Become a Pool
-              </label>
-          </div>
+          } 
           {
             signType === 'pool' ? 
             <div>
@@ -254,7 +263,8 @@ function SignUp() {
                 <p> &#x2714; it provides</p>
                 <p> &#x2716; it does not provides</p>
             </div>: <div></div>
-          }
+          } 
+          </div>
         </div>
         <button className="button sign" type="submit" value="Sign up" name="Sign up">Sign up</button>
         <div className="pb-5 to_sign">

@@ -30,14 +30,14 @@ const App = () => {
         >
           <div className="row back back__content modal-dialog-app">
             <div className="col-4 p_50 fs-2 fw-bold back__animation ">
-              <p className="text-dark">Blook</p>
+              <p className="text-dark">Flitch Coin</p>
               <img src={wave} height="350px" width="300px" />
             </div>
             <div className="col-8 welcome__dialog">
               <div className="content_oveflow">
                 <div className="modal__header">
                   <h1 className="fw-bold modal-title">
-                    Welcome to the Aladdin® site
+                    Welcome to the Flitch Coin site
                   </h1>
                 </div>
                 <div className="modal__body pressed">
