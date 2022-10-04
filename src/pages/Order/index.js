@@ -18,11 +18,11 @@ const Order = () => {
   const [memo, setMemo] = useState();
   const [state, setState] = useState();
 
-  const [ temp, setTemp] = useState()
+  const [temp, setTemp] = useState()
 
   useEffect(() => {
     setTemp(selectedCoin)
-  },[temp === null])
+  }, [temp === null])
 
   const coinHandler = (e) => {
     var data = JSON.stringify({
@@ -210,11 +210,11 @@ const Order = () => {
               </div>
               {state === "add_card" ?
                 <>
-                  <div className="card back1 mt-5 mb-5 p-2">
+                  <div className="card back mt-5 mb-5 p-2">
                     <div className="card-body">
                       <div className="escrow__body">
                         <div className=" text-center">
-                          <h6 className="text-white">USER</h6>
+                          <h6>USER</h6>
                           <div className="d-flex justify-content-end">
                             <button
                               type="button"
@@ -257,8 +257,8 @@ const Order = () => {
                           </div>
                         </div>
                         <div className="text-center">
-                          <h6 className="text-white">Memo of Transaction</h6>
-                          <h4 className="text-white">{selectedMemo}</h4>
+                          <h6>Memo of Transaction</h6>
+                          <h4>{selectedMemo}</h4>
                           <button
                             className="primary mt-5 mb-2 ps-4 pe-4"
                             onClick={() => navigate("/Dashboard")}
@@ -268,16 +268,17 @@ const Order = () => {
                           </button>
                         </div>
                         <div className="text-center">
-                          <h6 className="text-white">POOLS</h6>
+                          <h6>POOLS</h6>
                         </div>
                       </div>
                     </div>
+                    <h4><span class="position-absolute top-0 start-100 translate-middle badge p-2 bg-danger">Repayment</span></h4>
                   </div>
-                  <div className="card back2 mt-5 mb-5 p-2">
+                  <div className="card back mt-5 mb-5 p-2">
                     <div className="card-body">
                       <div className="escrow__body">
                         <div className=" text-center">
-                          <h6 className="text-white">USER</h6>
+                          <h6>USER</h6>
                           <div className="d-flex justify-content-end">
                             <button
                               type="button"
@@ -320,8 +321,8 @@ const Order = () => {
                           </div>
                         </div>
                         <div className="text-center">
-                          <h6 className="text-white">Memo of Transaction</h6>
-                          <h4 className="text-white">{selectedMemo}</h4>
+                          <h6>Memo of Transaction</h6>
+                          <h4>{selectedMemo}</h4>
                           <button
                             className="primary mt-5 mb-2 ps-4 pe-4"
                             onClick={() => navigate("/Dashboard")}
@@ -331,10 +332,11 @@ const Order = () => {
                           </button>
                         </div>
                         <div className="text-center">
-                          <h6 className="text-white">POOLS</h6>
+                          <h6>POOLS</h6>
                         </div>
                       </div>
                     </div>
+                    <h4><span class="position-absolute top-0 start-100 translate-middle badge p-2 bg-secondary">Margin</span></h4>
                   </div>
                 </>
                 : <></>}
@@ -342,11 +344,11 @@ const Order = () => {
           ) : <></>}
           {selectedOrderType === "margin" ? (
             <div className="col col-md-6 col-xs-12">
-              <div className="card back1 mt-5 mb-5 p-2">
+              <div className="card back mt-5 mb-5 p-2">
                 <div className="card-body">
                   <div className="escrow__body">
                     <div className=" text-center">
-                      <h6 className="text-white">USER</h6>
+                      <h6>USER</h6>
                       <div className="d-flex justify-content-end">
                         <button
                           type="button"
@@ -389,8 +391,8 @@ const Order = () => {
                       </div>
                     </div>
                     <div className="text-center">
-                      <h6 className="text-white">Memo of Transaction</h6>
-                      <h4 className="text-white">{selectedMemo}</h4>
+                      <h6>Memo of Transaction</h6>
+                      <h4>{selectedMemo}</h4>
                       <button
                         className="primary mt-5 mb-2 ps-4 pe-4"
                         onClick={() => navigate("/Dashboard")}
@@ -400,20 +402,21 @@ const Order = () => {
                       </button>
                     </div>
                     <div className="text-center">
-                      <h6 className="text-white">POOLS</h6>
+                      <h6>POOLS</h6>
                     </div>
                   </div>
                 </div>
+              <h4><span class="position-absolute top-0 start-100 translate-middle badge p-2 bg-secondary">Margin</span></h4>
               </div>
             </div>
           ) : <></>}
           {selectedOrderType === "repayment" ? (
             <div className="col col-md-6 col-xs-12">
-              <div className="card back2 mt-5 mb-5 p-2">
+              <div className="card back mt-5 mb-5 p-2">
                 <div className="card-body">
                   <div className="escrow__body">
                     <div className=" text-center">
-                      <h6 className="text-white">USER</h6>
+                      <h6>USER</h6>
                       <div className="d-flex justify-content-end">
                         <button
                           type="button"
@@ -456,8 +459,8 @@ const Order = () => {
                       </div>
                     </div>
                     <div className="text-center">
-                      <h6 className="text-white">Memo of Transaction</h6>
-                      <h4 className="text-white">{selectedMemo}</h4>
+                      <h6>Memo of Transaction</h6>
+                      <h4>{selectedMemo}</h4>
                       <button
                         className="primary mt-5 mb-2 ps-4 pe-4"
                         onClick={() => navigate("/Dashboard")}
@@ -467,10 +470,11 @@ const Order = () => {
                       </button>
                     </div>
                     <div className="text-center">
-                      <h6 className="text-white">POOLS</h6>
+                      <h6>POOLS</h6>
                     </div>
                   </div>
                 </div>
+              <h4><span class="position-absolute top-0 start-100 translate-middle badge p-2 bg-danger">Repayment</span></h4>
               </div>
             </div>
           ) : <></>}
@@ -488,7 +492,7 @@ const Order = () => {
               <QRCodeSVG
                 value={qr}
                 className="mt-5"
-                size = {150}
+                size={150}
               />
             </div>
             {type === "otherUser" ? (

@@ -205,14 +205,6 @@ element.style {
 	margin-top: 20px;
 }
 
-.back1 {
-	background-color: red !important;
-}
-
-.back2 {
-	background-color: green !important;
-}
-
 .save_wallet {
 	height: 590px;
 	overflow-y: scroll;
