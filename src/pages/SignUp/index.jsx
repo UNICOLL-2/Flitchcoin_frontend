@@ -15,28 +15,23 @@ function SignUp() {
 
   const [show, setShow] = useState(false);
   const [otp, setOtp] = useState('');
-  const [otpMsg, setOtpMsg] = useState(null)
+  const [otpMsg, setOtpMsg] = useState(null);
+  const [signType, setSignType] = useState('');
 
   useEffect(() => {
-    if (verifyString)
-    {
-      if (verifyString?.status === 400)
-      {
+    if (verifyString) {
+      if (verifyString?.status === 400) {
         setOtpMsg(verifyString.msg)
-      } else if (verifyString?.status === 200)
-      {
+      } else if (verifyString?.status === 200) {
         setOtpMsg(verifyString.msg);
         navigate('/login')
-      } else
-      {
+      } else {
         setOtpMsg("Please Enter correct OTP")
       }
     }
-    if (loginString)
-    {
+    if (loginString) {
       setShow(true);
     }
-    console.log(selectedType);
   }, [selectedType, loginString, verifyString]);
 
   const dispatch = useDispatch();
@@ -52,15 +47,12 @@ function SignUp() {
   }
 
   const [formData, setFormData] = useState({
-    usernameParticipant: "",
-    passwordParticipant: "",
-    fullNameParticipant: "",
-    usernamePool: "",
-    passwordPool: "",
-    fullNamePool: "",
+    username: "",
+    password: "",
+    fullName: "",
     type: ""
   });
-  const { usernameParticipant, passwordParticipant, fullNameParticipant, usernamePool, passwordPool, fullNamePool, type } = formData;
+  const { username, password, fullName, type } = formData;
 
   const submitHandler = (type) => {
     setFormData((prevData) => ({
@@ -76,10 +68,19 @@ function SignUp() {
       [e.target.name]: e.target.value,
     }));
   };
+
+  const onRadioChange = ( data ) => {
+    setSignType(data)
+  };
+
+  useEffect(() => {
+    console.log(signType);
+  },[signType])
+
   return (
     <>
       <Animation />
-      <div className="container">
+      {/* <div className="container">
         <div className="row login__two" >
           <div className="col col-2"></div>
           <div className="col col-sm-12 col-md-4 page_fill_3 pb-5">
@@ -104,7 +105,7 @@ function SignUp() {
                       placeholder="Enter your Email "
                       className="pressed txt-underline p-2 mb-3 mt-3 w-100"
                     />
-                    <span class="underline"></span>
+                    <span className="underline"></span>
                   </div>
                   <div className='input1 w-100'>
                     <input
@@ -115,7 +116,7 @@ function SignUp() {
                       placeholder="Enter your Password"
                       className="pressed txt-underline p-2 mb-2 w-100"
                     />
-                    <span class="underline"></span>
+                    <span className="underline"></span>
                   </div>
                   <div className='input1 w-100'>
                     <input
@@ -126,7 +127,7 @@ function SignUp() {
                       placeholder="Enter your Full Name"
                       className="pressed txt-underline p-2 mb-2 w-100"
                     />
-                    <span class="underline"></span>
+                    <span className="underline"></span>
                   </div>
                   <input type="submit" className=" primary w-100 mt-4" value="Sign Up" name="Sign In" id="danger-outlined" autoComplete="off"/>
                 </div>
@@ -151,7 +152,7 @@ function SignUp() {
                       placeholder="Enter your Email "
                       className="pressed txt-underline p-2 mb-3 mt-3 w-100"
                     />
-                    <span class="underline"></span>
+                    <span className="underline"></span>
                   </div>
                   <div className='input1 w-100'>
                     <input
@@ -162,7 +163,7 @@ function SignUp() {
                       placeholder="Enter your Password"
                       className="pressed txt-underline p-2 mb-2 w-100"
                     />
-                    <span class="underline"></span>
+                    <span className="underline"></span>
                   </div>
                   <div className='input1 w-100'>
                     <input
@@ -173,7 +174,7 @@ function SignUp() {
                       placeholder="Enter your Full Name"
                       className="pressed txt-underline p-2 mb-2 w-100"
                     />
-                    <span class="underline"></span>
+                    <span className="underline"></span>
                   </div>
                   <input type="submit" className="primary w-100 mt-4" value="Sign Up" name="Sign In" id="danger-outlined" autoComplete="off"/>
                 </div>
@@ -181,16 +182,93 @@ function SignUp() {
             </form>
           </div>
         </div>
-      </div>
-      <Footer />
-      <Modal show={show} onHide={() => setShow(false)}  backdrop="static" keyboard={false} className="modal-dialog1">
+      </div> */}
+
+      <form className="form" onSubmit={(e) => {
+        e.preventDefault();
+        submitHandler(signType)
+      }}>
+        <div className="segment">
+          <h1>Sign Up</h1>
+        </div>
+
+        <label className="label">
+          <input className="input_login"
+            type="email"
+            name="username"
+            value={username}
+            onChange={onChange}
+            placeholder="Enter your Username" />
+        </label>
+        <label className="label">
+          <input className="input_login"
+            type="password"
+            name="password"
+            value={password}
+            onChange={onChange}
+            placeholder="Enter your Password"
+            style={{ marginTop: "4%" }} />
+        </label>
+        <label className="label">
+          <input className="input_login"
+            type="text"
+            name="fullName"
+            value={fullName}
+            onChange={onChange}
+            placeholder="Enter your Full Name"
+            style={{ marginTop: "9%" }} />
+        </label>
+        <div className="row checks">
+          <div className="form-check">
+            <input className="form-check-input" type="radio" name="flexRadioDefault" value='participant' id="flexRadioDefault1" onChange={e =>onRadioChange(e.target.value)} />
+              <label className="form-check-label" htmlFor="flexRadioDefault1">
+                Become a Participant
+              </label>
+          </div>
+          {
+            signType === 'participant' ? 
+            <div>
+              <p> &#x2714; it provides</p>
+              <p> &#x2714; it provides</p>
+              <p> &#x2716; it does not provides</p>
+            </div> : <div></div>
+          }
+          <div className="form-check">
+            <input className="form-check-input" type="radio" name="flexRadioDefault" value='pool' id="flexRadioDefault2" onChange={e =>onRadioChange(e.target.value)}  />
+              <label className="form-check-label" htmlFor="flexRadioDefault2">
+                Become a Pool
+              </label>
+          </div>
+          {
+            signType === 'pool' ? 
+            <div>
+              <p> &#x2714; it provides</p>
+              <p> &#x2714; it provides</p>
+              <p> &#x2716; it does not provides</p>
+            </div> : <div></div>
+          }
+          {
+            signType === '' ?
+            <div>
+              <p> &#x2714; it provides</p>
+                <p> &#x2714; it provides</p>
+                <p> &#x2716; it does not provides</p>
+            </div>: <div></div>
+          }
+        </div>
+        <button className="button sign" type="submit" value="Sign up" name="Sign up">Sign up</button>
+        <div className="pb-5 to_sign">
+        </div>
+      </form>
+
+      <Modal show={show} onHide={() => setShow(false)} backdrop="static" keyboard={false} className="modal-dialog-login">
         <div className="back p-3">
           <b>Please Enter the OTP</b>
           <div className="input1 w-100">
             <input
               type="text"
               className="txt-underline p-3 mb-3 w-100 input pressed"
-              placeholder="Enter your OTP"
+              placeholder="x x x x"
               onChange={(e) => setOtp(e.target.value)}
               name="otp"
               value={otp}
@@ -213,6 +291,7 @@ function SignUp() {
           </button>
         </div>
       </Modal>
+      {/* <Footer /> */}
     </>
   );
 }

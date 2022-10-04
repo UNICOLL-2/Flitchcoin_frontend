@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../Feature/Auth/authSlice";
 import Animation from "../../Animation";
-import {  Modal } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 
 function Forgot_Pass() {
 
@@ -15,8 +15,8 @@ function Forgot_Pass() {
         password: "",
     });
     const { username, password } = formData;
-    const [msg,setMsg] = useState();
-    
+    const [msg, setMsg] = useState();
+
     const submitHandler = (e) => {
         e.preventDefault();
         if ((username === "") || (password === "")) {
@@ -25,7 +25,7 @@ function Forgot_Pass() {
             var data = JSON.stringify({
                 "username": username,
                 "password": password,
-                "is_pool":true
+                "is_pool": true
             })
             fetch("http://34.73.24.72/forgot/Signup", {
                 method: 'PUT',
@@ -90,50 +90,35 @@ function Forgot_Pass() {
     return (
         <div>
             <Animation />
-            <div className="container">
-                <div className="row page_fill_3">
-                    <div className="col col-md-4"></div>
-                    <div className="col col-md-3 ms-5 mt-5">
-                        <form onSubmit={submitHandler}>
-                            <div className="card back ">
-                                <div className="card-body ">
-                                    <h5 className="card-title text-center text-bold">Enter Your Credentials</h5>
-                                    <div className='input1 w-100'>
-                                        <input
-                                            type="email"
-                                            name="username"
-                                            value={username}
-                                            onChange={onChange}
-                                            placeholder="Enter your Email "
-                                            className="pressed p-2 mb-3 mt-3 w-100 txt-underline"
-                                        />
-                                        <span class="underline"></span>
-                                    </div>
-                                    <div className='input1 w-100'>
-                                        <input
-                                            type="password"
-                                            name="password"
-                                            value={password}
-                                            onChange={onChange}
-                                            placeholder="Enter new Password"
-                                            className="pressed p-2 mb-2 w-100 txt-underline"
-                                        />
-                                        <span class="underline"></span>
-                                    </div>
-                                    <input type="submit" className="primary w-100 mt-4" value="SEND OTP" name="Sign In" id="danger-outlined" autoComplete="off"
-                                        onClick={() =>
-                                            setFormData({
-                                                ...formData,
-                                            })
-                                        }
-                                    />
-                                </div>
+                        <form className="form mt-5" onSubmit={submitHandler}>
+                            <div className="segment">
+                                <h1>Enter Your Credentials</h1>
                             </div>
+
+                            <label className="label">
+                                <input className="input_login"
+                                    type="email"
+                                    name="username"
+                                    value={username}
+                                    onChange={onChange}
+                                    placeholder="Enter your Email" />
+                            </label>
+                            <label className="label">
+                                <input className="input_login"
+                                    type="password"
+                                    name="password"
+                                    value={password}
+                                    onChange={onChange}
+                                    placeholder="Enter New Password"
+                                    style={{ marginTop: "4%" }} />
+                            </label>
+                            <button className="red button" type="submit" value="Send OTP" name="Sign In" onClick={() =>
+                                setFormData({
+                                    ...formData,
+                                })
+                            }>Send OTP</button>
                         </form>
-                    </div>
-                    <div className="col col-4"></div>
-                </div>
-                <Modal show={show} onHide={() => setShow(false)} className="modal-dialog1">
+                <Modal show={show} onHide={() => setShow(false)} className="modal-dialog-login">
                     <div className="back p-3">
                         <b>Please Enter the OTP</b>
                         <div className="input1 w-100">
@@ -160,7 +145,6 @@ function Forgot_Pass() {
                         </button>
                     </div>
                 </Modal>
-            </div>
         </div>
     );
 }

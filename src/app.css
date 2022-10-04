@@ -44,7 +44,7 @@ element.style {
 }
 
 .modal-dialog {
-	width: 25% !important;
+	width: 30% !important;
 }
 
 /* .modal1 {
@@ -769,3 +769,19 @@ canvas {
 	display: none !important;
 }
 
+
+/* Sing up page */
+
+.button.sign{
+	display: block;
+    width: 31%;
+    color: #AE1100;
+    margin-top: 27%!important;
+	margin-bottom: 10%!important;
+}
+
+.checks{
+	margin-top: 15%!important;
+	margin-left: 3%!important;
+	position: absolute;
+}

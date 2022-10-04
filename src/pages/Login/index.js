@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { loginToken, userLogin } from "../../Feature/Auth/authSlice";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -185,17 +184,16 @@ function Login() {
             style={{marginTop: "4%"}} />
         </label>
         <Link to='/forgot_Password' className="text-danger forgot text-underline"><u>Forgot password ?</u></Link>
-        <button className="red button" type="submit" value="Log In" name="Sign In">Log in</button>
+        <button className="red button" type="submit" value="Log In" name="Log In">Log in</button>
         <div className="row text-center pb-5 to_sign me-4">
           <p>
             Don't have an account?
-            <span className="text-warning px-2 text" role="button">
+            <span className="text-warning px-2" role="button">
               <Link to="/sign-up" className="text-warning" style={{ position: "absolute" }}>Signup</Link>
             </span>
           </p>
         </div>
       </form>
-
 
       <Modal show={show} onHide={() => setShow(false)} backdrop="static" keyboard={false} className="modal-dialog-login">
         <div className="back p-3">

@@ -28,8 +28,8 @@ const App = () => {
           keyboard={false}
           className="w-100 h-100 d-flex justify-content-center align-items-center"
         >
-          <div className="row shadow back back__content">
-            <div className="col-4 p_50 fs-2 fw-bold back back__animation">
+          <div className="row back back__content">
+            <div className="col-4 p_50 fs-2 fw-bold back__animation">
               <p className="text-dark">Blook</p>
               <img src={wave} height="350px" width="300px" />
             </div>

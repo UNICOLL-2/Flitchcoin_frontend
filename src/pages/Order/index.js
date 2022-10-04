@@ -488,6 +488,7 @@ const Order = () => {
               <QRCodeSVG
                 value={qr}
                 className="mt-5"
+                size = {150}
               />
             </div>
             {type === "otherUser" ? (
@@ -555,7 +556,7 @@ const Order = () => {
                 aria-hidden="true"
               >
                 <div className="modal-dialog modal-dialog-centered dialog">
-                  <div className="modal-content back card">
+                  <div className="modal-content back">
                     <div className="modal-body">
                       <form onSubmit={submitHandler}>
                         <div className="input1 w-100">
