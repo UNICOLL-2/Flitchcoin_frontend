@@ -202,7 +202,7 @@ function Login() {
             <input
               type="text"
               className="txt-underline p-3 mb-3 w-100 input pressed mt-3"
-              placeholder="Enter your OTP"
+              placeholder="x x x x x x"
               onChange={onChange}
               name="otp"
               value={otp}

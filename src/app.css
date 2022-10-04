@@ -43,8 +43,16 @@ element.style {
 	box-shadow: 5px 5px 13px #2b2c2d, -5px -5px 5px #ffffff !important;
 }
 
+.to_make_center{
+	margin-left: -7%!important;
+}
+
 .modal-dialog {
-	width: 30% !important;
+	width: 50% !important;
+}
+
+.modal-dialog-app{
+	width: 130%!important;
 }
 
 /* .modal1 {
@@ -129,15 +137,7 @@ element.style {
 }
 
 .m_l {
-	margin-left: 110px;
-}
-
-.m_l_ {
-	margin-left: 870px;
-}
-
-.m_l__ {
-	margin-left: 600px;
+	margin-left: 50px;
 }
 
 .navbar {
