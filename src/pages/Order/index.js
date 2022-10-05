@@ -129,7 +129,7 @@ const Order = () => {
 
   useEffect(() => {
     coinHandler();
-  }, [network1 !== 'Select Network']);
+  }, [network1 !== 'Select Network',network1]);
 
   const display_card = () => {
     if (state === "add_card") {
