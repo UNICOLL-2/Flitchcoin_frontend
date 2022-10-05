@@ -33,6 +33,7 @@ function Login() {
 
   const participantHandler = (e) => {
     e.preventDefault();
+    setShow(true);
     setFormData((prevData) => ({
       ...prevData,
       type: 'participant',

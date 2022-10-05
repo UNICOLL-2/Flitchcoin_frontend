@@ -1,3 +1,4 @@
+import { faSleigh } from "@fortawesome/free-solid-svg-icons";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
 
@@ -171,7 +172,11 @@ export const authSlice = createSlice({
         state.loginString = null;
       })
       .addCase(signupUser.fulfilled, (state, action) => {
-        state.loginString = action.payload;
+        if(action.payload.status === 208){
+          state.loginString = false
+        }else{
+        state.loginString = action.payload.data;
+        }
       })
       .addCase(signupUser.rejected, (state) => {
         state.loginString = null;

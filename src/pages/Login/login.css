@@ -2,11 +2,11 @@
   display: flex!important;
   align-items: center!important;
   justify-content: center!important;
-  width: 30%!important;
+  width: 30vw!important;
   border-radius: 0%!important;
-  margin-left: 35%;
-  height: 30%!important;
-  margin-top: 18%;
+  margin-left: 35vw;
+  height: 30vw!important;
+  margin-top: 18vw;
   overflow-y: hidden!important;
 }
 
@@ -79,17 +79,34 @@
 }
 .button.red {
   display: block;
-  width: 31%;
+  width: 31vw;
   color: #AE1100;
-  margin-top: 12%!important;
+  margin-top: 12vw!important;
 }
 
 .forgot{
-  margin-top: 9%;
-  margin-left: 22%;
+  margin-top: 9vw;
+  margin-left: 22vw;
   position: absolute;
 }
 
-.to_sign{
-  margin-top: 60%!important;
+.button .icon {
+  margin-right: 8px;
+}
+.button.unit {
+  border-radius: 8px;
+  line-height: 0;
+  width: 78px;
+  height: 78px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  font-weight: 900;
+  margin-top: 15vw!important;
+  margin-left: -2vw;
+  position: absolute;
+}
+.button.unit .icon {
+  margin-right: 0;
 }

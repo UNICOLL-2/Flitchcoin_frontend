@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { signupUser, verifyEmail } from "../../Feature/Auth/authSlice";
 import Animation from "../../Animation";
-import Footer from '../../layouts/Footer/index';
 import { useEffect } from "react";
 import { Modal } from "react-bootstrap";
 
@@ -17,6 +16,7 @@ function SignUp() {
   const [otp, setOtp] = useState('');
   const [otpMsg, setOtpMsg] = useState(null);
   const [signType, setSignType] = useState('');
+  const [user, setUser] = useState(false)
 
   useEffect(() => {
     if (verifyString) {
@@ -31,6 +31,7 @@ function SignUp() {
     }
     if (loginString) {
       setShow(true);
+      setUser(true);
     }
   }, [selectedType, loginString, verifyString]);
 
@@ -56,6 +57,12 @@ function SignUp() {
 
   const submitHandler = (type) => {
     dispatch(signupUser({ formData, type }))
+    if (!user) {
+      setTimeout(() => {
+        navigate('/login')
+      }, 3000)
+      alert("User already exist \nTaking back to Login page...")
+    }
   };
 
   const onChange = (e) => {
@@ -176,90 +183,96 @@ function SignUp() {
         </div>
       </div> */}
 
-      <form className="form" onSubmit={(e) => {
+      <form onSubmit={(e) => {
         e.preventDefault();
         submitHandler(signType)
       }}>
-        <div className="segment">
-          <h1>Sign Up</h1>
-        </div>
+        <div className="form">
+          <div className="segment">
+            <h1>Sign Up</h1>
+          </div>
 
-        <label className="label">
-          <input className="input_login"
-            type="email"
-            name="username"
-            value={username}
-            onChange={onChange}
-            placeholder="Enter your Username" />
-        </label>
-        <label className="label">
-          <input className="input_login"
-            type="password"
-            name="password"
-            value={password}
-            onChange={onChange}
-            placeholder="Enter your Password"
-            style={{ marginTop: "4%" }} />
-        </label>
-        <label className="label">
-          <input className="input_login"
-            type="text"
-            name="fullName"
-            value={fullName}
-            onChange={onChange}
-            placeholder="Enter your Full Name"
-            style={{ marginTop: "9%" }} />
-        </label>
-        <div className="row checks">
-          <div className="col-6">
-          <div className="form-check">
-            <h5 className="text-muted">
-              <input className="form-check-input" type="radio" name="flexRadioDefault" value='participant' id="flexRadioDefault1" onChange={e => onRadioChange(e.target.value)} />
-              <label className="form-check-label" htmlFor="flexRadioDefault1">
-                Become a Participant
-              </label>
-            </h5>
-          </div>
-          <div className="form-check mt-5">
-            <h5 className="text-muted">
-              <input className="form-check-input" type="radio" name="flexRadioDefault" value='pool' id="flexRadioDefault2" onChange={e => onRadioChange(e.target.value)} />
-              <label className="form-check-label" htmlFor="flexRadioDefault2">
-                Become a Pool
-              </label>
-            </h5>
-          </div>
-          </div>
-          <div className="col-6">
-          {
-            signType === 'participant' ? 
-            <div>
-              <p> &#x2714; it provides</p>
-              <p> &#x2714; it provides</p>
-              <p> &#x2716; it does not provides</p>
-              <p> &#x2714; it provides</p>
-
-            </div> : <div></div>
-          } 
-          {
-            signType === 'pool' ? 
-            <div>
-              <p> &#x2714; it provides</p>
-              <p> &#x2714; it provides</p>
-              <p> &#x2716; it does not provides</p>
-            </div> : <div></div>
-          }
-          {
-            signType === '' ?
-            <div>
-              <p> &#x2714; it provides</p>
-                <p> &#x2714; it provides</p>
-                <p> &#x2716; it does not provides</p>
-            </div>: <div></div>
-          } 
+          <label className="label">
+            <input className="input_login"
+              type="email"
+              name="username"
+              value={username}
+              onChange={onChange}
+              placeholder="Enter your Username" />
+          </label>
+          <label className="label">
+            <input className="input_login"
+              type="password"
+              name="password"
+              value={password}
+              onChange={onChange}
+              placeholder="Enter your Password"
+              style={{ marginTop: "4vw" }} />
+          </label>
+          <label className="label">
+            <input className="input_login"
+              type="text"
+              name="fullName"
+              value={fullName}
+              onChange={onChange}
+              placeholder="Enter your Full Name"
+              style={{ marginTop: "9vw" }} />
+          </label>
+          <div class="segment">
+          <a href="#flexRadioDefault1"><button class="unit button" type="button" >&#8595;</button></a>
           </div>
         </div>
-        <button className="button sign" type="submit" value="Sign up" name="Sign up">Sign up</button>
-        <div className="pb-5 to_sign">
+        <div className="container">
+        <div className="row checks" >
+          <div className="col col-md-3"></div>
+          <div className="col col-md-4">
+            <div className="form-check">
+              <h5 className="text-muted">
+                <input className="form-check-input" type="radio" name="flexRadioDefault" value='participant' id="flexRadioDefault1" onChange={e => onRadioChange(e.target.value)}  style={{position: 'absolute'}} />
+                <label className="form-check-label" htmlFor="flexRadioDefault1">
+                  Become a Participant
+                </label>
+              </h5>
+            </div>
+            <div className="form-check mt-5">
+              <h5 className="text-muted">
+                <input className="form-check-input" type="radio" name="flexRadioDefault" value='pool' id="flexRadioDefault2" onChange={e => onRadioChange(e.target.value)} style={{position: 'absolute'}} />
+                <label className="form-check-label" htmlFor="flexRadioDefault2">
+                  Become a Pool
+                </label>
+              </h5>
+            </div>
+            <button className="button sign" type="submit" value="Sign up" name="Sign up">Sign up</button>
+          </div>
+          <div className="col col-md-4">
+            {
+              signType === 'participant' ?
+                <div>
+                  <p> &#x2714; it provides</p>
+                  <p> &#x2714; it provides</p>
+                  <p> &#x2716; it does not provides</p>
+                  <p> &#x2714; it provides</p>
+
+                </div> : <div></div>
+            }
+            {
+              signType === 'pool' ?
+                <div>
+                  <p> &#x2714; it provides</p>
+                  <p> &#x2714; it provides</p>
+                  <p> &#x2716; it does not provides</p>
+                </div> : <div></div>
+            }
+            {
+              signType === '' ?
+                <div>
+                  <p> &#x2714; it provides</p>
+                  <p> &#x2714; it provides</p>
+                  <p> &#x2716; it does not provides</p>
+                </div> : <div></div>
+            }
+          </div>
+        </div>
         </div>
       </form>
 

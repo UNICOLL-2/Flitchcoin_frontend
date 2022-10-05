@@ -33,16 +33,12 @@ const signupUser = async (data) => {
       is_pool: true,
     };
   }
-
-  console.log(userValue);
-
   try {
     response = await axios.post("http://34.73.24.72/Signup", userValue);
-    console.log("response is ",response)
   } catch (error) {
     response = error.response;
   }
-  return response.data;
+  return response;
 };
 
 // otp verify
@@ -52,14 +48,10 @@ const verifyEmail = async (data) => {
 
   try {
     response = await axios.post("http://34.73.24.72/verify_email", data);
-    console.log("data is ",data)
   } catch (error) {
     response = error.response;
   }
 
-  // if (response?.data?.detail[0]?.msg) return response.data.detail[0].msg;
-
-  console.log("RES", response.data);
   return response.data;
 };
 

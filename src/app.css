@@ -766,16 +766,17 @@ canvas {
 
 .button.sign{
 	display: block;
-    width: 31%;
+    width: 31vw;
     color: #AE1100;
-    margin-top: 27%!important;
-	margin-bottom: 10%!important;
+	margin-left: 6vw;
 }
 
 .checks{
-	margin-top: 15%!important;
-	margin-left: 1%!important;
-	position: absolute;
+	margin-top: 25vw!important;
+}
+
+.to_sign{
+	margin-top: 19vw!important;
 }
 
 
