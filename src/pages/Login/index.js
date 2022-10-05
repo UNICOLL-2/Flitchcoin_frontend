@@ -21,51 +21,27 @@ function Login() {
   }, [userToken]);
 
   var [formData, setFormData] = useState({
-    usernamePool: "",
-    usernameParticipant: "",
-    passwordPool: "",
-    passwordParticipant: "",
-    type: null,
+    username: "",
+    password: "",
     otp: ''
   });
 
-  var { usernamePool, usernameParticipant, passwordPool, passwordParticipant, type, otp } = formData;
+  var { username,password, otp } = formData;
 
-  const participantHandler = (e) => {
+  const submitHandler = (e) => {
     e.preventDefault();
     setShow(true);
-    setFormData((prevData) => ({
-      ...prevData,
-      type: 'participant',
-    }))
-    if (type === 'participant') {
-      if (usernameParticipant === "" || passwordParticipant === "") {
-        alert("Please fill in the above information in PARTICIPANT");
+      if (username === "" || password === "") {
+        alert("Please fill in the above information");
       } else {
         setShow(true);
       }
-    };
   }
 
   const otpHandler = (e) => {
     e.preventDefault();
     dispatch(loginToken(formData));
     setShow(false);
-  }
-
-  const poolHandler = (e) => {
-    e.preventDefault();
-    setFormData((prevData) => ({
-      ...prevData,
-      type: 'pool',
-    }))
-    if (type === 'pool') {
-      if (usernamePool === "" || passwordPool === "") {
-        alert("Please fill in the above information in POOL");
-      } else {
-        setShow(true);
-      }
-    };
   }
 
   const onChange = (e) => {
@@ -78,7 +54,7 @@ function Login() {
   return (
     <div>
       <Animation />
-      <form className="form" onSubmit={participantHandler}>
+      <form className="form" onSubmit={submitHandler}>
         <div className="segment">
           <h1>Log In</h1>
         </div>
@@ -86,16 +62,16 @@ function Login() {
         <label className="label">
           <input className="input_login"
             type="email"
-            name="usernameParticipant"
-            value={usernameParticipant}
+            name="username"
+            value={username}
             onChange={onChange}
             placeholder="Enter your Username" />
         </label>
         <label className="label">
           <input className="input_login"
             type="password"
-            name="passwordParticipant"
-            value={passwordParticipant}
+            name="password"
+            value={password}
             onChange={onChange}
             placeholder="Enter your Password"
             style={{ marginTop: "4%" }} />

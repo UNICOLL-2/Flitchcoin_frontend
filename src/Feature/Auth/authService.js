@@ -35,6 +35,7 @@ const signupUser = async (data) => {
   }
   try {
     response = await axios.post("http://34.73.24.72/Signup", userValue);
+
   } catch (error) {
     response = error.response;
   }

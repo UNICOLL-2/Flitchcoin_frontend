@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { AdvancedRealTimeChart } from "react-ts-tradingview-widgets";
-import { useSelector } from "react-redux";
 import { SymbolInfo } from "react-ts-tradingview-widgets";
 import { TechnicalAnalysis } from "react-ts-tradingview-widgets";
 import { CryptoCurrencyMarket } from "react-ts-tradingview-widgets";
@@ -84,7 +83,6 @@ const PoolParticipant = () => {
     asset_list();
   }, []);
 
-  const { selectedCoin } = useSelector((state) => state.order);
   const [coins, setCoins] = useState('');
   const [coinsNet, setCoinsNet] = useState('');
 
