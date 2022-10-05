@@ -20,16 +20,16 @@ const signupUser = async (data) => {
 
   if (data.type === "participant") {
     userValue = {
-      username: data.formData.usernameParticipant,
-      password: data.formData.passwordParticipant,
-      full_name: data.formData.fullNameParticipant,
+      username: data.formData.username,
+      password: data.formData.password,
+      full_name: data.formData.fullName,
       is_pool: false,
     };
   } else {
     userValue = {
-      username: data.formData.usernamePool,
-      password: data.formData.passwordPool,
-      full_name: data.formData.fullNamePool,
+      username: data.formData.username,
+      password: data.formData.password,
+      full_name: data.formData.fullName,
       is_pool: true,
     };
   }
@@ -38,6 +38,7 @@ const signupUser = async (data) => {
 
   try {
     response = await axios.post("http://34.73.24.72/Signup", userValue);
+    console.log("response is ",response)
   } catch (error) {
     response = error.response;
   }
@@ -51,6 +52,7 @@ const verifyEmail = async (data) => {
 
   try {
     response = await axios.post("http://34.73.24.72/verify_email", data);
+    console.log("data is ",data)
   } catch (error) {
     response = error.response;
   }

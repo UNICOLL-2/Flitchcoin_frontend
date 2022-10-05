@@ -50,15 +50,11 @@ function SignUp() {
     username: "",
     password: "",
     fullName: "",
-    type: ""
+    type: signType
   });
   const { username, password, fullName, type } = formData;
 
   const submitHandler = (type) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      type
-    }));
     dispatch(signupUser({ formData, type }))
   };
 
@@ -72,10 +68,6 @@ function SignUp() {
   const onRadioChange = (data) => {
     setSignType(data)
   };
-
-  useEffect(() => {
-    console.log(signType);
-  }, [signType])
 
   return (
     <>

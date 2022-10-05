@@ -19,6 +19,15 @@ const PoolParticipant = () => {
   const [value, setValue] = useState();
   const [amount, setAmount] = useState();
 
+
+  const [load, setLoad] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoad(false)
+    }, 5000)
+  }, [])
+
+
   function asset_list() {
     fetch("http://34.73.24.72/asset_list", {
       method: 'GET',
@@ -54,17 +63,17 @@ const PoolParticipant = () => {
       },
       body: data,
     })
-    .then((res) => res.json()
-    .then((result) => {
-      if (result.status === 200){
-        dispatch(coinType(coin));
-        dispatch(orderType("order"));
-        navigate("/order");
-      }
-    }))
-    .catch((err) => {
-      console.log(err);
-    })
+      .then((res) => res.json()
+        .then((result) => {
+          if (result.status === 200) {
+            dispatch(coinType(coin));
+            dispatch(orderType("order"));
+            navigate("/order");
+          }
+        }))
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   const nextHanlder = () => {
@@ -107,79 +116,79 @@ const PoolParticipant = () => {
     }
   }
 
-  const renderData = () => {
-    return (
-      <div>
-        <div className="row">
-          <div className="col col-xs-12 col-lg-9 ps-4 mt-5 card back">
-            <AdvancedRealTimeChart theme="light" autosize symbol={coinsNet} ></AdvancedRealTimeChart>
-          </div>
-          <div className="col col-md-12 col-lg-3">
-            <div className="container">
-              <div className="row pt-5 pb-5">
-                <div className="back card">
-                  <div className="container pt-5 pb-5">
-                    <div className="row order__body mt-4">
-                      <h2 className="text-center mb-5">Place Order</h2>
-                      <h5 className="mb-3">Select a Coin</h5>
-                      <div className="col col-12 mb-5 btn-group">
-                        <button
-                          type="button"
-                          className="btn btn-dark dropdown-toggle w-100"
-                          data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                        >
-                          <b>{coin}</b>
-                        </button>
-                        <ul className="dropdown-menu drop">
-                          {asset.map(items => {
-                            return (
-                              <div>
-                                <li className="list-items" onClick={() => setCoin(items)}>{items}</li>
-                              </div>
-                            )
-                          })}
-                        </ul>
-                      </div>
-                      <h5 className="mb-3">Enter Amount</h5>
-                      <div className="col col-12">
-                        <div className="input1 w-100">
-                          <input
-                            type="number"
-                            name="amount"
-                            placeholder="Amount ($)"
-                            className="pressed txt-underline p-3 mb-3 w-100"
-                            value = {amount}
-                            onChange={e => setAmount(e.target.value)}
-                          />
-                          <span className="underline"></span>
-                        </div>
-                      </div>
-                      <h5 className="mb-3">Enter Duration</h5>
-                      <div className="col col-12">
-                        <input type="range" value={value} className="form-range" min='7' max='365' onChange={onChangeValues}></input>
-                        <div className="input1 w-100">
-                          <input
-                            type="number"
-                            name="duration"
-                            placeholder="Days ( 7 - 365 )"
-                            className="pressed txt-underline p-3 mb-3 w-100"
-                            value={value}
-                            onChange={onChangeValues}
-                          />
-                          <span className="underline"></span>
+  return (
+    <div>
+      {load === true ?
+        <>
+        <div className="for_fox">
+          <div class="fox">
+            <div class="leg-outer">
+              <div class="leg">
+                <div class="paw">
+                  <div class="log">
+                    <div class="log-inner">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="leg-outer">
+              <div class="leg">
+                <div class="paw">
+                  <div class="log">
+                    <div class="log-inner"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="hind-leg-outer">
+              <div class="hind-leg-outer2">
+                <div class="hind-paw">
+                  <div class="hind-log">
+                    <div class="hind-log-inner">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="hind-leg-outer">
+              <div class="hind-leg-outer2">
+                <div class="hind-paw">
+                  <div class="hind-log">
+                    <div class="hind-log-inner">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="body">
+              <div class="head">
+                <div class="ears">
+                  <div class="ear"></div>
+                  <div class="ear"></div>
+                </div>
+                <div class="face"></div>
+                <div class="snout"></div>
+              </div>
+              <div class="tail">
+                <div class="tail">
+                  <div class="tail">
+                    <div class="tail">
+                      <div class="tail">
+                        <div class="tail">
                         </div>
                       </div>
                     </div>
-                    <div className="row">
-                      <div className="d-flex justify-content-center mb-5">
-                        <button
-                          className="primary mt-4 ps-5 pe-5"
-                          style={{ position: "absolute" }}
-                          onClick={nextHanlder}
-                        >
-                          NEXT
-                        </button>
+                  </div>
+                </div>
+                <div class="tail2">
+                  <div class="tail">
+                    <div class="tail">
+                      <div class="tail">
+                        <div class="tail">
+                          <div class="tail">
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -187,27 +196,106 @@ const PoolParticipant = () => {
               </div>
             </div>
           </div>
-        </div>
-        <div className="row">
-          <div className="col col-lg-7 col-xs-12 ms-5">
-            <div className="card back mt-5">
-              <CryptoCurrencyMarket colorTheme="light" width="100%" height={654} isTransparent ></CryptoCurrencyMarket>
+          <div class="snow"></div>
+          </div>
+        </> : <>
+          <div className="row">
+            <div className="col col-xs-12 col-lg-9 ps-4 mt-5 card back">
+              <AdvancedRealTimeChart theme="light" autosize symbol={coinsNet} ></AdvancedRealTimeChart>
+            </div>
+            <div className="col col-md-12 col-lg-3">
+              <div className="container">
+                <div className="row pt-5 pb-5">
+                  <div className="back card">
+                    <div className="container pt-5 pb-5">
+                      <div className="row order__body mt-4">
+                        <h2 className="text-center mb-5">Place Order</h2>
+                        <h5 className="mb-3">Select a Coin</h5>
+                        <div className="col col-12 mb-5 btn-group">
+                          <button
+                            type="button"
+                            className="btn btn-dark dropdown-toggle w-100"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <b>{coin}</b>
+                          </button>
+                          <ul className="dropdown-menu drop">
+                            {asset.map(items => {
+                              return (
+                                <div>
+                                  <li className="list-items" onClick={() => setCoin(items)}>{items}</li>
+                                </div>
+                              )
+                            })}
+                          </ul>
+                        </div>
+                        <h5 className="mb-3">Enter Amount</h5>
+                        <div className="col col-12">
+                          <div className="input1 w-100">
+                            <input
+                              type="number"
+                              name="amount"
+                              placeholder="Amount ($)"
+                              className="pressed txt-underline p-3 mb-3 w-100"
+                              value={amount}
+                              onChange={e => setAmount(e.target.value)}
+                            />
+                            <span className="underline"></span>
+                          </div>
+                        </div>
+                        <h5 className="mb-3">Enter Duration</h5>
+                        <div className="col col-12">
+                          <input type="range" value={value} className="form-range" min='7' max='365' onChange={onChangeValues}></input>
+                          <div className="input1 w-100">
+                            <input
+                              type="number"
+                              name="duration"
+                              placeholder="Days ( 7 - 365 )"
+                              className="pressed txt-underline p-3 mb-3 w-100"
+                              value={value}
+                              onChange={onChangeValues}
+                            />
+                            <span className="underline"></span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row">
+                        <div className="d-flex justify-content-center mb-5">
+                          <button
+                            className="primary mt-4 ps-5 pe-5"
+                            style={{ position: "absolute" }}
+                            onClick={nextHanlder}
+                          >
+                            NEXT
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="col col-lg-4 col-md-12 mt-5">
-            <div className="card back">
-              <SymbolInfo colorTheme="light" height={100} width={500} symbol={coins} isTransparent ></SymbolInfo>
+          <div className="row">
+            <div className="col col-lg-7 col-xs-12 ms-5">
+              <div className="card back mt-5">
+                <CryptoCurrencyMarket colorTheme="light" width="100%" height={654} isTransparent ></CryptoCurrencyMarket>
+              </div>
             </div>
-            <div className="card back technical-analysis mt-3">
-              <TechnicalAnalysis colorTheme="light" height={380} width="100%" symbol={coinsNet} isTransparent></TechnicalAnalysis>
+            <div className="col col-lg-4 col-md-12 mt-5">
+              <div className="card back">
+                <SymbolInfo colorTheme="light" height={100} width={500} symbol={coins} isTransparent ></SymbolInfo>
+              </div>
+              <div className="card back technical-analysis mt-3">
+                <TechnicalAnalysis colorTheme="light" height={380} width="100%" symbol={coinsNet} isTransparent></TechnicalAnalysis>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    );
-  };
-
-  return renderData();
+        </>
+      }
+    </div>
+  );
 };
 
 export default PoolParticipant;

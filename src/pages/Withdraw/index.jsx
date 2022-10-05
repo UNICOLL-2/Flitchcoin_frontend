@@ -143,9 +143,11 @@ const Withdraw = () => {
       }).catch((err) => {
         console.log(err);
       })
+      setChange(true)
   };
 
   const [walletData, setWalletData] = useState([]);
+  const [change, setChange] = useState(false)
 
   const getWallet = () => {
     fetch('http://34.73.24.72/user_wallet', {
@@ -173,8 +175,7 @@ const Withdraw = () => {
   
   useEffect(() => {
     getWallet();
-    console.log("calling wallet inside onsubmit")
-  }, [onSubmit])
+  }, [change])
 
   useEffect(() => {
     getWallet();
@@ -249,6 +250,7 @@ const Withdraw = () => {
       }).catch((err) => {
         console.log(err);
       });
+      setChange(false)
   }
 
   return (
