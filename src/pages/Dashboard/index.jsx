@@ -134,7 +134,8 @@ function Dashboard() {
       <div className="container mt-4 mb-5">
         <div className="row ms-1">
           <div className="col col-md-12 col-lg-7 card back mt-3 p-3">
-            <div className="row">
+          <div className="container-fluid">
+          <div className="d-flex">
               <div className="col col-8">
                 <h3>Balance Details</h3>
               </div>
@@ -143,6 +144,7 @@ function Dashboard() {
               </div>
               <div className="col col-2">
                 <button type='button' className='primary' style={{ position: "absolute" }} onClick={() => (navigate('/withdraw'))} >Withdraw</button>
+              </div>
               </div>
             </div>
             <hr />

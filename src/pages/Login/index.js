@@ -43,11 +43,11 @@ function Login() {
   const submitHandler = (e) => {
     e.preventDefault();
     setShow(true);
-      if (username === "" || password === "") {
-        alert("Please fill in the above information in PARTICIPANT");
-      } else {
-        setShow(true);
-      }
+    if (username === "" || password === "") {
+      alert("Please fill in the above information in PARTICIPANT");
+    } else {
+      setShow(true);
+    }
   };
 
   const otpHandler = (e) => {
@@ -62,6 +62,36 @@ function Login() {
       [e.target.name]: e.target.value,
     }));
   };
+
+  const [fa2, setfa2] = useState(false);
+
+  const checkUser = (e) => {
+    const data = JSON.stringify({
+      "emailid": e
+    })
+    fetch('http://34.73.24.72/userchrono_info', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: data
+    }).then(res => res.json())
+      .then((data) => {
+        if (data.fa2 === null) {
+          setfa2(true)
+        } else {
+          setfa2(false)
+        }
+      }).catch((err) => {
+        console.log(err);
+      })
+  };
+
+  const onFa2Click = (e) => {
+    e.preventDefault();
+    navigate('/qr_verify');
+  }
 
   return (
     <div>
@@ -79,6 +109,7 @@ function Login() {
             value={username}
             onChange={onChange}
             placeholder="Enter your Username"
+            onBlur={e => checkUser(e.target.value)}
           />
         </label>
         <label className="label">
@@ -98,14 +129,27 @@ function Login() {
         >
           <u>Forgot password ?</u>
         </Link>
-        <button
-          className="red button"
-          type="submit"
-          value="Log In"
-          name="Log In"
-        >
-          Log in
-        </button>
+        {
+          fa2 === true ?
+            <button
+              className="red button"
+              type="button"
+              value="To Fa2"
+              name="To Fa2"
+              onClick={onFa2Click}
+            >
+              To Fa2
+            </button>
+            :
+            <button
+              className="red button"
+              type="submit"
+              value="Log In"
+              name="Log In"
+            >
+              Log in
+            </button>
+        }
         <div className="row text-center pb-5 to_sign me-4">
           <p>
             Don't have an account?
