@@ -19,6 +19,7 @@ function Forgot_Pass() {
 
     const submitHandler = (e) => {
         e.preventDefault();
+        setShow(true);
         if ((username === "") || (password === "")) {
             alert("Please fill in the above information in ");
         } else {
