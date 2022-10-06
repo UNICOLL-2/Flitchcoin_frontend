@@ -119,72 +119,72 @@ const PoolParticipant = () => {
       {load === true ?
         <>
         <div className="for_fox">
-          <div class="fox">
-            <div class="leg-outer">
-              <div class="leg">
-                <div class="paw">
-                  <div class="log">
-                    <div class="log-inner">
+          <div className="fox">
+            <div className="leg-outer">
+              <div className="leg">
+                <div className="paw">
+                  <div className="log">
+                    <div className="log-inner">
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="leg-outer">
-              <div class="leg">
-                <div class="paw">
-                  <div class="log">
-                    <div class="log-inner"></div>
+            <div className="leg-outer">
+              <div className="leg">
+                <div className="paw">
+                  <div className="log">
+                    <div className="log-inner"></div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="hind-leg-outer">
-              <div class="hind-leg-outer2">
-                <div class="hind-paw">
-                  <div class="hind-log">
-                    <div class="hind-log-inner">
+            <div className="hind-leg-outer">
+              <div className="hind-leg-outer2">
+                <div className="hind-paw">
+                  <div className="hind-log">
+                    <div className="hind-log-inner">
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="hind-leg-outer">
-              <div class="hind-leg-outer2">
-                <div class="hind-paw">
-                  <div class="hind-log">
-                    <div class="hind-log-inner">
+            <div className="hind-leg-outer">
+              <div className="hind-leg-outer2">
+                <div className="hind-paw">
+                  <div className="hind-log">
+                    <div className="hind-log-inner">
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="body">
-              <div class="head">
-                <div class="ears">
-                  <div class="ear"></div>
-                  <div class="ear"></div>
+            <div className="body">
+              <div className="head">
+                <div className="ears">
+                  <div className="ear"></div>
+                  <div className="ear"></div>
                 </div>
-                <div class="face"></div>
-                <div class="snout"></div>
+                <div className="face"></div>
+                <div className="snout"></div>
               </div>
-              <div class="tail">
-                <div class="tail">
-                  <div class="tail">
-                    <div class="tail">
-                      <div class="tail">
-                        <div class="tail">
+              <div className="tail">
+                <div className="tail">
+                  <div className="tail">
+                    <div className="tail">
+                      <div className="tail">
+                        <div className="tail">
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="tail2">
-                  <div class="tail">
-                    <div class="tail">
-                      <div class="tail">
-                        <div class="tail">
-                          <div class="tail">
+                <div className="tail2">
+                  <div className="tail">
+                    <div className="tail">
+                      <div className="tail">
+                        <div className="tail">
+                          <div className="tail">
                           </div>
                         </div>
                       </div>
@@ -194,7 +194,7 @@ const PoolParticipant = () => {
               </div>
             </div>
           </div>
-          <div class="snow"></div>
+          <div className="snow"></div>
           </div>
         </> : <>
           <div className="row">

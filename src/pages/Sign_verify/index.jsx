@@ -82,7 +82,7 @@ const Sign_verify = () => {
                                             placeholder="Enter OTP"
                                             className="pressed txt-underline p-2 mb-2 w-100"
                                         />
-                                        <span class="underline"></span>
+                                        <span className="underline"></span>
                                         </div>
                                         <input type="submit" className="btn btn-dark w-100 mt-4" value="Sign Up" name="Sign Up" id="danger-outlined" autoComplete="off"
                                             onClick={() => {
@@ -112,7 +112,7 @@ const Sign_verify = () => {
                                             placeholder="Enter OTP"
                                             className="pressed txt-underline p-2 mb-2 w-100"
                                         />
-                                        <span class="underline"></span>
+                                        <span className="underline"></span>
                                         </div>
                                         <input type="submit" className="btn btn-dark w-100 mt-4" value="Sign Up" name="Sign Up" id="danger-outlined" autoComplete="off"
                                             onClick={() => {

@@ -56,6 +56,9 @@ function SignUp() {
   const { username, password, fullName, type } = formData;
 
   const submitHandler = (type) => {
+    if (username === '' && password === ''){
+      alert("Please enter the above information")
+    }else {
     dispatch(signupUser({ formData, type }))
     if (!user) {
       setTimeout(() => {
@@ -63,6 +66,7 @@ function SignUp() {
       }, 3000)
       alert("User already exist \nTaking back to Login page...")
     }
+  }
   };
 
   const onChange = (e) => {
@@ -79,110 +83,6 @@ function SignUp() {
   return (
     <>
       <Animation />
-      {/* <div className="container">
-        <div className="row login__two" >
-          <div className="col col-2"></div>
-          <div className="col col-sm-12 col-md-4 page_fill_3 pb-5">
-            <form onSubmit={(e) => {
-              e.preventDefault();
-              submitHandler('participant')
-            }}>
-              <div className="card back">
-                <div className="card-body">
-                  <h5 className="card-title text-center">
-                    I am a Borrower!
-                  </h5>
-                  <h5 className="card-title mt-5 mb-3">
-                    Sign up as Participants
-                  </h5>
-                  <div className='input1 w-100'>
-                    <input
-                      type="email"
-                      name="usernameParticipant"
-                      value={usernameParticipant}
-                      onChange={onChange}
-                      placeholder="Enter your Email "
-                      className="pressed txt-underline p-2 mb-3 mt-3 w-100"
-                    />
-                    <span className="underline"></span>
-                  </div>
-                  <div className='input1 w-100'>
-                    <input
-                      type="password"
-                      name="passwordParticipant"
-                      value={passwordParticipant}
-                      onChange={onChange}
-                      placeholder="Enter your Password"
-                      className="pressed txt-underline p-2 mb-2 w-100"
-                    />
-                    <span className="underline"></span>
-                  </div>
-                  <div className='input1 w-100'>
-                    <input
-                      type="text"
-                      name="fullNameParticipant"
-                      value={fullNameParticipant}
-                      onChange={onChange}
-                      placeholder="Enter your Full Name"
-                      className="pressed txt-underline p-2 mb-2 w-100"
-                    />
-                    <span className="underline"></span>
-                  </div>
-                  <input type="submit" className=" primary w-100 mt-4" value="Sign Up" name="Sign In" id="danger-outlined" autoComplete="off"/>
-                </div>
-              </div>
-            </form>
-          </div>
-          <div className="col col-sm-12 col-md-4 page_fill_3 pb-5">
-            <form onSubmit={(e) => {
-              e.preventDefault();
-              submitHandler('pool')
-            }}>
-              <div className="card back">
-                <div className="card-body">
-                  <h5 className="card-title text-center">I am a lender!</h5>
-                  <h5 className="card-title mt-5 mb-3">Sign up as Pool</h5>
-                  <div className='input1 w-100'>
-                    <input
-                      type="email"
-                      name="usernamePool"
-                      value={usernamePool}
-                      onChange={onChange}
-                      placeholder="Enter your Email "
-                      className="pressed txt-underline p-2 mb-3 mt-3 w-100"
-                    />
-                    <span className="underline"></span>
-                  </div>
-                  <div className='input1 w-100'>
-                    <input
-                      type="password"
-                      name="passwordPool"
-                      value={passwordPool}
-                      onChange={onChange}
-                      placeholder="Enter your Password"
-                      className="pressed txt-underline p-2 mb-2 w-100"
-                    />
-                    <span className="underline"></span>
-                  </div>
-                  <div className='input1 w-100'>
-                    <input
-                      type="text"
-                      name="fullNamePool"
-                      value={fullNamePool}
-                      onChange={onChange}
-                      placeholder="Enter your Full Name"
-                      className="pressed txt-underline p-2 mb-2 w-100"
-                    />
-                    <span className="underline"></span>
-                  </div>
-                  <input type="submit" className="primary w-100 mt-4" value="Sign Up" name="Sign In" id="danger-outlined" autoComplete="off"/>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div> */}
-
       <form onSubmit={(e) => {
         e.preventDefault();
         submitHandler(signType)
@@ -218,61 +118,61 @@ function SignUp() {
               placeholder="Enter your Full Name"
               style={{ marginTop: "9vw" }} />
           </label>
-          <div class="segment">
-          <a href="#flexRadioDefault1"><button class="unit button" type="button" >&#8595;</button></a>
+          <div className="segment">
+            <a href="#flexRadioDefault1"><button className="unit button" type="button" >&#8595;</button></a>
           </div>
         </div>
         <div className="container">
-        <div className="row checks" >
-          <div className="col col-md-3"></div>
-          <div className="col col-md-4">
-            <div className="form-check">
-              <h5 className="text-muted">
-                <input className="form-check-input" type="radio" name="flexRadioDefault" value='participant' id="flexRadioDefault1" onChange={e => onRadioChange(e.target.value)}  style={{position: 'absolute'}} />
-                <label className="form-check-label" htmlFor="flexRadioDefault1">
-                  Become a Participant
-                </label>
-              </h5>
+          <div className="row checks" >
+            <div className="col col-md-3"></div>
+            <div className="col col-md-4">
+              <div className="form-check">
+                <h5 className="text-muted">
+                  <input className="form-check-input" type="radio" name="flexRadioDefault" value='participant' id="flexRadioDefault1" onChange={e => onRadioChange(e.target.value)} style={{ position: 'absolute' }} />
+                  <label className="form-check-label" htmlFor="flexRadioDefault1">
+                    Become a Participant
+                  </label>
+                </h5>
+              </div>
+              <div className="form-check mt-5">
+                <h5 className="text-muted">
+                  <input className="form-check-input" type="radio" name="flexRadioDefault" value='pool' id="flexRadioDefault2" onChange={e => onRadioChange(e.target.value)} style={{ position: 'absolute' }} />
+                  <label className="form-check-label" htmlFor="flexRadioDefault2">
+                    Become a Pool
+                  </label>
+                </h5>
+              </div>
+              <button className="button sign" type="submit" value="Sign up" name="Sign up">Sign up</button>
             </div>
-            <div className="form-check mt-5">
-              <h5 className="text-muted">
-                <input className="form-check-input" type="radio" name="flexRadioDefault" value='pool' id="flexRadioDefault2" onChange={e => onRadioChange(e.target.value)} style={{position: 'absolute'}} />
-                <label className="form-check-label" htmlFor="flexRadioDefault2">
-                  Become a Pool
-                </label>
-              </h5>
-            </div>
-            <button className="button sign" type="submit" value="Sign up" name="Sign up">Sign up</button>
-          </div>
-          <div className="col col-md-4">
-            {
-              signType === 'participant' ?
-                <div>
-                  <p> &#x2714; it provides</p>
-                  <p> &#x2714; it provides</p>
-                  <p> &#x2716; it does not provides</p>
-                  <p> &#x2714; it provides</p>
+            <div className="col col-md-4">
+              {
+                signType === 'participant' ?
+                  <div>
+                    <p> &#x2714; it provides</p>
+                    <p> &#x2714; it provides</p>
+                    <p> &#x2716; it does not provides</p>
+                    <p> &#x2714; it provides</p>
 
-                </div> : <div></div>
-            }
-            {
-              signType === 'pool' ?
-                <div>
-                  <p> &#x2714; it provides</p>
-                  <p> &#x2714; it provides</p>
-                  <p> &#x2716; it does not provides</p>
-                </div> : <div></div>
-            }
-            {
-              signType === '' ?
-                <div>
-                  <p> &#x2714; it provides</p>
-                  <p> &#x2714; it provides</p>
-                  <p> &#x2716; it does not provides</p>
-                </div> : <div></div>
-            }
+                  </div> : <div></div>
+              }
+              {
+                signType === 'pool' ?
+                  <div>
+                    <p> &#x2714; it provides</p>
+                    <p> &#x2714; it provides</p>
+                    <p> &#x2716; it does not provides</p>
+                  </div> : <div></div>
+              }
+              {
+                signType === '' ?
+                  <div>
+                    <p> &#x2714; it provides</p>
+                    <p> &#x2714; it provides</p>
+                    <p> &#x2716; it does not provides</p>
+                  </div> : <div></div>
+              }
+            </div>
           </div>
-        </div>
         </div>
       </form>
 
@@ -306,7 +206,6 @@ function SignUp() {
           </button>
         </div>
       </Modal>
-      {/* <Footer /> */}
     </>
   );
 }

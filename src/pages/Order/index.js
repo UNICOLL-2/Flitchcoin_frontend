@@ -272,7 +272,7 @@ const Order = () => {
                         </div>
                       </div>
                     </div>
-                    <h4><span class="position-absolute top-0 start-100 translate-middle badge p-2 bg-danger">Repayment</span></h4>
+                    <h4><span className="position-absolute top-0 start-100 translate-middle badge p-2 bg-danger">Repayment</span></h4>
                   </div>
                   <div className="card back mt-5 mb-5 p-2">
                     <div className="card-body">
@@ -336,7 +336,7 @@ const Order = () => {
                         </div>
                       </div>
                     </div>
-                    <h4><span class="position-absolute top-0 start-100 translate-middle badge p-2 bg-secondary">Margin</span></h4>
+                    <h4><span className="position-absolute top-0 start-100 translate-middle badge p-2 bg-secondary">Margin</span></h4>
                   </div>
                 </>
                 : <></>}
@@ -406,7 +406,7 @@ const Order = () => {
                     </div>
                   </div>
                 </div>
-              <h4><span class="position-absolute top-0 start-100 translate-middle badge p-2 bg-secondary">Margin</span></h4>
+              <h4><span className="position-absolute top-0 start-100 translate-middle badge p-2 bg-secondary">Margin</span></h4>
               </div>
             </div>
           ) : <></>}
@@ -474,7 +474,7 @@ const Order = () => {
                     </div>
                   </div>
                 </div>
-              <h4><span class="position-absolute top-0 start-100 translate-middle badge p-2 bg-danger">Repayment</span></h4>
+              <h4><span className="position-absolute top-0 start-100 translate-middle badge p-2 bg-danger">Repayment</span></h4>
               </div>
             </div>
           ) : <></>}

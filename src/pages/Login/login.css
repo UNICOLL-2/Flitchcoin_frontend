@@ -1,17 +1,17 @@
 .modal-dialog-login {
-  display: flex!important;
-  align-items: center!important;
-  justify-content: center!important;
-  width: 30vw!important;
-  border-radius: 0%!important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 30vw !important;
+  border-radius: 0% !important;
   margin-left: 35vw;
-  height: 30vw!important;
+  height: 30vw !important;
   margin-top: 15vh;
-  overflow-y: hidden!important;
+  overflow-y: hidden !important;
 }
 
 .modal-content {
-  width: 100%!important;
+  width: 100% !important;
 }
 
 .form {
@@ -26,17 +26,22 @@
   color: #BABECC;
 }
 
-.button{
-  margin-top: 60px!important;
+.button {
+  margin-top: 60px !important;
   padding: 16px;
 }
 
-.button, .input_login {
+button,
+.input_login {
   border: 0;
   outline: 0;
   font-size: 16px;
-  border-radius: 320px!important;
   background-color: #EBECF0;
+}
+
+.button,
+.input_login {
+  border-radius: 320px !important;
   text-shadow: 1px 1px 0 #FFF;
 }
 
@@ -48,43 +53,52 @@
 
 .input_login {
   margin-right: 8px;
-  background-color: #EBECF0!important;
-  box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF!important;
+  background-color: #EBECF0 !important;
+  box-shadow: inset 2px 2px 5px #BABECC, inset -5px -5px 10px #FFF !important;
   width: 31%;
   box-sizing: border-box;
   transition: all 0.2s ease-in-out;
   appearance: none;
   -webkit-appearance: none;
   position: absolute;
-  margin-bottom: 100px!important;
-}
-.input_login:focus {
-  box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF!important;
+  margin-bottom: 100px !important;
 }
 
-.button {
-  color: #61677C;
+.input_login:focus {
+  box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF !important;
+}
+
+button {
+  color: #797e8d;
   font-weight: bold;
   box-shadow: -5px -5px 20px #FFF, 5px 5px 20px #BABECC;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
   font-weight: 600;
-  position:absolute;
+  padding: 12px;
+  color: black;
 }
-.button:hover {
+
+.button{
+  position: absolute;
+}
+
+button:hover {
   box-shadow: -2px -2px 5px #FFF, 2px 2px 5px #BABECC;
 }
-.button:active {
+
+button:active {
   box-shadow: inset 1px 1px 2px #BABECC, inset -1px -1px 2px #FFF;
 }
+
 .button.red {
   display: block;
   width: 31vw;
   color: #AE1100;
-  margin-top: 12vw!important;
+  margin-top: 12vw !important;
 }
 
-.forgot{
+.forgot {
   margin-top: 9vw;
   margin-left: 22vw;
   position: absolute;
@@ -93,6 +107,7 @@
 .button .icon {
   margin-right: 8px;
 }
+
 .button.unit {
   border-radius: 8px;
   line-height: 0;
@@ -103,10 +118,11 @@
   align-items: center;
   font-size: 50px;
   font-weight: 900;
-  margin-top: 15vw!important;
+  margin-top: 15vw !important;
   margin-left: -2vw;
   position: absolute;
 }
+
 .button.unit .icon {
   margin-right: 0;
 }

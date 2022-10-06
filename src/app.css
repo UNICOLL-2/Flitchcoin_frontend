@@ -319,7 +319,7 @@ element.style {
 
 /* button neomorphic */
 
-.primary,
+/* .primary, */
 .inverted {
 	text-decoration: none;
 	color: black;
@@ -342,7 +342,7 @@ element.style {
 	color: white !important;
 }
 
-.primary {
+/* .primary {
 	box-shadow: 4px 4px 8px #cbcbcb, -4px -4px 8px #ffffff;
 }
 
@@ -360,7 +360,7 @@ element.style {
 .primary:active {
 	background: linear-gradient(145deg, #d7d7d7, #ffffff);
 	box-shadow: 4px 4px 8px #cbcbcb, -4px -4px 8px #ffffff;
-}
+} */
 
 .inverted:not(:active):hover {
 	background: linear-gradient(145deg, #d7d7d7, #ffffff);
@@ -392,23 +392,6 @@ element.style {
 	border-radius: 10px;
 
 }
-
-/* .btn-dark {
-	background: linear-gradient(145deg, #353535, #0e0e0e);
-	box-shadow: 8px 8px 16px #000000, -8px -8px 16px #505050;
-  }
-  .btn-dark:hover {
-	background: linear-gradient(145deg, #353535, #0e0e0e);
-	box-shadow: 12px 12px 24px #000000, -12px -12px 24px #505050;
-  }
-  .btn-dark:focus {
-	background: linear-gradient(145deg, #353535, #0e0e0e);
-	box-shadow: 12px 12px 24px #000000, -12px -12px 24px #505050;
-  }
-  .btn-dark:active {
-	background: linear-gradient(145deg, #353535, #0e0e0e);
-	box-shadow: 4px 4px 8px #000000, -4px -4px 8px #505050;
-  } */
 
 /* ul Term */
 .border-dark {
@@ -778,7 +761,6 @@ canvas {
 .to_sign{
 	margin-top: 19vw!important;
 }
-
 
 /* arctic fox */
 
@@ -2027,4 +2009,19 @@ canvas {
 	display:flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.deposit{
+	padding: 11px!important;
+	font-weight: bold;
+}
+
+.margin{
+	font-size: 15px;
+	padding-top: 5px;
+}
+.margin-btn{
+	width: 100%;
+	font-size: 12px;
+	padding: 0!important;
 }

@@ -10,9 +10,9 @@ const Verifictaion = () => {
           <div className="row">
             <div className="col col-sm-12 col-md-6 pt-5 pb-5">
               <form>
-                <div class="card back">
-                  <div class="card-body">
-                    <h5 class="card-title"> <img src="https://www.atulhost.com/wp-content/uploads/2017/08/aadhaar.jpg" height="70px" width="100px" /> AADHAR VERIFICATION</h5>
+                <div className="card back">
+                  <div className="card-body">
+                    <h5 className="card-title"> <img src="https://www.atulhost.com/wp-content/uploads/2017/08/aadhaar.jpg" height="70px" width="100px" /> AADHAR VERIFICATION</h5>
                     <input
                       type="text"
                       name="aadhar"
@@ -31,9 +31,9 @@ const Verifictaion = () => {
             </div>
             <div className="col col-sm-12 col-md-6 pt-5 pb-5">
               <form>
-                <div class="card back">
-                  <div class="card-body">
-                    <h5 class="card-title"> <img src="https://bfsi.eletsonline.com/wp-content/uploads/2017/03/NSDL.jpg" height="70px" width="100px" /> PAN CARD VERIFICATION</h5>
+                <div className="card back">
+                  <div className="card-body">
+                    <h5 className="card-title"> <img src="https://bfsi.eletsonline.com/wp-content/uploads/2017/03/NSDL.jpg" height="70px" width="100px" /> PAN CARD VERIFICATION</h5>
                     <input
                       type="text"
                       name="pan"

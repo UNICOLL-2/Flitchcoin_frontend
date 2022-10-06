@@ -19,7 +19,6 @@ function Forgot_Pass() {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        setShow(true);
         if ((username === "") || (password === "")) {
             alert("Please fill in the above information in ");
         } else {
@@ -67,7 +66,6 @@ function Forgot_Pass() {
                 "otp": otp,
                 "add": msg
             })
-            console.log(data);
             fetch("http://34.73.24.72/forgot/verify_email", {
                 method: 'POST',
                 headers: {

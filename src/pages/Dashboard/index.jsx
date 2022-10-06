@@ -139,7 +139,7 @@ function Dashboard() {
                 <h3>Balance Details</h3>
               </div>
               <div className="col col-2">
-                <button type='button' style={{ position: "absolute" }} className='btn btn-warning' onClick={() => navigate("/place_order")} >Deposit</button>
+                <button type='button' style={{ position: "absolute" }} className='btn deposit btn-warning' onClick={() => navigate("/place_order")} >Deposit</button>
               </div>
               <div className="col col-2">
                 <button type='button' className='primary' style={{ position: "absolute" }} onClick={() => (navigate('/withdraw'))} >Withdraw</button>
@@ -178,8 +178,8 @@ function Dashboard() {
               })}
             </div>
             <div className='col col-md-2 p-3'>
-              <div className='row p-3'>memoMargin</div>
-              <button type='button' className='btn btn-dark' onClick={onMargin}>Add Margin</button>
+              <div className='row ps-3 pb-1 margin'>memoMargin</div>
+              <button type='button' className='btn btn-dark margin-btn btn-sm' onClick={onMargin}>Add Margin</button>
               <hr />
             </div>
             <div className="col col-md-2 p-3">
@@ -213,8 +213,8 @@ function Dashboard() {
               })}
             </div>
             <div className='col col-md-2 p-3'>
-              <div className='row p-3'>memoRepayment</div>
-              <button type='button' className='btn btn-dark' onClick={onRepayment}>Repayment</button>
+              <div className='row ps-3 pb-1 margin'>memoRepayment</div>
+              <button type='button' className='btn btn-dark margin-btn btn-sm' onClick={onRepayment}>Repayment</button>
               <hr />
             </div>
           </div>
