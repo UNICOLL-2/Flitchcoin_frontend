@@ -61,8 +61,8 @@ const loginToken = async (data) => {
   let response;
   try {
     const params = new URLSearchParams();
-    params.append("username", data.usernameParticipant);
-    params.append("password", data.passwordParticipant);
+    params.append("username", data.username);
+    params.append("password", data.password);
     params.append("otp", Number(data.otp));
     response = await axios.post("http://34.73.24.72/token", params, {
       headers: {
