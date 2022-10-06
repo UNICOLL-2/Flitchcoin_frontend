@@ -28,11 +28,11 @@ function Content() {
         <Route path="/order" element={<Order />} />
         <Route path="/verification" element={<Verification />} />
         <Route path="/login" element={<ProtectedRoutes><Login /></ProtectedRoutes>} />
-        <Route element={<PrivateRoute />}>
+        {/* <Route element={<PrivateRoute />}> */}
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/place_order" element={<PoolParticipant />} />
           <Route path="/Api" element={<Api />} />
-        </Route>
+        {/* </Route> */}
         <Route path="/about" element={<About />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign_verify" element={<Sign_verify />} />

@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { loginToken, userLogin } from "../../Feature/Auth/authSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
-import './login.css';
+import "./login.css";
 import Animation from "../../Animation";
 
 function Login() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const { userToken } = useSelector((state) => state.auth);
+  const { userToken, user } = useSelector((state) => state.auth);
 
   const [show, setShow] = useState(false);
 
@@ -18,31 +19,67 @@ function Login() {
     if (userToken?.access_token) {
       dispatch(userLogin());
     }
-  }, [userToken]);
+    if (user) {
+      if (user?.username) {
+        navigate("/home");
+      }
+    }
+  }, [userToken, user]);
 
   var [formData, setFormData] = useState({
-    username: "",
-    password: "",
-    otp: ''
+    usernamePool: "",
+    usernameParticipant: "",
+    passwordPool: "",
+    passwordParticipant: "",
+    type: null,
+    otp: "",
   });
 
-  var { username,password, otp } = formData;
+  var {
+    usernamePool,
+    usernameParticipant,
+    passwordPool,
+    passwordParticipant,
+    type,
+    otp,
+  } = formData;
 
-  const submitHandler = (e) => {
+  const participantHandler = (e) => {
     e.preventDefault();
     setShow(true);
-      if (username === "" || password === "") {
-        alert("Please fill in the above information");
+    setFormData((prevData) => ({
+      ...prevData,
+      type: "participant",
+    }));
+    if (type === "participant") {
+      if (usernameParticipant === "" || passwordParticipant === "") {
+        alert("Please fill in the above information in PARTICIPANT");
       } else {
         setShow(true);
       }
-  }
+    }
+  };
 
   const otpHandler = (e) => {
     e.preventDefault();
     dispatch(loginToken(formData));
     setShow(false);
-  }
+  };
+
+  const poolHandler = (e) => {
+    e.preventDefault();
+    setFormData((prevData) => ({
+      ...prevData,
+      type: "pool",
+    }));
+    if (type === "pool") {
+      if (usernamePool === "" || passwordPool === "") {
+        alert("Please fill in the above information in POOL");
+      } else {
+        setShow(true);
+      }
+    }
+  };
 
   const onChange = (e) => {
     setFormData((prevData) => ({
@@ -54,41 +91,69 @@ function Login() {
   return (
     <div>
       <Animation />
-      <form className="form" onSubmit={submitHandler}>
+      <form className="form" onSubmit={participantHandler}>
         <div className="segment">
           <h1>Log In</h1>
         </div>
 
         <label className="label">
-          <input className="input_login"
+          <input
+            className="input_login"
             type="email"
-            name="username"
-            value={username}
+            name="usernameParticipant"
+            value={usernameParticipant}
             onChange={onChange}
-            placeholder="Enter your Username" />
+            placeholder="Enter your Username"
+          />
         </label>
         <label className="label">
-          <input className="input_login"
+          <input
+            className="input_login"
             type="password"
-            name="password"
-            value={password}
+            name="passwordParticipant"
+            value={passwordParticipant}
             onChange={onChange}
             placeholder="Enter your Password"
-            style={{ marginTop: "4%" }} />
+            style={{ marginTop: "4%" }}
+          />
         </label>
-        <Link to='/forgot_Password' className="text-danger forgot text-underline"><u>Forgot password ?</u></Link>
-        <button className="red button" type="submit" value="Log In" name="Log In">Log in</button>
+        <Link
+          to="/forgot_Password"
+          className="text-danger forgot text-underline"
+        >
+          <u>Forgot password ?</u>
+        </Link>
+        <button
+          className="red button"
+          type="submit"
+          value="Log In"
+          name="Log In"
+        >
+          Log in
+        </button>
         <div className="row text-center pb-5 to_sign me-4">
           <p>
             Don't have an account?
             <span className="text-warning px-2" role="button">
-              <Link to="/sign-up" className="text-warning" style={{ position: "absolute" }}>Signup</Link>
+              <Link
+                to="/sign-up"
+                className="text-warning"
+                style={{ position: "absolute" }}
+              >
+                Signup
+              </Link>
             </span>
           </p>
         </div>
       </form>
 
-      <Modal show={show} onHide={() => setShow(false)} backdrop="static" keyboard={false} className="modal-dialog-login">
+      <Modal
+        show={show}
+        onHide={() => setShow(false)}
+        backdrop="static"
+        keyboard={false}
+        className="modal-dialog-login"
+      >
         <div className="back p-3">
           <b>Please Enter the OTP</b>
           <div className="input1 w-100">
@@ -109,8 +174,7 @@ function Login() {
           >
             Cancel
           </button>
-          <button type="button" className="primary"
-            onClick={otpHandler} >
+          <button type="button" className="primary" onClick={otpHandler}>
             Confirm
           </button>
         </div>
