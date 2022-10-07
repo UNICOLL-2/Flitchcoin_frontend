@@ -43,6 +43,7 @@ function Login() {
   const submitHandler = (e) => {
     e.preventDefault();
     setShow(true);
+    
     if (username === "" || password === "") {
       alert("Please fill in the above information in PARTICIPANT");
     } else {
@@ -78,6 +79,15 @@ function Login() {
       body: data
     }).then(res => res.json())
       .then((data) => {
+        if (data.is_pool){
+          setFormData({
+            type : 'pool'
+          })
+        }else{
+          setFormData({
+            type : 'participant'
+          })
+        }
         if (data.fa2 === null) {
           setfa2(true)
         } else {
