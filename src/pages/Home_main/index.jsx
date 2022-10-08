@@ -32,7 +32,6 @@ function Home() {
                 </button>
               </div>
             </div>
-            {/* <div className="spacer col-lg-1"></div> */}
             <div className="col-sm-12 col-md-6 mt-5 ms-5 card back">
               <SymbolOverview colorTheme="light"
                 height={300}

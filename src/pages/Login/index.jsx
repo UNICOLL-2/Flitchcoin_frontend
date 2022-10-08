@@ -43,7 +43,6 @@ function Login() {
   const submitHandler = (e) => {
     e.preventDefault();
     setShow(true);
-    
     if (username === "" || password === "") {
       alert("Please fill in the above information in PARTICIPANT");
     } else {
@@ -79,14 +78,17 @@ function Login() {
       body: data
     }).then(res => res.json())
       .then((data) => {
+        console.log(data)
         if (data.is_pool){
-          setFormData({
-            type : 'pool'
-          })
+          setFormData((prevData) => ({
+            ...prevData,
+            type: 'pool'
+          }));
         }else{
-          setFormData({
-            type : 'participant'
-          })
+          setFormData((prevData) => ({
+            ...prevData,
+            type: 'participant'
+          }));
         }
         if (data.fa2 === null) {
           setfa2(true)
@@ -106,11 +108,13 @@ function Login() {
   return (
     <div>
       <Animation />
-      <form className="form" onSubmit={submitHandler}>
+      <form className="container" onSubmit={submitHandler}>
         <div className="segment">
           <h1>Log In</h1>
         </div>
-
+        <div className="row">
+          <div className="col-lg-4"></div>
+          <div className="col-lg-6 col-12">
         <label className="label">
           <input
             className="input_login"
@@ -122,6 +126,11 @@ function Login() {
             onBlur={e => checkUser(e.target.value)}
           />
         </label>
+        </div>
+        </div>
+        <div className="row">
+        <div className="col-lg-4"></div>
+          <div className="col-12 col-lg-6">
         <label className="label">
           <input
             className="input_login"
@@ -133,6 +142,8 @@ function Login() {
             style={{ marginTop: "4%" }}
           />
         </label>
+        </div>
+        </div>
         <Link
           to="/forgot_Password"
           className="text-danger forgot text-underline"
