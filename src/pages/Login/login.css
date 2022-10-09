@@ -79,7 +79,7 @@ button {
 }
 
 .button{
-  position: absolute;
+  position: relative;
 }
 
 button:hover {
@@ -92,14 +92,16 @@ button:active {
 
 .button.red {
   display: block;
-  width: 31vw;
+  width: 100%;
   color: #AE1100;
-  margin-top: 12vw !important;
+  position: relative;
 }
 
 .forgot {
-  margin-top: 9vw;
-  position: absolute;
+  position: relative;
+  display: flex;
+  justify-content: end;
+  align-items: center;
 }
 
 .button .icon {
@@ -116,9 +118,8 @@ button:active {
   align-items: center;
   font-size: 50px;
   font-weight: 900;
-  margin-top: 15vw !important;
   margin-left: -2vw;
-  position: absolute;
+  position: relative;
 }
 
 .button.unit .icon {

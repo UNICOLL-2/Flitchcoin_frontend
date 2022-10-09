@@ -124,16 +124,9 @@ function Dashboard() {
           "title": "XRP/USDT"
         },
       ]} ></TickerTape>
-      <div className="container">
-        <div className="row mt-4 ms-1 me-1 mb-1">
-          <div className="card back p-4">
-            <p>Username / Profile <span className="ps-5"> User Id</span></p>
-          </div>
-        </div>
-      </div>
       <div className="container mt-4 mb-5">
         <div className="row ms-1">
-          <div className="col col-md-12 col-lg-7 card back mt-3 p-3">
+          <div className="col-12 col-lg-7 card back mt-3 p-3">
           <div className="container-fluid">
           <div className="d-flex">
               <div className="col col-8">
@@ -155,7 +148,7 @@ function Dashboard() {
               <h3>$ 1,606.25</h3>
             </div>
           </div>
-          <div className="col col-md-6 col-lg-4 mt-3 card back ms-5" >
+          <div className="col-12 col-lg-4 mt-3 card back ms-5" >
             <Timeline colorTheme="light" feedMode="market" displayMode="compact" market="crypto" height={300} width="100%" symbol="BTCUSD" isTransparent></Timeline>
           </div>
         </div>

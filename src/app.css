@@ -749,13 +749,14 @@ canvas {
 
 .button.sign{
 	display: block;
-    width: 31vw;
+    width: 100%;
     color: #AE1100;
-	margin-left: 6vw;
+	margin-bottom: 20px;
 }
 
 .checks{
-	margin-top: 25vw!important;
+	margin-top: 25%!important;
+	margin-bottom: 20%!important;
 }
 
 .to_sign{

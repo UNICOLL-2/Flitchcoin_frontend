@@ -66,149 +66,176 @@ function SignUp() {
         setTimeout(() => {
           navigate('/login')
         }, 3000)
+      }
     }
-  }
-};
+  };
 
-const onChange = (e) => {
-  setFormData((prevData) => ({
-    ...prevData,
-    [e.target.name]: e.target.value,
-  }));
-};
+  const onChange = (e) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
-const onRadioChange = (data) => {
-  setSignType(data)
-};
+  const onRadioChange = (data) => {
+    setSignType(data)
+  };
 
-return (
-  <>
-    <Animation />
-    <form onSubmit={(e) => {
-      e.preventDefault();
-      submitHandler(signType)
-    }}>
-      <div className="form">
-        <div className="segment">
-          <h1>Sign Up</h1>
-        </div>
-
-        <label className="label">
-          <input className="input_login"
-            type="email"
-            name="username"
-            value={username}
-            onChange={onChange}
-            placeholder="Enter your Username" />
-        </label>
-        <label className="label">
-          <input className="input_login"
-            type="password"
-            name="password"
-            value={password}
-            onChange={onChange}
-            placeholder="Enter your Password"
-            style={{ marginTop: "4vw" }} />
-        </label>
-        <label className="label">
-          <input className="input_login"
-            type="text"
-            name="fullName"
-            value={fullName}
-            onChange={onChange}
-            placeholder="Enter your Full Name"
-            style={{ marginTop: "9vw" }} />
-        </label>
-        <div className="segment">
-          <a href="#flexRadioDefault1"><button className="unit button" type="button" >&#8595;</button></a>
-        </div>
-      </div>
-      <div className="container">
-        <div className="row checks" >
-          <div className="col col-md-3"></div>
-          <div className="col col-md-4">
-            <div className="form-check">
-              <h5 className="text-muted">
-                <input className="form-check-input" type="radio" name="flexRadioDefault" value='participant' id="flexRadioDefault1" onChange={e => onRadioChange(e.target.value)} style={{ position: 'absolute' }} />
-                <label className="form-check-label" htmlFor="flexRadioDefault1">
-                  Become a Participant
-                </label>
-              </h5>
-            </div>
-            <div className="form-check mt-5">
-              <h5 className="text-muted">
-                <input className="form-check-input" type="radio" name="flexRadioDefault" value='pool' id="flexRadioDefault2" onChange={e => onRadioChange(e.target.value)} style={{ position: 'absolute' }} />
-                <label className="form-check-label" htmlFor="flexRadioDefault2">
-                  Become a Pool
-                </label>
-              </h5>
-            </div>
-            <button className="button sign" type="submit" value="Sign up" name="Sign up">Sign up</button>
+  return (
+    <>
+      <Animation />
+      <form onSubmit={(e) => {
+        e.preventDefault();
+        submitHandler(signType)
+      }}>
+        <div className="container">
+          <div className="segment">
+            <h1>Sign Up</h1>
           </div>
-          <div className="col col-md-4">
-            {
-              signType === 'participant' ?
-                <div>
-                  <p> &#x2714; it provides</p>
-                  <p> &#x2714; it provides</p>
-                  <p> &#x2716; it does not provides</p>
-                  <p> &#x2714; it provides</p>
-
-                </div> : <div></div>
-            }
-            {
-              signType === 'pool' ?
-                <div>
-                  <p> &#x2714; it provides</p>
-                  <p> &#x2714; it provides</p>
-                  <p> &#x2716; it does not provides</p>
-                </div> : <div></div>
-            }
-            {
-              signType === '' ?
-                <div>
-                  <p> &#x2714; it provides</p>
-                  <p> &#x2714; it provides</p>
-                  <p> &#x2716; it does not provides</p>
-                </div> : <div></div>
-            }
+          <div className="row">
+            <div className="col-lg-4"></div>
+            <div className="col-lg-4 col-12">
+              <label className="label">
+                <input
+                  className="input_login"
+                  type="email"
+                  name="username"
+                  value={username}
+                  onChange={onChange}
+                  placeholder="Enter your Username"
+                />
+              </label>
+            </div>
+            <div className="col-lg-4"></div>
+          </div>
+          <div className="row">
+            <div className="col-lg-4"></div>
+            <div className="col-12 col-lg-4">
+              <label className="label">
+                <input
+                  className="input_login"
+                  type="password"
+                  name="password"
+                  value={password}
+                  onChange={onChange}
+                  placeholder="Enter your Password"
+                  style={{ marginTop: "4%" }}
+                />
+              </label>
+            </div>
+            <div className="col-lg-4"></div>
+          </div>
+          <div className="row">
+            <div className="col-lg-4"></div>
+            <div className="col-12 col-lg-4">
+              <label className="label">
+                <input className="input_login"
+                  type="text"
+                  name="fullName"
+                  value={fullName}
+                  onChange={onChange}
+                  placeholder="Enter your Full Name"
+                  style={{ marginTop: "8%" }} />
+              </label>
+            </div>
+            <div className="col-lg-4"></div>
+          </div>
+          <div className="segment">
+            <a href="#flexRadioDefault1"><button className="unit button" type="button" >&#8595;</button></a>
           </div>
         </div>
-      </div>
-    </form>
+        <div className="container">
+          <div className="row checks" >
+            <div className="col-lg-3"></div>
+            <div className="col-6 col-lg-4">
+              <div className="form-check">
+                <h5 className="text-muted">
+                  <input className="form-check-input" type="radio" name="flexRadioDefault" value='participant' id="flexRadioDefault1" onChange={e => onRadioChange(e.target.value)} style={{ position: 'absolute' }} />
+                  <label className="form-check-label" htmlFor="flexRadioDefault1">
+                    Become a Participant
+                  </label>
+                </h5>
+              </div>
+              <div className="form-check mt-5">
+                <h5 className="text-muted">
+                  <input className="form-check-input" type="radio" name="flexRadioDefault" value='pool' id="flexRadioDefault2" onChange={e => onRadioChange(e.target.value)} style={{ position: 'absolute' }} />
+                  <label className="form-check-label" htmlFor="flexRadioDefault2">
+                    Become a Pool
+                  </label>
+                </h5>
+              </div>
+            </div>
+            <div className="col-6 col-lg-4">
+              {
+                signType === 'participant' ?
+                  <div>
+                    <p> &#x2714; it provides</p>
+                    <p> &#x2714; it provides</p>
+                    <p> &#x2716; it does not provides</p>
+                    <p> &#x2714; it provides</p>
 
-    <Modal show={show} onHide={() => setShow(false)} backdrop="static" keyboard={false} className="modal-dialog-login">
-      <div className="back p-3">
-        <b>Please Enter the OTP</b>
-        <div className="input1 w-100">
-          <input
-            type="text"
-            className="txt-underline p-3 mb-3 w-100 input pressed"
-            placeholder="x x x x"
-            onChange={(e) => setOtp(e.target.value)}
-            name="otp"
-            value={otp}
-          />
-          <span className="underline"></span>
+                  </div> : <div></div>
+              }
+              {
+                signType === 'pool' ?
+                  <div>
+                    <p> &#x2714; it provides</p>
+                    <p> &#x2714; it provides</p>
+                    <p> &#x2716; it does not provides</p>
+                  </div> : <div></div>
+              }
+              {
+                signType === '' ?
+                  <div>
+                    <p> &#x2714; it provides</p>
+                    <p> &#x2714; it provides</p>
+                    <p> &#x2716; it does not provides</p>
+                  </div> : <div></div>
+              }
+            </div>
+          </div>
+          <div className="row">
+          <div className="col-lg-4"></div>
+          <div className="col-12 col-lg-4">
+          <button className="button sign" type="submit" value="Sign up" name="Sign up">Sign up</button>
+          </div>
+          <div className="col-lg-4"></div>
+          </div>
         </div>
-        {verifyString && (
-          <div className="w-100 pb-1">{otpMsg}</div>
-        )}
-        <button
-          type="button"
-          className="primary me-4"
-          onClick={() => setShow(false)}
-        >
-          Cancel
-        </button>
-        <button type="button" className="primary"
-          onClick={otpHandler} >
-          Confirm
-        </button>
-      </div>
-    </Modal>
-  </>
-);
+      </form>
+
+      <Modal show={show} onHide={() => setShow(false)} backdrop="static" keyboard={false} className="modal-dialog-login">
+        <div className="back p-3">
+          <b>Please Enter the OTP</b>
+          <div className="input1 w-100">
+            <input
+              type="text"
+              className="txt-underline p-3 mb-3 w-100 input pressed"
+              placeholder="x x x x"
+              onChange={(e) => setOtp(e.target.value)}
+              name="otp"
+              value={otp}
+            />
+            <span className="underline"></span>
+          </div>
+          {verifyString && (
+            <div className="w-100 pb-1">{otpMsg}</div>
+          )}
+          <button
+            type="button"
+            className="primary me-4"
+            onClick={() => setShow(false)}
+          >
+            Cancel
+          </button>
+          <button type="button" className="primary"
+            onClick={otpHandler} >
+            Confirm
+          </button>
+        </div>
+      </Modal>
+    </>
+  );
 }
 
 export default SignUp;

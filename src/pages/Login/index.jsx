@@ -150,7 +150,7 @@ function Login() {
         </div>
         <div className="row">
           <div className="col-lg-4"></div>
-          <div className="col-12 col-lg-4"></div>
+          <div className="col-12 col-lg-4">
         <Link
           to="/forgot_Password"
           className="text-danger forgot text-underline"
@@ -158,7 +158,12 @@ function Login() {
           <u>Forgot password ?</u>
         </Link>
         </div>
-        {
+        <div className="col-lg-4"></div>
+        </div>
+        <div className="row">
+          <div className="col-lg-4"></div>
+          <div className="col-12 col-lg-4">
+          {
           fa2 === true ?
             <button
               className="red button"
@@ -179,7 +184,13 @@ function Login() {
               Log in
             </button>
         }
-        <div className="row text-center pb-5 to_sign me-4">
+        </div>
+        <div className="col-lg-4"></div>
+        </div>
+        <div className="row">
+          <div className="col-lg-4"></div>
+          <div className="col-12 col-lg-4">
+          <div className="text-center pb-5 pt-5 me-4">
           <p>
             Don't have an account?
             <span className="text-warning px-2" role="button">
@@ -193,6 +204,10 @@ function Login() {
             </span>
           </p>
         </div>
+        </div>
+        <div className="col-lg-4"></div>
+        </div>
+        
       </form>
 
       <Modal
