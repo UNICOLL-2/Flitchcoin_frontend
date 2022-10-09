@@ -73,18 +73,19 @@ function Login() {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+
       },
       body: data
     }).then(res => res.json())
       .then((data) => {
         console.log(data)
-        if (data.is_pool){
+        if (data.is_pool) {
           setFormData((prevData) => ({
             ...prevData,
             type: 'pool'
           }));
-        }else{
+        } else {
           setFormData((prevData) => ({
             ...prevData,
             type: 'participant'
@@ -102,6 +103,7 @@ function Login() {
 
   const onFa2Click = (e) => {
     e.preventDefault();
+    dispatch(loginToken(formData));
     navigate('/qr_verify');
   }
 
@@ -114,42 +116,48 @@ function Login() {
         </div>
         <div className="row">
           <div className="col-lg-4"></div>
-          <div className="col-lg-6 col-12">
-        <label className="label">
-          <input
-            className="input_login"
-            type="email"
-            name="username"
-            value={username}
-            onChange={onChange}
-            placeholder="Enter your Username"
-            onBlur={e => checkUser(e.target.value)}
-          />
-        </label>
-        </div>
+          <div className="col-lg-4 col-12">
+            <label className="label">
+              <input
+                className="input_login"
+                type="email"
+                name="username"
+                value={username}
+                onChange={onChange}
+                placeholder="Enter your Username"
+                onBlur={e => checkUser(e.target.value)}
+              />
+            </label>
+          </div>
+          <div className="col-lg-4"></div>
         </div>
         <div className="row">
-        <div className="col-lg-4"></div>
-          <div className="col-12 col-lg-6">
-        <label className="label">
-          <input
-            className="input_login"
-            type="password"
-            name="password"
-            value={password}
-            onChange={onChange}
-            placeholder="Enter your Password"
-            style={{ marginTop: "4%" }}
-          />
-        </label>
+          <div className="col-lg-4"></div>
+          <div className="col-12 col-lg-4">
+            <label className="label">
+              <input
+                className="input_login"
+                type="password"
+                name="password"
+                value={password}
+                onChange={onChange}
+                placeholder="Enter your Password"
+                style={{ marginTop: "4%" }}
+              />
+            </label>
+          </div>
+          <div className="col-lg-4"></div>
         </div>
-        </div>
+        <div className="row">
+          <div className="col-lg-4"></div>
+          <div className="col-12 col-lg-4"></div>
         <Link
           to="/forgot_Password"
           className="text-danger forgot text-underline"
         >
           <u>Forgot password ?</u>
         </Link>
+        </div>
         {
           fa2 === true ?
             <button

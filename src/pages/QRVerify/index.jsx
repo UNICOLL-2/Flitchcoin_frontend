@@ -4,6 +4,8 @@ import { loginToken } from "../../Feature/Auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import Animation from "../../Animation";
 import { useDispatch } from "react-redux";
+import { fetchToken } from "../../Auth";
+
 
 const QRVerify = () => {
 
@@ -13,12 +15,21 @@ const QRVerify = () => {
     const [qr, setQr] = useState("");
     
     useEffect(() => {
+        console.log("inside useeffect");
         getOtp();
     }, []);
 
     const getOtp = () => {
-        fetch("http://34.73.24.72/fa2url").then((result) => {
+        fetch("http://34.73.24.72/fa2url",{
+            method:'GET',
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${fetchToken()}`,
+              },
+        }).then((result) => {
             result.json().then((res) => {
+                console.log(res)
                 setQr(res);
             })
         })
@@ -36,16 +47,21 @@ const QRVerify = () => {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${fetchToken()}`,
                 },
                 body: data
             }).then(res => res.json())
                 .then((data) => {
+                    console.log(data)
                     if (data.true) {
+                        console.log("inside if ")
                         dispatch(loginToken());
                     } else if (data.false) {
+                        console.log("inside else if")
                         alert("WRONG OTP");
                     } else {
+                        console.log("inside else")
                         alert("Max tries Reached. Try again !!");
                         navigate("/login");
                     }
@@ -64,8 +80,9 @@ const QRVerify = () => {
                 </div>
                 <QRCodeSVG
                     value={qr}
-                    style={{marginLeft: '11vw'}}
+                    style={{marginLeft: '11vw',position: 'absolute'}}
                     size={150}
+
                 />
                 <label className="label">
                     <input className="input_login"
@@ -74,7 +91,7 @@ const QRVerify = () => {
                         value={otp}
                         onChange={e => setOtp(e.target.value)}
                         placeholder="x x x x x x"
-                        style={{ marginTop: "4%" }} />
+                        style={{ marginTop: "40%" }} />
                 </label>
                 <button className="red button" type="submit" value="Log In" name="Log In">Log in</button>
             </form>
