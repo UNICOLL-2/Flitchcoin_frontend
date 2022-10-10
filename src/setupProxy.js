@@ -4,7 +4,7 @@ module.exports = function(app) {
   app.use(
     '/',
     createProxyMiddleware({
-      target: 'http://34.73.24.72',
+      target: 'http://localhost:8000',
       changeOrigin: true,
       pathRewrite: {'^/' : ''}
     })
