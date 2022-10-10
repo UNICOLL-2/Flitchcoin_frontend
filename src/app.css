@@ -1987,3 +1987,15 @@ canvas {
 	}
 }
 
+@media screen and (min-width:400px) {
+	.manage_margin_2{
+		margin-left:5rem!important;
+	}
+}
+
+@media screen and (max-width:400px) {
+	.manage_margin_2{
+		margin:0!important;
+	}
+}
+

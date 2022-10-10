@@ -124,23 +124,21 @@ function Dashboard() {
           "title": "XRP/USDT"
         },
       ]} ></TickerTape>
-      <div className="container mt-4 mb-5">
-        <div className="row ms-1">
+      <div className="container mt-4">
+        <div className="row ms-1 mb-3">
           <div className="col-12 col-lg-7 card back mt-3 p-3">
-          <div className="container-fluid">
-          <div className="d-flex">
-              <div className="col col-8">
+            <div className="row">
+              <div className="col-12 col-md-8">
                 <h3>Balance Details</h3>
               </div>
-              <div className="col col-2">
-                <button type='button' style={{ position: "absolute" }} className='btn deposit btn-warning' onClick={() => navigate("/place_order")} >Deposit</button>
+              <div className="col-6 col-md-2 mb-3">
+                <button type='button' style={{ position: "relative" }} className='btn deposit btn-warning' onClick={() => navigate("/place_order")} >Deposit</button>
               </div>
-              <div className="col col-2">
-                <button type='button' className='primary' style={{ position: "absolute" }} onClick={() => (navigate('/withdraw'))} >Withdraw</button>
+              <div className="col-6 col-md-2 mb-3">
+                <button type='button' className='primary' style={{ position: "relative" }} onClick={() => (navigate('/withdraw'))} >Withdraw</button>
               </div>
-              </div>
-            </div>
             <hr />
+            </div>
             <div className="row">
               <p className='text-muted'>Account Balance : </p>
               <h1>0.04487898<span className="balance ps-2">BTC</span></h1>
@@ -148,12 +146,12 @@ function Dashboard() {
               <h3>$ 1,606.25</h3>
             </div>
           </div>
-          <div className="col-12 col-lg-4 mt-3 card back ms-5" >
+          <div className="col-12 col-lg-4 mt-3 card back manage_margin_2" >
             <Timeline colorTheme="light" feedMode="market" displayMode="compact" market="crypto" height={300} width="100%" symbol="BTCUSD" isTransparent></Timeline>
           </div>
         </div>
         </div>
-        <div className="container card back mt-5 mb-1">
+        <div className="container card back mt-5 mb-3">
           <div className="row">
             <div className="col-2 text-muted account text-center p-3">Name</div>
             <div className="col-2 text-muted account text-center p-3">Liquidate</div>
