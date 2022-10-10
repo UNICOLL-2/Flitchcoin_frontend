@@ -55,15 +55,15 @@ function Forgot_Pass() {
     };
 
     const [show, setShow] = useState(false);
-    const [otp, setOtp] = useState(0);
+    const [otp, setOtp] = useState("");
 
     const otpHandler = (e) => {
         e.preventDefault();
-        if (otp === 0) {
+        if (otp === "") {
             alert("Please fill in the otp ");
         } else {
             var data = JSON.stringify({
-                "otp": otp,
+                "otp": Number(otp),
                 "add": msg
             })
             fetch("http://34.73.24.72/forgot/verify_email", {
@@ -144,9 +144,9 @@ function Forgot_Pass() {
                     <b>Please Enter the OTP</b>
                     <div className="input1 w-100">
                         <input
-                            type="number"
+                            type="text"
                             className="txt-underline p-3 mb-3 w-100 input pressed mt-3"
-                            placeholder="Enter your OTP"
+                            placeholder="x x x x x x"
                             onChange={(e) => setOtp(e.target.value)}
                             name="otp"
                             value={otp}

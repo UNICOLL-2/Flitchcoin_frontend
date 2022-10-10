@@ -1975,3 +1975,14 @@ canvas {
 	font-size: 12px;
 	padding: 0!important;
 }
+@media screen and (min-width:400px) {
+	.manage_margin{
+		margin: 1rem 3rem 1rem 3rem;
+	}
+}
+
+@media screen and (max-width:400px) {
+	.manage_margin{
+		margin:0 0 1rem 0;
+	}
+}

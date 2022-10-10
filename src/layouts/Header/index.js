@@ -28,9 +28,10 @@ function Header() {
 
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light ms-5 me-5 mt-3 mb-3">
+      {/*  5=3rem 3=1rem */}
+      <nav className="navbar navbar-expand-lg navbar-light bg-light  manage_margin">
         <div className="container-fluid">
-          <Link className="navbar-brand m_l" to="/">LLC</Link>
+          <Link className="navbar-brand m_l" to="/"><u>Flitch Coin</u></Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
