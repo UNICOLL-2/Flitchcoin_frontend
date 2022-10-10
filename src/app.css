@@ -1966,7 +1966,7 @@ canvas {
 	font-weight: bold;
 }
 
-.margin{
+.memo_margin{
 	font-size: 15px;
 	padding-top: 5px;
 }
@@ -1986,3 +1986,4 @@ canvas {
 		margin:0 0 1rem 0;
 	}
 }
+

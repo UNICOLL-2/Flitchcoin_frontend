@@ -152,6 +152,7 @@ function Dashboard() {
             <Timeline colorTheme="light" feedMode="market" displayMode="compact" market="crypto" height={300} width="100%" symbol="BTCUSD" isTransparent></Timeline>
           </div>
         </div>
+        </div>
         <div className="container card back mt-5 mb-1">
           <div className="row">
             <div className="col-2 text-muted account text-center p-3">Name</div>
@@ -173,7 +174,7 @@ function Dashboard() {
               })}
             </div>
             <div className='col col-md-2 p-3'>
-              <div className='row ps-3 pb-1 margin'>memoMargin</div>
+              <div className='row ps-3 pb-1 memo_margin'>memoMargin</div>
               <button type='button' className='btn btn-dark margin-btn btn-sm' onClick={onMargin}>Add Margin</button>
               <hr />
             </div>
@@ -213,8 +214,7 @@ function Dashboard() {
               <hr />
             </div>
           </div>
-        </div>
-      </div>
+          </div>
     </>
   );
 }
