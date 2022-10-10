@@ -35,9 +35,6 @@ element.style {
 	color: black;
 }
 
-/* .dialog {
-	width: 30% !important;
-} */
 
 .shadow {
 	box-shadow: 5px 5px 13px #2b2c2d, -5px -5px 5px #ffffff !important;
@@ -55,36 +52,12 @@ element.style {
 	width: 130%!important;
 }
 
-/* .modal1 {
-	width: auto !important;
-	height: auto !important;
-	margin-top: 18% !important;
-	margin-left: 40% !important;
-}
-
-.modal2 {
-	width: 30% !important;
-	height: auto !important;
-	margin-top: 18% !important;
-	margin-left: 40% !important;
-} */
-
 .card {
 	border-radius: 0 !important;
 	border: none !important;
 	background: #ededed;
 	box-shadow: 4px 4px 8px #cbcbcb, -4px -4px 8px #ffffff;
 }
-
-/* .modal-content {
-	max-width: 100% !important;
-	max-height: 100% !important;
-	overflow-x: hidden !important;
-	overflow-y: hidden !important;
-	border: none !important;
-	border-radius: 0 !important;
-	box-shadow: 5px;
-} */
 
 .p_50 {
 	padding: 50px !important;
@@ -247,10 +220,7 @@ element.style {
 
 .vertical-center {
 	min-height: 100%;
-	/* Fallback for browsers do NOT support vh unit */
 	min-height: 100vh;
-	/* These two lines are counted as one :-)       */
-
 	display: flex;
 	align-items: center;
 }
@@ -341,26 +311,6 @@ element.style {
 	background: linear-gradient(145deg, #171717, #352222) !important;
 	color: white !important;
 }
-
-/* .primary {
-	box-shadow: 4px 4px 8px #cbcbcb, -4px -4px 8px #ffffff;
-}
-
-.primary:hover {
-	color: black;
-	background: linear-gradient(145deg, #d7d7d7, #ffffff);
-	box-shadow: 12px 12px 24px #cbcbcb, -12px -12px 24px #ffffff;
-}
-
-.primary:focus {
-	background: linear-gradient(145deg, #fefefe, #d5d5d5);
-	box-shadow: 4px 4px 8px #c9c9c9, -4px -4px 8px #ffffff;
-}
-
-.primary:active {
-	background: linear-gradient(145deg, #d7d7d7, #ffffff);
-	box-shadow: 4px 4px 8px #cbcbcb, -4px -4px 8px #ffffff;
-} */
 
 .inverted:not(:active):hover {
 	background: linear-gradient(145deg, #d7d7d7, #ffffff);
@@ -518,11 +468,22 @@ textarea:focus {
 }
 
 /* responsive */
-@media screen and (min-width: 576px) {
+@media screen and (min-width: 990px) {
 	.modal-dialog {
 		max-width: 100% !important;
 		height: auto;
-		margin: 1.75rem auto;
+	}
+}
+@media screen and (max-width: 990px) {
+	.modal{
+		width: 185%!important;
+		margin-left: -40%;
+	}
+}
+
+@media screen and (max-width: 576px) {
+	.modal{
+		margin-left: 0;
 	}
 }
 
@@ -560,9 +521,7 @@ textarea:focus {
 	}
 
 	.header__login__res:hover {
-		/* text-decoration: underline; */
 		color: rgba(0, 0, 0, .55);
-		;
 	}
 
 	.nav-link {
@@ -578,16 +537,6 @@ textarea:focus {
 
 	.signout__navbar__button {
 		display: none;
-	}
-
-	.m_l_ {
-		margin-left: 70px;
-		margin-top: 20px;
-	}
-
-	.m_l__ {
-		margin-left: 70px;
-		margin-top: 20px;
 	}
 
 }

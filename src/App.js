@@ -26,12 +26,11 @@ const App = () => {
           onHide={() => setShow(false)}
           backdrop="static"
           keyboard={false}
-          className="w-100 h-100 d-flex justify-content-center align-items-center to_make_center"
         >
-          <div className="row back back__content modal-dialog-app">
+          <div className="row back">
             <div className="col-4 p_50 fs-2 fw-bold back__animation ">
               <p className="text-dark">Flitch Coin</p>
-              <img src={wave} height="350px" width="300px" />
+              <img src={wave} height="350px" width="200px" />
             </div>
             <div className="col-8 welcome__dialog">
               <div className="content_oveflow">

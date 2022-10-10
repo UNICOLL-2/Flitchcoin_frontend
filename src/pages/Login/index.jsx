@@ -44,7 +44,7 @@ function Login() {
     e.preventDefault();
     setShow(true);
     if (username === "" || password === "") {
-      alert("Please fill in the above information in PARTICIPANT");
+      alert("Please fill in the above information.");
     } else {
       setShow(true);
     }
