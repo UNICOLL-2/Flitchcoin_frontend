@@ -32,8 +32,7 @@ function Home() {
                 </button>
               </div>
             </div>
-            {/* <div className="spacer col-lg-1"></div> */}
-            <div className="col-sm-12 col-md-6 mt-5 ms-5 card back">
+            <div className="col-sm-12 col-md-6 mt-5 manage_margin_2 card back">
               <SymbolOverview colorTheme="light"
                 height={300}
                 width="100%"
@@ -116,7 +115,7 @@ function Home() {
                 <SymbolInfo colorTheme="dark" autosize symbol="XRPUSDT" isTransparent></SymbolInfo>
               </div>
               {/* <div className="col-md-1"></div> */}
-              <div className="col-md-6 col-sm-12 ms-5 d-flex flex-column justify-content-center">
+              <div className="col-md-6 col-sm-12 manage_margin_2 d-flex flex-column justify-content-center">
                 <div className="pt-3">
                   <p className="h3">THE POWER OF ALADDIN + EFRONT</p>
                 </div>
