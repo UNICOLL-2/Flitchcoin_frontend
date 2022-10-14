@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import "./login.css";
 import Animation from "../../Animation";
-import { GoogleLogin, GoogleLogout } from 'react-google-login';
+// import { GoogleLogin, GoogleLogout } from 'react-google-login';
 
 const clientId = "798613593742-0raprcg62m90v8oha2s07gbngugo4fle.apps.googleusercontent.com";
 
