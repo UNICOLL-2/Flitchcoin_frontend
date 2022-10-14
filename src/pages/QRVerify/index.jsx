@@ -90,7 +90,7 @@ const QRVerify = () => {
                         name="otp"
                         value={otp}
                         onChange={e => setOtp(e.target.value)}
-                        placeholder="x x x x x x"
+                        placeholder="x - x - x - x - x - x - x  x"
                         style={{ marginTop: "40%" }} />
                 </label>
                 <button className="red button" type="submit" value="Log In" name="Log In">Log in</button>

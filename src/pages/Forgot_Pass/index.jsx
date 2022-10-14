@@ -146,7 +146,7 @@ function Forgot_Pass() {
                         <input
                             type="text"
                             className="txt-underline p-3 mb-3 w-100 input pressed mt-3"
-                            placeholder="x x x x x x"
+                            placeholder="x - x - x - x - x - x - x  x"
                             onChange={(e) => setOtp(e.target.value)}
                             name="otp"
                             value={otp}

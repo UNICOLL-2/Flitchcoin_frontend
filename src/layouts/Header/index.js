@@ -57,7 +57,22 @@ function Header() {
             </ul>
             <div className="d-flex">
               {selectedType === "pool" || selectedType === "participant" ? (
-                <Link to="/" type="button" className="btn btn-dark me-5" onClick={onClick}>Sign Out</Link>
+                // <Link to="/" type="button" className="btn btn-dark me-5" onClick={onClick}>Sign Out</Link>
+                <>
+                    <div class="dropdown">
+                      <button className="no_button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                      <div className="avatar">
+                      <img src="https://th.bing.com/th/id/OIP.cjOvUxt_6TVBz93oqpUa1gHaHa?pid=ImgDet&rs=1" className="avatar_img" />&nbsp;&nbsp;&nbsp;&#9660;
+                      </div>
+                      </button>
+                      <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                        <li><a class="dropdown-item active" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li><a class="dropdown-item" href="#">Separated link</a></li>
+                      </ul>
+                    </div>
+                </>
               ) : null}
               {selectedType === "accept" ? (
                 <Link to="/login" type="button" className="btn btn-dark me-5" >Login</Link>

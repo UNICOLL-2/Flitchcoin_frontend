@@ -2,12 +2,13 @@
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  width: 30% !important;
+  width: 50% !important;
   border-radius: 0% !important;
-  margin-left: 35vw;
+  margin-left: 25vw;
   height: 60% !important;
   margin-top: 15vh;
   overflow-y: hidden !important;
+  text-align: center;
 }
 
 .modal-content {
@@ -152,4 +153,19 @@ button:active {
     margin-top: 0;
     overflow-y: hidden !important;
   }
+}
+
+::-webkit-input-placeholder {
+  text-align: center;
+  font-weight: 600;
+  color: #804f4a;
+  letter-spacing: 0.1cm;
+}
+
+.url{
+  background-color: rgb(254, 246, 216);
+  padding: 8px 0 8px 0;
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }
