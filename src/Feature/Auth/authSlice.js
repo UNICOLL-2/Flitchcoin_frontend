@@ -1,4 +1,3 @@
-import { faSleigh } from "@fortawesome/free-solid-svg-icons";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
 

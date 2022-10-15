@@ -6,7 +6,6 @@ import Verification from "../../pages/Verification";
 import PoolParticipant from "../../pages/PoolParticipant";
 import Api from "../../pages/Api";
 import Dashboard from "../../pages/Dashboard";
-import Invalid from "../../pages/Invalid";
 import About from "../../pages/About";
 import Login from "../../pages/Login";
 import SignUp from "../../pages/SignUp";
@@ -39,7 +38,6 @@ function Content() {
         <Route path="/qr_verify" element={<QRVerify />} />
         <Route path="/forgot_password" element={<Forgot_Pass />} />
         <Route path="/withdraw" element={<Withdraw />} />
-        <Route path="*" element={<Invalid />} />
       </Routes>
     </div>
   );

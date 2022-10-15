@@ -2405,7 +2405,7 @@ canvas {
 #MiniRightNav li{
 	list-style: outside none none;
 }
-#MiniRightNav li a{
+#MiniRightNav li div{
 	display: block;
     position: relative;
 }
@@ -2426,9 +2426,9 @@ canvas {
     white-space: nowrap;
     width: 0;
 }
-#MiniRightNav a:hover span{ width:auto; padding:0 30px;overflow:visible; }
-#MiniRightNav a:hover{text-decoration:none;}
-#MiniRightNav a span{
+#MiniRightNav div:hover span{ width:auto; padding:0 30px;overflow:visible; }
+#MiniRightNav div:hover{text-decoration:none;}
+#MiniRightNav div span{
 	background-color:#fff;
 	color:#3d4f0c;
 }
@@ -2453,6 +2453,9 @@ canvas {
 
 .dropdown-item:hover{
 	font-size: 21px!important;
+	background-color: rgb(125, 247, 3)!important;
+	color: #fff!important;
+	cursor:pointer;
 }
 
 .dropdown-menu-dark .dropdown-item.active, .dropdown-menu-dark .dropdown-item:active {
