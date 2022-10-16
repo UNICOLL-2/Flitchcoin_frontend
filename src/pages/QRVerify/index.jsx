@@ -82,12 +82,12 @@ const QRVerify = () => {
                     <div className="col card mt-3 mb-3 col-12 col-md-3 p-5">
                         {page === true ?
                             <>
-                                <div className="number mb-3 pt-2 pb-2 text-center"><b>Continue with 2 - FA </b></div>
-                                <div className="number me-3 pt-2 pb-2 text-center">Verify Your QR</div>
+                                <div className="number mb-3 pt-2 pb-2 text-center mt-5"><b>Continue with 2 - FA </b></div>
+                                <div className="number me-3 pt-2 pb-2 text-center mt-4">Verify Your QR</div>
                             </> :
                             <>
-                                <div className="number mb-3 pt-2 pb-2 text-center position-relative">Continue with 2 - FA<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">&#10004;</span></div>
-                                <div className="number me-3 pt-2 pb-2 text-center"><b>Verify Your QR</b></div>
+                                <div className="number mb-3 pt-2 pb-2 text-center position-relative mt-5">Continue with 2 - FA<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">&#10004;</span></div>
+                                <div className="number me-3 pt-2 pb-2 text-center mt-4"><b>Verify Your QR</b></div>
                             </>}
                     </div>
                     <div className="col card mt-3 mb-3 col-12 col-md-7 p-5">
@@ -96,40 +96,41 @@ const QRVerify = () => {
                                 <h2 className='text-center'>Continue with 2 - FA ?</h2>
                                 <p className='text-muted mt-4'>2 Factor Authentication provides you with the most provided security features and enhanced protection of wallet.</p>
                                 <input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off" checked />
-                                <label class="btn btn-outline-success" for="success-outlined">Checked success radio</label>
+                                <label class="btn btn-outline-info p-4 mb-4" for="success-outlined">Continue with 2 factor Authentication</label>
 
                                 <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off" />
-                                <label class="btn btn-outline-danger" for="danger-outlined">Danger radio</label>
+                                <label class="btn btn-outline-danger p-4" for="danger-outlined">Continue without 2 factor Authentication</label>
+                                <button className="btn mt-5" onClick={() => setPage(false)}>Next</button>
                             </> :
                             <>
+                                <form className="form" onSubmit={submitHandler}>
+                                    <div className="segment">
+                                        <h1>QR OTP VERIFICATION</h1>
+                                    </div>
+                                    <QRCodeSVG
+                                        value={qr}
+                                        style={{ marginLeft: '11vw', position: 'absolute' }}
+                                        size={150}
 
+                                    />
+                                    <label className="label">
+                                        <input className="input_login"
+                                            type="text"
+                                            name="otp"
+                                            value={otp}
+                                            onChange={e => setOtp(e.target.value)}
+                                            placeholder="x - x - x - x - x - x - x  x"
+                                            style={{ marginTop: "40%" }} />
+                                    </label>
+                                    <button className="red button" type="submit" value="Log In" name="Log In">Log in</button>
+                                </form>
                             </>}
                     </div>
                     <div className="col col-md-1"></div>
                 </div>
             </div>
 
-            {/* <form className="form" onSubmit={submitHandler}>
-                <div className="segment">
-                    <h1>QR OTP VERIFICATION</h1>
-                </div>
-                <QRCodeSVG
-                    value={qr}
-                    style={{marginLeft: '11vw',position: 'absolute'}}
-                    size={150}
 
-                />
-                <label className="label">
-                    <input className="input_login"
-                        type="text"
-                        name="otp"
-                        value={otp}
-                        onChange={e => setOtp(e.target.value)}
-                        placeholder="x - x - x - x - x - x - x  x"
-                        style={{ marginTop: "40%" }} />
-                </label>
-                <button className="red button" type="submit" value="Log In" name="Log In">Log in</button>
-            </form> */}
         </>
     )
 }
