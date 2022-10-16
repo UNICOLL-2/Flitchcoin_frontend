@@ -28,7 +28,7 @@ const PoolParticipant = () => {
 
 
   function asset_list() {
-    fetch("http://34.73.24.72/asset_list", {
+    fetch("https://flitchcoin.com/api/asset_list", {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -53,7 +53,7 @@ const PoolParticipant = () => {
       "amount": amount,
       "duration": value
     })
-    fetch('http://34.73.24.72/place_order', {
+    fetch('https://flitchcoin.com/api/place_order', {
       method: 'POST',
       headers: {
         "Accept": "application/json",

@@ -34,7 +34,7 @@ function Header() {
   const [checkPool, setCheckPool] = useState(false);
 
   const getInfo = () => {
-    fetch('http://34.73.24.72/users/me/items/', {
+    fetch('https://flitchcoin.com/api/users/me/items/', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -57,7 +57,7 @@ function Header() {
     const data = JSON.stringify({
       "emailid": username
     })
-    fetch('http://34.73.24.72/userchrono_info', {
+    fetch('https://flitchcoin.com/api/userchrono_info', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -79,7 +79,7 @@ function Header() {
       "is_pool": !checkPool
     })
     e.preventDefault();
-    fetch('http://34.73.24.72/mode', {
+    fetch('https://flitchcoin.com/api/mode', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -96,7 +96,7 @@ function Header() {
 
   const manageFa2 = () => {
     if (fa2) {
-      fetch('http://34.73.24.72/2fa_options', {
+      fetch('https://flitchcoin.com/api/2fa_options', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',

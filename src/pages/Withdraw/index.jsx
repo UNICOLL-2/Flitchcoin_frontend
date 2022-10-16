@@ -39,7 +39,7 @@ const Withdraw = () => {
   const [coin, setCoin] = useState("Select coin");
 
   function asset_list() {
-    fetch("http://34.73.24.72/asset_list", {
+    fetch("https://flitchcoin.com/api/asset_list", {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -65,7 +65,7 @@ const Withdraw = () => {
     var data = JSON.stringify({
       "string": coin
     })
-    fetch("http://34.73.24.72/network", {
+    fetch("https://flitchcoin.com/api/network", {
       method: "POST",
       headers: {
         "Accept": "application/json",
@@ -129,7 +129,7 @@ const Withdraw = () => {
         "is_binance_pay": is_binance_pay
       })
     }
-    fetch("http://34.73.24.72/user_wallet", {
+    fetch("https://flitchcoin.com/api/user_wallet", {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${fetchToken()}`,
@@ -150,7 +150,7 @@ const Withdraw = () => {
   const [change, setChange] = useState(false)
 
   const getWallet = () => {
-    fetch('http://34.73.24.72/user_wallet', {
+    fetch('https://flitchcoin.com/api/user_wallet', {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${fetchToken()}`,
@@ -216,7 +216,7 @@ const Withdraw = () => {
       "network": WithdrawNetwork,
       "tag": WithdrawTag
     });
-    fetch("http://34.73.24.72/withdraw", {
+    fetch("https://flitchcoin.com/api/withdraw", {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${fetchToken()}`,
@@ -236,7 +236,7 @@ const Withdraw = () => {
     var data = JSON.stringify({
       "uid":uid
     })
-    fetch('http://34.73.24.72/user_wallet', {
+    fetch('https://flitchcoin.com/api/user_wallet', {
       method: 'DELETE',
       headers: {
         Authorization: `Bearer ${fetchToken()}`,

@@ -112,7 +112,7 @@ function Home() {
           <section className="my_50">
             <div className="row">
               <div className="col-md-5 col-sm-12 mt-5 ms-2 card back">
-                <SymbolInfo colorTheme="dark" autosize symbol="XRPUSDT" isTransparent></SymbolInfo>
+                <SymbolInfo colorTheme="dark" autosize symbol="BTC" isTransparent></SymbolInfo>
               </div>
               {/* <div className="col-md-1"></div> */}
               <div className="col-md-6 col-sm-12 manage_margin_2 d-flex flex-column justify-content-center">

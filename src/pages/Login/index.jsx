@@ -102,7 +102,7 @@ function Login() {
     const data = JSON.stringify({
       "emailid": e
     })
-    fetch('http://34.73.24.72/userchrono_info', {
+    fetch('https://flitchcoin.com/api/userchrono_info', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

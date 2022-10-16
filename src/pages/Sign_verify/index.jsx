@@ -26,7 +26,7 @@ const Sign_verify = () => {
         if (otp === 0) {
             alert("Enter OTP");
         } else {
-            fetch("http://34.73.24.72/verify_email", {
+            fetch("https://flitchcoin.com/api/verify_email", {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

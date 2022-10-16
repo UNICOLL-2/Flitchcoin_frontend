@@ -15,7 +15,7 @@ function Dashboard() {
 
   const account = () => {
     console.log(item)
-    fetch("http://34.73.24.72/account", {
+    fetch("https://flitchcoin.com/api/account", {
       method: 'GET',
       headers: {
         'Accept': 'application/json',

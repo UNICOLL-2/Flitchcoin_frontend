@@ -34,7 +34,7 @@ const signupUser = async (data) => {
     };
   }
   try {
-    response = await axios.post("http://34.73.24.72/Signup", userValue);
+    response = await axios.post("https://flitchcoin.com/api/Signup", userValue);
     console.log(response);
   } catch (error) {
     response = error.response;
@@ -48,7 +48,7 @@ const verifyEmail = async (data) => {
   console.log(data);
 
   try {
-    response = await axios.post("http://34.73.24.72/verify_email", data);
+    response = await axios.post("https://flitchcoin.com/api/verify_email", data);
   } catch (error) {
     response = error.response;
   }
@@ -64,7 +64,7 @@ const loginToken = async (data) => {
     params.append("username", data.username);
     params.append("password", data.password);
     params.append("otp", Number(data.otp));
-    response = await axios.post("http://34.73.24.72/token", params, {
+    response = await axios.post("https://flitchcoin.com/api/token", params, {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
@@ -85,7 +85,7 @@ const loginToken = async (data) => {
 const userLogin = async () => {
   let response;
   try {
-    response = await axios.get("http://34.73.24.72/users/me/items/", {
+    response = await axios.get("https://flitchcoin.com/api/users/me/items/", {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },

@@ -29,7 +29,7 @@ const Order = () => {
       "coin_name": selectedCoin,
       "network": network1
     });
-    fetch("http://34.73.24.72/wallet_address/", {
+    fetch("https://flitchcoin.com/api/wallet_address/", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -76,7 +76,7 @@ const Order = () => {
       });
     }
     console.log(trans);
-    fetch("http://34.73.24.72/validate_transaction", {
+    fetch("https://flitchcoin.com/api/validate_transaction", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -96,7 +96,7 @@ const Order = () => {
     var data = JSON.stringify({
       "string": temp
     })
-    fetch("http://34.73.24.72/network", {
+    fetch("https://flitchcoin.com/api/network", {
       method: "POST",
       headers: {
         "Accept": "application/json",

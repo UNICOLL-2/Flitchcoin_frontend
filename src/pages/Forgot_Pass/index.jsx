@@ -27,7 +27,7 @@ function Forgot_Pass() {
                 "password": password,
                 "is_pool": true
             })
-            fetch("http://34.73.24.72/forgot/Signup", {
+            fetch("https://flitchcoin.com/api/forgot/Signup", {
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
@@ -66,7 +66,7 @@ function Forgot_Pass() {
                 "otp": Number(otp),
                 "add": msg
             })
-            fetch("http://34.73.24.72/forgot/verify_email", {
+            fetch("https://flitchcoin.com/api/forgot/verify_email", {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
