@@ -151,7 +151,7 @@ function SignUp() {
               <div className="form-check">
                 <h5 className="text-muted">
                   <input className="form-check-input" type="radio" name="flexRadioDefault" value='participant' id="flexRadioDefault1" onChange={e => onRadioChange(e.target.value)} style={{ position: 'absolute' }} />
-                  <label className="form-check-label" htmlFor="flexRadioDefault1">
+                  <label className="form-check-label" htmlhtmlFor="flexRadioDefault1">
                     Become a Participant
                   </label>
                 </h5>
@@ -159,7 +159,7 @@ function SignUp() {
               <div className="form-check mt-5">
                 <h5 className="text-muted">
                   <input className="form-check-input" type="radio" name="flexRadioDefault" value='pool' id="flexRadioDefault2" onChange={e => onRadioChange(e.target.value)} style={{ position: 'absolute' }} />
-                  <label className="form-check-label" htmlFor="flexRadioDefault2">
+                  <label className="form-check-label" htmlhtmlFor="flexRadioDefault2">
                     Become a Pool
                   </label>
                 </h5>

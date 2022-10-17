@@ -112,6 +112,23 @@ function Header() {
           onClick();
         })).catch(err => console.log(err));
     }else{
+      const data = JSON.stringify({
+        "emailid" : username,
+        "fa2" : "null"
+      })
+      fetch('https://flitchcoin.com/api/userchrono_info', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: data
+    }).then(res => res.json())
+      .then((data) => {
+        console.log(data);
+      }).catch((err) => {
+        console.log(err);
+      })
       navigate("/login");
       onClick();
     }

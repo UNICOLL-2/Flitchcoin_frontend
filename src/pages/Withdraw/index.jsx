@@ -264,11 +264,11 @@ const Withdraw = () => {
                 <h3 className='mb-4 text-center'>Insert Wallet</h3>
                 <div className="col col-6">
                   <input type="radio" className="btn-check" name="options-outlined" id="success-outlined" autoComplete="off" />
-                  <label className="btn btn-outline-light text-dark shadow w-100" htmlFor="success-outlined" onClick={other}>Other User</label>
+                  <label className="btn btn-outline-light text-dark shadow w-100" htmlhtmlFor="success-outlined" onClick={other}>Other User</label>
                 </div>
                 <div className="col col-6">
                   <input type="radio" className="btn-check" name="options-outlined" id="danger-outlined" autoComplete="off" />
-                  <label className="btn btn-outline-light text-dark shadow w-100" htmlFor="danger-outlined" onClick={binance}>Binance User</label>
+                  <label className="btn btn-outline-light text-dark shadow w-100" htmlhtmlFor="danger-outlined" onClick={binance}>Binance User</label>
                 </div>
                 {is_binance_pay === false ? (
                   <>
