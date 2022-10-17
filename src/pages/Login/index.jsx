@@ -6,39 +6,10 @@ import { useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
 import "./login.css";
 import Animation from "../../Animation";
-// import { GoogleLogin, GoogleLogout } from 'react-google-login';
-
-// const clientId = "798613593742-0raprcg62m90v8oha2s07gbngugo4fle.apps.googleusercontent.com";
+import { initializeApp } from "firebase/app";
+import {getAuth, GoogleAuthProvider, signInWithPopup} from 'firebase/auth';
 
 function Login() {
-
-  // signin with google
-  // useEffect(() => {
-  //   console.log("ehdukhfehk,b,")
-  //   fetch("https://accounts.google.com/gsi/client", {
-  //     method: 'GET',
-  //     headers: {
-  //       'Accept': 'application/json',
-  //     },
-  //     mode: "no-cors",
-  //   }).then((result) => result.json().then((res)=>console.log("res",res)))
-  //   console.log("rbfo egig eig eigre iulgie rle treholrilUHF/R RAIFEHLRKJF,BEVGUBFHV,KKRB,GJKERGB RERGEMEGEJKRE")
-  //   google.accounts.id.initialize({
-  //     client_id: "798613593742-0raprcg62m90v8oha2s07gbngugo4fle.apps.googleusercontent.com",
-  //     callback: handleCallbackResponse
-  //   });
-
-  //   google.accounts.id.renderButton(
-  //     document.getElementById("signInDiv"),
-  //     {theme: "outline", size: "large"}
-  //   );
-  // },[]);
-
-  // function handleCallbackResponse(response){
-  //   console.log("Encoded JWT ID token" + response.credential);
-  // }
-
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -72,8 +43,8 @@ function Login() {
   } = formData;
 
   const submitHandler = (e) => {
+    console.log("submitHandler called");
     e.preventDefault();
-    setShow(true);
     if (username === "" || password === "") {
       alert("Please fill in the above information.");
     } else if(fa2 === "true") {
@@ -138,36 +109,37 @@ function Login() {
     navigate('/qr_verify');
   };
 
-  // const [loading, setLoading] = useState('Loading...');
-  // const [user1, setUser1] = useState(null);
+  // sigin with google
 
-  // const handleLoginSuccess = (response) => {
-  //   console.log("Login Success ", response);
-  //   setUser1(response.profileObj);
-  //   setLoading();
-  // }
-
-  // const handleLoginFailure = error => {
-  //   console.log("Login Failure ", error);
-  //   setLoading();
-  // }
-
-  // const handleLogoutSuccess = (response) => {
-  //   console.log("Logout Success ", response);
-  //   setUser1(null);
-  // }
-
-  // const handleLogoutFailure = error => {
-  //   console.log("Logout Failure ", error);
-  // }
-
-  // const handleRequest = () => {
-  //   setLoading("Loading...");
-  // }
-
-  // const handleAutoLoadFinished = () => {
-  //   setLoading();
-  // }
+  const firebaseConfig = {
+    apiKey: "AIzaSyD9-xgz9FYET9nVocqKmfPqWeOShtDw5AY",
+    authDomain: "auth-77872.firebaseapp.com",
+    projectId: "auth-77872",
+    storageBucket: "auth-77872.appspot.com",
+    messagingSenderId: "768493241754",
+    appId: "1:768493241754:web:6e3a5b66a938bff5962623"
+  };
+  
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  
+  const provider = new GoogleAuthProvider();
+  const sigInWithGoogle = () => {
+    console.log("sigInWithGoogle called")
+      signInWithPopup(auth, provider).then(result => {
+        setFormData((prevData) => ({
+          ...prevData,
+          username: result.user.email,
+          password: result.user.uid,
+        }));
+        checkUser();
+        if(fa2 === "true") {
+          setShow(true);
+        }else{
+        dispatch(loginToken(formData));
+        }
+      }).catch(err => console.log(err)); 
+  };
 
   return (
     <div>
@@ -267,6 +239,13 @@ function Login() {
           <div className="col-lg-4"></div>
         </div>
         <div className="row">
+        <div className="col-lg-4"></div>
+        <div className="col-12 col-lg-4">
+          <button onClick={sigInWithGoogle} type="button" className="button_google button w-100"><i className="fa-brands fa-google text-primary">&nbsp;&nbsp;&nbsp;Sign In With Google</i></button>
+        </div>
+        </div>
+        <div className="col-lg-4"></div>
+        <div className="row">
           <div className="col-lg-4"></div>
           <div className="col-12 col-lg-4">
             <div className="text-center pb-5 pt-5 me-4">
@@ -286,31 +265,7 @@ function Login() {
           </div>
           <div className="col-lg-4"></div>
         </div>
-
       </form>
-
-      {/* <div>
-      <h3>Login with Google using React - <a href="https://www.cluemediator.com/" target="_blank" rel="noopener noreferrer">Clue Mediator</a></h3>
-      {user1 ? <div>
-        <div className="name">Welcome {user1.name}!</div>
-        <GoogleLogout
-          clientId={clientId}
-          onLogoutSuccess={handleLogoutSuccess}
-          onFailure={handleLogoutFailure}
-        />
-        <pre>{JSON.stringify(user, null, 2)}</pre>
-      </div> :
-        <GoogleLogin
-          clientId={clientId}
-          buttonText={loading}
-          onSuccess={handleLoginSuccess}
-          onFailure={handleLoginFailure}
-          onRequest={handleRequest}
-          onAutoLoadFinished={handleAutoLoadFinished}
-          isSignedIn={true}
-        />}
-        <div id="signInDiv"></div>
-    </div> */}
 
       <Modal
         show={show}

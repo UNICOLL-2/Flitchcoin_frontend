@@ -172,7 +172,7 @@ export const authSlice = createSlice({
       })
       .addCase(signupUser.fulfilled, (state, action) => {
         if(action.payload.status === 208){
-          state.loginString = false
+          state.loginString = "false"
         }else{
         state.loginString = action.payload.data;
         }

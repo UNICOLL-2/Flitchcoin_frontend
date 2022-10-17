@@ -483,11 +483,11 @@ const Order = () => {
             <div className="row pt-3 pb-3">
               <div className="col col-6">
                 <input type="radio" className="btn-check" name="options-outlined" id="success-outlined" autoComplete="off" checked />
-                <label className="btn btn-outline-light text-dark shadow w-100" htmlhtmlFor="success-outlined" onClick={() => setType("otherUser")}>Other User</label>
+                <label className="btn btn-outline-light text-dark shadow w-100" htmlFor="success-outlined" onClick={() => setType("otherUser")}>Other User</label>
               </div>
               <div className="col col-6">
                 <input type="radio" className="btn-check" name="options-outlined" id="danger-outlined" autoComplete="off" />
-                <label className="btn btn-outline-light text-dark shadow w-100" htmlhtmlFor="danger-outlined" onClick={() => setType("binanceUser")}>Binance User</label>
+                <label className="btn btn-outline-light text-dark shadow w-100" htmlFor="danger-outlined" onClick={() => setType("binanceUser")}>Binance User</label>
               </div>
               <QRCodeSVG
                 value={qr}

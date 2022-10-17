@@ -63,10 +63,15 @@ const loginToken = async (data) => {
     const params = new URLSearchParams();
     params.append("username", data.username);
     params.append("password", data.password);
-    params.append("otp", Number(data.otp));
+    if(data.otp === ""){
+      params.append("otp", 100000);
+    }else{
+      params.append("otp", Number(data.otp));
+    }
     response = await axios.post("https://flitchcoin.com/api/token", params, {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
+        "Accept" : "application/x-www-form-urlencoded",
       },
     });
     if (response.data) {
