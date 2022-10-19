@@ -312,6 +312,11 @@ element.style {
 	color: white !important;
 }
 
+.accept:active {
+	background: linear-gradient(145deg, #171717, #352222) !important;
+	color: white !important;
+}
+
 .inverted:not(:active):hover {
 	background: linear-gradient(145deg, #d7d7d7, #ffffff);
 	box-shadow: 4px 4px 8px #cbcbcb, -4px -4px 8px #ffffff;
@@ -2394,11 +2399,11 @@ canvas {
 }
 
 .icons_login {
-	font-size: 10px;
+	font-size: 15px;
 }
 
 .icons_login:hover {
-	font-size: 11px;
+	font-size: 17px;
 }
 
 .icon_signout {

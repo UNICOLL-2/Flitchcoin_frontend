@@ -56,9 +56,6 @@ function SignUp() {
   const { username, password, fullName, type } = formData;
 
   const submitHandler = (type) => {
-    if (username === '' && password === '' && fullName === "") {
-      alert("Please enter the above information");
-    }else {
       dispatch(signupUser({ formData, type }));
       if (loginString === "false") {
         alert("User already exist \nTaking back to Login page...")
@@ -69,7 +66,6 @@ function SignUp() {
         setShow(true);
         setUser(true);
       }
-    }
   };
 
   const onChange = (e) => {
@@ -82,6 +78,14 @@ function SignUp() {
   const onRadioChange = (data) => {
     setSignType(data)
   };
+
+  const nextClick = () => {
+    if (username === '' && password === '' && fullName === "") {
+      alert("Please enter the above information");
+    }else{
+      setPage(false);
+    }
+  }
 
   // signup with google
 
@@ -174,7 +178,7 @@ function SignUp() {
                 <div className="col-lg-4"></div>
               </div>
               <div className="segment" style={{ marginTop: "-5%" }}>
-                <button className="unit button" type="button" onClick={() => {setPage(false)}} >&#8594;</button>
+                <button className="unit button" type="button" onClick={nextClick} >&#8594;</button>
                 <div className="row">
                   <div className="col-lg-4"></div>
                   <div className="col-12 col-lg-4">

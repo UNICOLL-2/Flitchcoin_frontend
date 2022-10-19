@@ -8,7 +8,7 @@ const Withdraw = () => {
     wallet_add: "",
     phone_no: 0,
     pay_id: "",
-    memo: 0,
+    memo: "",
     is_binance_pay: false,
     email_id: "",
     binance_id: ""
@@ -92,14 +92,11 @@ const Withdraw = () => {
     asset_list();
   }, [coin])
 
-  useEffect(() => {
-    network_list();
-  }, [coin !== "Select coin"]);
-
   const [sym, setSym] = useState("");
 
   useEffect(() => {
     setSym(coin);
+    network_list();
   }, [coin !== "Select coin"]);
 
   const [net, setNet] = useState("");
@@ -108,42 +105,66 @@ const Withdraw = () => {
     setNet(network1);
   }, [network1 !== "Select Network"]);
 
+  const toGetData = () => {
+    const data2 = JSON.stringify({
+      "nick_name": nick_name,
+      "phone_no": phone_no,
+      "pay_id": pay_id,
+      "is_binance_pay": is_binance_pay,
+      "email_id": email_id,
+      "binance_id": binance_id
+    })
+    return data2;
+  }
+
   const onSubmit = (e) => {
     e.preventDefault();
+    var data1 = "";
+    var data = "";
     if (is_binance_pay) {
-      var data = JSON.stringify({
-        "nick_name": nick_name,
-        "phone_no": phone_no,
-        "pay_id": pay_id,
-        "is_binance_pay": is_binance_pay,
-        "email_id": email_id,
-        "binance_id": binance_id
-      })
+      if (nick_name === undefined || nick_name === "") {
+        alert("Please fill in the Required fields")
+      } else {
+        if (pref === "From which you want to continue ?") {
+          alert("Please select a method to continue")
+        } else {
+          data1 = toGetData();
+        }
+      }
+      console.log(data1)
+      data = data1
     } else {
-      var data = JSON.stringify({
-        "nick_name": nick_name,
-        "sym": sym,
-        "wallet_add": wallet_add,
-        "network": net,
-        "memo": memo,
-        "is_binance_pay": is_binance_pay
-      })
+      if (nick_name === "" || sym === "Select coin" || wallet_add === "" || net === "Select Network" || memo === 0) {
+        alert("Please fill in the Required fields from else")
+      } else {
+        data = JSON.stringify({
+          "nick_name": nick_name,
+          "sym": sym,
+          "wallet_add": wallet_add,
+          "network": net,
+          "memo": Number(memo),
+          "is_binance_pay": is_binance_pay
+        })
+      }
     }
-    fetch("https://flitchcoin.com/api/user_wallet", {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${fetchToken()}`,
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: data
-    }).then(res => res.json())
-      .then((result) => {
-        console.log(result);
-      }).catch((err) => {
-        console.log(err);
-      })
+    if (data === "" || data === undefined) {
+    } else {
+      fetch("https://flitchcoin.com/api/user_wallet", {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${fetchToken()}`,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: data
+      }).then(res => res.json())
+        .then((result) => {
+        }).catch((err) => {
+          console.log(err);
+        })
       setChange(true)
+    }
+
   };
 
   const [walletData, setWalletData] = useState([]);
@@ -157,7 +178,6 @@ const Withdraw = () => {
       }
     }).then(res => res.json()
       .then((result) => {
-        console.log(result);
         let tempArray = [];
         result.map((items) => {
           for (let i = 0; i < 1; i++) {
@@ -170,9 +190,6 @@ const Withdraw = () => {
       })
   }
 
-  // bombarding
-
-  
   useEffect(() => {
     getWallet();
   }, [change])
@@ -234,7 +251,7 @@ const Withdraw = () => {
 
   const onDelete = (uid) => {
     var data = JSON.stringify({
-      "uid":uid
+      "uid": uid
     })
     fetch('https://flitchcoin.com/api/user_wallet', {
       method: 'DELETE',
@@ -250,8 +267,10 @@ const Withdraw = () => {
       }).catch((err) => {
         console.log(err);
       });
-      setChange(false)
-  }
+    setChange(false)
+  };
+
+  const [pref, setPref] = useState("From which you want to continue ?");
 
   return (
     <div className='container'>
@@ -340,7 +359,7 @@ const Withdraw = () => {
                     </div>
                     <div className="input1 w-100 mt-4">
                       <input
-                        type="number"
+                        type="text"
                         className="txt-underline p-3 mb-3 w-100  input pressed"
                         placeholder="Memo"
                         onChange={onChange}
@@ -363,53 +382,101 @@ const Withdraw = () => {
                       />
                       <span className="underline"></span>
                     </div>
-                    <div className="input1 w-100 mt-3">
-                      <input
-                        type="text"
-                        className="txt-underline p-3 mb-3 w-100  input pressed"
-                        placeholder="Email id"
-                        onChange={onChange}
-                        name="email_id"
-                        value={email_id}
-                      />
-                      <span className="underline"></span>
+                    <div className="col col-12 mb-3 mt-4 btn-group">
+                      <button
+                        type="button"
+                        className="btn btn-dark dropdown-toggle w-100"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        <b>{pref}</b>
+                      </button>
+                      <ul className="dropdown-menu drop">
+                        <div>
+                          <li className="list-items" onClick={() => setPref("emial_id")}>Email id</li>
+                          <li className="list-items" onClick={() => setPref("binance_id")}>Binance id</li>
+                          <li className="list-items" onClick={() => setPref("phone_no")}>Phone number</li>
+                          <li className="list-items" onClick={() => setPref("pay_id")}>Pay id</li>
+                        </div>
+                      </ul>
                     </div>
-                    <h5 className="text-center">---OR---</h5>
-                    <div className="input1 w-100 mt-3">
-                      <input
-                        type="text"
-                        className="txt-underline p-3 mb-3 w-100  input pressed"
-                        placeholder="Binance Id"
-                        onChange={onChange}
-                        name="binance_id"
-                        value={binance_id}
-                      />
-                      <span className="underline"></span>
-                    </div>
-                    <h5 className="text-center">---OR---</h5>
-                    <div className="input1 w-100 mt-3">
-                      <input
-                        type="number"
-                        className="txt-underline p-3 mb-3 w-100  input pressed"
-                        placeholder="Phone number"
-                        onChange={onChange}
-                        name="phone_no"
-                        value={phone_no}
-                      />
-                      <span className="underline"></span>
-                    </div>
-                    <h5 className="text-center">---OR---</h5>
-                    <div className="input1 w-100 mt-4">
-                      <input
-                        type="text"
-                        className="txt-underline p-3 mb-3 w-100  input pressed"
-                        placeholder="Pay Id"
-                        onChange={onChange}
-                        name="pay_id"
-                        value={pay_id}
-                      />
-                      <span className="underline"></span>
-                    </div>
+                    {
+                      pref === "emial_id" ?
+                        <>
+                          <div className="input1 w-100 mt-3">
+                            <input
+                              type="text"
+                              className="txt-underline p-3 mb-3 w-100  input pressed"
+                              placeholder="Email id"
+                              onChange={onChange}
+                              name="email_id"
+                              value={email_id}
+                            />
+                            <span className="underline"></span>
+                          </div>
+                        </>
+                        :
+                        <>
+                          {
+                            pref === "binance_id" ?
+                              <>
+                                <div className="input1 w-100 mt-3">
+                                  <input
+                                    type="text"
+                                    className="txt-underline p-3 mb-3 w-100  input pressed"
+                                    placeholder="Binance Id"
+                                    onChange={onChange}
+                                    name="binance_id"
+                                    value={binance_id}
+                                  />
+                                  <span className="underline"></span>
+                                </div>
+                              </>
+                              :
+                              <>
+                                {
+                                  pref === "phone_no" ?
+                                    <>
+                                      <div className="input1 w-100 mt-3">
+                                        <input
+                                          type="number"
+                                          className="txt-underline p-3 mb-3 w-100  input pressed"
+                                          placeholder="Phone number"
+                                          onChange={onChange}
+                                          name="phone_no"
+                                          value={phone_no}
+                                        />
+                                        <span className="underline"></span>
+                                      </div>
+                                    </>
+                                    :
+                                    <>
+                                      {
+                                        pref === "pay_id" ?
+                                          <>
+                                            <div className="input1 w-100 mt-4">
+                                              <input
+                                                type="text"
+                                                className="txt-underline p-3 mb-3 w-100  input pressed"
+                                                placeholder="Pay Id"
+                                                onChange={onChange}
+                                                name="pay_id"
+                                                value={pay_id}
+                                              />
+                                              <span className="underline"></span>
+                                            </div>
+                                          </>
+                                          :
+                                          <>
+
+                                          </>
+                                      }
+                                    </>
+                                }
+                              </>
+                          }
+                        </>
+                    }
                   </>
                 )}
                 <button type='submit' className='primary w-100'>Save Wallet</button>
@@ -427,13 +494,27 @@ const Withdraw = () => {
                 <>
                   <div className='back card mt-4 p-3' onClick={() => gettingWallet(items)} >
                     <>
-                      <div>- Name : {items.name}</div>
-                      <div>- Memo : {items.memo}</div>
-                      <div>- Network : {items.network}</div>
-                      <div>- Coin : {items.sym}</div>
-                      <div>- Wallet address : {items.wallet_add}</div>
-                      <div>- Transaction id : {items.tnx_id}</div>
-                      <div>- UID : {items.uid}</div>
+                      {items.name === "Binance Pay Universal" ?
+                        <>
+                          <div>- Name : {items.name}</div>
+                          {items.pay_id === "string" ? <></> : <><div>- Pay Id : {items.pay_id}</div></>}
+                          {items.binance_id === "string" ? <></> : <><div>- Binance Id : {items.binance_id}</div></>}
+                          {items.phone_no === 0 ? <></> : <><div>- Phone no. : {items.phone_no}</div></>}
+                          {items.email_id === "string" ? <></> : <><div>- Email id : {items.email_id}</div></>}
+                          <div>- Transaction id : {items.tnx_id}</div>
+                          <div>- UID : {items.uid}</div>
+                        </>
+                        :
+                        <>
+                          <div>- Name : {items.name}</div>
+                          {items.memo === null ? <></> : <><div>- Memo : {items.memo}</div></>}
+                          {items.network === null ? <></> : <><div>- Network : {items.network}</div></>}
+                          {items.memo === null ? <></> : <><div>- Coin : {items.sym}</div></>}
+                          {items.wallet_add === null ? <></> : <><div>- Wallet address : {items.wallet_add}</div></>}
+                          <div>- Transaction id : {items.tnx_id}</div>
+                          <div>- UID : {items.uid}</div>
+                        </>}
+
                     </>
                   </div>
                   <button type='button' className='btn btn-dark mt-3' onClick={() => onDelete(items.uid)}>Delete</button>

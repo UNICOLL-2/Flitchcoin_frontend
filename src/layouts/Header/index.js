@@ -241,7 +241,7 @@ function Header() {
                 <Link to="/login" type="button" className="btn btn-dark me-5" ><i className="fa-solid fa-right-to-bracket icons_login">&nbsp; Login</i></Link>
               ) : null}
               {selectedType === "decline" ? (
-                <Link to="/sign-up" type="button" className="btn btn-dark me-5">Let's Start</Link>
+                <Link to="/sign-up" type="button" className="btn btn-dark me-5"><i class="fa-regular fa-face-smile-wink icons_login">&nbsp;&nbsp;Let's Start</i></Link>
               ) : null}
             </div>
           </div>
