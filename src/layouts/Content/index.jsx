@@ -17,6 +17,9 @@ import Forgot_Pass from "../../pages/Forgot_Pass";
 import ProtectedRoutes from "../../pages/ProtectedRoutes";
 import Withdraw from "../../pages/Withdraw";
 import PrivateRoute from "../../pages/PrivateRoute";
+import Profile from "../../pages/Profile";
+import Statements from "../../pages/Statements";
+import Settings from "../../pages/Settings";
 
 function Content() {
   return (
@@ -31,6 +34,9 @@ function Content() {
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/place_order" element={<PoolParticipant />} />
           <Route path="/Api" element={<Api />} />
+          <Route path="/profile" element={<Profile/>} />
+          <Route path="/statements" element={<Statements/>} />
+          <Route path="/settings" element={<Settings/>} />
         {/* </Route> */}
         <Route path="/about" element={<About />} />
         <Route path="/sign-up" element={<SignUp />} />

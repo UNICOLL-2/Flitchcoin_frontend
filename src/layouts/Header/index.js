@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logOutUser } from "../../Feature/Auth/authSlice";
 import { fetchToken } from "../../Auth";
-import { Modal } from "react-bootstrap";
 
 function Header() {
   const { selectedType } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [show, setShow] = useState(false);
-  const [show1, setShow1] = useState(false);
+  // const [show, setShow] = useState(false);
+  // const [show1, setShow1] = useState(false);
 
   const [formData, setFormData] = useState({
     type: null
@@ -31,7 +29,6 @@ function Header() {
     dispatch(logOutUser());
   }
   const [username, setUsername] = useState('');
-  const [checkPool, setCheckPool] = useState(false);
 
   const getInfo = () => {
     fetch('https://flitchcoin.com/api/users/me/items/', {
@@ -42,102 +39,15 @@ function Header() {
       }
     }).then((result) => result.json()
       .then(res => {
-        if (res.is_pool) {
-          setCheckPool(true);
-        }
         setUsername(res.username);
       })).catch((err) => {
         console.log(err);
       })
   };
 
-  const [fa2, setfa2] = useState(false);
-
-  const checkUser = (e) => {
-    const data = JSON.stringify({
-      "emailid": username
-    })
-    fetch('https://flitchcoin.com/api/userchrono_info', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: data
-    }).then(res => res.json())
-      .then((data) => {
-        if (data.fa2 === true) {
-          setfa2(true)
-        }
-      }).catch((err) => {
-        console.log(err);
-      })
-  };
-
-  const become = (e) => {
-    const data = JSON.stringify({
-      "is_pool": !checkPool
-    })
-    e.preventDefault();
-    fetch('https://flitchcoin.com/api/mode', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        Authorization: `Bearer ${fetchToken()}`,
-        'Content-Type': 'application/json'
-      },
-      body: data
-    }).then((result) => result.json()
-      .then(res => {
-        navigate("/login");
-        onClick();
-      })).catch(err => console.log(err));
-  };
-
-  const manageFa2 = () => {
-    if (fa2) {
-      fetch('https://flitchcoin.com/api/2fa_options', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          Authorization: `Bearer ${fetchToken()}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          "fa2": !fa2
-        })
-      }).then((result) => result.json()
-        .then(res => {
-          navigate('/login');
-          onClick();
-        })).catch(err => console.log(err));
-    }else{
-      const data = JSON.stringify({
-        "emailid" : username,
-        "fa2" : "null"
-      })
-      fetch('https://flitchcoin.com/api/userchrono_info', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: data
-    }).then(res => res.json())
-      .then((data) => {
-        console.log(data);
-      }).catch((err) => {
-        console.log(err);
-      })
-      navigate("/login");
-      onClick();
-    }
-  };
-
   useEffect(() => {
     getInfo();
-    checkUser();
-  }, [selectedType, manageFa2, show, show1]);
+  }, [selectedType]);
 
   return (
     <div>
@@ -180,16 +90,21 @@ function Header() {
                             </div>
                           </button>
                           <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                            <li><div className="dropdown-item">Change Avatar</div></li>
-                            <li><div className="dropdown-item" onClick={() => setShow(true)}>Become {checkPool ? <>Participant</> : <>Pool</>}</div></li>
-                            <li><div className="dropdown-item" onClick={() => setShow1(true)}>{fa2 ? <>Deactivate</> : <>Activate</>} 2-FA</div></li>
+                            <li><div className="set_margins"><img src="https://th.bing.com/th/id/OIP.cjOvUxt_6TVBz93oqpUa1gHaHa?pid=ImgDet&rs=1" className="avatar_big" /></div></li>
+                            <li><div className="small-text text-muted mb-4">{username}</div></li>
+                            <li><Link to="/profile" className="manage_profile">Manage your Profile</Link></li>
+                            <li><Link to="/settings" className="dropdown-item mt-3">Settings</Link></li>
+                            <li><div className="dropdown-item">Reports</div></li>
+                            <li><div className="dropdown-item">Help</div></li>
                             <li><Link to="/" className="dropdown-item" onClick={onClick}><i className="fa-solid fa-right-from-bracket icon_signout"> Sign Out</i></Link></li>
+                            {/* <li><div className="dropdown-item" onClick={() => setShow(true)}>Become {checkPool ? <>Participant</> : <>Pool</>}</div></li>
+                            <li><div className="dropdown-item" onClick={() => setShow1(true)}>{fa2 ? <>Deactivate</> : <>Activate</>} 2-FA</div></li> */}
                           </ul>
                         </div>
-                      </i> <span>{username}</span></div>
+                      </i></div>
                     </li>
                   </ul>
-                  <Modal
+                  {/* <Modal
                     show={show}
                     onHide={() => setShow(false)}
                     backdrop="static"
@@ -211,8 +126,8 @@ function Header() {
                         Confirm
                       </button>
                     </div>
-                  </Modal>
-                  <Modal
+                  </Modal> */}
+                  {/* <Modal
                     show={show1}
                     onHide={() => setShow1(false)}
                     backdrop="static"
@@ -234,7 +149,7 @@ function Header() {
                         Confirm
                       </button>
                     </div>
-                  </Modal>
+                  </Modal> */}
                 </>
               ) : null}
               {selectedType === "accept" ? (

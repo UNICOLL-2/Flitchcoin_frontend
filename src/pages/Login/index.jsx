@@ -23,7 +23,7 @@ function Login() {
     }
     if (user) {
       if (user?.username) {
-        navigate("/home");
+        navigate("/dashboard");
       }
     }
   }, [userToken, user]);

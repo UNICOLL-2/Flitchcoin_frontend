@@ -2349,6 +2349,18 @@ canvas {
 	border-radius: 50% !important;
 }
 
+.avatar_big {
+	height: 55x !important;
+	width: 55px !important;
+	border-radius: 50% !important;
+}
+
+.set_margins {
+	margin-left: 6.5vw;
+	padding-top: 1.2rem;
+	padding-bottom: 0.8rem;
+}
+
 .avatar {
 	border-radius: 18px !important;
 	font-size: 15px !important;
@@ -2409,6 +2421,7 @@ canvas {
 .icon_signout {
 	font-size: 15px;
 	letter-spacing: 0.07cm !important;
+	color: #3d4f0c;
 }
 
 .icon_signout:hover {
@@ -2465,7 +2478,8 @@ canvas {
 }
 
 .dropdown-menu[data-bs-popper] {
-	left: -120% !important;
+	top: 150% !important;
+	left: -200% !important;
 }
 
 .dropdown-menu {
@@ -2473,26 +2487,32 @@ canvas {
 }
 
 .dropdown-menu-dark {
-	background-color: #efeeef !important;
+	background-color: #ffffff !important;
 	color: black !important;
 }
 
 .dropdown-item {
 	color: black !important;
-	font-size: 20px !important;
+	font-size: 16px !important;
+	font-style: normal;
+	padding: 14px!important;
+	padding-left: 30px!important;
+	border-top: 1px solid rgb(219, 219, 219)!important;
+	font-weight: 550!important;
 }
 
 .dropdown-item:hover {
-	font-size: 21px !important;
-	background-color: rgb(125, 247, 3) !important;
-	color: #fff !important;
+	font-size: 17px !important;
+	background-color: #eff0f0 !important;
+	color: #000 !important;
 	cursor: pointer;
+	font-style: normal!important;
 }
 
 .dropdown-menu-dark .dropdown-item.active,
 .dropdown-menu-dark .dropdown-item:active {
 	color: #fff !important;
-	background-color: rgb(125, 247, 3) !important;
+	background-color: #eff0f0 !important;
 }
 
 .number {
@@ -2500,3 +2520,64 @@ canvas {
 	border: 3px solid rgb(229, 255, 0);
 	padding-left: 8px;
 }
+
+.small-text {
+	font-size: 15px !important;
+	padding: 0px 50px 0px 50px;
+}
+
+.manage_profile {
+	margin: 0px 0px 10px 40px!important;
+	background-color: #eff0f0;
+	padding: 15px 25px 15px 25px;
+	font-weight: 700;
+	text-decoration: none!important;
+	color: black;
+}
+
+.manage_profile:hover{
+	color: #000;
+	background-color: #e4e4e4;
+}
+
+
+/* Profile page */
+
+.profile_section{
+	border: 1px solid rgb(211, 211, 211);
+	border-radius: 6px;
+	padding: 20px;
+	padding-left: 30px;
+}
+
+.avatar_big_2{
+	border-radius: 50%;
+	height: 100px;
+	width: 100px;
+}
+
+.reduce_bold{
+	font-weight: 400!important;
+}
+
+.input_profile{
+	padding: 10px;
+}
+
+.side_navigation{
+	background-color: #fff;
+}
+
+.link{
+	text-decoration: none!important;
+}
+
+
+
+/* settings page */
+
+.navigate{
+	color: blue;
+	font-weight: 700;
+}
+
