@@ -41,7 +41,7 @@ const QRVerify = () => {
             "otp": otp
         });
         e.preventDefault();
-        if (otp == "") {
+        if (otp === "") {
             alert("Enter OTP");
         } else {
             fetch("https://flitchcoin.com/api/fa2url", {

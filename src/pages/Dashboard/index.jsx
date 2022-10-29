@@ -80,7 +80,7 @@ function Dashboard() {
 
   useEffect(() => {
     item && table();
-  }, [temp === true]);
+  }, [temp === true],item,table);
 
   const onRepayment = () => {
     dispatch(orderType("repayment"));

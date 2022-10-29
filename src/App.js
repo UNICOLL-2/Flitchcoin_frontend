@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "./layouts";
-import { Button, Modal } from "react-bootstrap";
+import {  Modal } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { defaultType, userLogin  } from "./Feature/Auth/authSlice";
 import "./app.css";
@@ -30,7 +30,7 @@ const App = () => {
           <div className="row back">
             <div className="col-4 p_50 fs-2 fw-bold back__animation ">
               <p className="text-dark">Flitch Coin</p>
-              <img src={wave} height="350px" width="200px" />
+              <img src={wave} height="350px" width="200px" alt="wave"/>
             </div>
             <div className="col-8 welcome__dialog">
               <div className="content_oveflow">

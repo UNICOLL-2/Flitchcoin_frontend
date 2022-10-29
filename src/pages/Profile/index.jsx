@@ -16,7 +16,7 @@ const Profile = () => {
                     <div className='mt-5'>
                         <div className="row">
                             <div className="col-12 text-center col-md-2">
-                                <img src="https://th.bing.com/th/id/OIP.cjOvUxt_6TVBz93oqpUa1gHaHa?pid=ImgDet&rs=1" className="avatar_big_2" />
+                                <img src="https://th.bing.com/th/id/OIP.cjOvUxt_6TVBz93oqpUa1gHaHa?pid=ImgDet&rs=1" className="avatar_big_2" alt="profile img"/>
                             </div>
                             <div className="col-12 col-md-6">
                                 <div className="row ms-3 mt-3"><h4>Tushar gupta</h4></div>

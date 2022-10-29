@@ -77,7 +77,6 @@ const Settings = () => {
         const data = JSON.stringify({
             "is_pool": !checkPool
         })
-        console.log(data);
         e.preventDefault();
         fetch('https://flitchcoin.com/api/mode', {
             method: 'POST',
@@ -89,7 +88,6 @@ const Settings = () => {
             body: data
         }).then((result) => result.json()
             .then(res => {
-                console.log(res);
                 navigate("/login");
                 onClick();
             })).catch(err => console.log(err));
@@ -126,7 +124,6 @@ const Settings = () => {
                 body: data
             }).then(res => res.json())
                 .then((data) => {
-                    console.log(data);
                 }).catch((err) => {
                     console.log(err);
                 })
