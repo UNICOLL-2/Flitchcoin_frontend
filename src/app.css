@@ -2482,6 +2482,12 @@ canvas {
 	left: -200% !important;
 }
 
+@media screen and (max-width:991px){
+	.dropdown-menu[data-bs-popper] {
+		left: -50% !important;
+	}
+}
+
 .dropdown-menu {
 	padding: 0 !important;
 }

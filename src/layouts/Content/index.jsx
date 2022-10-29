@@ -15,10 +15,10 @@ import QRVerify from "../../pages/QRVerify";
 import ForgotPass from "../../pages/Forgot_Pass";
 import ProtectedRoutes from "../../pages/ProtectedRoutes";
 import Withdraw from "../../pages/Withdraw";
-import PrivateRoute from "../../pages/PrivateRoute";
 import Profile from "../../pages/Profile";
 import Statements from "../../pages/Statements";
 import Settings from "../../pages/Settings";
+import Protection from "../../pages/Protection";
 
 function Content() {
   return (
@@ -26,22 +26,20 @@ function Content() {
       <Routes>
         <Route path="/home" element={<RequireToken><HomeMain /></RequireToken>} />
         <Route path="/" element={<Home />} />
-        <Route path="/order" element={<Order />} />
         <Route path="/login" element={<ProtectedRoutes><Login /></ProtectedRoutes>} />
-        {/* <Route element={<PrivateRoute />}> */}
-          <Route path="/Dashboard" element={<Dashboard />} />
-          <Route path="/place_order" element={<PoolParticipant />} />
-          <Route path="/Api" element={<Api />} />
-          <Route path="/profile" element={<Profile/>} />
-          <Route path="/statements" element={<Statements/>} />
-          <Route path="/settings" element={<Settings/>} />
-        {/* </Route> */}
+          <Route path="/Dashboard" element={<Protection Cmp={Dashboard}/>} />
+          <Route path="/place_order" element={<Protection Cmp={PoolParticipant}/>} />
+          <Route path="/Api" element={<Protection Cmp={Api}/>} />
+          <Route path="/order" element={<Protection Cmp={Order}/>} />
+          <Route path="/profile" element={<Protection Cmp={Profile}/>} />
+          <Route path="/statements" element={<Protection Cmp={Statements}/>} />
+          <Route path="/settings" element={<Protection Cmp={Settings}/>} />
+          <Route path="/withdraw" element={<Protection Cmp={Withdraw}/>} />
         <Route path="/about" element={<About />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign_verify" element={<SignVerify />} />
         <Route path="/qr_verify" element={<QRVerify />} />
         <Route path="/forgot_password" element={<ForgotPass />} />
-        <Route path="/withdraw" element={<Withdraw />} />
       </Routes>
     </div>
   );

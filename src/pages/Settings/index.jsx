@@ -147,8 +147,8 @@ const Settings = () => {
                     {setting ?
                         <>
                             <div className="row p-4">
-                                <h6 className="col-3 navigate" role="button">2-Step Verification</h6>
-                                <h6 className="col-3 " role="button" onClick={() => setSetting(false)}>Become {checkPool ? <>Participant</> : <>Pool</>}</h6>
+                                <h6 className="col-md-4 navigate col-12" role="button">2-Step Verification</h6>
+                                <h6 className="col-md-4 col-12 " role="button" onClick={() => setSetting(false)}>Become {checkPool ? <>Participant</> : <>Pool</>}</h6>
                                 <hr /><br /><br /><br />
                                 <p><b>Select your 2-step verification method</b></p>
                                 <p>Your 2-step verification method is valid across all your Flitchcoin accounts</p><br /><br /><br /><br />
@@ -182,8 +182,8 @@ const Settings = () => {
                         </> :
                         <>
                             <div className="row p-4">
-                                <h6 className="col-3" role="button" onClick={() => setSetting(true)}>2-Step Verification</h6>
-                                <h6 className="col-3 navigate" role="button">Become {checkPool ? <>Participant</> : <>Pool</>}</h6>
+                                <h6 className="col-md-4 col-12" role="button" onClick={() => setSetting(true)}>2-Step Verification</h6>
+                                <h6 className="col-md-4 col-12 navigate" role="button">Become {checkPool ? <>Participant</> : <>Pool</>}</h6>
                                 <hr /><br /><br /><br />
                                 <p className="text-muted"><b>CURRENT</b></p>
                                 <p>You have currently opted to continue as {!checkPool ? <>Participant</> : <>Pool</>}</p>
