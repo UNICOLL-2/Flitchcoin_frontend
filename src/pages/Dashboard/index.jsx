@@ -14,7 +14,6 @@ function Dashboard() {
   const [item, setItem] = useState();
 
   const account = () => {
-    console.log(item)
     fetch("https://flitchcoin.com/api/account", {
       method: 'GET',
       headers: {
@@ -46,7 +45,6 @@ function Dashboard() {
   const [temp, setTemp] = useState();
 
   useEffect(() => {
-    console.log(temp);
     if (item === undefined) {
       setTemp(false)
     } else {

@@ -43,7 +43,6 @@ function Login() {
   } = formData;
 
   const submitHandler = (e) => {
-    console.log("submitHandler called");
     e.preventDefault();
     if (username === "" || password === "") {
       alert("Please fill in the above information.");
@@ -125,7 +124,6 @@ function Login() {
   
   const provider = new GoogleAuthProvider();
   const sigInWithGoogle = () => {
-    console.log("sigInWithGoogle called")
       signInWithPopup(auth, provider).then(result => {
         setFormData((prevData) => ({
           ...prevData,

@@ -9,8 +9,6 @@ function Header() {
   const { selectedType } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
-  // const [show, setShow] = useState(false);
-  // const [show1, setShow1] = useState(false);
 
   const [formData, setFormData] = useState({
     type: null
@@ -93,63 +91,15 @@ function Header() {
                             <li><div className="set_margins"><img src="https://th.bing.com/th/id/OIP.cjOvUxt_6TVBz93oqpUa1gHaHa?pid=ImgDet&rs=1" className="avatar_big" /></div></li>
                             <li><div className="small-text text-muted mb-4">{username}</div></li>
                             <li><Link to="/profile" className="manage_profile">Manage your Profile</Link></li>
-                            <li><Link to="/settings" className="dropdown-item mt-3">Settings</Link></li>
+                            <li><Link to="/settings" className="dropdown-item mt-4">Settings</Link></li>
                             <li><div className="dropdown-item">Reports</div></li>
                             <li><div className="dropdown-item">Help</div></li>
                             <li><Link to="/" className="dropdown-item" onClick={onClick}><i className="fa-solid fa-right-from-bracket icon_signout"> Sign Out</i></Link></li>
-                            {/* <li><div className="dropdown-item" onClick={() => setShow(true)}>Become {checkPool ? <>Participant</> : <>Pool</>}</div></li>
-                            <li><div className="dropdown-item" onClick={() => setShow1(true)}>{fa2 ? <>Deactivate</> : <>Activate</>} 2-FA</div></li> */}
                           </ul>
                         </div>
                       </i></div>
                     </li>
                   </ul>
-                  {/* <Modal
-                    show={show}
-                    onHide={() => setShow(false)}
-                    backdrop="static"
-                    keyboard={false}
-                    className="modal-dialog-login"
-                  >
-                    <div className="back p-3">
-                      <h2>Confirm !!!</h2>
-                      <b>Do you want to continue to become {checkPool ? <>Participant</> : <>Pool</>}</b>
-                      <p>Notice: On clicking Confirm You will be taken back to login page.</p>
-                      <button
-                        type="button"
-                        className="primary me-4"
-                        onClick={() => setShow(false)}
-                      >
-                        Cancel
-                      </button>
-                      <button type="button" className="primary" onClick={become}>
-                        Confirm
-                      </button>
-                    </div>
-                  </Modal> */}
-                  {/* <Modal
-                    show={show1}
-                    onHide={() => setShow1(false)}
-                    backdrop="static"
-                    keyboard={false}
-                    className="modal-dialog-login"
-                  >
-                    <div className="back p-3">
-                      <h2>Confirm !!!</h2>
-                      <b>Do you want to continue to {fa2 ? <>Deactivate</> : <>Activate</>} 2-Factor Authentication</b>
-                      <p>Notice: On clicking Confirm You will be taken back to login page.</p>
-                      <button
-                        type="button"
-                        className="primary me-4"
-                        onClick={() => setShow1(false)}
-                      >
-                        Cancel
-                      </button>
-                      <button type="button" className="primary" onClick={manageFa2}>
-                        Confirm
-                      </button>
-                    </div>
-                  </Modal> */}
                 </>
               ) : null}
               {selectedType === "accept" ? (
