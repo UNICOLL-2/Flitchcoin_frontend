@@ -80,7 +80,7 @@ function Dashboard() {
 
   useEffect(() => {
     item && table();
-  }, [temp === true],item,table);
+  }, [temp === true], item, table);
 
   const onRepayment = () => {
     dispatch(orderType("repayment"));
@@ -92,7 +92,32 @@ function Dashboard() {
     dispatch(orderType("margin"));
     dispatch(memoType("memoMargin"));
     navigate("/order");
-  }
+  };
+
+  const [newArr, setNewArr] = useState([]);
+
+  const images = () => {
+    fetch("https://flitchcoin.com/api/logo", {
+      method: "GET",
+      headers: {
+        'Accept': 'application/json',
+      },
+    }).then(result => result.json().
+      then(res => {
+        const data = Object.entries(res);
+        let tempArray = [];
+        data.map((items) => {
+          for (let i = 0; i < 1; i++) {
+            tempArray.push(items);
+          }
+        })
+        setNewArr([...tempArray]);
+      })).catch(err => console.log(err))
+  };
+
+  useEffect(() => {
+    images();
+  }, [])
 
   return (
     <>
@@ -135,7 +160,7 @@ function Dashboard() {
               <div className="col-6 col-md-2 mb-3">
                 <button type='button' className='primary' style={{ position: "relative" }} onClick={() => (navigate('/withdraw'))} >Withdraw</button>
               </div>
-            <hr />
+              <hr />
             </div>
             <div className="row">
               <p className='text-muted'>Account Balance : </p>
@@ -148,69 +173,75 @@ function Dashboard() {
             <Timeline colorTheme="light" feedMode="market" displayMode="compact" market="crypto" height={300} width="100%" symbol="BTCUSD" isTransparent></Timeline>
           </div>
         </div>
+      </div>
+      <div className="container card back mt-5 mb-3">
+        <div className="row">
+          <div className="col-2 text-muted account text-center p-3">Name</div>
+          <div className="col-2 text-muted account text-center p-3">Liquidate</div>
+          <div className="col-2 text-muted account text-center p-3">Total</div>
+          <div className="col-2 text-muted account text-center p-3">Used</div>
+          <div className="col-2 text-muted account text-center p-3">Yield</div>
+          <div className="col-2 text-muted account text-center p-3">Duration</div>
         </div>
-        <div className="container card back mt-5 mb-3">
-          <div className="row">
-            <div className="col-2 text-muted account text-center p-3">Name</div>
-            <div className="col-2 text-muted account text-center p-3">Liquidate</div>
-            <div className="col-2 text-muted account text-center p-3">Total</div>
-            <div className="col-2 text-muted account text-center p-3">Used</div>
-            <div className="col-2 text-muted account text-center p-3">Yield</div>
-            <div className="col-2 text-muted account text-center p-3">Duration</div>
+        <div className="row dashboard_table">
+          <div className="col col-md-2 p-3">
+          {
+              newArr.map(name => {
+                return (
+                  <>
+                  <div className="p-3 row align-items-center">
+                    <div className="col-3"><img src={name[1]} className="dashboard_logo"/></div>
+                    <div className="col-6">{name[0]}</div>
+                  </div>
+                  <hr/>
+                  </>
+                )
+              })
+            }
           </div>
-          <div className="row dashboard_table">
-            <div className="col col-md-2 p-3">
-              {arr.map(names => {
-                return (
-                  <>
-                    <div className="row p-3">{names}</div>
-                    <hr />
-                  </>
-                )
-              })}
-            </div>
-            <div className='col col-md-2 p-3'>
-              <div className='row ps-3 pb-1 memo_margin'>memoMargin</div>
-              <button type='button' className='btn btn-dark margin-btn btn-sm' onClick={onMargin}>Add Margin</button>
-              <hr />
-            </div>
-            <div className="col col-md-2 p-3">
-              {arr1.map(names => {
-                return (
-                  <>
-                    <div className="row p-3">{names}</div>
-                    <hr />
-                  </>
-                )
-              })}
-            </div>
-            <div className="col col-md-2 p-3">
-              {arr2.map(names => {
-                return (
-                  <>
-                    <div className="row p-3">{names}</div>
-                    <hr />
-                  </>
-                )
-              })}
-            </div>
-            <div className="col col-md-2 p-3">
-              {arr3.map(names => {
-                return (
-                  <>
-                    <div className="row p-3">{names}</div>
-                    <hr />
-                  </>
-                )
-              })}
-            </div>
-            <div className='col col-md-2 p-3'>
-              <div className='row ps-3 pb-1 margin'>memoRepayment</div>
-              <button type='button' className='btn btn-dark margin-btn btn-sm' onClick={onRepayment}>Repayment</button>
-              <hr />
-            </div>
+          <div className='col col-md-2 p-3'>
+            <div className='row ps-3 pb-1 memo_margin'>memoMargin</div>
+            <button type='button' className='btn btn-dark margin-btn btn-sm' onClick={onMargin}>Add Margin</button>
+            <hr />
           </div>
+          <div className="col col-md-2 p-3">
+            {arr1.map(names => {
+              return (
+                <>
+                  <div className="row p-3">{names}</div>
+                  <hr />
+                </>
+              )
+            })}
+            
           </div>
+          <div className="col col-md-2 p-3">
+            {arr2.map(names => {
+              return (
+                <>
+                  <div className="row p-3">{names}</div>
+                  <hr />
+                </>
+              )
+            })}
+          </div>
+          <div className="col col-md-2 p-3">
+            {arr3.map(names => {
+              return (
+                <>
+                  <div className="row p-3">{names}</div>
+                  <hr />
+                </>
+              )
+            })}
+          </div>
+          <div className='col col-md-2 p-3'>
+            <div className='row ps-3 pb-1 margin'>memoRepayment</div>
+            <button type='button' className='btn btn-dark margin-btn btn-sm' onClick={onRepayment}>Repayment</button>
+            <hr />
+          </div>
+        </div>
+      </div>
     </>
   );
 }
