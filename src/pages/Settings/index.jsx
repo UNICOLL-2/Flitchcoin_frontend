@@ -112,18 +112,19 @@ const Settings = () => {
                 })).catch(err => console.log(err));
         } else {
             const data = JSON.stringify({
-                "emailid": username,
-                "fa2": "null"
+                "fa2": "1110"
             })
-            fetch('https://flitchcoin.com/api/userchrono_info', {
-                method: 'POST',
+            fetch('https://flitchcoin.com/api/dashboard', {
+                method: 'PUT',
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${fetchToken()}`,
+                    'Content-Type': 'application/json'
                 },
                 body: data
             }).then(res => res.json())
                 .then((data) => {
+                    console.log(data);
                 }).catch((err) => {
                     console.log(err);
                 })

@@ -42,10 +42,42 @@ function Header() {
         console.log(err);
       })
   };
+  const [avt, setAvt] = useState();
+
+  const change = () => {
+    fetch('https://www.flitchcoin.com/api/dashboard', {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            Authorization: `Bearer ${fetchToken()}`
+        }
+    }).then((result) => result.json()
+        .then(res => {
+            const setter = res.avtar;
+            fetch('https://www.flitchcoin.com/api/avtar', {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    Authorization: `Bearer ${fetchToken()}`
+                }
+            }).then((result) => result.json()
+                .then(res => {
+                    setAvt(Object.entries(res)[setter][1])
+                })).catch((err) => {
+                    console.log(err);
+                })
+        })).catch((err) => {
+            console.log(err);
+        })
+};
 
   useEffect(() => {
     getInfo();
   }, [selectedType]);
+
+  useEffect(() => {
+    change();
+  },[avt]);
 
   return (
     <div>
@@ -84,11 +116,11 @@ function Header() {
                         <div className="dropdown">
                           <button className="no_button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                             <div className="avatar">
-                              <img src="https://th.bing.com/th/id/OIP.cjOvUxt_6TVBz93oqpUa1gHaHa?pid=ImgDet&rs=1" alt="avatar" className="avatar_img" />&nbsp;&nbsp;&nbsp;&#9660;
+                              <img src={avt} alt="avatar" className="avatar_img" />&nbsp;&nbsp;&nbsp;&#9660;
                             </div>
                           </button>
                           <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                            <li><div className="set_margins"><img src="https://th.bing.com/th/id/OIP.cjOvUxt_6TVBz93oqpUa1gHaHa?pid=ImgDet&rs=1" alt="avatar" className="avatar_big" /></div></li>
+                            <li><div className="set_margins"><img src={avt} alt="avatar" className="avatar_big" /></div></li>
                             <li><div className="small-text text-muted mb-4">{username}</div></li>
                             <li><Link to="/profile" className="manage_profile">Manage your Profile</Link></li>
                             <li><Link to="/settings" className="dropdown-item mt-4">Settings</Link></li>

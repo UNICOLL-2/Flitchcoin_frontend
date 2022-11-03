@@ -2329,15 +2329,17 @@ canvas {
 	}
 }
 
-@media screen and (min-width:400px) {
+@media screen and (min-width:1200px) {
 	.manage_margin_2 {
 		margin-left: 5rem !important;
+		margin-right: 5px!important;
 	}
 }
 
-@media screen and (max-width:400px) {
+@media screen and (max-width:1200px) {
 	.manage_margin_2 {
 		margin: 0 !important;
+		margin-right: 5px!important;
 	}
 }
 
@@ -2576,6 +2578,13 @@ canvas {
 
 .link{
 	text-decoration: none!important;
+}
+
+.change_profile{
+	height: 100px;
+	width: 100px;
+	border-radius: 50%;
+	padding: 20px;
 }
 
 
