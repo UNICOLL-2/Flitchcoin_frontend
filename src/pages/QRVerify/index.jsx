@@ -16,7 +16,6 @@ const QRVerify = () => {
     const [changeButton, setChangeButton] = useState(false);
 
     useEffect(() => {
-        console.log("inside useeffect");
         getOtp();
     }, []);
 
@@ -30,7 +29,6 @@ const QRVerify = () => {
             },
         }).then((result) => {
             result.json().then((res) => {
-                console.log(res)
                 setQr(res);
             })
         })
@@ -56,13 +54,10 @@ const QRVerify = () => {
                 .then((data) => {
                     console.log(data)
                     if (data.true) {
-                        console.log("inside if ")
                         dispatch(loginToken());
                     } else if (data.false) {
-                        console.log("inside else if")
                         alert("WRONG OTP");
                     } else {
-                        console.log("inside else")
                         alert("Max tries Reached. Try again !!");
                         navigate("/login");
                     }
@@ -76,7 +71,8 @@ const QRVerify = () => {
         fetch("https://flitchcoin.com/api/fa2url", {
             method: 'DELETE',
             headers: {
-                'Accept' : 'application/json'
+                'Accept' : 'application/json',
+                Authorization: `Bearer ${fetchToken()}`,
             }
         }).then(result => result.json()
         .then(res => {

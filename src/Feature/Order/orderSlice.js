@@ -5,6 +5,7 @@ const initialState = {
   selectedCoin: null,
   selectedOrderType: null,
   selectedMemo: null,
+  selectedAvtar: null,
 };
 
 export const coinType = createAsyncThunk(
@@ -45,7 +46,24 @@ export const memoType = createAsyncThunk(
   "memo/type",
   async (type, thunkAPI) => {
     try {
-      return orderService.orderType(type);
+      return orderService.memoType(type);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const avtarType = createAsyncThunk(
+  "memo/type",
+  async (type, thunkAPI) => {
+    try {
+      return orderService.avtarType(type);
     } catch (error) {
       const message =
         (error.response &&
@@ -65,6 +83,8 @@ export const orderSlice = createSlice({
     reset: (state) => {
       state.selectedCoin = null;
       state.selectedOrderType = null;
+      state.selectedMemo = null;
+      state.selectedAvtar = null;
     },
   },
   extraReducers: (builder) => {
@@ -96,6 +116,15 @@ export const orderSlice = createSlice({
       .addCase(memoType.rejected, (state) => {
         state.selectedMemo = null;
       })
+      // .addCase(avtarType.pending, (state) => {
+      //   state.selectedAvtar = null;
+      // })
+      // .addCase(avtarType.fulfilled, (state, action) => {
+      //   state.selectedAvtar = action.payload;
+      // })
+      // .addCase(avtarType.rejected, (state) => {
+      //   state.selectedAvtar = null;
+      // })
   },
 });
 

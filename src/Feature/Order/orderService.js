@@ -9,11 +9,16 @@ const orderType = (type) => {
 const memoType = (type) => {
   return type;
 };
+
+const avtarType = (type) => {
+  return type;
+};
   
   const orderService = {
     coinType,
     orderType,
-    memoType
+    memoType,
+    avtarType
   };
   
   export default orderService;

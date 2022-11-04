@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { fetchToken } from "../../Auth";
 import { Modal } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { avtarType } from "../../Feature/Order/orderSlice";
 
 const Profile = () => {
 
     const [avt, setAvt] = useState();
     const [show, setShow] = useState(false);
+    const [show1, setShow1] = useState(false);
     const [arr, setArr] = useState();
     const [loading, setLoading] = useState(true);
-    const [number, setNumber] = useState(0);
     const [display, setDisplay] = useState("");
+    const [pass, setPass] = useState("");
+
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const getAvtar = () => {
         fetch('https://www.flitchcoin.com/api/avtar', {
@@ -49,9 +55,8 @@ const Profile = () => {
             .then(res => {
                 for (let i = 0; i < Object.entries(res).length; i++) {
                     if (e === Object.entries(res)[i][1]) {
-                        setNumber(i + 1);
                         var data = JSON.stringify({
-                            "avtar": number
+                            "avtar": i+1
                         })
                         fetch("https://www.flitchcoin.com/api/dashboard", {
                             method: "PUT",
@@ -83,20 +88,9 @@ const Profile = () => {
             }
         }).then((result) => result.json()
             .then(res => {
-                const setter = res.avtar;
-                fetch('https://www.flitchcoin.com/api/avtar', {
-                    method: 'GET',
-                    headers: {
-                        'Accept': 'application/json',
-                        Authorization: `Bearer ${fetchToken()}`
-                    }
-                }).then((result) => result.json()
-                    .then(res => {
-                        setAvt(Object.entries(res)[setter][1]);
-                        setLoading(false);
-                    })).catch((err) => {
-                        console.log(err);
-                    })
+                setAvt(res.avtar_im);
+                setLoading(false);
+                dispatch(avtarType("changed"));
             })).catch((err) => {
                 console.log(err);
             })
@@ -147,6 +141,32 @@ const Profile = () => {
                 setName(res.name);
             })).catch(err => console.log(err))
     };
+
+    const closeAccount = () => {
+        var data = JSON.stringify({
+            "username": username,
+            "password": pass
+        });
+        console.log(data);
+        fetch("https://flitchcoin.com/api/Signup", {
+            method: "DELETE",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${fetchToken()}`
+            },
+            body: data
+        }).then(result => result.json()
+            .then(res => {
+                console.log(res);
+                if (res.status_code === 200) {
+                    alert("Your account has been deleted permanently");
+                    navigate("/login");
+                } else {
+                    alert("Wrong Password!");
+                }
+            })).catch(err => console.log(err))
+    }
 
     return (
         <div>
@@ -284,10 +304,10 @@ const Profile = () => {
                                             </h2>
                                             <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                                 <div className="accordion-body">
-                                                    <input className='input_profile w-100' placeholder='Display name' name="display name" value={display} onChange={(e) => setDisplay(e.target.value)} /><br /><br />
+                                                    <input className='input_profile txt-underline input pressed p-3 mt-3 w-100' placeholder='Display name' name="display name" value={display} onChange={(e) => setDisplay(e.target.value)} /><span className="underline"></span><br /><br />
                                                     <div className="row">
                                                         <div className="col-md-8"></div>
-                                                        <div className="col-md-2 col-6"><button className='btn btn-light w-100' onClick={() => setDisplay("")}>Cancel</button></div>
+                                                        <div className="col-md-2 col-6"><button className='btn btn-light w-100' onClick={() => setDisplay("")} data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">Cancel</button></div>
                                                         <div className="col-md-2 col-6 "><button className='btn btn-primary w-100' onClick={changeUser}>Save</button></div>
                                                     </div>
                                                 </div>
@@ -312,7 +332,29 @@ const Profile = () => {
                                         <div className="col-md-9 col-12 text-muted">
                                             On clicking the button you will close your account permanently . Make sure you have no amount in your flitchCoin wallet otherwise it may lead to loss of that amount.
                                         </div>
-                                        <div className="col-md-3 col-12"><button className='btn btn-danger'><b>Close Account</b></button></div>
+                                        <div className="col-md-3 col-12"><button className='btn btn-danger' onClick={() => setShow1(true)}><b>Close Account</b></button></div>
+                                        <Modal
+                                            show={show1}
+                                            onHide={() => setShow1(false)}
+                                            backdrop="static"
+                                            keyboard={false}
+                                            className="modal-dialog-login"
+                                        >
+                                            <div className="back p-3">
+                                                <h2>Enter Your Password</h2><br />
+                                                <input className='txt-underline p-3 w-100 input pressed' placeholder='Password' name="Password" value={pass} onChange={(e) => setPass(e.target.value)} /><br /><br />
+                                                <button
+                                                    type="button"
+                                                    className="primary me-4"
+                                                    onClick={() => setShow1(false)}
+                                                >
+                                                    Cancel
+                                                </button>
+                                                <button type="button" className="primary" onClick={closeAccount}>
+                                                    Confirm
+                                                </button>
+                                            </div>
+                                        </Modal>
                                     </div>
                                 </div>
                             </div>

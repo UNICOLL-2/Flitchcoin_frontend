@@ -2395,8 +2395,14 @@ canvas {
 /* Navbar */
 
 .icons {
-	font-size: 15px;
+	font-size: 1.1vw;
 	letter-spacing: 0.07cm;
+}
+
+@media screen and (max-width:800px){
+	.icons {
+		font-size: 100%;
+	}
 }
 
 .icons:hover {

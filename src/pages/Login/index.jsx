@@ -125,6 +125,7 @@ function Login() {
   const provider = new GoogleAuthProvider();
   const sigInWithGoogle = () => {
       signInWithPopup(auth, provider).then(result => {
+        console.log(result.user.uid);
         setFormData((prevData) => ({
           ...prevData,
           username: result.user.email,

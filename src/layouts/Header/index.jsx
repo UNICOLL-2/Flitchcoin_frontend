@@ -7,6 +7,7 @@ import { fetchToken } from "../../Auth";
 
 function Header() {
   const { selectedType } = useSelector((state) => state.auth);
+  const { selectedAvtar } = useSelector((state) => state.order);
 
   const dispatch = useDispatch();
 
@@ -53,19 +54,7 @@ function Header() {
         }
     }).then((result) => result.json()
         .then(res => {
-            const setter = res.avtar;
-            fetch('https://www.flitchcoin.com/api/avtar', {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    Authorization: `Bearer ${fetchToken()}`
-                }
-            }).then((result) => result.json()
-                .then(res => {
-                    setAvt(Object.entries(res)[setter][1])
-                })).catch((err) => {
-                    console.log(err);
-                })
+           setAvt(res.avtar_im);
         })).catch((err) => {
             console.log(err);
         })
@@ -77,7 +66,7 @@ function Header() {
 
   useEffect(() => {
     change();
-  },[avt]);
+  },[,selectedType,avt,getInfo,username,formData,selectedAvtar]);
 
   return (
     <div>
