@@ -60,7 +60,7 @@ export const memoType = createAsyncThunk(
 );
 
 export const avtarType = createAsyncThunk(
-  "memo/type",
+  "avtar/type",
   async (type, thunkAPI) => {
     try {
       return orderService.avtarType(type);
@@ -116,15 +116,15 @@ export const orderSlice = createSlice({
       .addCase(memoType.rejected, (state) => {
         state.selectedMemo = null;
       })
-      // .addCase(avtarType.pending, (state) => {
-      //   state.selectedAvtar = null;
-      // })
-      // .addCase(avtarType.fulfilled, (state, action) => {
-      //   state.selectedAvtar = action.payload;
-      // })
-      // .addCase(avtarType.rejected, (state) => {
-      //   state.selectedAvtar = null;
-      // })
+      .addCase(avtarType.pending, (state) => {
+        state.selectedAvtar = null;
+      })
+      .addCase(avtarType.fulfilled, (state, action) => {
+        state.selectedAvtar = action.payload;
+      })
+      .addCase(avtarType.rejected, (state) => {
+        state.selectedAvtar = null;
+      })
   },
 });
 

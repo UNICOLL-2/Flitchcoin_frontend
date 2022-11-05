@@ -1,23 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
-import { loginToken } from "../../Feature/Auth/authSlice";
+import { loginToken,userLogin } from "../../Feature/Auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import Animation from "../../Animation";
 import { useDispatch } from "react-redux";
+import { Modal } from "react-bootstrap";
 import { fetchToken } from "../../Auth";
+import { useSelector } from "react-redux";
+import { initializeApp } from "firebase/app";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 const QRVerify = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [otp, setOtp] = useState();
+    const [otp1, setOtp1] = useState();
     const [qr, setQr] = useState("");
     const [page, setPage] = useState(true);
     const [changeButton, setChangeButton] = useState(false);
+    const [show1, setShow1] = useState(false);
+    const [pass, setPass] = useState("");
+    const [show, setShow] = useState(false);
+    const { userToken, user } = useSelector((state) => state.auth);
 
     useEffect(() => {
         getOtp();
     }, []);
+
+    useEffect(() => {
+        if (userToken?.access_token) {
+          dispatch(userLogin());
+        }
+        if (user) {
+          if (user?.username) {
+            navigate("/dashboard");
+          }
+        }
+      }, [userToken, user]);
 
     const getOtp = () => {
         fetch("https://flitchcoin.com/api/fa2url", {
@@ -34,12 +53,83 @@ const QRVerify = () => {
         })
     };
 
+
+    const findUser = () => {
+        fetch("https://flitchcoin.com/api/users/me/items/", {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                Authorization: `Bearer ${fetchToken()}`
+            }
+        }).then((result) => result.json()
+            .then(res => {
+                setFormData((prevData) => ({
+                    ...prevData,
+                    username: res.username,
+                }))
+                if (res.is_pool) {
+                    setFormData((prevData) => ({
+                        ...prevData,
+                        type: 'pool'
+                      }));
+                } else {
+                    setFormData((prevData) => ({
+                        ...prevData,
+                        type: 'participant'
+                      }));
+                }
+            })).catch((err) => {
+                console.log(err);
+            })
+    };
+
+    useEffect(() => {
+        findUser();
+    }, []);
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyD9-xgz9FYET9nVocqKmfPqWeOShtDw5AY",
+        authDomain: "auth-77872.firebaseapp.com",
+        projectId: "auth-77872",
+        storageBucket: "auth-77872.appspot.com",
+        messagingSenderId: "768493241754",
+        appId: "1:768493241754:web:6e3a5b66a938bff5962623"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const provider = new GoogleAuthProvider();
+    const sigInWithGoogle = () => {
+        signInWithPopup(auth, provider).then(result => {
+            setFormData((prevData) => ({
+                ...prevData,
+                username: result.user.email,
+                password: result.user.uid,
+            }))
+        }).catch(err => console.log(err));
+    };
+
+    var [formData, setFormData] = useState({
+        username: "",
+        password: "",
+        type: null,
+        otp: "",
+    });
+
+    var {
+        username,
+        password,
+        type,
+        otp,
+    } = formData;
+
     const submitHandler = (e) => {
         const data = JSON.stringify({
-            "otp": otp
+            "otp": otp1
         });
         e.preventDefault();
-        if (otp === "") {
+        if (otp1 === "") {
             alert("Enter OTP");
         } else {
             fetch("https://flitchcoin.com/api/fa2url", {
@@ -54,7 +144,7 @@ const QRVerify = () => {
                 .then((data) => {
                     console.log(data)
                     if (data.true) {
-                        dispatch(loginToken());
+                        dispatch(loginToken(formData));
                     } else if (data.false) {
                         alert("WRONG OTP");
                     } else {
@@ -68,24 +158,32 @@ const QRVerify = () => {
     };
 
     const noFa = () => {
+        console.log(formData);
         fetch("https://flitchcoin.com/api/fa2url", {
             method: 'DELETE',
             headers: {
-                'Accept' : 'application/json',
+                'Accept': 'application/json',
                 Authorization: `Bearer ${fetchToken()}`,
             }
         }).then(result => result.json()
-        .then(res => {
-            if(res.status === 200){
-                dispatch(loginToken());
-            }
-        })).catch(err => console.log(err))
+            .then(res => {
+                console.log(res)
+                if (res.status === 200) {
+                    dispatch(loginToken(formData));
+                }
+            })).catch(err => console.log(err))
     };
+
+    const onChange = (e) => {
+        setFormData((prevData) => ({
+          ...prevData,
+          [e.target.name]: e.target.value,
+        }));
+      };
 
     return (
         <>
             <Animation />
-
             <div className="container">
                 <div className="row mt-5">
                     <h1 className='text-center text-muted'>Setup Two Factor Authentication</h1>
@@ -113,7 +211,30 @@ const QRVerify = () => {
                                 <label className="btn btn-outline-danger p-4" htmlFor="danger-outlined">Continue without 2 factor Authentication</label>
                                 {changeButton ?
                                     <>
-                                        <button className="btn-primary w-50 mt-5" onClick={noFa}>Log in Without 2-FA</button>
+                                        <button className="btn-primary w-50 mt-5" onClick={() => setShow1(true)}>Log in Without 2-FA</button>
+                                        <Modal
+                                            show={show1}
+                                            onHide={() => setShow1(false)}
+                                            backdrop="static"
+                                            keyboard={false}
+                                            className="modal-dialog-login"
+                                        >
+                                            <div className="back p-3">
+                                                <h2>Enter Your Password</h2><br />
+                                                <input type="password" className='txt-underline p-3 w-100 input pressed' placeholder='Password' name="password" value={password} onChange={onChange} /><br />
+                                                <button onClick={sigInWithGoogle} type="button" className="button_google button w-100"><i className="fa-brands fa-google text-primary">&nbsp;&nbsp;&nbsp;Google user</i></button><br /><br /><br />
+                                                <button
+                                                    type="button"
+                                                    className="primary me-4"
+                                                    onClick={() => setShow1(false)}
+                                                >
+                                                    Cancel
+                                                </button>
+                                                <button type="button" className="primary" onClick={noFa}>
+                                                    Confirm
+                                                </button>
+                                            </div>
+                                        </Modal>
                                     </> :
                                     <>
                                         <button className="btn-primary w-50 mt-5" onClick={() => setPage(false)}>Next</button>
@@ -132,11 +253,34 @@ const QRVerify = () => {
                                         <input className="input_login w-50"
                                             type="text"
                                             name="otp"
-                                            value={otp}
-                                            onChange={e => setOtp(e.target.value)}
+                                            value={otp1}
+                                            onChange={e => setOtp1(e.target.value)}
                                             placeholder="x - x - x - x - x - x - x - x" />
                                     </label>
-                                    <button className="btn-primary w-50" type="submit" value="Log In" name="Log In">Log in</button>
+                                    <button className="btn-primary w-50" onClick={() => setShow(true)} value="Log In" name="Log In">Log in</button>
+                                    <Modal
+                                        show={show}
+                                        onHide={() => setShow(false)}
+                                        backdrop="static"
+                                        keyboard={false}
+                                        className="modal-dialog-login"
+                                    >
+                                        <div className="back p-3">
+                                            <h2>Enter Your Password</h2><br />
+                                            <input type="password" className='txt-underline p-3 w-100 input pressed' placeholder='Password' name="password" value={password} onChange={onChange} /><br />
+                                            <button onClick={sigInWithGoogle} type="button" className="button_google button w-100"><i className="fa-brands fa-google text-primary">&nbsp;&nbsp;&nbsp;Google user</i></button><br /><br /><br />
+                                            <button
+                                                type="button"
+                                                className="primary me-4"
+                                                onClick={() => setShow(false)}
+                                            >
+                                                Cancel
+                                            </button>
+                                            <button className="primary" type="submit">
+                                                Confirm
+                                            </button>
+                                        </div>
+                                    </Modal>
                                 </form>
                             </>}
                     </div>

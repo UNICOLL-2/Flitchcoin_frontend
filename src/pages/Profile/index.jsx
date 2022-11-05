@@ -4,6 +4,9 @@ import { fetchToken } from "../../Auth";
 import { Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { avtarType } from "../../Feature/Order/orderSlice";
+import { logOutUser } from "../../Feature/Auth/authSlice";
+import { initializeApp } from "firebase/app";
+import {getAuth, GoogleAuthProvider, signInWithPopup} from 'firebase/auth';
 
 const Profile = () => {
 
@@ -142,31 +145,49 @@ const Profile = () => {
             })).catch(err => console.log(err))
     };
 
+    const firebaseConfig = {
+        apiKey: "AIzaSyD9-xgz9FYET9nVocqKmfPqWeOShtDw5AY",
+        authDomain: "auth-77872.firebaseapp.com",
+        projectId: "auth-77872",
+        storageBucket: "auth-77872.appspot.com",
+        messagingSenderId: "768493241754",
+        appId: "1:768493241754:web:6e3a5b66a938bff5962623"
+      };
+      
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      
+      const provider = new GoogleAuthProvider();
+      const sigInWithGoogle = () => {
+          signInWithPopup(auth, provider).then(result => {
+              setUsername(result.user.email);
+              setPass(result.user.uid);
+          }).catch(err => console.log(err)); 
+      };
+
     const closeAccount = () => {
-        var data = JSON.stringify({
-            "username": username,
-            "password": pass
-        });
+        var data = `grant_type=&username=${username}&password=${pass}&scope=&client_id=&client_secret=`;
         console.log(data);
         fetch("https://flitchcoin.com/api/Signup", {
             method: "DELETE",
             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
+                'Accept': 'application/x-www-form-urlencoded ',
+                'Content-Type': 'application/x-www-form-urlencoded ',
                 Authorization: `Bearer ${fetchToken()}`
             },
             body: data
         }).then(result => result.json()
             .then(res => {
                 console.log(res);
-                if (res.status_code === 200) {
+                if (res.status === 200) {
                     alert("Your account has been deleted permanently");
+                    dispatch(logOutUser());
                     navigate("/login");
                 } else {
                     alert("Wrong Password!");
                 }
             })).catch(err => console.log(err))
-    }
+    };
 
     return (
         <div>
@@ -282,12 +303,13 @@ const Profile = () => {
                                         >
                                             <div className="back p-3">
                                                 <h2>Select your Avatar !</h2>
-                                                {
-                                                    arr.map((items) => {
+                                                {arr ? <>
+                                                    {arr.map((items) => {
                                                         return (
                                                             <img src={items} alt="" className="change_profile" onClick={() => edit(items)} />
                                                         )
-                                                    })
+                                                    })}
+                                                </>:<></>
                                                 }
                                             </div>
                                         </Modal>
@@ -342,7 +364,8 @@ const Profile = () => {
                                         >
                                             <div className="back p-3">
                                                 <h2>Enter Your Password</h2><br />
-                                                <input className='txt-underline p-3 w-100 input pressed' placeholder='Password' name="Password" value={pass} onChange={(e) => setPass(e.target.value)} /><br /><br />
+                                                <input type="password" className='txt-underline p-3 w-100 input pressed' placeholder='Password' name="Password" value={pass} onChange={(e) => setPass(e.target.value)} /><br />
+                                                <button onClick={sigInWithGoogle} type="button" className="button_google button w-100"><i className="fa-brands fa-google text-primary">&nbsp;&nbsp;&nbsp;Google user</i></button><br/><br/><br/>
                                                 <button
                                                     type="button"
                                                     className="primary me-4"
