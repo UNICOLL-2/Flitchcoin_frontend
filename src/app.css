@@ -2337,14 +2337,14 @@ canvas {
 
 @media screen and (min-width:1200px) {
 	.manage_margin_2 {
-		margin-left: 5rem !important;
+		margin-left: 2% !important;
 		margin-right: 5px!important;
 	}
 }
 
-@media screen and (max-width:1200px) {
+@media screen and (max-width:991px) {
 	.manage_margin_2 {
-		margin: 0 !important;
+		margin: 0% !important;
 		margin-right: 5px!important;
 	}
 }
@@ -2609,3 +2609,6 @@ canvas {
 }
 
 
+.border_to_card{
+	border-radius: 30px!important;
+}

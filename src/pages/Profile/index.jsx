@@ -274,7 +274,7 @@ const Profile = () => {
                 </> :
                     <>
                         <div className="row">
-                            <div className="col-xxl-2 col-lg-3 col-12 side_navigation">
+                            <div className="col-xxl-2 col-xl-3 col-12 side_navigation">
                                 <Link to="/profile" className='link'><i className="fa-regular fa-circle-user p-4 dropdown-item text-danger"> &nbsp; &nbsp; P r o f i l e</i></Link>
                                 <Link to="/statements" className='link'><i className="fa-solid fa-list p-4 dropdown-item"> &nbsp; &nbsp; S t a t e m e n t s</i></Link>
                             </div>

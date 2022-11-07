@@ -401,7 +401,7 @@ const Withdraw = () => {
                       </ul>
                     </div>
                     {
-                      pref === "emial_id" ?
+                      pref === "email_id" ?
                         <>
                           <div className="input1 w-100 mt-3">
                             <input

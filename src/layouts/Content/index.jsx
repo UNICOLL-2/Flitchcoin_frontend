@@ -19,6 +19,7 @@ import Profile from "../../pages/Profile";
 import Statements from "../../pages/Statements";
 import Settings from "../../pages/Settings";
 import Protection from "../../pages/Protection";
+import Deposit from "../../pages/Deposit";
 
 function Content() {
   return (
@@ -35,6 +36,7 @@ function Content() {
           <Route path="/statements" element={<Protection Cmp={Statements}/>} />
           <Route path="/settings" element={<Protection Cmp={Settings}/>} />
           <Route path="/withdraw" element={<Protection Cmp={Withdraw}/>} />
+          <Route path="/deposit" element={<Protection Cmp={Deposit}/>} />
         <Route path="/about" element={<About />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign_verify" element={<SignVerify />} />

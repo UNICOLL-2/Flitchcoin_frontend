@@ -149,13 +149,13 @@ function Dashboard() {
       ]} ></TickerTape>
       <div className="container mt-4">
         <div className="row ms-1 mb-3">
-          <div className="col-12 me-2 col-xl-7 card back mt-3 p-3">
+          <div className="col-12 me-2 col-lg-7 card back mt-3 p-3">
             <div className="row">
               <div className="col-12 col-md-8">
                 <h3>Balance Details</h3>
               </div>
               <div className="col-6 col-lg-2 mb-3">
-                <button type='button' style={{ position: "relative" }} className='btn deposit btn-warning' onClick={() => navigate("/place_order")} >Deposit</button>
+                <button type='button' style={{ position: "relative" }} className='btn deposit btn-warning' onClick={() => navigate("/deposit")} >Deposit</button>
               </div>
               <div className="col-6 col-md-2 mb-3">
                 <button type='button' className='primary' style={{ position: "relative" }} onClick={() => (navigate('/withdraw'))} >Withdraw</button>
@@ -169,7 +169,7 @@ function Dashboard() {
               <h3>$ 1,606.25</h3>
             </div>
           </div>
-          <div className="col-12 col-xl-4 mt-3 me-2 card back manage_margin_2" >
+          <div className="col-12 col-lg-4 mt-3 me-2 card back manage_margin_2" >
             <Timeline colorTheme="light" feedMode="market" displayMode="compact" market="crypto" height={300} width="100%" symbol="BTCUSD" isTransparent></Timeline>
           </div>
         </div>

@@ -45,14 +45,11 @@ const signupUser = async (data) => {
 // otp verify
 const verifyEmail = async (data) => {
   let response;
-  console.log(data);
-
   try {
     response = await axios.post("https://flitchcoin.com/api/verify_email", data);
   } catch (error) {
     response = error.response;
   }
-
   return response.data;
 };
 
