@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Timeline } from "react-ts-tradingview-widgets";
 import { TickerTape } from "react-ts-tradingview-widgets";
 import { fetchToken } from "../../Auth";
 import { orderType } from "../../Feature/Order/orderSlice";
 import { memoType } from "../../Feature/Order/orderSlice";
+import { Link, useNavigate } from "react-router-dom";
 
 function Dashboard() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [item, setItem] = useState();
+  const [username, setUsername] = useState('');
 
   const account = () => {
     fetch("https://flitchcoin.com/api/account", {
@@ -51,10 +52,6 @@ function Dashboard() {
       setTemp(true)
     }
   }, [item])
-
-  useEffect(() => {
-    account();
-  }, [])
 
   const [arr, setArr] = useState([]);
   const [arr1, setArr1] = useState([]);
@@ -115,9 +112,53 @@ function Dashboard() {
       })).catch(err => console.log(err))
   };
 
+  const getInfo = () => {
+    fetch('https://flitchcoin.com/api/users/me/items/', {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            Authorization: `Bearer ${fetchToken()}`
+        }
+    }).then((result) => result.json()
+        .then(res => {
+            setUsername(res.username);
+        })).catch((err) => {
+            console.log(err);
+        })
+};
+
+const [fa2, setfa2] = useState(false);
+
+const checkUser = (e) => {
+    const data = JSON.stringify({
+        "emailid": username
+    })
+    fetch('https://flitchcoin.com/api/userchrono_info', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: data
+    }).then(res => res.json())
+        .then((data) => {
+           if(data.fa2 === null){
+              setfa2(true);
+            }
+        }).catch((err) => {
+            console.log(err);
+        })
+};
+
   useEffect(() => {
     images();
-  }, [])
+    account();
+    getInfo();
+  }, []);
+
+  useEffect(() => {
+    checkUser();
+  },[username])
 
   return (
     <>
@@ -147,6 +188,16 @@ function Dashboard() {
           "title": "XRP/USDT"
         },
       ]} ></TickerTape>
+      {
+        fa2 ?
+        <>
+        <div className="url position-relative">
+        <b>Complete 2 - Factor Authentication to enhace your security</b><Link to="/qr_verify" className='link_to_fa2'>Activate Now</Link>
+        <span class="position-absolute top-0 start-100 translate-middle badge pe-5 bg-danger cross" onClick={() => setfa2(false)}> X</span>
+      </div>
+        </>:
+        <></>
+      }
       <div className="container mt-4">
         <div className="row ms-1 mb-3">
           <div className="col-12 me-2 col-lg-7 card back mt-3 p-3">

@@ -634,6 +634,20 @@ textarea:focus {
 	margin: 4rem 0 4rem 0 !important;
 }
 
+.link_to_fa2{
+	color: #AE1100;
+	padding-left: 15px;
+}
+
+.cross{
+	cursor: pointer;
+}
+
+.link_to_fa2:hover{
+	color: #AE1100;
+	font-weight: 500;
+}
+
 .dashboard_logo{
 	height: 20px;
 	width: 20px;
@@ -2611,4 +2625,10 @@ canvas {
 
 .border_to_card{
 	border-radius: 30px!important;
+}
+
+.onramper{
+	align-items: center;
+	justify-content: center;
+	display: flex;
 }

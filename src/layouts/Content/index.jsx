@@ -37,10 +37,10 @@ function Content() {
           <Route path="/settings" element={<Protection Cmp={Settings}/>} />
           <Route path="/withdraw" element={<Protection Cmp={Withdraw}/>} />
           <Route path="/deposit" element={<Protection Cmp={Deposit}/>} />
+          <Route path="/qr_verify" element={<Protection Cmp={QRVerify} />} />
         <Route path="/about" element={<About />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign_verify" element={<SignVerify />} />
-        <Route path="/qr_verify" element={<QRVerify />} />
         <Route path="/forgot_password" element={<ForgotPass />} />
       </Routes>
     </div>

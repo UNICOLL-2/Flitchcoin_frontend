@@ -20,15 +20,11 @@ const Settings = () => {
     });
     const { type } = formData;
 
-    function rel_login() {
+    const onClick = (e) => {
         setFormData((prevData) => ({
             ...prevData,
             type: null
         }));
-    };
-
-    const onClick = (e) => {
-        rel_login();
         dispatch(logOutUser());
     };
 
@@ -65,7 +61,7 @@ const Settings = () => {
             body: data
         }).then(res => res.json())
             .then((data) => {
-                if (data.fa2 === true) {
+                if (data.fa2) {
                     setfa2(true)
                 }
             }).catch((err) => {
@@ -124,12 +120,11 @@ const Settings = () => {
                 body: data
             }).then(res => res.json())
                 .then((data) => {
-                    console.log(data);
+                    navigate("/qr_verify");
+                    // onClick();
                 }).catch((err) => {
                     console.log(err);
                 })
-            navigate("/login");
-            onClick();
         }
     };
 

@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { coinType } from "../../Feature/Order/orderSlice";
 import { orderType } from "../../Feature/Order/orderSlice";
 import { fetchToken } from "../../Auth";
+import Fields from "./fields";
 
 const PoolParticipant = () => {
 
@@ -15,17 +16,6 @@ const PoolParticipant = () => {
   const dispatch = useDispatch();
   const [asset, setAsset] = useState([]);
   const [coin, setCoin] = useState("Select coin");
-  const [value, setValue] = useState();
-  const [amount, setAmount] = useState();
-
-
-  const [load, setLoad] = useState(true);
-  useEffect(() => {
-    setTimeout(() => {
-      setLoad(false)
-    }, 5000)
-  }, [])
-
 
   function asset_list() {
     fetch("https://flitchcoin.com/api/asset_list", {
@@ -47,13 +37,20 @@ const PoolParticipant = () => {
     });
   };
 
+  let amt = 0;
+  let val = 0;
+
+  const getData = (data) => {
+    val = data[0];
+    amt = data[1];
+  };
+
   function sendOrder() {
     var data = JSON.stringify({
       "coin": coin.toLowerCase(),
-      "amount": Number(amount),
-      "duration": Number(value)
-    })
-    console.log(data);
+      "amount": Number(amt),
+      "duration": Number(val)
+    });
     fetch('https://flitchcoin.com/api/place_order', {
       method: 'POST',
       headers: {
@@ -76,10 +73,6 @@ const PoolParticipant = () => {
         console.log(err);
       })
   }
-
-  const nextHanlder = () => {
-    sendOrder();
-  };
 
   useEffect(() => {
     asset_list();
@@ -104,17 +97,8 @@ const PoolParticipant = () => {
 
   useEffect(() => {
     coin1();
-  }, [coin]);
-
-  useEffect(() => {
     coinNet();
   }, [coin]);
-
-  const onChangeValues = (e) => {
-    if (e.target.value >= 7 && e.target.value <= 365) {
-      setValue(e.target.value);
-    }
-  }
 
   return (
     <div>
@@ -149,42 +133,14 @@ const PoolParticipant = () => {
                         })}
                       </ul>
                     </div>
-                    <h5 className="mb-3">Enter Amount</h5>
-                    <div className="col col-12">
-                      <div className="input1 w-100">
-                        <input
-                          type="number"
-                          name="amount"
-                          placeholder="Amount ($)"
-                          className="pressed txt-underline p-3 mb-3 w-100"
-                          value={amount}
-                          onChange={e => setAmount(e.target.value)}
-                        />
-                        <span className="underline"></span>
-                      </div>
-                    </div>
-                    <h5 className="mb-3">Enter Duration</h5>
-                    <div className="col col-12">
-                      <input type="range" value={value} className="form-range" min='7' max='365' onChange={onChangeValues}></input>
-                      <div className="input1 w-100">
-                        <input
-                          type="number"
-                          name="duration"
-                          placeholder="Days ( 7 - 365 )"
-                          className="pressed txt-underline p-3 mb-3 w-100"
-                          value={value}
-                          onChange={onChangeValues}
-                        />
-                        <span className="underline"></span>
-                      </div>
-                    </div>
+                    <Fields onSubmit={getData}/>
                   </div>
                   <div className="row">
                     <div className="d-flex justify-content-center mb-5">
                       <button
                         className="primary mt-4 ps-5 pe-5"
                         style={{ position: "absolute" }}
-                        onClick={nextHanlder}
+                        onClick={sendOrder}
                       >
                         NEXT
                       </button>

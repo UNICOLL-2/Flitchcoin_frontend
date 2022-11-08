@@ -66,7 +66,7 @@ function Header() {
 
   useEffect(() => {
     change();
-  },[,selectedType,avt,getInfo,username,formData,selectedAvtar]);
+  },[getInfo]);
 
   return (
     <div>

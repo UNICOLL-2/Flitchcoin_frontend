@@ -19,24 +19,7 @@ const QRVerify = () => {
     const [page, setPage] = useState(true);
     const [changeButton, setChangeButton] = useState(false);
     const [show1, setShow1] = useState(false);
-    const [pass, setPass] = useState("");
     const [show, setShow] = useState(false);
-    const { userToken, user } = useSelector((state) => state.auth);
-
-    useEffect(() => {
-        getOtp();
-    }, []);
-
-    useEffect(() => {
-        if (userToken?.access_token) {
-          dispatch(userLogin());
-        }
-        if (user) {
-          if (user?.username) {
-            navigate("/dashboard");
-          }
-        }
-      }, [userToken, user]);
 
     const getOtp = () => {
         fetch("https://flitchcoin.com/api/fa2url", {
@@ -84,6 +67,7 @@ const QRVerify = () => {
     };
 
     useEffect(() => {
+        getOtp();
         findUser();
     }, []);
 
@@ -102,6 +86,7 @@ const QRVerify = () => {
     const provider = new GoogleAuthProvider();
     const sigInWithGoogle = () => {
         signInWithPopup(auth, provider).then(result => {
+            console.log(result.user.uid);
             setFormData((prevData) => ({
                 ...prevData,
                 username: result.user.email,
@@ -158,7 +143,6 @@ const QRVerify = () => {
     };
 
     const noFa = () => {
-        console.log(formData);
         fetch("https://flitchcoin.com/api/fa2url", {
             method: 'DELETE',
             headers: {
@@ -167,9 +151,9 @@ const QRVerify = () => {
             }
         }).then(result => result.json()
             .then(res => {
-                console.log(res)
                 if (res.status === 200) {
                     dispatch(loginToken(formData));
+                    navigate("/dashboard");
                 }
             })).catch(err => console.log(err))
     };
@@ -287,8 +271,6 @@ const QRVerify = () => {
                     <div className="col col-md-1"></div>
                 </div>
             </div>
-
-
         </>
     )
 }

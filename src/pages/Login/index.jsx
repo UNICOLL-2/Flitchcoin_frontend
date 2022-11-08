@@ -7,7 +7,7 @@ import { Modal } from "react-bootstrap";
 import "./login.css";
 import Animation from "../../Animation";
 import { initializeApp } from "firebase/app";
-import {getAuth, GoogleAuthProvider, signInWithPopup} from 'firebase/auth';
+import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 function Login() {
   const dispatch = useDispatch();
@@ -46,10 +46,10 @@ function Login() {
     e.preventDefault();
     if (username === "" || password === "") {
       alert("Please fill in the above information.");
-    } else if(fa2 === "true") {
+    } else if (fa2 === "true") {
       setShow(true);
-    }else{
-    dispatch(loginToken(formData));
+    } else {
+      dispatch(loginToken(formData));
     }
   };
 
@@ -64,11 +64,13 @@ function Login() {
       ...prevData,
       [e.target.name]: e.target.value,
     }));
+    checkUser(username);
   };
 
   const [fa2, setfa2] = useState("false");
 
   const checkUser = (e) => {
+    console.log("inside check user");
     const data = JSON.stringify({
       "emailid": e
     })
@@ -94,18 +96,12 @@ function Login() {
         }
         if (data.fa2 === null) {
           setfa2("null")
-        }else if(data.fa2 === true){
+        } else if (data.fa2 === true) {
           setfa2("true")
         }
       }).catch((err) => {
         console.log(err);
       })
-  };
-
-  const onFa2Click = (e) => {
-    e.preventDefault();
-      dispatch(loginToken(formData));
-      navigate('/qr_verify');
   };
 
   // sigin with google
@@ -118,25 +114,25 @@ function Login() {
     messagingSenderId: "768493241754",
     appId: "1:768493241754:web:6e3a5b66a938bff5962623"
   };
-  
+
   const app = initializeApp(firebaseConfig);
   const auth = getAuth(app);
-  
+
   const provider = new GoogleAuthProvider();
   const sigInWithGoogle = () => {
-      signInWithPopup(auth, provider).then(result => {
-        setFormData((prevData) => ({
-          ...prevData,
-          username: result.user.email,
-          password: result.user.uid,
-        }));
-        checkUser();
-        if(fa2 === "true") {
-          setShow(true);
-        }else{
+    signInWithPopup(auth, provider).then(result => {
+      setFormData((prevData) => ({
+        ...prevData,
+        username: result.user.email,
+        password: result.user.uid,
+      }));
+      checkUser();
+      if (fa2 === "true") {
+        setShow(true);
+      } else {
         dispatch(loginToken(formData));
-        }
-      }).catch(err => console.log(err)); 
+      }
+    }).catch(err => console.log(err));
   };
 
   return (
@@ -160,7 +156,6 @@ function Login() {
                 value={username}
                 onChange={onChange}
                 placeholder="Enter your Username"
-                onBlur={e => checkUser(e.target.value)}
               />
             </label>
           </div>
@@ -199,48 +194,33 @@ function Login() {
           <div className="col-lg-4"></div>
           <div className="col-12 col-lg-4">
             {
-              fa2 === "null" ?
+              fa2 === "true" ?
                 <button
                   className="red button"
-                  type="button"
-                  value="To Fa2"
-                  name="To Fa2"
-                  onClick={onFa2Click}
+                  type="submit"
+                  value="Log In"
+                  name="Log In"
                 >
-                  To Fa2
+                  Enter OTP
                 </button>
                 :
-                <>
-                  {
-                    fa2 === "false" ?
-                      <button
-                        className="red button"
-                        type="submit"
-                        value="Log In"
-                        name="Log In"
-                      >
-                        Log in
-                      </button>
-                      :
-                      <button
-                        className="red button"
-                        type="submit"
-                        value="Log In"
-                        name="Log In"
-                      >
-                        Enter OTP
-                      </button>
-            }
-                </>
+                <button
+                  className="red button"
+                  type="submit"
+                  value="Log In"
+                  name="Log In"
+                >
+                  Log in
+                </button>
             }
           </div>
           <div className="col-lg-4"></div>
         </div>
         <div className="row">
-        <div className="col-lg-4"></div>
-        <div className="col-12 col-lg-4">
-          <button onClick={sigInWithGoogle} type="button" className="button_google button w-100"><i className="fa-brands fa-google text-primary">&nbsp;&nbsp;&nbsp;Sign In With Google</i></button>
-        </div>
+          <div className="col-lg-4"></div>
+          <div className="col-12 col-lg-4">
+            <button onClick={sigInWithGoogle} type="button" className="button_google button w-100"><i className="fa-brands fa-google text-primary">&nbsp;&nbsp;&nbsp;Sign In With Google</i></button>
+          </div>
         </div>
         <div className="col-lg-4"></div>
         <div className="row">
