@@ -1,8 +1,12 @@
 import React from "react";
 import Animation from "../../Animation";
 import Footer from '../../layouts/Footer/index';
+import { Link, useNavigate } from "react-router-dom";
 
 function Api() {
+
+  const navigate = useNavigate();
+
   return (
     <>
     <Animation/>
@@ -26,8 +30,9 @@ function Api() {
                 type="button "
                 className="primary"
                 style={{ position: "absolute" }}
+                onClick={() => navigate("/api/docs")}
               >
-                Contact us to learn more
+                Read Documentation
               </button>
             </div>
           </div>

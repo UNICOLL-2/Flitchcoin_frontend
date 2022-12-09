@@ -68,6 +68,23 @@ const Deposit = () => {
     network_list();
   }, [coin !== "Select coin"]);
 
+  const onramper = () => {
+    fetch("https://onramper.tech/gateways",{
+      method: 'GET',
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": "Basic pk_test_DQtHHoa8pHVaHhhDMfIz_PikmIq_yoQmKQ40LovstdU0"
+      },
+    }).then((res) => res.json()
+    .then((result => {
+      console.log(result);
+    }))).catch(err => console.log(err))
+  }
+
+  useEffect(() => {
+    onramper();
+  },[])
 
   return (
     <div className='container'>
@@ -164,15 +181,15 @@ const Deposit = () => {
       </div>
       <div>
         <div className="onramper">
-        <iframe
-          src="https://widget.onramper.com?color=266677&apiKey=pk_test_x5M_5fdXzn1fxK04seu0JgFjGsu7CH8lOvS9xZWzuSM0"
-          height="660px"
-          width="482px"
-          title="Onramper widget"
-          frameborder="0"
-          allow="accelerometer; autoplay; camera; gyroscope; payment"
-        >
-        </iframe>
+          <iframe
+            src="https://widget.onramper.com?color=266677&apiKey=pk_test_x5M_5fdXzn1fxK04seu0JgFjGsu7CH8lOvS9xZWzuSM0"
+            height="660px"
+            width="482px"
+            title="Onramper widget"
+            frameborder="0"
+            allow="accelerometer; autoplay; camera; gyroscope; payment"
+          >
+          </iframe>
         </div>
       </div>
     </div>

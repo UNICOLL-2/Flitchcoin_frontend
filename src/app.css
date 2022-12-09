@@ -2632,3 +2632,8 @@ canvas {
 	justify-content: center;
 	display: flex;
 }
+
+
+#tradingview_widget_wrapper div{
+	font-size: 0!important;
+}
