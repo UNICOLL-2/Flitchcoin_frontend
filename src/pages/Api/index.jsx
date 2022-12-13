@@ -2,17 +2,37 @@ import React from "react";
 import Animation from "../../Animation";
 import Footer from '../../layouts/Footer/index';
 import { Link, useNavigate } from "react-router-dom";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 function Api() {
 
   const navigate = useNavigate();
+  AOS.init();
+  AOS.init({
+    // offset: 1020, // offset (in px) from the original trigger point
+    // delay: 0, // values from 0 to 3000, with step 50ms
+    duration: 1000, // values from 0 to 3000, with step 50ms
+    // easing: 'ease', // default easing for AOS animations
+    once: true, // whether animation should happen only once - while scrolling down
+    // mirror: false, // whether elements should animate out while scrolling past them
+    // anchorPlacement: 'top-bottom', // defines which position of the element regarding to window should trigger the animation
+  });
+
 
   return (
     <>
     <Animation/>
     <div className="back shadow">
       <div className="container">
-        <section className="row pt-5">
+        <section className="row pt-5"     data-aos="fade-up"
+    data-aos-offset="200"
+    data-aos-delay="50"
+    data-aos-duration="1000"
+    data-aos-easing="ease-in-out"
+    data-aos-mirror="true"
+    data-aos-once="false"
+    data-aos-anchor-placement="top-center">
           <div className="col-sm-12 col-md-6 col-lg-5 d-flex flex-column justify-content-center h_get_to_know">
             <div className="pt-3"> ALADDIN BY BLACKROCK</div>
             <h1 className="pt-3">
@@ -45,7 +65,7 @@ function Api() {
             />
           </div>
         </section>
-        <section className="my_50 col-sm-12 col-md-6 col-lg-5 d-flex flex-column justify-content-center w-100">
+        <section className="my_50 col-sm-12 col-md-6 col-lg-5 d-flex flex-column justify-content-center w-100" data-aos="fade-right">
           <p className="h2">
             What are APIs? How can I use them in Aladdin Studio?
           </p>

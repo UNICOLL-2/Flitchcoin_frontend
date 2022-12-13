@@ -101,14 +101,15 @@ const PoolParticipant = () => {
   }, [coin]);
 
   return (
-    <div>
+    <div className="mb-5">
       <div className="row">
-        <div className="col col-xs-12 col-lg-9 ps-4 mt-5 card back">
+        {/* <div className="col-xl-1"></div> */}
+        <div className="col-12 col-xl-8 ms-5 mt-5 card back">
           <AdvancedRealTimeChart theme="light" autosize symbol={coinsNet} ></AdvancedRealTimeChart>
         </div>
-        <div className="col col-md-12 col-lg-3">
+        <div className="col-12 col-xl-3">
           <div className="container">
-            <div className="row pt-5 pb-5">
+            <div className="row pt-5 pb-1">
               <div className="back card">
                 <div className="container pt-5 pb-5">
                   <div className="row order__body mt-4">
@@ -151,6 +152,7 @@ const PoolParticipant = () => {
             </div>
           </div>
         </div>
+        {/* <div className="col-xl-1"></div> */}
       </div>
       <div className="row">
         <div className="col col-lg-7 col-xs-12 ms-5">
@@ -163,7 +165,7 @@ const PoolParticipant = () => {
             <SymbolInfo colorTheme="light" height={100} width={500} symbol={coins} isTransparent ></SymbolInfo>
           </div>
           <div className="card back technical-analysis mt-3">
-            <TechnicalAnalysis colorTheme="light" height={380} width="100%" symbol={coinsNet} isTransparent></TechnicalAnalysis>
+            <TechnicalAnalysis colorTheme="light" height={390} width="100%" symbol={coinsNet} isTransparent></TechnicalAnalysis>
           </div>
         </div>
       </div>
