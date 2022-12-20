@@ -1,3 +1,7 @@
+*{
+	font-family:'Lexend';
+}
+
 .back {
 	background-color: #eff0f0 !important;
 }
@@ -54,7 +58,7 @@ element.style {
 
 .card {
 	border-radius: 0 !important;
-	border: none !important;
+	/* border: none !important; */
 	background: #ededed;
 	box-shadow: 4px 4px 8px #cbcbcb, -4px -4px 8px #ffffff;
 }
@@ -678,6 +682,69 @@ textarea:focus {
 	.order__devision {
 		display: none;
 	}
+}
+
+#tradingview_widget_wrapper{
+	padding: 0!important;
+}
+
+.round-btn{
+	border-radius: 320px;
+}
+
+.welcome{
+	font-weight: 500;
+	font-size: 39px;
+}
+.welcome_1{
+	font-weight: 300;
+	font-size: 32px;
+	padding: 20px;
+}
+
+.special_card{
+	border-radius: 20px!important;
+	border: 2px solid transparent!important;
+	background: linear-gradient(to right, #eff0f0,#eff0f0),
+				linear-gradient(to right, #8F00FF, #000000 )!important;
+	background-clip: padding-box,border-box!important;
+	background-origin: padding-box,border-box!important;
+}
+
+.parent_card{
+	border-radius: 20px!important;
+	border: none!important;
+}
+
+.url{
+	background: linear-gradient(90deg, #F97979 0%, #F97979 43.75%, #FFF3CA 100%);
+}
+
+.dashboard_img{
+	width: 85px;
+	height: 83px;
+	margin-left: 25px;
+	margin-top: 20px;
+}
+
+.swap{
+	padding-right: 40px;
+	padding-left: 40px;
+}
+
+.deposit_btn{
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+.buy{
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
+.enable_scroll{
+	height: 600px;
+	overflow-y: scroll;
 }
 
 /* Escrow section */

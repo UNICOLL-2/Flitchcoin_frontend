@@ -6,6 +6,7 @@ import { fetchToken } from "../../Auth";
 import { orderType } from "../../Feature/Order/orderSlice";
 import { memoType } from "../../Feature/Order/orderSlice";
 import { Link, useNavigate } from "react-router-dom";
+import image from "./Rectangle 53.png";
 
 function Dashboard() {
 
@@ -114,41 +115,41 @@ function Dashboard() {
 
   const getInfo = () => {
     fetch('https://flitchcoin.com/api/users/me/items/', {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            Authorization: `Bearer ${fetchToken()}`
-        }
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        Authorization: `Bearer ${fetchToken()}`
+      }
     }).then((result) => result.json()
-        .then(res => {
-            setUsername(res.username);
-        })).catch((err) => {
-            console.log(err);
-        })
-};
+      .then(res => {
+        setUsername(res.username);
+      })).catch((err) => {
+        console.log(err);
+      })
+  };
 
-const [fa2, setfa2] = useState(false);
+  const [fa2, setfa2] = useState(false);
 
-const checkUser = (e) => {
+  const checkUser = (e) => {
     const data = JSON.stringify({
-        "emailid": username
+      "emailid": username
     })
     fetch('https://flitchcoin.com/api/userchrono_info', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: data
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: data
     }).then(res => res.json())
-        .then((data) => {
-           if(data.fa2 === null){
-              setfa2(true);
-            }
-        }).catch((err) => {
-            console.log(err);
-        })
-};
+      .then((data) => {
+        if (data.fa2 === null) {
+          setfa2(true);
+        }
+      }).catch((err) => {
+        console.log(err);
+      })
+  };
 
   useEffect(() => {
     images();
@@ -158,46 +159,12 @@ const checkUser = (e) => {
 
   useEffect(() => {
     checkUser();
-  },[username])
+  }, [username])
 
   return (
     <>
-      <TickerTape colorTheme="light" symbols={[
-        {
-          "proName": "BITSTAMP:BTCUSD",
-          "title": "BTC/USD"
-        },
-        {
-          "proName": "BITSTAMP:ETHUSDT",
-          "title": "ETH/USDT"
-        },
-        {
-          "proName": "BINANCE:SOLUSDT",
-          "title": "SOL/USDT"
-        },
-        {
-          "proName": "BINANCE:MATICUSDT",
-          "title": "MATIC/USDT"
-        },
-        {
-          "proName": "BINANCE:AVAXUSDT",
-          "title": "AVAX/USDT"
-        },
-        {
-          "proName": "BINANCE:XRPUSDT",
-          "title": "XRP/USDT"
-        },
-      ]} ></TickerTape>
-      {
-        fa2 ?
-        <>
-        <div className="url position-relative">
-        <b>Complete 2 - Factor Authentication to enhace your security</b><Link to="/qr_verify" className='link_to_fa2'>Activate Now</Link>
-        <span class="position-absolute top-0 start-100 translate-middle badge pe-5 bg-danger cross" onClick={() => setfa2(false)}> X</span>
-      </div>
-        </>:
-        <></>
-      }
+      {/* 
+     
       <div className="container mt-4">
         <div className="row ms-1 mb-3">
           <div className="col-12 me-2 col-lg-7 card back mt-3 p-3">
@@ -290,6 +257,160 @@ const checkUser = (e) => {
             <div className='row ps-3 pb-1 margin'>memoRepayment</div>
             <button type='button' className='btn btn-dark margin-btn btn-sm' onClick={onRepayment}>Repayment</button>
             <hr />
+          </div>
+        </div>
+      </div> */}
+
+      <div className="container card back parent_card">
+        <div className="row mt-3 ticker">
+          <TickerTape colorTheme="light" symbols={[
+            {
+              "proName": "BITSTAMP:BTCUSD",
+              "title": "BTC/USD"
+            },
+            {
+              "proName": "BITSTAMP:ETHUSDT",
+              "title": "ETH/USDT"
+            },
+            {
+              "proName": "BINANCE:SOLUSDT",
+              "title": "SOL/USDT"
+            },
+            {
+              "proName": "BINANCE:MATICUSDT",
+              "title": "MATIC/USDT"
+            },
+            {
+              "proName": "BINANCE:AVAXUSDT",
+              "title": "AVAX/USDT"
+            },
+            {
+              "proName": "BINANCE:XRPUSDT",
+              "title": "XRP/USDT"
+            },
+          ]} ></TickerTape>
+        </div>
+        <div className="row ps-5 pb-4">
+          <div className="col-xl-7 me-5">
+            <div className="row pb-4">
+              <div className="col-xl-6 welcome">Welcome <b>Tushar ,</b></div>
+              <div className="col-xl-3">
+                <button
+                  className="ps-5 pe-5 round-btn"
+                >
+                  Deposit
+                </button>
+              </div>
+              <div className="col-xl-3">
+                <button
+                  className="ps-5 pe-5 round-btn"
+                >
+                  Withdraw
+                </button>
+              </div>
+            </div>
+            <div className="row card back special_card">
+              <p className="welcome_1">Account Summary : $ 4500000</p>
+              {
+                fa2 ?
+                  <>
+                    <div className="url position-relative">
+                      <b>Complete 2 - Factor Authentication to enhace your security</b><Link to="/qr_verify" className='link_to_fa2'>Activate Now</Link>
+                    </div>
+                  </> :
+                  <></>
+              }
+              <div className="row">
+                <div className="col-lg-3 card back parent_card m-4 ms-5 p-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis, sunt.</div>
+                <div className="col-lg-3 card back parent_card m-4 p-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, voluptas?</div>
+                <div className="col-lg-3 card back parent_card m-4 p-4">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, ipsam.</div>
+              </div>
+            </div>
+          </div>
+          <div className="col-xl-4 card back special_card">
+            <div className="row">
+              <div className="col-lg-4"></div>
+              <div className="col-lg-6">
+                <img src={image} className="dashboard_img" />
+                <p style={{ fontSize: "20px", fontWeight: 200 }}>Tushar Gupta</p>
+              </div>
+              <div className="col-lg-3"></div>
+            </div>
+            <div className="row">
+              <div className="col-xl-4">
+                <button
+                  className="swap round-btn"
+                >
+                  Swap
+                </button>
+              </div>
+              <div className="col-xl-4">
+                <button
+                  className="deposit_btn round-btn"
+                >
+                  Deposit
+                </button>
+              </div>
+              <div className="col-xl-4">
+                <button
+                  className="buy round-btn"
+                >
+                  Buy
+                </button>
+              </div>
+            </div>
+            <div className="row mt-5">
+              <label className="label">
+                <input
+                  className="input_login p-2"
+                />
+              </label>
+              <label className="label">
+                <input
+                  className="input_login p-2"
+                />
+              </label>
+            </div>
+            <div className="row mt-4">
+              <div className="col-xl-6">
+                <button
+                  className="round-btn ps-5 pe-5 ms-3"
+                >
+                  Deposit
+                </button>
+              </div>
+              <div className="col-xl-6">
+                <button
+                  className="round-btn ps-5 pe-5 ms-3"
+                >
+                  Deposit
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="container mt-5 mb-5 pb-5">
+        <div className="row">
+          <div className="col-xl-7 enable_scroll me-5">
+            <div className="card p-4 parent_card mt-3 back"></div>
+            <div className="card p-4 parent_card mt-4 back"></div>
+            <div className="card p-4 parent_card mt-4 back"></div>
+            <div className="card p-4 parent_card mt-4 back"></div>
+            <div className="card p-4 parent_card mt-4 back"></div>
+            <div className="card p-4 parent_card mt-4 back"></div>
+            <div className="card p-4 parent_card mt-4 back"></div>
+            <div className="card p-4 parent_card mt-4 back"></div>
+            <div className="card p-4 parent_card mt-4 back"></div>
+            <div className="card p-4 parent_card mt-4 back"></div>
+            <div className="card p-4 parent_card mt-4 back"></div>
+            <div className="card p-4 parent_card mt-4 back"></div>
+            <div className="card p-4 parent_card mt-4 back"></div>
+            <div className="card p-4 parent_card mt-4 back"></div>
+            <div className="card p-4 parent_card mt-4 back"></div>
+          </div>
+          <div className="col-xl-4">
+            <Timeline colorTheme="light" feedMode="market" market="crypto" height={600} width="120%"></Timeline>
           </div>
         </div>
       </div>
