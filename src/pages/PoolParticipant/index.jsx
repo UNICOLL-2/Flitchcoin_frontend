@@ -153,19 +153,6 @@ const PoolParticipant = () => {
         </div>
       </div>
       <div className="row">
-        {/* <div className="col col-lg-7 col-xs-12 ms-5">
-          <div className="card back mt-5">
-            <CryptoCurrencyMarket colorTheme="light" width="100%" height={654} isTransparent ></CryptoCurrencyMarket>
-          </div>
-        </div>
-        <div className="col col-lg-4 col-md-12 mt-5">
-          <div className="card back">
-            <SymbolInfo colorTheme="light" height={100} width={500} symbol={coins} isTransparent ></SymbolInfo>
-          </div>
-          <div className="card back technical-analysis mt-3">
-            <TechnicalAnalysis colorTheme="light" height={390} width="100%" symbol={coinsNet} isTransparent></TechnicalAnalysis>
-          </div> 
-        </div>*/}
         <div className="col-lg-4 card back special_card_deposit ms-5 mt-4">
           <TechnicalAnalysis colorTheme="light" height={390} width="100%" symbol={coinsNet} isTransparent></TechnicalAnalysis>
         </div>
