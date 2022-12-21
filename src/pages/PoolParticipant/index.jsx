@@ -103,22 +103,21 @@ const PoolParticipant = () => {
   return (
     <div className="mb-5">
       <div className="row">
-        {/* <div className="col-xl-1"></div> */}
-        <div className="col-12 col-xl-8 ms-5 mt-5 card back">
+        <div className=" col-xl-8 ms-5 mt-5">
           <AdvancedRealTimeChart theme="light" autosize symbol={coinsNet} ></AdvancedRealTimeChart>
         </div>
-        <div className="col-12 col-xl-3">
+        <div className="col-xl-3">
           <div className="container">
             <div className="row pt-5 pb-1">
-              <div className="back card">
-                <div className="container pt-5 pb-5">
-                  <div className="row order__body mt-4">
+              <div className="back card special_card_order pt-4">
+                <div className="container pb-5">
+                  <div className="row order__body">
                     <h2 className="text-center mb-5">Place Order</h2>
                     <h5 className="mb-3">Select a Coin</h5>
-                    <div className="col col-12 mb-5 btn-group">
+                    <div className="col-12 mb-5 btn-group">
                       <button
                         type="button"
-                        className="btn btn-dark dropdown-toggle w-100"
+                        className="btn btn-dark dropdown-toggle w-100 round-btn"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
                       >
@@ -134,7 +133,7 @@ const PoolParticipant = () => {
                         })}
                       </ul>
                     </div>
-                    <Fields onSubmit={getData}/>
+                    <Fields onSubmit={getData} />
                   </div>
                   <div className="row">
                     <div className="d-flex justify-content-center mb-5">
@@ -152,10 +151,9 @@ const PoolParticipant = () => {
             </div>
           </div>
         </div>
-        {/* <div className="col-xl-1"></div> */}
       </div>
       <div className="row">
-        <div className="col col-lg-7 col-xs-12 ms-5">
+        {/* <div className="col col-lg-7 col-xs-12 ms-5">
           <div className="card back mt-5">
             <CryptoCurrencyMarket colorTheme="light" width="100%" height={654} isTransparent ></CryptoCurrencyMarket>
           </div>
@@ -166,8 +164,17 @@ const PoolParticipant = () => {
           </div>
           <div className="card back technical-analysis mt-3">
             <TechnicalAnalysis colorTheme="light" height={390} width="100%" symbol={coinsNet} isTransparent></TechnicalAnalysis>
-          </div>
+          </div> 
+        </div>*/}
+        <div className="col-lg-4 card back special_card_deposit ms-5 mt-4">
+          <TechnicalAnalysis colorTheme="light" height={390} width="100%" symbol={coinsNet} isTransparent></TechnicalAnalysis>
         </div>
+        <div className="col-lg-4 card back special_card_deposit ms-5 mt-4">
+          <SymbolInfo colorTheme="light" height="100%" width="100%" symbol={coins} isTransparent ></SymbolInfo>
+        </div>
+      </div>
+      <div className="row card back parent_card mt-4 mb-4 ms-5 me-5">
+      <CryptoCurrencyMarket colorTheme="light" width="100%" height={654} isTransparent ></CryptoCurrencyMarket>
       </div>
     </div>
   );

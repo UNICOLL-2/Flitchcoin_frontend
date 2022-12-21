@@ -20,6 +20,7 @@ import Statements from "../../pages/Statements";
 import Settings from "../../pages/Settings";
 import Protection from "../../pages/Protection";
 import Deposit from "../../pages/Deposit";
+import AddWallet from "../../pages/Add_Wallet";
 
 function Content() {
   return (
@@ -38,6 +39,7 @@ function Content() {
           <Route path="/withdraw" element={<Protection Cmp={Withdraw}/>} />
           <Route path="/deposit" element={<Protection Cmp={Deposit}/>} />
           <Route path="/qr_verify" element={<Protection Cmp={QRVerify} />} />
+          <Route path="/add_wallet" element={<Protection Cmp={AddWallet} />} />
         <Route path="/about" element={<About />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/sign_verify" element={<SignVerify />} />

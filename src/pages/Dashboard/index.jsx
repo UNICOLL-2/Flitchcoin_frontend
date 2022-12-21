@@ -164,34 +164,6 @@ function Dashboard() {
   return (
     <>
       {/* 
-     
-      <div className="container mt-4">
-        <div className="row ms-1 mb-3">
-          <div className="col-12 me-2 col-lg-7 card back mt-3 p-3">
-            <div className="row">
-              <div className="col-12 col-md-8">
-                <h3>Balance Details</h3>
-              </div>
-              <div className="col-6 col-lg-2 mb-3">
-                <button type='button' style={{ position: "relative" }} className='btn deposit btn-warning' onClick={() => navigate("/deposit")} >Deposit</button>
-              </div>
-              <div className="col-6 col-md-2 mb-3">
-                <button type='button' className='primary' style={{ position: "relative" }} onClick={() => (navigate('/withdraw'))} >Withdraw</button>
-              </div>
-              <hr />
-            </div>
-            <div className="row">
-              <p className='text-muted'>Account Balance : </p>
-              <h1>0.04487898<span className="balance ps-2">BTC</span></h1>
-              <p className='text-muted'>Estimated Value : </p>
-              <h3>$ 1,606.25</h3>
-            </div>
-          </div>
-          <div className="col-12 col-lg-4 mt-3 me-2 card back manage_margin_2" >
-            <Timeline colorTheme="light" feedMode="market" displayMode="compact" market="crypto" height={300} width="100%" symbol="BTCUSD" isTransparent></Timeline>
-          </div>
-        </div>
-      </div>
       <div className="container card back mt-5 mb-3">
         <div className="row">
           <div className="col-2 text-muted account text-center p-3">Name</div>
@@ -297,6 +269,7 @@ function Dashboard() {
               <div className="col-xl-3">
                 <button
                   className="ps-5 pe-5 round-btn"
+                  onClick={() => navigate("/deposit")} 
                 >
                   Deposit
                 </button>
@@ -304,12 +277,13 @@ function Dashboard() {
               <div className="col-xl-3">
                 <button
                   className="ps-5 pe-5 round-btn"
+                  onClick={() => (navigate('/withdraw'))} 
                 >
                   Withdraw
                 </button>
               </div>
             </div>
-            <div className="row card back special_card">
+            <div className="row card back special_card_account">
               <p className="welcome_1">Account Summary : $ 4500000</p>
               {
                 fa2 ?
@@ -327,12 +301,12 @@ function Dashboard() {
               </div>
             </div>
           </div>
-          <div className="col-xl-4 card back special_card">
+          <div className="col-xl-4 card back special_card_profile">
             <div className="row">
               <div className="col-lg-4"></div>
               <div className="col-lg-6">
                 <img src={image} className="dashboard_img" />
-                <p style={{ fontSize: "20px", fontWeight: 200 }}>Tushar Gupta</p>
+                <p className="plain_text">Tushar Gupta</p>
               </div>
               <div className="col-lg-3"></div>
             </div>
@@ -393,21 +367,46 @@ function Dashboard() {
       <div className="container mt-5 mb-5 pb-5">
         <div className="row">
           <div className="col-xl-7 enable_scroll me-5">
-            <div className="card p-4 parent_card mt-3 back"></div>
-            <div className="card p-4 parent_card mt-4 back"></div>
-            <div className="card p-4 parent_card mt-4 back"></div>
-            <div className="card p-4 parent_card mt-4 back"></div>
-            <div className="card p-4 parent_card mt-4 back"></div>
-            <div className="card p-4 parent_card mt-4 back"></div>
-            <div className="card p-4 parent_card mt-4 back"></div>
-            <div className="card p-4 parent_card mt-4 back"></div>
-            <div className="card p-4 parent_card mt-4 back"></div>
-            <div className="card p-4 parent_card mt-4 back"></div>
-            <div className="card p-4 parent_card mt-4 back"></div>
-            <div className="card p-4 parent_card mt-4 back"></div>
-            <div className="card p-4 parent_card mt-4 back"></div>
-            <div className="card p-4 parent_card mt-4 back"></div>
-            <div className="card p-4 parent_card mt-4 back"></div>
+              <div className="row">
+                <div className="col-lg-6 p-0">
+                {
+              newArr.map(name => {
+                return (
+                  <>
+                  <hr className='mt-3'/>
+                  <div className="p-3 row align-items-center making_lines">
+                    <div className="col-3"><img src={name[1]} className="dashboard_logo"/></div>
+                    <div className="col-6">{name[0]}</div>
+                  </div>
+                  <hr/>
+                  </>
+                )
+              })
+            }
+                </div>
+                <div className="col-lg-3 p-0">
+                {arr1.map(names => {
+              return (
+                <>
+                <hr className='mt-3'/>
+                  <div className="row p-3">{names}</div>
+                  <hr />
+                </>
+              )
+            })}
+                </div>
+                <div className="col-lg-3 p-0">
+                {arr2.map(names => {
+              return (
+                <>
+                <hr className='mt-3'/>
+                  <div className="row p-3 making_lines_end">{names}</div>
+                  <hr />
+                </>
+              )
+            })}
+                </div>
+              </div>
           </div>
           <div className="col-xl-4">
             <Timeline colorTheme="light" feedMode="market" market="crypto" height={600} width="120%"></Timeline>

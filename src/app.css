@@ -689,7 +689,9 @@ textarea:focus {
 }
 
 .round-btn{
-	border-radius: 320px;
+	border-radius: 320px!important;
+	font-size: 19px!important;
+	font-weight: 400!important;
 }
 
 .welcome{
@@ -702,11 +704,20 @@ textarea:focus {
 	padding: 20px;
 }
 
-.special_card{
+.special_card_account{
 	border-radius: 20px!important;
 	border: 2px solid transparent!important;
-	background: linear-gradient(to right, #eff0f0,#eff0f0),
-				linear-gradient(to right, #8F00FF, #000000 )!important;
+	background: linear-gradient( #eff0f0,#eff0f0),
+				linear-gradient(#000000, #8F00FF )!important;
+	background-clip: padding-box,border-box!important;
+	background-origin: padding-box,border-box!important;
+}
+
+.special_card_profile{
+	border-radius: 20px!important;
+	border: 2px solid transparent!important;
+	background: linear-gradient( #eff0f0,#eff0f0),
+				linear-gradient( #A10088, #000000 )!important;
 	background-clip: padding-box,border-box!important;
 	background-origin: padding-box,border-box!important;
 }
@@ -745,6 +756,34 @@ textarea:focus {
 .enable_scroll{
 	height: 600px;
 	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+.enable_scroll_2{
+	height: 700px;
+	overflow-y: scroll;
+}
+
+.enable_scroll_3{
+	height: 240px;
+	overflow-y: scroll;
+}
+
+.plain_text{
+	font-size: 20px!important;
+	font-weight: 0!important;
+}
+
+.making_lines{
+	border-left: 13px solid gray;
+}
+
+hr{
+	margin: 0!important;
+}
+
+.making_lines_end{
+	border-right: 13px solid gray;
 }
 
 /* Escrow section */
@@ -2391,6 +2430,43 @@ canvas {
 .deposit {
 	padding: 11px !important;
 	font-weight: bold;
+}
+
+.gateway_img{
+	width: 60.25px;
+	height: 42px;
+}
+
+input[type="radio" i] {
+	box-sizing: border-box;
+  appearance: none;
+  background: #fff;
+  width: 26px;
+  height: 26px;
+  box-shadow: 4px 4px 8px #a4a4a4, -4px -4px 8px #ffffff;
+}
+
+input[type='radio']:checked {
+	background: rgb(232, 232, 232);
+	border-radius:50% ;
+  }
+
+.special_card_deposit{
+	border-radius: 20px!important;
+	border: 2px solid transparent!important;
+	background: linear-gradient( #eff0f0,#eff0f0),
+				linear-gradient(#000,#3787FF, #001AFF)!important;
+	background-clip: padding-box,border-box!important;
+	background-origin: padding-box,border-box!important;
+}
+
+.special_card_order{
+	border-radius: 20px!important;
+	border: 2px solid transparent!important;
+	background: linear-gradient( #eff0f0,#eff0f0),
+				linear-gradient(#001AFF,#3787FF,#000 )!important;
+	background-clip: padding-box,border-box!important;
+	background-origin: padding-box,border-box!important;
 }
 
 .memo_margin {
