@@ -188,7 +188,7 @@ const Withdraw = () => {
                                                 <div>- Name : {items.name}</div>
                                                 {items.memo === null ? <></> : <><div>- Memo : {items.memo}</div></>}
                                                 {items.network === null ? <></> : <><div>- Network : {items.network}</div></>}
-                                                {items.memo === null ? <></> : <><div>- Coin : {items.sym}</div></>}
+                                                {items.sym === null ? <></> : <><div>- Coin : {items.sym}</div></>}
                                                 {items.wallet_add === null ? <></> : <><div>- Wallet address : {items.wallet_add}</div></>}
                                                 <div>- Transaction id : {items.tnx_id}</div>
                                                 <div>- UID : {items.uid}</div>
@@ -206,7 +206,7 @@ const Withdraw = () => {
             </div>
             <div className="col-xl-3 card back special_card_deposit mt-4">
               <p className="welcome_1 text-center">Withdraw Here </p>
-              <form onSubmit={onWithdraw}></form>
+              <form onSubmit={onWithdraw}>
               <p className="plain_text">Choose Transfer Network :</p>
               <button
                 type="button"
@@ -245,12 +245,21 @@ const Withdraw = () => {
                  </div> : <div>
                   <input className="input_login p-2 w-100" value={withdrawData.WithdrawTag} disabled />
                   </div>}
+                  <p className="plain_text mt-4">Amount :</p>
+                  <input
+                    type="number"
+                    className="p-2 w-100  input_login"
+                    onChange={onWithdrawChange}
+                    name="withdrawAmt"
+                    value={withdrawAmt}
+                  />
                   <button
-                  className="ps-5 pe-5 round-btn mt-5 mb-4"
+                  className="ps-5 pe-5 round-btn mt-5 mb-4 w-100"
                   type='submit'
                 >
                   Withdraw
                 </button>
+                </form>
             </div>
           </div>
         </div>
