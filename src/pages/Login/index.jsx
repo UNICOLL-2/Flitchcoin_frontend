@@ -8,6 +8,9 @@ import "./login.css";
 import Animation from "../../Animation";
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import side_login_img from "./Vector.png";
+import login_lock from "./Vector (1).png";
+import google_img from "./image 21.png";
 
 function Login() {
   const dispatch = useDispatch();
@@ -142,12 +145,12 @@ function Login() {
         <svg xmlns="http://www.w3.org/2000/svg" height={25} width={25} viewBox="0 0 24 24" fill="none" className="css-11gn95z"><path fillRule="evenodd" clipRule="evenodd" d="M7 8v2H5v11h14V10h-2V8A5 5 0 007 8zm7.5 2V8a2.5 2.5 0 00-5 0v2h5zm-1 8v-5h-3v5h3z" fill="currentColor"></path></svg>&nbsp;&nbsp;&nbsp;URL verification: <span className="text-muted">&nbsp;&nbsp;https://</span>www.flitchcoin.com/login
       </div>
       <form className="container" onSubmit={submitHandler}>
+        <div className="row ">
+        <div className="col-lg-4"></div>
+        <div className="col-lg-4 card back special_card_profile margin_bottom">
         <div className="segment mt-4">
-          <h1>Log In</h1>
+          <h1><img src={side_login_img} style={{height: "78px", width: "51px"}}/>&nbsp;&nbsp; &nbsp;  Log In</h1>
         </div>
-        <div className="row">
-          <div className="col-lg-4"></div>
-          <div className="col-lg-4 col-12">
             <label className="label">
               <input
                 className="input_login"
@@ -158,12 +161,6 @@ function Login() {
                 placeholder="Enter your Username"
               />
             </label>
-          </div>
-          <div className="col-lg-4"></div>
-        </div>
-        <div className="row">
-          <div className="col-lg-4"></div>
-          <div className="col-12 col-lg-4">
             <label className="label">
               <input
                 className="input_login"
@@ -175,24 +172,14 @@ function Login() {
                 style={{ marginTop: "4%" }}
               />
             </label>
-          </div>
-          <div className="col-lg-4"></div>
-        </div>
-        <div className="row">
-          <div className="col-lg-4"></div>
-          <div className="col-12 col-lg-4">
-            <Link
-              to="/forgot_Password"
-              className="text-danger forgot text-underline"
-            >
-              <u>Forgot password ?</u>
-            </Link>
-          </div>
-          <div className="col-lg-4"></div>
-        </div>
-        <div className="row">
-          <div className="col-lg-4"></div>
-          <div className="col-12 col-lg-4">
+            <div className="row">
+            <div className="col-lg-6">
+                <button className="round-btn red button" onClick={navigate("/sign-up")}>New Signup</button>
+              </div>
+              <div className="col-lg-6">
+                <button className="round-btn red button" onClick={navigate("/forgot_Password")}>Forgot password</button>
+              </div>
+            </div>
             {
               fa2 === "true" ?
                 <button
@@ -200,48 +187,43 @@ function Login() {
                   type="submit"
                   value="Log In"
                   name="Log In"
+                  style={{fontSize: "28px"}}
                 >
                   Enter OTP
                 </button>
                 :
-                <button
+                <>
+                
+                  <button
                   className="red button"
                   type="submit"
                   value="Log In"
                   name="Log In"
+                  style={{fontSize: "28px"}}
                 >
+                  <div className="row">
+                    <div className="col-4"></div>
+                  <div className="col-4 text-center">
                   Log in
-                </button>
+                  </div>
+                  <div className="col-4">
+                  <img src={login_lock} className="pb-2" style={{height: "35px", width: "27px"}}/>
+                  </div>
+                  </div>
+                </button>                  
+                </>
             }
-          </div>
-          <div className="col-lg-4"></div>
+            <button onClick={sigInWithGoogle} className="mt-4 primary round-btn w-100 mb-5 place_order_btn" >
+              <div className="row">
+                <div className="col-2">
+                <img src={google_img} style={{height: "41px", width: "41px"}}/>
+                </div>
+                <div className="col-10 pt-1">
+                Sign In With Google
+                </div>
+              </div>
+              </button>
         </div>
-        <div className="row">
-          <div className="col-lg-4"></div>
-          <div className="col-12 col-lg-4">
-            <button onClick={sigInWithGoogle} type="button" className="button_google button w-100"><i className="fa-brands fa-google text-primary">&nbsp;&nbsp;&nbsp;Sign In With Google</i></button>
-          </div>
-        </div>
-        <div className="col-lg-4"></div>
-        <div className="row">
-          <div className="col-lg-4"></div>
-          <div className="col-12 col-lg-4">
-            <div className="text-center pb-5 pt-5 me-4">
-              <p>
-                Don't have an account?
-                <span className="text-warning px-2" role="button">
-                  <Link
-                    to="/sign-up"
-                    className="text-warning"
-                    style={{ position: "absolute" }}
-                  >
-                    Signup
-                  </Link>
-                </span>
-              </p>
-            </div>
-          </div>
-          <div className="col-lg-4"></div>
         </div>
       </form>
 

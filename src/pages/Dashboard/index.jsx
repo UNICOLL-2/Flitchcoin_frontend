@@ -159,7 +159,16 @@ function Dashboard() {
 
   useEffect(() => {
     checkUser();
-  }, [username])
+  }, [username]);
+
+  const [onLoad,setOnLoad] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setOnLoad(true);
+    console.log(onLoad);
+  }, 2000);
+  },[])
 
   return (
     <>
@@ -234,6 +243,8 @@ function Dashboard() {
       </div> */}
 
       <div className="container card back parent_card">
+        {onLoad ? 
+        <>
         <div className="row mt-3 ticker">
           <TickerTape colorTheme="light" symbols={[
             {
@@ -262,6 +273,13 @@ function Dashboard() {
             },
           ]} ></TickerTape>
         </div>
+        </>:
+        <>
+        <div className="p-5">
+
+        </div>
+        </>}
+        
         <div className="row ps-5 pb-4">
           <div className="col-xl-7 me-5">
             <div className="row pb-4">

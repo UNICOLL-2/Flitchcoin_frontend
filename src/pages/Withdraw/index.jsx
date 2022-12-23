@@ -194,7 +194,7 @@ const Withdraw = () => {
                                                 <div>- UID : {items.uid}</div>
                                                 </div>
                                                 <div className="col-sm-1">
-                                                <input type="radio" name='wallet' />
+                                                <input type="radio" name='wallet' className='withdraw_radio' />
                                                 </div>
                                                 </div>
                                             </>

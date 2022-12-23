@@ -8,6 +8,10 @@ import { useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import side_login_img from "./Vector.png";
+import login_lock from "./Vector (1).png";
+import google_img from "./image 21.png";
+import referal_img from "./image 28.png";
 
 function SignUp() {
   var { selectedType } = useSelector((state) => state.auth);
@@ -57,16 +61,16 @@ function SignUp() {
   const { username, password, fullName, type } = formData;
 
   const submitHandler = (type) => {
-      dispatch(signupUser({ formData, type }));
-      if (loginString === "false") {
-        alert("User already exist \nTaking back to Login page...")
-        setTimeout(() => {
-          navigate('/login')
-        }, 3000)
-      } else {
-        setShow(true);
-        setUser(true);
-      }
+    dispatch(signupUser({ formData, type }));
+    if (loginString === "false") {
+      alert("User already exist \nTaking back to Login page...")
+      setTimeout(() => {
+        navigate('/login')
+      }, 3000)
+    } else {
+      setShow(true);
+      setUser(true);
+    }
   };
 
   const onChange = (e) => {
@@ -83,7 +87,7 @@ function SignUp() {
   const nextClick = () => {
     if (username === '' && password === '' && fullName === "") {
       alert("Please enter the above information");
-    }else{
+    } else {
       setPage(false);
     }
   }
@@ -123,16 +127,15 @@ function SignUp() {
       <form onSubmit={(e) => {
         e.preventDefault();
         submitHandler(signType)
-      }}>
+      }} >
         <div className="container">
-          <div className="segment">
-            <h1>Sign Up</h1>
-          </div>
-          {page ?
-            <>
-              <div className="row">
-                <div className="col-lg-4"></div>
-                <div className="col-lg-4 col-12">
+          <div className="row">
+            <div className="col-lg-4 ms-3 mb-3 card back special_card_profile margin_bottom">
+              <div className="segment">
+                <h1><img src={side_login_img} style={{ height: "78px", width: "51px" }} />&nbsp;&nbsp; &nbsp;  Sign Up</h1>
+              </div>
+              {page ?
+                <>
                   <label className="label">
                     <input
                       className="input_login"
@@ -143,12 +146,6 @@ function SignUp() {
                       placeholder="Enter your Username"
                     />
                   </label>
-                </div>
-                <div className="col-lg-4"></div>
-              </div>
-              <div className="row">
-                <div className="col-lg-4"></div>
-                <div className="col-12 col-lg-4">
                   <label className="label">
                     <input
                       className="input_login"
@@ -160,12 +157,6 @@ function SignUp() {
                       style={{ marginTop: "4%" }}
                     />
                   </label>
-                </div>
-                <div className="col-lg-4"></div>
-              </div>
-              <div className="row">
-                <div className="col-lg-4"></div>
-                <div className="col-12 col-lg-4">
                   <label className="label">
                     <input className="input_login"
                       type="text"
@@ -175,81 +166,121 @@ function SignUp() {
                       placeholder="Enter your Full Name"
                       style={{ marginTop: "8%" }} />
                   </label>
-                </div>
-                <div className="col-lg-4"></div>
-              </div>
-              <div className="segment" style={{ marginTop: "-5%" }}>
-                <button className="unit button" type="button" onClick={nextClick} >&#8594;</button>
-                <div className="row">
-                  <div className="col-lg-4"></div>
-                  <div className="col-12 col-lg-4">
-                    <button onClick={sigInWithGoogle} className="button_google button w-100"><i className="fa-brands fa-google text-primary">&nbsp;&nbsp;&nbsp;Signup With Google</i></button>
-                  </div>
-                  <div className="col-lg-4"></div>
-                </div>
-              </div>
-            </> :
-            <>
-              <div className="container">
-                <div className="row mt-5" >
-                  <div className="col-lg-3"></div>
-                  <div className="col-6 col-lg-4">
-                    <div className="form-check">
-                      <h5 className="text-muted">
-                        <input className="form-check-input" type="radio" name="flexRadioDefault" value='participant' id="flexRadioDefault1" onChange={e => onRadioChange(e.target.value)} style={{ position: 'absolute' }} />
-                        <label className="form-check-label" htmlFor="flexRadioDefault1">
-                          Become a Participant
-                        </label>
-                      </h5>
+                  <div className="plain_text row mb-4 mt-3">
+                    <div className="col-4 text-end">
+                      Pool
                     </div>
-                    <div className="form-check mt-5">
-                      <h5 className="text-muted">
-                        <input className="form-check-input" type="radio" name="flexRadioDefault" value='pool' id="flexRadioDefault2" onChange={e => onRadioChange(e.target.value)} style={{ position: 'absolute' }} />
-                        <label className="form-check-label" htmlFor="flexRadioDefault2">
-                          Become a Pool
-                        </label>
-                      </h5>
+                    <div className="col-2" style={{ marginTop: "-22px" }}>
+                      <div>
+                        <input type="checkbox" id="toggle" />
+                        <label for="toggle" className="switch_toggle"></label>
+                      </div>
+                    </div>
+                    <div className="col-4 text-start">
+                      Participant
                     </div>
                   </div>
-                  <div className="col-6 col-lg-4">
-                    {
-                      signType === 'participant' ?
-                        <div>
-                          <p> &#x2714; it provides</p>
-                          <p> &#x2714; it provides</p>
-                          <p> &#x2716; it does not provides</p>
-                          <p> &#x2714; it provides</p>
+                  <div className="row">
+                    <div className="col-lg-4">
+                      <p className="plain_text pt-3"><img src={referal_img} style={{ height: "25px", width: "25px" }} /> Referral : </p>
+                    </div>
+                    <div className="col-lg-8">
+                      <label className="label">
+                        <input className="input_login"
+                          type="text"
+                          name="fullName"
+                          value={fullName}
+                          onChange={onChange}
+                          placeholder="Enter your Full Name" />
+                      </label>
+                    </div>
+                  </div>
+                  <button className="button red mt-3" type="submit" value="Sign up" name="Sign up" style={{ fontSize: "28px"}}>
+                    <div className="row">
+                      <div className="col-4"></div>
+                      <div className="col-4 text-center">
+                        Signup
+                      </div>
+                      <div className="col-4">
+                        <img src={login_lock} className="pb-2" style={{ height: "35px", width: "27px" }} />
+                      </div>
+                    </div>
+                  </button>
 
-                        </div> : <div></div>
-                    }
-                    {
-                      signType === 'pool' ?
-                        <div>
-                          <p> &#x2714; it provides</p>
-                          <p> &#x2714; it provides</p>
-                          <p> &#x2716; it does not provides</p>
-                        </div> : <div></div>
-                    }
-                    {
-                      signType === '' ?
-                        <div>
-                          <p> &#x2714; it provides</p>
-                          <p> &#x2714; it provides</p>
-                          <p> &#x2716; it does not provides</p>
-                        </div> : <div></div>
-                    }
+                  <button onClick={sigInWithGoogle} className="mt-4 primary round-btn w-100 mb-5 place_order_btn" >
+                    <div className="row">
+                      <div className="col-2">
+                        <img src={google_img} style={{ height: "41px", width: "41px" }} />
+                      </div>
+                      <div className="col-10 pt-1">
+                        Sign Up With Google
+                      </div>
+                    </div>
+                  </button>
+                </> :
+                <>
+                  <div className="container">
+                    <div className="row mt-5" >
+                      <div className="col-lg-3"></div>
+                      <div className="col-6 col-lg-4">
+                        <div className="form-check">
+                          <h5 className="text-muted">
+                            <input className="form-check-input" type="radio" name="flexRadioDefault" value='participant' id="flexRadioDefault1" onChange={e => onRadioChange(e.target.value)} style={{ position: 'absolute' }} />
+                            <label className="form-check-label" htmlFor="flexRadioDefault1">
+                              Become a Participant
+                            </label>
+                          </h5>
+                        </div>
+                        <div className="form-check mt-5">
+                          <h5 className="text-muted">
+                            <input className="form-check-input" type="radio" name="flexRadioDefault" value='pool' id="flexRadioDefault2" onChange={e => onRadioChange(e.target.value)} style={{ position: 'absolute' }} />
+                            <label className="form-check-label" htmlFor="flexRadioDefault2">
+                              Become a Pool
+                            </label>
+                          </h5>
+                        </div>
+                      </div>
+                      <div className="col-6 col-lg-4">
+                        {
+                          signType === 'participant' ?
+                            <div>
+                              <p> &#x2714; it provides</p>
+                              <p> &#x2714; it provides</p>
+                              <p> &#x2716; it does not provides</p>
+                              <p> &#x2714; it provides</p>
+
+                            </div> : <div></div>
+                        }
+                        {
+                          signType === 'pool' ?
+                            <div>
+                              <p> &#x2714; it provides</p>
+                              <p> &#x2714; it provides</p>
+                              <p> &#x2716; it does not provides</p>
+                            </div> : <div></div>
+                        }
+                        {
+                          signType === '' ?
+                            <div>
+                              <p> &#x2714; it provides</p>
+                              <p> &#x2714; it provides</p>
+                              <p> &#x2716; it does not provides</p>
+                            </div> : <div></div>
+                        }
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col-lg-4"></div>
+                      <div className="col-12 col-lg-4">
+                      </div>
+                      <div className="col-lg-4"></div>
+                    </div>
                   </div>
-                </div>
-                <div className="row">
-                  <div className="col-lg-4"></div>
-                  <div className="col-12 col-lg-4">
-                    <button className="button sign" type="submit" value="Sign up" name="Sign up">Sign up</button>
-                  </div>
-                  <div className="col-lg-4"></div>
-                </div>
-              </div>
-            </>}
+                </>}
+            </div>
+          </div>
         </div>
+
 
       </form>
 

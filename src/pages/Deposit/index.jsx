@@ -227,12 +227,12 @@ const Deposit = () => {
             <button
               className="ps-5 pe-5 round-btn"
             >
-              <img src={coingate_img} className="gateway_img" />&nbsp;&nbsp;&nbsp;&nbsp; COINGATE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="gateway" value="coingate" />
+              <img src={coingate_img} className="gateway_img" />&nbsp;&nbsp;&nbsp;&nbsp; COINGATE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="gateway" value="coingate" className='deposit_radio' />
             </button><br /><br />
             <button
               className="ps-5 pe-5 round-btn"
             >
-              <img src={crypt_img} className="gateway_img" />&nbsp;&nbsp;&nbsp;&nbsp; CRPYT API &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="gateway" value="crypt" />
+              <img src={crypt_img} className="gateway_img" />&nbsp;&nbsp;&nbsp;&nbsp; CRPYT API &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="gateway" value="crypt" className='deposit_radio' />
             </button>
           </div>
           <div className="col-xl-3 card back special_card_deposit mt-4">

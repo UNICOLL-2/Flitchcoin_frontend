@@ -74,10 +74,6 @@ const PoolParticipant = () => {
       })
   }
 
-  useEffect(() => {
-    asset_list();
-  }, []);
-
   const [coins, setCoins] = useState('');
   const [coinsNet, setCoinsNet] = useState('');
 
@@ -95,10 +91,52 @@ const PoolParticipant = () => {
     }
   }
 
+  const price = () => {
+    const data = JSON.stringify({
+      "sym" : coin.toUpperCase() 
+    })
+    console.log(data);
+    fetch('https://flitchcoin.com/api/prices', {
+      method: 'POST',
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+      },
+      body: data,
+    })
+      .then((res) => res.json()
+        .then((result) => {
+          console.log(result);
+        }))
+      .catch((err) => {
+        console.log(err);
+      })
+  };
+
   useEffect(() => {
     coin1();
     coinNet();
+    price();
   }, [coin]);
+
+
+  // CryptApi
+
+  const query = new URLSearchParams({ callback: 'https://flitchcoin.com/api/a9a7a6c3-7c30-4081-a041-dcca63046835-088bcd46-9411-576a-aec4-5ba50882e40a/JFXLIMVPSZXWHTJMQYBJ' }).toString();
+
+  const ticker = 'btc';
+  async function resp() {
+    const response = await fetch(
+      `https://api.cryptapi.io/${ticker}/logs/?${query}`,
+      { method: 'GET' }
+    );
+    const data = await response.text();
+    console.log(data);
+  }
+  useEffect(() => {
+    asset_list();
+    resp();
+  }, []);
 
   return (
     <div className="mb-5">
@@ -110,10 +148,9 @@ const PoolParticipant = () => {
           <div className="container">
             <div className="row pt-5 pb-1">
               <div className="back card special_card_order pt-4">
-                <div className="container pb-5">
+                <div className="pb-5">
                   <div className="row order__body">
                     <h2 className="text-center mb-5">Place Order</h2>
-                    <h5 className="mb-3">Select a Coin</h5>
                     <div className="col-12 mb-5 btn-group">
                       <button
                         type="button"
@@ -136,13 +173,13 @@ const PoolParticipant = () => {
                     <Fields onSubmit={getData} />
                   </div>
                   <div className="row">
-                    <div className="d-flex justify-content-center mb-5">
+                    <div className="d-flex justify-content-center mb-5 ps-2 pe-2">
                       <button
-                        className="primary mt-4 ps-5 pe-5"
-                        style={{ position: "absolute" }}
+                        className="primary mt-4 ps-5 pe-5 round-btn place_order_btn"
+                        style={{ position: "absolute", width: "90%" }}
                         onClick={sendOrder}
                       >
-                        NEXT
+                        Place Order
                       </button>
                     </div>
                   </div>
@@ -154,14 +191,14 @@ const PoolParticipant = () => {
       </div>
       <div className="row">
         <div className="col-lg-4 card back special_card_deposit ms-5 mt-4">
-          <TechnicalAnalysis colorTheme="light" height={390} width="100%" symbol={coinsNet} isTransparent></TechnicalAnalysis>
+          <TechnicalAnalysis colorTheme="light" height={450} width="100%" symbol={coinsNet} isTransparent></TechnicalAnalysis>
         </div>
         <div className="col-lg-4 card back special_card_deposit ms-5 mt-4">
           <SymbolInfo colorTheme="light" height="100%" width="100%" symbol={coins} isTransparent ></SymbolInfo>
         </div>
       </div>
       <div className="row card back parent_card mt-4 mb-4 ms-5 me-5">
-      <CryptoCurrencyMarket colorTheme="light" width="100%" height={654} isTransparent ></CryptoCurrencyMarket>
+        <CryptoCurrencyMarket colorTheme="light" width="100%" height={654} isTransparent ></CryptoCurrencyMarket>
       </div>
     </div>
   );

@@ -765,7 +765,7 @@ textarea:focus {
 }
 
 .enable_scroll_3{
-	height: 240px;
+	height: 370px;
 	overflow-y: scroll;
 }
 
@@ -775,7 +775,7 @@ textarea:focus {
 }
 
 .making_lines{
-	border-left: 13px solid gray;
+	border-left: 14px solid gray;
 }
 
 hr{
@@ -784,6 +784,78 @@ hr{
 
 .making_lines_end{
 	border-right: 13px solid gray;
+}
+
+.place_order_btn {
+    background: linear-gradient(270deg, #3787ff, #001aff, #000000);
+    background-size: 600% 600%;
+	color: #fff!important;
+
+    -webkit-animation: AnimationName 7s ease infinite;
+    -moz-animation: AnimationName 7s ease infinite;
+    -o-animation: AnimationName 7s ease infinite;
+    animation: AnimationName 7s ease infinite;
+}
+
+#toggle {
+	visibility: hidden;
+  }
+  #toggle:checked + .switch_toggle {
+	transform: rotate(360deg);
+	background-color: #000;
+  }
+  #toggle:checked + .switch_toggle:before {
+	transform: translateX(36px);
+	background-color: #FFF;
+  }
+  
+  .switch_toggle {
+	display: flex;
+	width: 60px;
+	height: 20px;
+	border: 2px solid;
+	border-radius: 99em;
+	position: relative;
+	transition: transform 0.75s ease-in-out;
+	transform-origin: 50% 50%;
+	cursor: pointer;
+  }
+  .switch_toggle:before {
+	transition: transform 0.75s ease;
+	transition-delay: 0.5s;
+	content: "";
+	/* display: block; */
+	position: relative;
+	width: 14px;
+	height: 14px;
+	background-color: #000;
+	border-radius: 50%;
+	top: 1px;
+	left: 2px;
+  }
+.margin_bottom{
+	margin-top: 4rem!important;
+}
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-o-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
 }
 
 /* Escrow section */
@@ -2437,19 +2509,29 @@ canvas {
 	height: 42px;
 }
 
-input[type="radio" i] {
+.withdraw_radio {
 	box-sizing: border-box;
   appearance: none;
-  background: #fff;
+  background: #EAEAEA;
   width: 26px;
   height: 26px;
-  box-shadow: 4px 4px 8px #a4a4a4, -4px -4px 8px #ffffff;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.29);
+  box-shadow: -12px -12px 28px #FFFFFF, 14px 14px 40px rgba(0, 0, 0, 0.25);
 }
 
-input[type='radio']:checked {
-	background: rgb(232, 232, 232);
-	border-radius:50% ;
+.withdraw_radio:checked {
+	background: #7BFFE7;;
   }
+
+.deposit_radio{
+	width: 16px;
+	height: 16px;
+}
+
+.deposit_radio:checked{
+	accent-color: blue;
+}
 
 .special_card_deposit{
 	border-radius: 20px!important;

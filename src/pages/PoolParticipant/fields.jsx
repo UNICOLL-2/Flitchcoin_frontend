@@ -16,17 +16,30 @@ const Fields = (props) => {
         arr.push(value);
         arr.push(amount);
         props.onSubmit(arr);
-      },[value,amount])
+      },[value,amount]);
 
     return (
         <div>
-            <h5 className="mb-3">Enter Amount</h5>
-                    <div className="col col-12">
+            <div className="row mb-4">
+              <div className="col-3">
+                <button className="round-btn ps-3 pe-3">10%</button>
+              </div>
+              <div className="col-3">
+                <button className="round-btn ps-3 pe-3">25%</button>
+              </div>
+              <div className="col-3">
+                <button className="round-btn ps-3 pe-3">50%</button>
+              </div>
+              <div className="col-3">
+                <button className="round-btn ps-3 pe-2">100%</button>
+              </div>
+            </div>
+                    <div className="col-12">
                       <div className="input1 w-100">
                         <input
                           type="number"
                           name="amount"
-                          placeholder="Amount ($)"
+                          placeholder="Amount:                   BTC"
                           className="input_login txt-underline p-3 mb-3 w-100"
                           value={amount}
                           onChange={e => setAmount(e.target.value)}
@@ -34,14 +47,13 @@ const Fields = (props) => {
                         <span className="underline"></span>
                       </div>
                     </div>
-                    <h5 className="mb-3">Enter Duration</h5>
-                    <div className="col col-12">
+                    <div className="col-12">
                       <input type="range" value={value} className="form-range" min='7' max='365' onChange={onChangeValues}></input>
                       <div className="input1 w-100">
                         <input
                           type="number"
                           name="duration"
-                          placeholder="Days ( 7 - 365 )"
+                          placeholder="Duration:                 Days"
                           className="input_login txt-underline p-3 mb-3 w-100"
                           value={value}
                           onChange={onChangeValues}
