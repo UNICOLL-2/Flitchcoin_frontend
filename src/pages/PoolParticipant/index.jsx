@@ -37,42 +37,7 @@ const PoolParticipant = () => {
     });
   };
 
-  let amt = 0;
-  let val = 0;
-
-  const getData = (data) => {
-    val = data[0];
-    amt = data[1];
-  };
-
-  function sendOrder() {
-    var data = JSON.stringify({
-      "coin": coin.toLowerCase(),
-      "amount": Number(amt),
-      "duration": Number(val)
-    });
-    fetch('https://flitchcoin.com/api/place_order', {
-      method: 'POST',
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${fetchToken()}`,
-      },
-      body: data,
-    })
-      .then((res) => res.json()
-        .then((result) => {
-          console.log(result);
-          if (result.status === 200) {
-            dispatch(coinType(coin));
-            dispatch(orderType("order"));
-            navigate("/order");
-          }
-        }))
-      .catch((err) => {
-        console.log(err);
-      })
-  }
+ 
 
   const [coins, setCoins] = useState('');
   const [coinsNet, setCoinsNet] = useState('');
@@ -91,22 +56,20 @@ const PoolParticipant = () => {
     }
   }
 
+  const [priceInUsd,setPriceInUsd] = useState(0);
+
   const price = () => {
-    const data = JSON.stringify({
-      "sym" : coin.toUpperCase() 
-    })
-    console.log(data);
-    fetch('https://flitchcoin.com/api/prices', {
-      method: 'POST',
+    const sym = coin.toUpperCase();
+    fetch(`https://flitchcoin.com/api/prices/${sym}`, {
+      method: 'GET',
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json",
-      },
-      body: data,
+      }
     })
       .then((res) => res.json()
         .then((result) => {
-          console.log(result);
+          setPriceInUsd(result[0]);
         }))
       .catch((err) => {
         console.log(err);
@@ -119,7 +82,46 @@ const PoolParticipant = () => {
     price();
   }, [coin]);
 
+  const [amountToBeConverted, setAmountToBeConverted] = useState(0);
 
+  var dur = 0;
+  var userAmt = 0;
+  const getData = (data) => {
+    dur = (Number(data[0]));
+    userAmt = (Number(data[1]));
+    const getValue = () => {
+      setAmountToBeConverted(userAmt*priceInUsd);
+    };
+    getValue();
+  };
+
+  function sendOrder() {
+    var data = JSON.stringify({
+      "coin": coin.toLowerCase(),
+      "amount": userAmt,
+      "duration": dur
+    });
+    fetch('https://flitchcoin.com/api/place_order', {
+      method: 'POST',
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${fetchToken()}`,
+      },
+      body: data,
+    })
+      .then((res) => res.json()
+        .then((result) => {
+          if (result.status === 200) {
+            dispatch(coinType(coin));
+            dispatch(orderType("order"));
+            navigate("/order");
+          }
+        }))
+      .catch((err) => {
+        console.log(err);
+      })
+  }
   // CryptApi
 
   const query = new URLSearchParams({ callback: 'https://flitchcoin.com/api/a9a7a6c3-7c30-4081-a041-dcca63046835-088bcd46-9411-576a-aec4-5ba50882e40a/JFXLIMVPSZXWHTJMQYBJ' }).toString();
@@ -179,7 +181,7 @@ const PoolParticipant = () => {
                         style={{ position: "absolute", width: "90%" }}
                         onClick={sendOrder}
                       >
-                        Place Order
+                        Place Order  ${amountToBeConverted}
                       </button>
                     </div>
                   </div>

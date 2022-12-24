@@ -232,7 +232,7 @@ const AddWallet = () => {
                                                 <div>- UID : {items.uid}</div>
                                                 </div>
                                                 <div className="col-sm-1">
-                                                <span style={{cursor: "pointer" }} onClick={() => onDelete(items.uid)} ><i class="fa-regular fa-trash-can"></i></span>
+                                                <span style={{cursor: "pointer" }} onClick={() => onDelete(items.uid)} ><i className="fa-regular fa-trash-can"></i></span>
                                                 </div>
                                                 </div>
                                             </>

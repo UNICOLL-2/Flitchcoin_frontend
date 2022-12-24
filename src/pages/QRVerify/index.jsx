@@ -189,10 +189,10 @@ const QRVerify = () => {
                                 <h3>Continue with 2 - FA ?</h3>
                                 <p className='text-muted mt-4'>2 Factor Authentication provides you with the most provided security features and enhanced protection of wallet.</p>
                                 <input type="radio" className="btn-check" name="options-outlined" id="success-outlined" autoComplete="off" onClick={() => setChangeButton(false)} />
-                                <label className="btn btn-outline-info p-4 mb-4" htmlFor="success-outlined">Continue with 2 factor Authentication</label>
+                                <label className="btn btn-outline-info p-4 mb-4" htmlhtmlFor="success-outlined">Continue with 2 factor Authentication</label>
 
                                 <input type="radio" className="btn-check" name="options-outlined" id="danger-outlined" autoComplete="off" onClick={() => setChangeButton(true)} />
-                                <label className="btn btn-outline-danger p-4" htmlFor="danger-outlined">Continue without 2 factor Authentication</label>
+                                <label className="btn btn-outline-danger p-4" htmlhtmlFor="danger-outlined">Continue without 2 factor Authentication</label>
                                 {changeButton ?
                                     <>
                                         <button className="btn-primary w-50 mt-5" onClick={() => setShow1(true)}>Log in Without 2-FA</button>

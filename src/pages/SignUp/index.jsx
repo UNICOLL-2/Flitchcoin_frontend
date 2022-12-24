@@ -172,7 +172,7 @@ function SignUp() {
                     <div className="col-2" style={{ marginTop: "-22px" }}>
                       <div>
                         <input type="checkbox" id="toggle" onClick={toggle} />
-                        <label for="toggle" className="switch_toggle"></label>
+                        <label htmlFor="toggle" className="switch_toggle"></label>
                       </div>
                     </div>
                     <div className="col-4 text-start">
