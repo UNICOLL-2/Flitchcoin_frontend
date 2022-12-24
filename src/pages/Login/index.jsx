@@ -174,16 +174,16 @@ function Login() {
             </label>
             <div className="row">
             <div className="col-lg-6">
-                <button className="round-btn red button" onClick={navigate("/sign-up")}>New Signup</button>
+                <button type="button" className="round-btn red button" onClick={()=>navigate("/sign-up")}>New Signup</button>
               </div>
               <div className="col-lg-6">
-                <button className="round-btn red button" onClick={navigate("/forgot_Password")}>Forgot password</button>
+                <button type="button" className="round-btn red button" onClick={()=>navigate("/forgot_Password")}>Forgot password</button>
               </div>
             </div>
             {
               fa2 === "true" ?
                 <button
-                  className="red button"
+                  className="red button mt-5"
                   type="submit"
                   value="Log In"
                   name="Log In"
@@ -195,7 +195,7 @@ function Login() {
                 <>
                 
                   <button
-                  className="red button"
+                  className="red button mt-5"
                   type="submit"
                   value="Log In"
                   name="Log In"
@@ -213,7 +213,7 @@ function Login() {
                 </button>                  
                 </>
             }
-            <button onClick={sigInWithGoogle} className="mt-4 primary round-btn w-100 mb-5 place_order_btn" >
+            <button type="button" onClick={sigInWithGoogle} className="mt-4 primary round-btn w-100 mb-5 place_order_btn" >
               <div className="row">
                 <div className="col-2">
                 <img src={google_img} style={{height: "41px", width: "41px"}}/>

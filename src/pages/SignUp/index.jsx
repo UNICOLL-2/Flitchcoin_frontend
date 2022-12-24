@@ -14,15 +14,14 @@ import google_img from "./image 21.png";
 import referal_img from "./image 28.png";
 
 function SignUp() {
+  
   var { selectedType } = useSelector((state) => state.auth);
-
   const { loginString, verifyString } = useSelector((state) => state.auth)
 
   const [show, setShow] = useState(false);
   const [otp, setOtp] = useState('');
   const [otpMsg, setOtpMsg] = useState(null);
   const [signType, setSignType] = useState('');
-  const [user, setUser] = useState(false);
   const [page, setPage] = useState(true);
 
   useEffect(() => {
@@ -52,25 +51,36 @@ function SignUp() {
     }
   }
 
-  const [formData, setFormData] = useState({
+  var [formData, setFormData] = useState({
     username: "",
     password: "",
     fullName: "",
     type: signType
   });
-  const { username, password, fullName, type } = formData;
+  var { username, password, fullName, type } = formData;
 
-  const submitHandler = (type) => {
-    dispatch(signupUser({ formData, type }));
-    if (loginString === "false") {
-      alert("User already exist \nTaking back to Login page...")
-      setTimeout(() => {
-        navigate('/login')
-      }, 3000)
-    } else {
-      setShow(true);
-      setUser(true);
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if(page){
+      setSignType("pool");
+      type = "pool";
+    }else{
+      setSignType("participant");
+      type = "participant";
     }
+    if(username == "" || password == "" || fullName == "" || type == "") {
+      alert("Please fill in the required fiels");
+    }else{
+      dispatch(signupUser({ formData, type }));
+      if (loginString === "false") {
+        alert("User already exist \nTaking back to Login page...")
+        setTimeout(() => {
+          navigate('/login')
+        }, 3000)
+      } else {
+        setShow(true);
+      }
+    }    
   };
 
   const onChange = (e) => {
@@ -79,18 +89,6 @@ function SignUp() {
       [e.target.name]: e.target.value,
     }));
   };
-
-  const onRadioChange = (data) => {
-    setSignType(data)
-  };
-
-  const nextClick = () => {
-    if (username === '' && password === '' && fullName === "") {
-      alert("Please enter the above information");
-    } else {
-      setPage(false);
-    }
-  }
 
   // signup with google
 
@@ -116,26 +114,27 @@ function SignUp() {
         password: result.user.uid,
         fullName: result.user.displayName,
       }));
-      setPage(false);
     }).catch(err => console.log(err));
   };
 
+  const toggle = () => {
+    if(page){
+      setPage(false);
+    }else{
+      setPage(true);
+    }
+  };
 
   return (
     <>
       <Animation />
-      <form onSubmit={(e) => {
-        e.preventDefault();
-        submitHandler(signType)
-      }} >
+      <form onSubmit={submitHandler} >
         <div className="container">
           <div className="row">
             <div className="col-lg-4 ms-3 mb-3 card back special_card_profile margin_bottom">
               <div className="segment">
                 <h1><img src={side_login_img} style={{ height: "78px", width: "51px" }} />&nbsp;&nbsp; &nbsp;  Sign Up</h1>
               </div>
-              {page ?
-                <>
                   <label className="label">
                     <input
                       className="input_login"
@@ -172,7 +171,7 @@ function SignUp() {
                     </div>
                     <div className="col-2" style={{ marginTop: "-22px" }}>
                       <div>
-                        <input type="checkbox" id="toggle" />
+                        <input type="checkbox" id="toggle" onClick={toggle} />
                         <label for="toggle" className="switch_toggle"></label>
                       </div>
                     </div>
@@ -217,71 +216,41 @@ function SignUp() {
                       </div>
                     </div>
                   </button>
-                </> :
+            </div>
+            <div className="col-lg-2"></div>
+            <div className="col-lg-4 mt-5">
+              {
+                page ?
                 <>
-                  <div className="container">
-                    <div className="row mt-5" >
-                      <div className="col-lg-3"></div>
-                      <div className="col-6 col-lg-4">
-                        <div className="form-check">
-                          <h5 className="text-muted">
-                            <input className="form-check-input" type="radio" name="flexRadioDefault" value='participant' id="flexRadioDefault1" onChange={e => onRadioChange(e.target.value)} style={{ position: 'absolute' }} />
-                            <label className="form-check-label" htmlFor="flexRadioDefault1">
-                              Become a Participant
-                            </label>
-                          </h5>
-                        </div>
-                        <div className="form-check mt-5">
-                          <h5 className="text-muted">
-                            <input className="form-check-input" type="radio" name="flexRadioDefault" value='pool' id="flexRadioDefault2" onChange={e => onRadioChange(e.target.value)} style={{ position: 'absolute' }} />
-                            <label className="form-check-label" htmlFor="flexRadioDefault2">
-                              Become a Pool
-                            </label>
-                          </h5>
-                        </div>
-                      </div>
-                      <div className="col-6 col-lg-4">
-                        {
-                          signType === 'participant' ?
-                            <div>
-                              <p> &#x2714; it provides</p>
-                              <p> &#x2714; it provides</p>
-                              <p> &#x2716; it does not provides</p>
-                              <p> &#x2714; it provides</p>
-
-                            </div> : <div></div>
-                        }
-                        {
-                          signType === 'pool' ?
-                            <div>
-                              <p> &#x2714; it provides</p>
-                              <p> &#x2714; it provides</p>
-                              <p> &#x2716; it does not provides</p>
-                            </div> : <div></div>
-                        }
-                        {
-                          signType === '' ?
-                            <div>
-                              <p> &#x2714; it provides</p>
-                              <p> &#x2714; it provides</p>
-                              <p> &#x2716; it does not provides</p>
-                            </div> : <div></div>
-                        }
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-lg-4"></div>
-                      <div className="col-12 col-lg-4">
-                      </div>
-                      <div className="col-lg-4"></div>
-                    </div>
+                <div className="card back special_card_profile">
+                  <div className="segment">
+                    <h1>Becoming a Pool :</h1>
                   </div>
-                </>}
+                  <p className="plain_text ps-4">- It provides you with </p>
+                  <p className="plain_text ps-4">- It provides you with </p>
+                  <p className="plain_text ps-4">- It provides you with </p>
+                  <p className="plain_text ps-4">- It provides you with </p>
+                  <p className="plain_text ps-4">- It provides you with </p>
+                  <p className="plain_text ps-4">- It provides you with </p>
+                </div>
+                </>:
+                <>
+                <div className="card back special_card_profile">
+                  <div className="segment">
+                    <h1>Becoming a Participant :</h1>
+                  </div>
+                  <p className="plain_text ps-4">- It provides you with </p>
+                  <p className="plain_text ps-4">- It provides you with </p>
+                  <p className="plain_text ps-4">- It provides you with </p>
+                  <p className="plain_text ps-4">- It provides you with </p>
+                  <p className="plain_text ps-4">- It provides you with </p>
+                  <p className="plain_text ps-4">- It provides you with </p>
+                </div>
+                </>
+              }
             </div>
           </div>
         </div>
-
-
       </form>
 
       <Modal show={show} onHide={() => setShow(false)} backdrop="static" keyboard={false} className="modal-dialog-login">

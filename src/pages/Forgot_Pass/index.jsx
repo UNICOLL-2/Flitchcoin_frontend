@@ -84,18 +84,18 @@ function Forgot_Pass() {
                     console.log(err);
                 })
         }
-    }
+    };
 
     return (
         <div>
             <Animation />
             <form className="container mt-5" onSubmit={submitHandler}>
-                <div className="segment">
-                    <h1>Enter Your Credentials</h1>
-                </div>
                 <div className="row">
                     <div className="col-lg-4"></div>
-                    <div className="col-lg-4 col-12">
+                    <div className="col-lg-4 card back special_card_profile ms-2 mt-2 mb-3">
+                        <div className="segment">
+                            <h1>Enter Your Credentials</h1>
+                        </div>
                         <label className="label">
                             <input
                                 className="input_login"
@@ -106,12 +106,6 @@ function Forgot_Pass() {
                                 placeholder="Enter your Username"
                             />
                         </label>
-                    </div>
-                    <div className="col-lg-4"></div>
-                </div>
-                <div className="row">
-                    <div className="col-lg-4"></div>
-                    <div className="col-12 col-lg-4">
                         <label className="label">
                             <input
                                 className="input_login"
@@ -123,19 +117,12 @@ function Forgot_Pass() {
                                 style={{ marginTop: "4%" }}
                             />
                         </label>
-                    </div>
-                    <div className="col-lg-4"></div>
-                </div>
-                <div className="row">
-                    <div className="col-lg-4"></div>
-                    <div className="col-12 col-lg-4 pb-5">
-                        <button className="red button" type="submit" value="Send OTP" name="Sign In" onClick={() =>
+                        <button className="red button mb-4" type="submit" value="Send OTP" name="Sign In" onClick={() =>
                             setFormData({
                                 ...formData,
                             })
                         }>Send OTP</button>
                     </div>
-                    <div className="col-lg-4"></div>
                 </div>
             </form>
 
