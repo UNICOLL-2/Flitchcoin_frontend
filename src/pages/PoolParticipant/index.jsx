@@ -101,7 +101,7 @@ const PoolParticipant = () => {
       "amount": userAmt,
       "duration": dur
     });
-    fetch('https://flitchcoin.com/api/place_order', {
+    fetch('https://flitchcoin.com/api/order', {
       method: 'POST',
       headers: {
         "Accept": "application/json",

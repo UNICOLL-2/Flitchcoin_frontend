@@ -180,9 +180,7 @@ const Withdraw = () => {
                         <div className='enable_scroll_3 mt-4'>
                             {walletData.map((items) => {
                                 return (
-                                    <>
                                         <div className='profile_section mt-4' onClick={() => gettingWallet(items)} >
-                                            <>
                                             <div className='row'>
                                                 <div className="col-sm-11">
                                                 <div>- Name : {items.name}</div>
@@ -197,9 +195,7 @@ const Withdraw = () => {
                                                 <input type="radio" name='wallet' className='withdraw_radio' />
                                                 </div>
                                                 </div>
-                                            </>
                                         </div>
-                                    </>
                                 )
                             })}
                         </div>}
