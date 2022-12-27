@@ -96,8 +96,11 @@ const PoolParticipant = () => {
   };
 
   function sendOrder() {
-    var data = JSON.stringify({
-      "coin": coin.toLowerCase(),
+    if(amountToBeConverted <= 20){
+      alert("The amount of order must be greater than $ 20.")
+    }else{
+      var data = JSON.stringify({
+        "coin": coin.toLowerCase(),
       "amount": userAmt,
       "duration": dur
     });
@@ -121,6 +124,7 @@ const PoolParticipant = () => {
       .catch((err) => {
         console.log(err);
       })
+    }
   }
   // CryptApi
 

@@ -155,6 +155,10 @@ function Dashboard() {
     images();
     account();
     getInfo();
+    setTimeout(() => {
+      setOnLoad(true);
+    console.log(onLoad);
+  }, 2000);
   }, []);
 
   useEffect(() => {
@@ -163,85 +167,8 @@ function Dashboard() {
 
   const [onLoad,setOnLoad] = useState(false);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setOnLoad(true);
-    console.log(onLoad);
-  }, 2000);
-  },[])
-
   return (
     <>
-      {/* 
-      <div className="container card back mt-5 mb-3">
-        <div className="row">
-          <div className="col-2 text-muted account text-center p-3">Name</div>
-          <div className="col-2 text-muted account text-center p-3">Liquidate</div>
-          <div className="col-2 text-muted account text-center p-3">Total</div>
-          <div className="col-2 text-muted account text-center p-3">Used</div>
-          <div className="col-2 text-muted account text-center p-3">Yield</div>
-          <div className="col-2 text-muted account text-center p-3">Duration</div>
-        </div>
-        <div className="row dashboard_table">
-          <div className="col col-md-2 p-3">
-          {
-              newArr.map(name => {
-                return (
-                  <>
-                  <div className="p-3 row align-items-center">
-                    <div className="col-3"><img src={name[1]} className="dashboard_logo"/></div>
-                    <div className="col-6">{name[0]}</div>
-                  </div>
-                  <hr/>
-                  </>
-                )
-              })
-            }
-          </div>
-          <div className='col col-md-2 p-3'>
-            <div className='row ps-3 pb-1 memo_margin'>memoMargin</div>
-            <button type='button' className='btn btn-dark margin-btn btn-sm' onClick={onMargin}>Add Margin</button>
-            <hr />
-          </div>
-          <div className="col col-md-2 p-3">
-            {arr1.map(names => {
-              return (
-                <>
-                  <div className="row p-3">{names}</div>
-                  <hr />
-                </>
-              )
-            })}
-            
-          </div>
-          <div className="col col-md-2 p-3">
-            {arr2.map(names => {
-              return (
-                <>
-                  <div className="row p-3">{names}</div>
-                  <hr />
-                </>
-              )
-            })}
-          </div>
-          <div className="col col-md-2 p-3">
-            {arr3.map(names => {
-              return (
-                <>
-                  <div className="row p-3">{names}</div>
-                  <hr />
-                </>
-              )
-            })}
-          </div>
-          <div className='col col-md-2 p-3'>
-            <div className='row ps-3 pb-1 margin'>memoRepayment</div>
-            <button type='button' className='btn btn-dark margin-btn btn-sm' onClick={onRepayment}>Repayment</button>
-            <hr />
-          </div>
-        </div>
-      </div> */}
-
       <div className="container card back parent_card">
         {onLoad ? 
         <>
