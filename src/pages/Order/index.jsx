@@ -231,14 +231,14 @@ const Order = () => {
               <label className="btn special_btn" htmlFor="History">History</label>
             </div>
           </div>
-          <div className="row enable_scroll_4 ps-3 pe-3">
+          <div className="row enable_scroll_4 ps-4 pe-4">
             {
               type === "Open Positions" ?
                 <>
                   {
                     openPositionDataParticipant.map(i => {
                       return (
-                        <div className="card back mt-3 mb-4 text_for_order parent_card p-4" onClick={() => gettingData(i)}>
+                        <div className="card back mt-3 mb-4 text_for_order parent_card p-4 hover_cards" onClick={() => gettingData(i)}>
                           <div className="row">
                             <div className="text-end">
                               <input type="radio" name='data' className='data_radio' />
@@ -265,7 +265,7 @@ const Order = () => {
                   {
                     openPositionDataPool.map(i => {
                       return (
-                        <div className="card back mt-3 mb-4 text_for_order parent_card p-4" onClick={() => gettingData(i)}>
+                        <div className="card back mt-3 mb-4 text_for_order parent_card p-4 hover_cards" onClick={() => gettingData(i)}>
                           <div className="row">
                             <div className="text-end">
                               <input type="radio" name='data' className='data_radio' />
@@ -296,7 +296,7 @@ const Order = () => {
                         {
                           openOrderDataParticipant.map(i => {
                             return (
-                              <div className="card back mt-3 mb-4 text_for_order parent_card p-4" onClick={() => gettingData(i)}>
+                              <div className="card back mt-3 mb-4 text_for_order parent_card p-4 hover_cards" onClick={() => gettingData(i)}>
                                 <div className="row">
                                   <div className="text-end">
                                     <input type="radio" name='data' className='data_radio' />
@@ -323,7 +323,7 @@ const Order = () => {
                         {
                           openOrderDataPool.map(i => {
                             return (
-                              <div className="card back mt-3 mb-4 text_for_order parent_card p-4" onClick={() => gettingData(i)}>
+                              <div className="card back mt-3 mb-4 text_for_order parent_card p-4 hover_cards" onClick={() => gettingData(i)}>
                                 <div className="row">
                                   <div className="text-end">
                                     <input type="radio" name='data' className='data_radio' />
@@ -354,7 +354,7 @@ const Order = () => {
                               {
                                 openPositionDataParticipant.map(i => {
                                   return (
-                                    <div className="card back mt-3 mb-4 text_for_order parent_card p-4" onClick={() => gettingData(i)}>
+                                    <div className="card back mt-3 mb-4 text_for_order parent_card p-4 hover_cards" onClick={() => gettingData(i)}>
                                       <div className="row">
                                         <div className="text-end">
                                           <input type="radio" name='data' className='data_radio' />
@@ -381,7 +381,7 @@ const Order = () => {
                               {
                                 openPositionDataPool.map(i => {
                                   return (
-                                    <div className="card back mt-3 mb-4 text_for_order parent_card p-4" onClick={() => gettingData(i)}>
+                                    <div className="card back mt-3 mb-4 text_for_order parent_card p-4 hover_cards" onClick={() => gettingData(i)}>
                                       <div className="row">
                                         <div className="text-end">
                                           <input type="radio" name='data' className='data_radio' />
@@ -407,7 +407,7 @@ const Order = () => {
                               {
                                 openOrderDataParticipant.map(i => {
                                   return (
-                                    <div className="card back mt-3 mb-4 text_for_order parent_card p-4" onClick={() => gettingData(i)}>
+                                    <div className="card back mt-3 mb-4 text_for_order parent_card p-4 hover_cards" onClick={() => gettingData(i)}>
                                       <div className="row">
                                         <div className="text-end">
                                           <input type="radio" name='data' className='data_radio' />
@@ -434,7 +434,7 @@ const Order = () => {
                               {
                                 openOrderDataPool.map(i => {
                                   return (
-                                    <div className="card back mt-3 mb-4 text_for_order parent_card p-4" onClick={() => gettingData(i)}>
+                                    <div className="card back mt-3 mb-4 text_for_order parent_card p-4 hover_cards" onClick={() => gettingData(i)}>
                                       <div className="row">
                                         <div className="text-end">
                                           <input type="radio" name='data' className='data_radio' />

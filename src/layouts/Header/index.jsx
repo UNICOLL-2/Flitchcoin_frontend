@@ -47,18 +47,18 @@ function Header() {
 
   const change = () => {
     fetch('https://www.flitchcoin.com/api/dashboard', {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            Authorization: `Bearer ${fetchToken()}`
-        }
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        Authorization: `Bearer ${fetchToken()}`
+      }
     }).then((result) => result.json()
-        .then(res => {
-           setAvt(res.avtar_im);
-        })).catch((err) => {
-            console.log(err);
-        })
-};
+      .then(res => {
+        setAvt(res.avtar_im);
+      })).catch((err) => {
+        console.log(err);
+      })
+  };
 
   useEffect(() => {
     getInfo();
@@ -66,11 +66,22 @@ function Header() {
 
   useEffect(() => {
     change();
-  },[getInfo]);
+  }, [getInfo]);
+
+  function open() {
+    document.getElementById('menu-box').style.display = "block";
+  }
+  function close() {
+    document.getElementById('menu-box').style.display = "none";
+  }
+
+  // document.getElementById('menubtn').addEventListener('click', open);
+
+  // document.getElementById('menubtn').addEventListener('dblclick', close);
 
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light  manage_margin">
+    <div className="ending_margin">
+      {/* <nav className="navbar navbar-expand-lg navbar-light bg-light  manage_margin">
         <div className="container-fluid">
           <Link className="navbar-brand m_l" to="/"><u>Flitch Coin</u></Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -127,12 +138,67 @@ function Header() {
                 <Link to="/login" type="button" className="btn btn-dark me-5" ><i className="fa-solid fa-right-to-bracket icons_login">&nbsp; Login</i></Link>
               ) : null}
               {selectedType === "decline" ? (
-                <Link to="/sign-up" type="button" className="btn btn-dark me-5"><i class="fa-regular fa-face-smile-wink icons_login">&nbsp;&nbsp;Let's Start</i></Link>
+                <Link to="/sign-up" type="button" className="btn btn-dark me-5"><i className="fa-regular fa-face-smile-wink icons_login">&nbsp;&nbsp;Let's Start</i></Link>
               ) : null}
             </div>
           </div>
         </div>
+      </nav> */}
+
+
+      <nav className="navbar navbar-expand-lg mt-4 text-white" id="navb">
+        <div className="container">
+          <a href="#" className="brand">&#x2190;</a>
+          <div className="containerinner text-center">
+            <ul>
+              <li className="pe-5 ps-4"><a href="#"> Home</a></li>
+              <li className="pe-5 ps-4"><a href="#">Order</a></li>
+              <li className="pe-5 ps-5"><a href="#" >Flitch Coin</a></li>
+              <li className="pe-5 ps-5"><a href="#"> Api</a></li>
+              <li  className="pe-5 ps-4"><a href="#"> History</a></li>
+            </ul>
+          </div>
+          <img className="logo" id="cl" src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"></img>
+          <i className="fa fa-bars" id="menubtn"></i>
+
+        </div>
+
+        <div className="menu" id="menu-box">
+          <div className="subcontainer">
+            <hr></hr>
+            {/* hamburger menu starts here */}
+            <div className="hamburger">
+              <ul>
+                <li><a href="#">HOME</a></li>
+                <li><a href="#">ABOUT</a></li>
+                <li><a href="#">API</a></li>
+                <li><a href="#">DASHBOARD</a></li>
+                <li><a href="#"></a>ORDER</li>
+              </ul>
+            </div>
+            <hr></hr>
+            {/* hamburger menu ends here */}
+            <br></br>
+            <img className="btc" src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"></img><br></br>
+            <br></br>
+            <p className="para">tushargupta2k3@gmail.com</p>
+            <br></br>
+            <button className="manage">Manage your Profile</button>
+            <br></br><br></br>
+            <hr></hr>
+
+            <ul>
+              <li><a href="#">Settings</a></li>
+              <li><a href="#">Reports</a></li>
+              <li><a href="#">Help</a></li>
+              <li><a href="#"><i className="fa-solid fa-right-from-bracket icon_signout"> Sign Out</i></a></li>
+            </ul>
+          </div>
+        </div>
+
+
       </nav>
+
     </div>
   );
 }

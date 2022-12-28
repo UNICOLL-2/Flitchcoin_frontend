@@ -7,6 +7,7 @@ import { orderType } from "../../Feature/Order/orderSlice";
 import { memoType } from "../../Feature/Order/orderSlice";
 import { Link, useNavigate } from "react-router-dom";
 import image from "./Rectangle 53.png";
+import { logOutUser } from "../../Feature/Auth/authSlice";
 
 function Dashboard() {
 
@@ -113,6 +114,8 @@ function Dashboard() {
       })).catch(err => console.log(err))
   };
 
+  const [checkPool, setCheckPool] = useState(false);
+
   const getInfo = () => {
     fetch('https://flitchcoin.com/api/users/me/items/', {
       method: 'GET',
@@ -122,6 +125,9 @@ function Dashboard() {
       }
     }).then((result) => result.json()
       .then(res => {
+        if (res.is_pool) {
+          setCheckPool(true);
+        }
         setUsername(res.username);
       })).catch((err) => {
         console.log(err);
@@ -157,56 +163,92 @@ function Dashboard() {
     getInfo();
     setTimeout(() => {
       setOnLoad(true);
-    console.log(onLoad);
-  }, 2000);
+      console.log(onLoad);
+    }, 2000);
   }, []);
 
   useEffect(() => {
     checkUser();
   }, [username]);
 
-  const [onLoad,setOnLoad] = useState(false);
+  const [onLoad, setOnLoad] = useState(false);
+
+  const [formData, setFormData] = useState({
+    type: null
+  });
+  const { type } = formData;
+
+  const onClick = (e) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      type: null
+    }));
+    dispatch(logOutUser());
+  };
+
+  const become = (e) => {
+    e.preventDefault();
+    setTimeout(() => {
+      const data = JSON.stringify({
+        "is_pool": !checkPool
+      })
+      fetch('https://flitchcoin.com/api/mode', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          Authorization: `Bearer ${fetchToken()}`,
+          'Content-Type': 'application/json'
+        },
+        body: data
+      }).then((result) => result.json()
+        .then(res => {
+          navigate("/login");
+          onClick();
+        })).catch(err => console.log(err));
+    },5000);
+    alert("You will now signed out from this page . Please login again !");
+  };
 
   return (
     <>
       <div className="container card back parent_card">
-        {onLoad ? 
-        <>
-        <div className="row mt-3 ticker">
-          <TickerTape colorTheme="light" symbols={[
-            {
-              "proName": "BITSTAMP:BTCUSD",
-              "title": "BTC/USD"
-            },
-            {
-              "proName": "BITSTAMP:ETHUSDT",
-              "title": "ETH/USDT"
-            },
-            {
-              "proName": "BINANCE:SOLUSDT",
-              "title": "SOL/USDT"
-            },
-            {
-              "proName": "BINANCE:MATICUSDT",
-              "title": "MATIC/USDT"
-            },
-            {
-              "proName": "BINANCE:AVAXUSDT",
-              "title": "AVAX/USDT"
-            },
-            {
-              "proName": "BINANCE:XRPUSDT",
-              "title": "XRP/USDT"
-            },
-          ]} ></TickerTape>
-        </div>
-        </>:
-        <>
-        <div className="p-5">
+        {onLoad ?
+          <>
+            <div className="row mt-3 ticker">
+              <TickerTape colorTheme="light" symbols={[
+                {
+                  "proName": "BITSTAMP:BTCUSD",
+                  "title": "BTC/USD"
+                },
+                {
+                  "proName": "BITSTAMP:ETHUSDT",
+                  "title": "ETH/USDT"
+                },
+                {
+                  "proName": "BINANCE:SOLUSDT",
+                  "title": "SOL/USDT"
+                },
+                {
+                  "proName": "BINANCE:MATICUSDT",
+                  "title": "MATIC/USDT"
+                },
+                {
+                  "proName": "BINANCE:AVAXUSDT",
+                  "title": "AVAX/USDT"
+                },
+                {
+                  "proName": "BINANCE:XRPUSDT",
+                  "title": "XRP/USDT"
+                },
+              ]} ></TickerTape>
+            </div>
+          </> :
+          <>
+            <div className="p-5">
 
-        </div>
-        </>}
-        
+            </div>
+          </>}
+
         <div className="row ps-5 pb-4">
           <div className="col-xl-7 me-5">
             <div className="row pb-4">
@@ -214,7 +256,7 @@ function Dashboard() {
               <div className="col-xl-3">
                 <button
                   className="ps-5 pe-5 round-btn"
-                  onClick={() => navigate("/deposit")} 
+                  onClick={() => navigate("/deposit")}
                 >
                   Deposit
                 </button>
@@ -222,7 +264,7 @@ function Dashboard() {
               <div className="col-xl-3">
                 <button
                   className="ps-5 pe-5 round-btn"
-                  onClick={() => (navigate('/withdraw'))} 
+                  onClick={() => (navigate('/withdraw'))}
                 >
                   Withdraw
                 </button>
@@ -240,9 +282,9 @@ function Dashboard() {
                   <></>
               }
               <div className="row">
-                <div className="col-lg-3 card back parent_card m-4 ms-5 p-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis, sunt.</div>
-                <div className="col-lg-3 card back parent_card m-4 p-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, voluptas?</div>
-                <div className="col-lg-3 card back parent_card m-4 p-4">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, ipsam.</div>
+                <div className="col-lg-3 card back parent_card m-4 ms-5 p-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis, sunt. Lorem ipsum dolor sit amet consectetur adi</div>
+                <div className="col-lg-3 card back parent_card m-4 p-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, voluptas? Lorem ipsum dolor sit amet consectetur adi</div>
+                <div className="col-lg-3 card back parent_card m-4 p-4">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, ipsam. Lorem ipsum dolor sit amet consectetur adi</div>
               </div>
             </div>
           </div>
@@ -256,6 +298,24 @@ function Dashboard() {
               <div className="col-lg-3"></div>
             </div>
             <div className="row">
+            <div className="plain_text row mb-4 mt-3">
+                    <div className="col-5 text-end">
+                      {
+                        checkPool?<>Pool</>:<>Part.</>
+                      }
+                    </div>
+                    <div className="col-2" style={{ marginTop: "-22px" }}>
+                      <div>
+                        <input type="checkbox" id="toggle" onClick={become} />
+                        <label htmlFor="toggle" className="switch_toggle"></label>
+                      </div>
+                    </div>
+                    <div className="col-5 ps-4 text-start">
+                    {
+                        !checkPool?<>Pool</>:<>Part.</>
+                      }
+                    </div>
+                  </div>
               <div className="col-xl-4">
                 <button
                   className="swap round-btn"
@@ -312,46 +372,46 @@ function Dashboard() {
       <div className="container mt-5 mb-5 pb-5">
         <div className="row">
           <div className="col-xl-7 enable_scroll me-5">
-              <div className="row">
-                <div className="col-lg-6 p-0">
+            <div className="row">
+              <div className="col-lg-6 p-0">
                 {
-              newArr.map(name => {
-                return (
-                  <>
-                  <hr className='mt-3'/>
-                  <div className="p-3 row align-items-center making_lines">
-                    <div className="col-3"><img src={name[1]} className="dashboard_logo"/></div>
-                    <div className="col-6">{name[0]}</div>
-                  </div>
-                  <hr/>
-                  </>
-                )
-              })
-            }
-                </div>
-                <div className="col-lg-3 p-0">
-                {arr1.map(names => {
-              return (
-                <>
-                <hr className='mt-3'/>
-                  <div className="row p-3">{names}</div>
-                  <hr />
-                </>
-              )
-            })}
-                </div>
-                <div className="col-lg-3 p-0">
-                {arr2.map(names => {
-              return (
-                <>
-                <hr className='mt-3'/>
-                  <div className="row p-3 making_lines_end">{names}</div>
-                  <hr />
-                </>
-              )
-            })}
-                </div>
+                  newArr.map(name => {
+                    return (
+                      <>
+                        <hr className='mt-3' />
+                        <div className="p-3 row align-items-center making_lines">
+                          <div className="col-3"><img src={name[1]} className="dashboard_logo" /></div>
+                          <div className="col-6">{name[0]}</div>
+                        </div>
+                        <hr />
+                      </>
+                    )
+                  })
+                }
               </div>
+              <div className="col-lg-3 p-0">
+                {arr1.map(names => {
+                  return (
+                    <>
+                      <hr className='mt-3' />
+                      <div className="row p-3">{names}</div>
+                      <hr />
+                    </>
+                  )
+                })}
+              </div>
+              <div className="col-lg-3 p-0">
+                {arr2.map(names => {
+                  return (
+                    <>
+                      <hr className='mt-3' />
+                      <div className="row p-3 making_lines_end">{names}</div>
+                      <hr />
+                    </>
+                  )
+                })}
+              </div>
+            </div>
           </div>
           <div className="col-xl-4">
             <Timeline colorTheme="light" feedMode="market" market="crypto" height={600} width="120%"></Timeline>

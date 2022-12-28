@@ -27,12 +27,7 @@ function Api() {
       <div className="container">
         <section className="row pt-5"     data-aos="fade-up"
     data-aos-offset="200"
-    data-aos-delay="50"
-    data-aos-duration="1000"
-    data-aos-easing="ease-in-out"
-    data-aos-mirror="true"
-    data-aos-once="false"
-    data-aos-anchor-placement="top-center">
+    data-aos-delay="50">
           <div className="col-sm-12 col-md-6 col-lg-5 d-flex flex-column justify-content-center h_get_to_know">
             <div className="pt-3"> ALADDIN BY BLACKROCK</div>
             <h1 className="pt-3">
