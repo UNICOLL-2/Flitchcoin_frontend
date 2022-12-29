@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logOutUser } from "../../Feature/Auth/authSlice";
 import { fetchToken } from "../../Auth";
@@ -10,6 +10,7 @@ function Header() {
   const { selectedAvtar } = useSelector((state) => state.order);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     type: null
@@ -68,132 +69,116 @@ function Header() {
     change();
   }, [getInfo]);
 
+  const [isActive, setIsActive] = useState(false);
+
   function open() {
-    document.getElementById('menu-box').style.display = "block";
+    if (isActive) {
+      setIsActive(false);
+    } else {
+      setIsActive(true);
+    }
   }
-  function close() {
-    document.getElementById('menu-box').style.display = "none";
-  }
-
-  // document.getElementById('menubtn').addEventListener('click', open);
-
-  // document.getElementById('menubtn').addEventListener('dblclick', close);
 
   return (
     <div className="ending_margin">
-      {/* <nav className="navbar navbar-expand-lg navbar-light bg-light  manage_margin">
-        <div className="container-fluid">
-          <Link className="navbar-brand m_l" to="/"><u>Flitch Coin</u></Link>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <Link className="nav-link ms-4" aria-current="page" to="/"><i className="fa-solid fa-house icons"> Home</i></Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/about" className="nav-link ms-4"><i className="fa-solid fa-circle-info icons"> About</i></Link>
-              </li>
-              {selectedType === null ? (
-                <>
-                </>
-              ) : null}
-              {selectedType === "pool" || selectedType === "participant" ? (
-                <>
-                  <li className="nav-item ms-4"><Link to="/Api" className="nav-link"><i className="fa-solid fa-paperclip icons"> API</i></Link></li>
-                  <li className="nav-item ms-4"><Link to="/Dashboard" className="nav-link"><i className="fa-solid fa-user icons"> Dashboard</i></Link></li>
-                  <li className="nav-item ms-4"><Link to="/place_order" className="nav-link"><i className="fa-solid fa-money-check-dollar icons"> Order</i></Link></li>
-                </>
-              ) : null}
-            </ul>
-            <div className="d-flex">
-              {selectedType === "pool" || selectedType === "participant" ? (
-                <>
-                  <ul id="MiniRightNav">
-                    <li>
-                      <div className="navtext"><i>
-                        <div className="dropdown">
-                          <button className="no_button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                            <div className="avatar">
-                              <img src={avt} alt="avatar" className="avatar_img" />&nbsp;&nbsp;&nbsp;&#9660;
-                            </div>
-                          </button>
-                          <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-                            <li><div className="set_margins"><img src={avt} alt="avatar" className="avatar_big" /></div></li>
-                            <li><div className="small-text text-muted mb-4">{username}</div></li>
-                            <li><Link to="/profile" className="manage_profile">Manage your Profile</Link></li>
-                            <li><Link to="/settings" className="dropdown-item mt-4">Settings</Link></li>
-                            <li><div className="dropdown-item">Reports</div></li>
-                            <li><div className="dropdown-item">Help</div></li>
-                            <li><Link to="/" className="dropdown-item" onClick={onClick}><i className="fa-solid fa-right-from-bracket icon_signout"> Sign Out</i></Link></li>
-                          </ul>
-                        </div>
-                      </i></div>
-                    </li>
-                  </ul>
-                </>
-              ) : null}
-              {selectedType === "accept" ? (
-                <Link to="/login" type="button" className="btn btn-dark me-5" ><i className="fa-solid fa-right-to-bracket icons_login">&nbsp; Login</i></Link>
-              ) : null}
-              {selectedType === "decline" ? (
-                <Link to="/sign-up" type="button" className="btn btn-dark me-5"><i className="fa-regular fa-face-smile-wink icons_login">&nbsp;&nbsp;Let's Start</i></Link>
-              ) : null}
-            </div>
-          </div>
-        </div>
-      </nav> */}
-
-
-      <nav className="navbar navbar-expand-lg mt-4 text-white" id="navb">
+      <nav className="navbar mt-4" id="navb">
         <div className="container">
-          <a href="#" className="brand">&#x2190;</a>
-          <div className="containerinner text-center">
-            <ul>
-              <li className="pe-5 ps-4"><a href="#"> Home</a></li>
-              <li className="pe-5 ps-4"><a href="#">Order</a></li>
-              <li className="pe-5 ps-5"><a href="#" >Flitch Coin</a></li>
-              <li className="pe-5 ps-5"><a href="#"> Api</a></li>
-              <li  className="pe-5 ps-4"><a href="#"> History</a></li>
-            </ul>
+          <div className="containerinner ">
+            {
+              selectedType === "accept" ?
+                <>
+                  <Link to="/" className="text-dark ms-4 p-1" >Flitch Coin</Link>
+                  <Link to="/login" type="button" className=" me-4" ><i className="fa-solid fa-right-to-bracket icons_login">&nbsp; Login</i></Link>
+                </> :
+                <>
+                  {
+                    selectedType === "decline" ?
+                      <>
+                        <Link to="/" className="text-dark ms-4 p-1" >Flitch Coin</Link>
+                        <Link to="/sign-up" className="me-4"><i className="fa-regular fa-face-smile-wink icons_login">&nbsp;&nbsp;Let's Start</i></Link>
+                      </> :
+                      <>
+                      </>
+                  }
+                </>
+            }
           </div>
-          <img className="logo" id="cl" src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"></img>
-          <i className="fa fa-bars" id="menubtn"></i>
-
+          <div className="contain">
+          {
+            selectedType === "pool" || selectedType === "participant" ?
+              <>
+                <div className="brand ms-4" onClick={() => navigate(-1)}>&#x2190;</div>
+                <img src={avt} alt="avatar" className="logo" id="menubtn" onClick={open}/>
+                <Link to="/Api" className="margin_start ">Api</Link>
+                <Link to="/Dashboard" className="margin_bw ">Dashboard</Link>
+                <Link to="/" className="margin_bw " >Flitch Coin</Link>
+                <Link to="/place_order" className="margin_bw ">Order</Link>
+                <Link to="/order" className="margin_bw ">History</Link>
+              </> :
+              <>
+              </>
+          }
+          </div>
         </div>
 
-        <div className="menu" id="menu-box">
+        <div className={isActive ? "menu display_block" : "menu display_none"} id="menu-box">
           <div className="subcontainer">
             <hr></hr>
-            {/* hamburger menu starts here */}
             <div className="hamburger">
-              <ul>
-                <li><a href="#">HOME</a></li>
-                <li><a href="#">ABOUT</a></li>
-                <li><a href="#">API</a></li>
-                <li><a href="#">DASHBOARD</a></li>
-                <li><a href="#"></a>ORDER</li>
-              </ul>
-            </div>
+            <div className="containerinner ">
+            {
+              selectedType === "accept" ?
+                <>
+                  <Link to="/" className="text-dark ms-4 p-1" >Flitch Coin</Link>
+                  <Link to="/login" type="button" className=" me-4" ><i className="fa-solid fa-right-to-bracket icons_login">&nbsp; Login</i></Link>
+                </> :
+                <>
+                  {
+                    selectedType === "decline" ?
+                      <>
+                        <Link to="/" className="text-dark ms-4 p-1" >Flitch Coin</Link>
+                        <Link to="/sign-up" className="me-4"><i className="fa-regular fa-face-smile-wink icons_login">&nbsp;&nbsp;Let's Start</i></Link>
+                      </> :
+                      <>
+                      </>
+                  }
+                </>
+            }
+          </div>
+          <div className="contain">
+          {
+            selectedType === "pool" || selectedType === "participant" ?
+              <>
+                <div className="brand ms-4" onClick={() => navigate(-1)}>&#x2190;</div>
+                <img src={avt} alt="avatar" className="logo" id="menubtn" onClick={open}/>
+                <Link to="/Api" className="margin_start ">Api</Link>
+                <Link to="/Dashboard" className="margin_bw ">Dashboard</Link>
+                <Link to="/" className="margin_bw " >Flitch Coin</Link>
+                <Link to="/place_order" className="margin_bw ">Order</Link>
+                <Link to="/order" className="margin_bw ">History</Link>
+              </> :
+              <>
+              </>
+          }
+          </div>
+            </div> 
             <hr></hr>
-            {/* hamburger menu ends here */}
             <br></br>
-            <img className="btc" src="https://s2.coinmarketcap.com/static/img/coins/64x64/1.png"></img><br></br>
+            <img className="btc" src={avt}></img><br></br>
             <br></br>
-            <p className="para">tushargupta2k3@gmail.com</p>
+            <p className="para">{username}</p>
             <br></br>
-            <button className="manage">Manage your Profile</button>
+            <button className="manage ps-5 pe-5">Manage your Profile</button>
             <br></br><br></br>
             <hr></hr>
 
             <ul>
-              <li><a href="#">Settings</a></li>
-              <li><a href="#">Reports</a></li>
-              <li><a href="#">Help</a></li>
-              <li><a href="#"><i className="fa-solid fa-right-from-bracket icon_signout"> Sign Out</i></a></li>
+              <li><Link to="/settings" className="text-dark">Settings</Link></li>
+              <li><Link to="/" className="text-dark">Reports</Link></li>
+              <li><Link to="/" className="text-dark">Help</Link></li>
+              <li><Link to="/" className="text-dark" onClick={onClick}><i className="fa-solid fa-right-from-bracket icon_signout"> Sign Out</i></Link></li>
             </ul>
-          </div>
+          </div> 
         </div>
 
 

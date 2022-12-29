@@ -211,7 +211,7 @@ function Dashboard() {
 
   return (
     <>
-      <div className="container card back parent_card">
+      <div className="container card back parent_card mt-4">
         {onLoad ?
           <>
             <div className="row mt-3 ticker">

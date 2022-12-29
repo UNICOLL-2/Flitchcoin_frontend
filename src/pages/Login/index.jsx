@@ -139,7 +139,7 @@ function Login() {
   };
 
   return (
-    <div>
+    <div className="mt-4">
       <Animation />
       <div className="url" style={{ position: "absolute", width: "100%" }}>
         <svg xmlns="http://www.w3.org/2000/svg" height={25} width={25} viewBox="0 0 24 24" fill="none" className="css-11gn95z"><path fillRule="evenodd" clipRule="evenodd" d="M7 8v2H5v11h14V10h-2V8A5 5 0 007 8zm7.5 2V8a2.5 2.5 0 00-5 0v2h5zm-1 8v-5h-3v5h3z" fill="currentColor"></path></svg>&nbsp;&nbsp;&nbsp;URL verification: <span className="text-muted">&nbsp;&nbsp;https://</span>www.flitchcoin.com/login
