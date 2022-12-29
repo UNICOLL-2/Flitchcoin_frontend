@@ -8,6 +8,12 @@ import { memoType } from "../../Feature/Order/orderSlice";
 import { Link, useNavigate } from "react-router-dom";
 import image from "./Rectangle 53.png";
 import { logOutUser } from "../../Feature/Auth/authSlice";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { EffectCoverflow, Pagination, Navigation } from "swiper";
 
 function Dashboard() {
 
@@ -282,9 +288,53 @@ function Dashboard() {
                   <></>
               }
               <div className="row">
-                <div className="col-lg-3 card back parent_card m-4 ms-5 p-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis, sunt. Lorem ipsum dolor sit amet consectetur adi</div>
-                <div className="col-lg-3 card back parent_card m-4 p-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias, voluptas? Lorem ipsum dolor sit amet consectetur adi</div>
-                <div className="col-lg-3 card back parent_card m-4 p-4">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repudiandae, ipsam. Lorem ipsum dolor sit amet consectetur adi</div>
+              <div className="col-md-12 my-5 mx-0">
+                  <Swiper
+                    modules={[EffectCoverflow, Pagination, Navigation]}
+                    effect={"coverflow"}
+                    grabCursor={true}
+                    centeredSlides={true}
+                    slidesPerView={2}
+                    loop={true}
+                    coverflowEffect={{
+                      rotate: 0,
+                      stretch: 0,
+                      depth: 300,
+                      modifier: 3,
+                      slideShadows: true,
+                    }}
+                    navigation={true}
+                    pagination={true}
+                    spaceBetween={-10}
+                    onSlideChange={() => console.log("slide change")}
+                    onSwiper={(swiper) => console.log(swiper)}
+                  >
+                    <SwiperSlide>
+                      <div className=" card back parent_card m-4 ms-5 p-4">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing
+                        elit. Nobis, sunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit 
+                      </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <div className=" card back parent_card m-4 ms-5 p-4">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing
+                        elit. Nobis, sunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit 
+                      </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <div className="card back parent_card m-4 ms-5 p-4">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing
+                        elit. Nobis, sunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit 
+                      </div>
+                    </SwiperSlide>
+                    <SwiperSlide>
+                      <div className=" card back parent_card m-4 ms-5 p-4">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing
+                        elit. Nobis, sunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit 
+                      </div>
+                    </SwiperSlide>
+                  </Swiper>
+                </div>
               </div>
             </div>
           </div>

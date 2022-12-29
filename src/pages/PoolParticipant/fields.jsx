@@ -39,7 +39,7 @@ const Fields = (props) => {
                         <input
                           type="number"
                           name="amount"
-                          placeholder="Amount:                   BTC"
+                          placeholder="Amount:               BTC"
                           className="input_login txt-underline p-3 mb-3 w-100"
                           value={amount}
                           onChange={e => setAmount(e.target.value)}
@@ -53,7 +53,7 @@ const Fields = (props) => {
                         <input
                           type="number"
                           name="duration"
-                          placeholder="Duration:                 Days"
+                          placeholder="Duration:             Days"
                           className="input_login txt-underline p-3 mb-3 w-100"
                           value={value}
                           onChange={onChangeValues}

@@ -15,6 +15,11 @@ element.style {
 	background: #ededed;
 }
 
+.swiper-3d .swiper-slide-shadow-right,
+.swiper-3d .swiper-slide-shadow-left {
+  background-image: none !important;
+}
+
 .forgot_pass {
 	overflow: hidden;
 }
@@ -131,7 +136,7 @@ element.style {
 }
 
 .drop {
-	width: 97%;
+	width: 95%;
 	padding: 0 !important;
 	height: 200px;
 	overflow-y: scroll;
@@ -2780,25 +2785,6 @@ canvas {
 
 /* Navigation bar */
 
-/* .container,
-.containerinner {
-	margin: 0 auto !important;
-	width: 100% !important;
-}
-
-nav .container {
-	max-width: 1350px !important;
-	position: relative !important;
-	display: grid !important;
-	grid-template-columns: 1fr 5fr 1fr !important;
-	justify-content: space-between !important;
-	align-items: center !important;
-	margin: 0 auto !important;
-}
-
-nav .containerinner {
-	max-width: 1500px !important;
-} */
 .contain{
 	max-width: 1100px!important;
 }

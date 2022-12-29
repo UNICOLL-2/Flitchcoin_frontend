@@ -168,7 +168,7 @@ function Header() {
             <br></br>
             <p className="para">{username}</p>
             <br></br>
-            <button className="manage ps-5 pe-5">Manage your Profile</button>
+            <button className="manage ps-5 pe-5" onClick={()=> navigate("/profile")}>Manage your Profile</button>
             <br></br><br></br>
             <hr></hr>
 

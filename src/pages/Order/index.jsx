@@ -4,7 +4,7 @@ import bit_img from "./image 4.png";
 
 const Order = () => {
 
-  const [type, setType] = useState("Open Orders");
+  const [type, setType] = useState("History");
 
   const [checkPool, setCheckPool] = useState(false);
 
@@ -125,6 +125,22 @@ const Order = () => {
         memo: (item.memo).substring(0, 12)
       }));
     }
+    const data = JSON.stringify({
+      "memo":item.memo
+    })
+    fetch("https://flitchcoin.com/api/check/one/open/positions", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        Authorization: `Bearer ${fetchToken()}`,
+        'Content-Type': 'application/json'
+      },
+      body: data
+    }).then((result) => {
+      result.json().then((res) => {
+        console.log(res)
+      });
+    }).catch(err => console.log(err));
   };
 
   const [asset, setAsset] = useState([]);
