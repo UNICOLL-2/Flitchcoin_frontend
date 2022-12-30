@@ -9,6 +9,7 @@ import { coinType } from "../../Feature/Order/orderSlice";
 import { orderType } from "../../Feature/Order/orderSlice";
 import { fetchToken } from "../../Auth";
 import Fields from "./fields";
+import Toast from 'react-bootstrap/Toast';
 
 const PoolParticipant = () => {
 
@@ -37,7 +38,7 @@ const PoolParticipant = () => {
     });
   };
 
- 
+
 
   const [coins, setCoins] = useState('');
   const [coinsNet, setCoinsNet] = useState('');
@@ -56,7 +57,7 @@ const PoolParticipant = () => {
     }
   }
 
-  const [priceInUsd,setPriceInUsd] = useState(0);
+  const [priceInUsd, setPriceInUsd] = useState(0);
 
   const price = () => {
     const sym = coin.toUpperCase();
@@ -90,40 +91,42 @@ const PoolParticipant = () => {
     dur = (Number(data[0]));
     userAmt = (Number(data[1]));
     const getValue = () => {
-      setAmountToBeConverted(userAmt*priceInUsd);
+      setAmountToBeConverted(userAmt * priceInUsd);
     };
     getValue();
   };
 
+  const [showA, setShowA] = useState(false);
+
   function sendOrder() {
-    if(amountToBeConverted <= 20){
-      alert("The amount of order must be greater than $ 20.")
-    }else{
+    if (amountToBeConverted <= 20) {
+      setShowA(true);
+    } else {
       var data = JSON.stringify({
         "coin": coin.toLowerCase(),
-      "amount": userAmt,
-      "duration": dur
-    });
-    fetch('https://flitchcoin.com/api/order', {
-      method: 'POST',
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${fetchToken()}`,
-      },
-      body: data,
-    })
-      .then((res) => res.json()
-        .then((result) => {
-          if (result.status === 200) {
-            dispatch(coinType(coin));
-            dispatch(orderType("order"));
-            navigate("/order");
-          }
-        }))
-      .catch((err) => {
-        console.log(err);
+        "amount": userAmt,
+        "duration": dur
+      });
+      fetch('https://flitchcoin.com/api/order', {
+        method: 'POST',
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${fetchToken()}`,
+        },
+        body: data,
       })
+        .then((res) => res.json()
+          .then((result) => {
+            if (result.status === 200) {
+              dispatch(coinType(coin));
+              dispatch(orderType("order"));
+              navigate("/order");
+            }
+          }))
+        .catch((err) => {
+          console.log(err);
+        })
     }
   }
   // CryptApi
@@ -156,6 +159,13 @@ const PoolParticipant = () => {
               <div className="back card special_card_order pt-4 pb-4">
                 <div className="pb-5">
                   <div className="row order__body">
+                    <Toast onClose={() => setShowA(false)} className="text-center position-absolute" style={{ zIndex: "11" }} position="top-center" show={showA} delay={3000} autohide>
+                      <Toast.Header>
+                        <strong className="me-auto">Flitchcoin</strong>
+                        <small>Amount Barrier !</small>
+                      </Toast.Header>
+                      <Toast.Body>Please enter an amount greater than $ 20 to proceed with order.</Toast.Body>
+                    </Toast>
                     <h2 className="text-center mb-5">Place Order</h2>
                     <div className="col-12 mb-5 btn-group">
                       <button

@@ -13,7 +13,8 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { EffectCoverflow, Pagination,Autoplay, Navigation } from "swiper";
+import { EffectCoverflow, Pagination, Autoplay, Navigation } from "swiper";
+import Toast from 'react-bootstrap/Toast';
 
 function Dashboard() {
 
@@ -191,6 +192,8 @@ function Dashboard() {
     dispatch(logOutUser());
   };
 
+  const [showA, setShowA] = useState(false);
+
   const become = (e) => {
     e.preventDefault();
     setTimeout(() => {
@@ -210,8 +213,8 @@ function Dashboard() {
           navigate("/login");
           onClick();
         })).catch(err => console.log(err));
-    },5000);
-    alert("You will now signed out from this page . Please login again !");
+    }, 3000);
+    setShowA(true);
   };
 
   return (
@@ -287,9 +290,9 @@ function Dashboard() {
                   <></>
               }
               <div className="row">
-              <div className="col-md-12 my-5 mx-0">
+                <div className="col-md-12 my-5 mx-0">
                   <Swiper
-                    modules={[EffectCoverflow, Pagination, Navigation,Autoplay]}
+                    modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
                     autoplay={{
                       delay: 3000,
                       disableOnInteraction: true,
@@ -312,25 +315,25 @@ function Dashboard() {
                     <SwiperSlide>
                       <div className=" card back parent_card m-4 ms-5 p-4 py-5">
                         Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit. Nobis, sunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit 
+                        elit. Nobis, sunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit
                       </div>
                     </SwiperSlide>
                     <SwiperSlide>
                       <div className=" card back parent_card m-4 ms-5 p-4 py-5">
                         Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit. Nobis, sunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit 
+                        elit. Nobis, sunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit
                       </div>
                     </SwiperSlide>
                     <SwiperSlide>
                       <div className="card back parent_card m-4 ms-5 p-4 py-5">
                         Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit. Nobis, sunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit 
+                        elit. Nobis, sunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit
                       </div>
                     </SwiperSlide>
                     <SwiperSlide>
                       <div className=" card back parent_card m-4 ms-5 p-4 py-5">
                         Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit. Nobis, sunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit 
+                        elit. Nobis, sunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit
                       </div>
                     </SwiperSlide>
                   </Swiper>
@@ -342,50 +345,49 @@ function Dashboard() {
             <div className="row">
               <div className="col-lg-4"></div>
               <div className="col-lg-6">
+                <Toast onClose={() => setShowA(false)} className="position-absolute" style={{ zIndex: "11", marginTop: "5rem" }} position="top-center" show={showA} delay={3000} autohide>
+                  <Toast.Header>
+                    <strong className="me-auto">Flitchcoin</strong>
+                    <small>Error !</small>
+                  </Toast.Header>
+                  <Toast.Body>Please enter details to proceed for Login.</Toast.Body>
+                </Toast>
                 <img src={image} className="dashboard_img" />
                 <p className="plain_text">Tushar Gupta</p>
               </div>
               <div className="col-lg-3"></div>
             </div>
             <div className="row">
-            <div className="plain_text row mb-4 mt-3">
-                    <div className="col-5 text-end">
-                      {
-                        checkPool?
-                        <>
-                        <p className='tool' data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tooltip on bottom">
-                        Pool
-                        </p>
-                        </>:
-                        <>
-                        <p className='tool' data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tooltip on bottom">
-                        Part.
-                        </p>
-                        </>
-                      }
-                    </div>
-                    <div className="col-2" style={{ marginTop: "-22px" }}>
-                      <div>
-                        <input type="checkbox" id="toggle" onClick={become} />
-                        <label htmlFor="toggle" className="switch_toggle"></label>
-                      </div>
-                    </div>
-                    <div className="col-5 ps-4 text-start">
-                    {
-                        !checkPool?
-                         <>
-                        <p className='tool' data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tooltip on bottom">
-                        Pool
-                        </p>
-                        </>:
-                        <>
-                        <p className='tool' data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tooltip on bottom">
-                        Part.
-                        </p>
-                        </>
-                      }
-                    </div>
+              <div className="plain_text row mb-4 mt-3">
+                <div className="col-5 text-end">
+                  {
+                    checkPool ?
+                      <>
+                          Pool
+                      </> :
+                      <>
+                          Part.
+                      </>
+                  }
+                </div>
+                <div className="col-2" style={{ marginTop: "-22px" }}>
+                  <div>
+                    <input type="checkbox" id="toggle" onClick={become} />
+                    <label htmlFor="toggle" className="switch_toggle"></label>
                   </div>
+                </div>
+                <div className="col-5 ps-4 text-start">
+                  {
+                    !checkPool ?
+                      <>
+                          Pool
+                      </> :
+                      <>
+                          Part.
+                      </>
+                  }
+                </div>
+              </div>
               <div className="col-xl-4">
                 <button
                   className="swap round-btn"

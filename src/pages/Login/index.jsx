@@ -11,6 +11,7 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import side_login_img from "./Vector.png";
 import login_lock from "./Vector (1).png";
 import google_img from "./image 21.png";
+import Toast from 'react-bootstrap/Toast';
 
 function Login() {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ function Login() {
   const { userToken, user } = useSelector((state) => state.auth);
 
   const [show, setShow] = useState(false);
-  const [noInfo, setNoInfo] = useState(false);
+  const [showA, setShowA] = useState(false);
 
   useEffect(() => {
     if (userToken?.access_token) {
@@ -49,7 +50,7 @@ function Login() {
   const submitHandler = (e) => {
     e.preventDefault();
     if (username === "" || password === "") {
-      alert("Please fill in the above information.");
+      setShowA(true);
     } else if (fa2 === "true") {
       setShow(true);
     } else {
@@ -74,7 +75,6 @@ function Login() {
   const [fa2, setfa2] = useState("false");
 
   const checkUser = (e) => {
-    console.log("inside check user");
     const data = JSON.stringify({
       "emailid": e
     })
@@ -147,7 +147,15 @@ function Login() {
       </div>
       <form className="container" onSubmit={submitHandler}>
         <div className="row ">
-          <div className="col-lg-4"></div>
+          <div className="col-lg-4">
+          <Toast onClose={() => setShowA(false)} className="text-center position-absolute" style={{zIndex : "11",marginTop: "5rem"}} position="top-center" show={showA} delay={3000} autohide>
+          <Toast.Header>
+            <strong className="me-auto">Flitchcoin</strong>
+            <small>Error !</small>
+          </Toast.Header>
+          <Toast.Body>Please enter details to proceed for Login.</Toast.Body>
+        </Toast>
+          </div>
           <div className="col-lg-4 card back special_card_profile margin_bottom">
             <div className="segment mt-4">
               <h1><img src={side_login_img} style={{ height: "78px", width: "51px" }} />&nbsp;&nbsp; &nbsp;  Log In</h1>
@@ -261,21 +269,8 @@ function Login() {
           </button>
         </div>
       </Modal>
-      <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
-
-      <div class="position-fixed bottom-0 end-0 p-3" style={{zIndex: "11"}}>
-        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
-          <div class="toast-header">
-            <img src="..." class="rounded me-2" alt="..."/>
-              <strong class="me-auto">Bootstrap</strong>
-              <small>11 mins ago</small>
-              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-          </div>
-          <div class="toast-body">
-            Hello, world! This is a toast message.
-          </div>
-        </div>
-      </div>
+     
+        
     </div>
   );
 }
