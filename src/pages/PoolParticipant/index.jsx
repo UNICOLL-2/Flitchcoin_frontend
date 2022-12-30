@@ -153,7 +153,7 @@ const PoolParticipant = () => {
         <div className="col-xl-3">
           <div className="container">
             <div className="row pt-5 pb-1">
-              <div className="back card special_card_order pt-4">
+              <div className="back card special_card_order pt-4 pb-4">
                 <div className="pb-5">
                   <div className="row order__body">
                     <h2 className="text-center mb-5">Place Order</h2>
@@ -181,11 +181,11 @@ const PoolParticipant = () => {
                   <div className="row">
                     <div className="d-flex justify-content-center mb-5 ps-2 pe-2">
                       <button
-                        className="primary mt-4 ps-5 pe-5 round-btn place_order_btn"
+                        className="primary mt-4 ps-5 pe-5 round-btn place_order_btn "
                         style={{ position: "absolute", width: "90%" }}
                         onClick={sendOrder}
                       >
-                        Place Order  ${amountToBeConverted}
+                        Place Order  ${(amountToBeConverted).toFixed(2)}
                       </button>
                     </div>
                   </div>

@@ -13,7 +13,7 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { EffectCoverflow, Pagination, Navigation } from "swiper";
+import { EffectCoverflow, Pagination,Autoplay, Navigation } from "swiper";
 
 function Dashboard() {
 
@@ -169,7 +169,6 @@ function Dashboard() {
     getInfo();
     setTimeout(() => {
       setOnLoad(true);
-      console.log(onLoad);
     }, 2000);
   }, []);
 
@@ -290,7 +289,11 @@ function Dashboard() {
               <div className="row">
               <div className="col-md-12 my-5 mx-0">
                   <Swiper
-                    modules={[EffectCoverflow, Pagination, Navigation]}
+                    modules={[EffectCoverflow, Pagination, Navigation,Autoplay]}
+                    autoplay={{
+                      delay: 3000,
+                      disableOnInteraction: true,
+                    }}
                     effect={"coverflow"}
                     grabCursor={true}
                     centeredSlides={true}
@@ -300,35 +303,32 @@ function Dashboard() {
                       rotate: 0,
                       stretch: 0,
                       depth: 300,
-                      modifier: 3,
+                      modifier: 1,
                       slideShadows: true,
                     }}
-                    navigation={true}
                     pagination={true}
-                    spaceBetween={-10}
-                    onSlideChange={() => console.log("slide change")}
-                    onSwiper={(swiper) => console.log(swiper)}
+                    spaceBetween={-20}
                   >
                     <SwiperSlide>
-                      <div className=" card back parent_card m-4 ms-5 p-4">
+                      <div className=" card back parent_card m-4 ms-5 p-4 py-5">
                         Lorem ipsum dolor sit amet, consectetur adipisicing
                         elit. Nobis, sunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit 
                       </div>
                     </SwiperSlide>
                     <SwiperSlide>
-                      <div className=" card back parent_card m-4 ms-5 p-4">
+                      <div className=" card back parent_card m-4 ms-5 p-4 py-5">
                         Lorem ipsum dolor sit amet, consectetur adipisicing
                         elit. Nobis, sunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit 
                       </div>
                     </SwiperSlide>
                     <SwiperSlide>
-                      <div className="card back parent_card m-4 ms-5 p-4">
+                      <div className="card back parent_card m-4 ms-5 p-4 py-5">
                         Lorem ipsum dolor sit amet, consectetur adipisicing
                         elit. Nobis, sunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit 
                       </div>
                     </SwiperSlide>
                     <SwiperSlide>
-                      <div className=" card back parent_card m-4 ms-5 p-4">
+                      <div className=" card back parent_card m-4 ms-5 p-4 py-5">
                         Lorem ipsum dolor sit amet, consectetur adipisicing
                         elit. Nobis, sunt. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit 
                       </div>
@@ -351,7 +351,17 @@ function Dashboard() {
             <div className="plain_text row mb-4 mt-3">
                     <div className="col-5 text-end">
                       {
-                        checkPool?<>Pool</>:<>Part.</>
+                        checkPool?
+                        <>
+                        <p className='tool' data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tooltip on bottom">
+                        Pool
+                        </p>
+                        </>:
+                        <>
+                        <p className='tool' data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tooltip on bottom">
+                        Part.
+                        </p>
+                        </>
                       }
                     </div>
                     <div className="col-2" style={{ marginTop: "-22px" }}>
@@ -362,7 +372,17 @@ function Dashboard() {
                     </div>
                     <div className="col-5 ps-4 text-start">
                     {
-                        !checkPool?<>Pool</>:<>Part.</>
+                        !checkPool?
+                         <>
+                        <p className='tool' data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tooltip on bottom">
+                        Pool
+                        </p>
+                        </>:
+                        <>
+                        <p className='tool' data-bs-toggle="tooltip" data-bs-placement="bottom" title="Tooltip on bottom">
+                        Part.
+                        </p>
+                        </>
                       }
                     </div>
                   </div>

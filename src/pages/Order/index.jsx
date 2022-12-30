@@ -4,8 +4,8 @@ import bit_img from "./image 4.png";
 
 const Order = () => {
 
+  const [cardClicked, setCardClicked] = useState(null);
   const [type, setType] = useState("History");
-
   const [checkPool, setCheckPool] = useState(false);
 
   const getInfo = () => {
@@ -46,7 +46,6 @@ const Order = () => {
     }).then((result) => result.json()
       .then(resp => {
         const res = (Object.values(resp));
-        console.log(res);
         var tempArr_1 = [];
         var tempArr_2 = [];
         var tempArr_3 = [];
@@ -116,8 +115,8 @@ const Order = () => {
         withdrawableHedge: item.hedge,
         entryPrice: item.init_price,
         markPrice: item.current_price,
-        roe: (item.current_price / item.settlement_price).toFixed(2),
-        liquationPrice: (item.settlement_price).toFixed(2),
+        // roe: (item.current_price / item.settlement_price).toFixed(2),
+        // liquationPrice: (item.settlement_price).toFixed(2),
         colateralizedAsset: item.sym,
         allocatedMargin: item.init_amt,
         totalAmount: item.current_price,
@@ -126,7 +125,7 @@ const Order = () => {
       }));
     }
     const data = JSON.stringify({
-      "memo":item.memo
+      "memo": item.memo
     })
     fetch("https://flitchcoin.com/api/check/one/open/positions", {
       method: 'POST',
@@ -252,15 +251,22 @@ const Order = () => {
               type === "Open Positions" ?
                 <>
                   {
-                    openPositionDataParticipant.map(i => {
+                    openPositionDataParticipant.map((i, index) => {
                       return (
-                        <div className="card back mt-3 mb-4 text_for_order parent_card p-4 hover_cards" onClick={() => gettingData(i)}>
+                        <div key={index} className={`card back mt-3 mb-4 text_for_order parent_card p-4 hover_cards ${cardClicked === index ? 'special_card_order' : ''}`} onClick={() => {
+                          gettingData(i)
+                          setCardClicked(index)
+                        }}>
                           <div className="row">
                             <div className="text-end">
-                              <input type="radio" name='data' className='data_radio' />
+                              <input type="checkbox" checked={cardClicked === index ? true : false} name='data' className='data_radio' />
                             </div>
                             <div className="col-xl-6 col-12">
-                              <p>- Date and time :&nbsp;&nbsp; {(i.time_duration).replace("T", "    ")} </p>
+                              <p>{i.time_duration === "" ?
+                                <></> :
+                                <>
+                                  - Date and time :&nbsp;&nbsp; {(i.time_duration).toString().replace("T", "    ")}
+                                </>} </p>
                               <p>- Total amount :&nbsp;&nbsp;&nbsp; {i.current_price}</p>
                               <p>- Memo :&nbsp;&nbsp;&nbsp; {i.memo}</p>
                               <p>- Colateralized Asset : &nbsp;&nbsp;&nbsp;{i.sym}</p>
@@ -270,8 +276,17 @@ const Order = () => {
                               <div className="v_line"></div>
                             </div>
                             <div className="col-xl-4 col-12">
-                              <p>- Liq. Price : &nbsp;&nbsp;{(i.settlement_price).toFixed(2)}</p>
-                              <p>- % ROE : &nbsp;&nbsp;&nbsp;{(i.current_price / i.settlement_price).toFixed(2)}</p>
+                              <p>{i.settlement_price === 0 ?
+                                <></> :
+                                <>
+                                  - Liq. Price : &nbsp;&nbsp;{Number((i.settlement_price)).toFixed(2)}
+                                </>}</p>
+                              <p>
+                                {i.settlement_price === 0 ?
+                                  <></> :
+                                  <>
+                                    - % ROE : &nbsp;&nbsp;&nbsp;{Number((i.current_price / i.settlement_price)).toFixed(2)}
+                                  </>}</p>
                             </div>
                           </div>
                         </div>
@@ -279,12 +294,15 @@ const Order = () => {
                     })
                   }
                   {
-                    openPositionDataPool.map(i => {
+                    openPositionDataPool.map((i,index) => {
                       return (
-                        <div className="card back mt-3 mb-4 text_for_order parent_card p-4 hover_cards" onClick={() => gettingData(i)}>
+                        <div key={index} className={`card back mt-3 mb-4 text_for_order parent_card p-4 hover_cards ${cardClicked === index ? 'special_card_order' : ''}`} onClick={() => {
+                          gettingData(i)
+                          setCardClicked(index)
+                        }}>
                           <div className="row">
                             <div className="text-end">
-                              <input type="radio" name='data' className='data_radio' />
+                              <input type="checkbox" checked={cardClicked === index ? true : false} name='data' className='data_radio' />
                             </div>
                             <div className="col-xl-6 col-12">
                               <p>- Date and time :&nbsp;&nbsp; {i.time_duration} </p>
@@ -297,7 +315,12 @@ const Order = () => {
                             </div>
                             <div className="col-xl-4 col-12">
                               <p>- Colateralized Asset : &nbsp;&nbsp;&nbsp;{i.sym}</p>
-                              <p>- Liq. Price : &nbsp;&nbsp;{(i.post_price).toFixed(2)}</p>
+                              <p>{i.post_price === 0 ?
+                                <></> :
+                                <>
+                                  - Liq. Price : &nbsp;&nbsp;{Number((i.post_price)).toFixed(2)}
+                                </>}
+                              </p>
                             </div>
                           </div>
                         </div>
@@ -310,16 +333,23 @@ const Order = () => {
                     type === "Open Orders" ?
                       <>
                         {
-                          openOrderDataParticipant.map(i => {
+                          openOrderDataParticipant.map((i,index) => {
                             return (
-                              <div className="card back mt-3 mb-4 text_for_order parent_card p-4 hover_cards" onClick={() => gettingData(i)}>
+                              <div key={index} className={`card back mt-3 mb-4 text_for_order parent_card p-4 hover_cards ${cardClicked === index ? 'special_card_order' : ''}`} onClick={() => {
+                                gettingData(i)
+                                setCardClicked(index)
+                              }}>
                                 <div className="row">
                                   <div className="text-end">
-                                    <input type="radio" name='data' className='data_radio' />
+                                    <input type="checkbox" checked={cardClicked === index ? true : false} name='data' className='data_radio' />
                                   </div>
                                   <div className="col-xl-6 col-12">
-                                    <p>- Date and time : &nbsp;&nbsp;{(i.time_duration).replace("T", "    ")} </p>
-                                    <p>- Total amount : &nbsp;&nbsp;&nbsp;{i.current_price}</p>
+                                    <p>{i.time_duration === "" ?
+                                      <></> :
+                                      <>
+                                        - Date and time :&nbsp;&nbsp; {(i.time_duration).toString().replace("T", "    ")}
+                                      </>} </p>
+                                    <p>- Total amount :&nbsp;&nbsp;&nbsp; {i.current_price}</p>
                                     <p>- Memo :&nbsp;&nbsp;&nbsp; {i.memo}</p>
                                     <p>- Colateralized Asset : &nbsp;&nbsp;&nbsp;{i.sym}</p>
                                   </div>
@@ -328,8 +358,17 @@ const Order = () => {
                                     <div className="v_line"></div>
                                   </div>
                                   <div className="col-xl-4 col-12">
-                                    <p>- Liq. Price : &nbsp;&nbsp;{(i.settlement_price).toFixed(2)}</p>
-                                    <p>- % ROE : &nbsp;&nbsp;&nbsp;{(i.current_price / i.settlement_price).toFixed(2)}</p>
+                                    <p>{i.settlement_price === 0 ?
+                                      <></> :
+                                      <>
+                                        - Liq. Price : &nbsp;&nbsp;{Number((i.settlement_price)).toFixed(2)}
+                                      </>}</p>
+                                    <p>
+                                      {i.settlement_price === 0 ?
+                                        <></> :
+                                        <>
+                                          - % ROE : &nbsp;&nbsp;&nbsp;{Number((i.current_price / i.settlement_price)).toFixed(2)}
+                                        </>}</p>
                                   </div>
                                 </div>
                               </div>
@@ -337,12 +376,15 @@ const Order = () => {
                           })
                         }
                         {
-                          openOrderDataPool.map(i => {
+                          openOrderDataPool.map((i,index) => {
                             return (
-                              <div className="card back mt-3 mb-4 text_for_order parent_card p-4 hover_cards" onClick={() => gettingData(i)}>
+                              <div key={index} className={`card back mt-3 mb-4 text_for_order parent_card p-4 hover_cards ${cardClicked === index ? 'special_card_order' : ''}`} onClick={() => {
+                                gettingData(i)
+                                setCardClicked(index)
+                              }}>
                                 <div className="row">
                                   <div className="text-end">
-                                    <input type="radio" name='data' className='data_radio' />
+                                    <input type="checkbox" checked={cardClicked === index ? true : false} name='data' className='data_radio' />
                                   </div>
                                   <div className="col-xl-6 col-12">
                                     <p>- Date and time :&nbsp;&nbsp; {i.time_duration} </p>
@@ -355,7 +397,11 @@ const Order = () => {
                                   </div>
                                   <div className="col-xl-4 col-12">
                                     <p>- Colateralized Asset : &nbsp;&nbsp;&nbsp;{i.sym}</p>
-                                    <p>- Liq. Price : &nbsp;&nbsp;{(i.post_price).toFixed(2)}</p>
+                                    <p>{i.post_price === 0 ?
+                                <></> :
+                                <>
+                                  - Liq. Price : &nbsp;&nbsp;{Number((i.post_price)).toFixed(2)}
+                                </>}</p>
                                   </div>
                                 </div>
                               </div>
@@ -368,16 +414,23 @@ const Order = () => {
                           type === "History" ?
                             <>
                               {
-                                openPositionDataParticipant.map(i => {
+                                openPositionDataParticipant.map((i,index) => {
                                   return (
-                                    <div className="card back mt-3 mb-4 text_for_order parent_card p-4 hover_cards" onClick={() => gettingData(i)}>
+                                    <div key={index} className={`card back mt-3 mb-4 text_for_order parent_card p-4 hover_cards ${cardClicked === index ? 'special_card_order' : ''}`} onClick={() => {
+                                      gettingData(i)
+                                      setCardClicked(index)
+                                    }}>
                                       <div className="row">
                                         <div className="text-end">
-                                          <input type="radio" name='data' className='data_radio' />
+                                          <input type="checkbox" checked={cardClicked === index ? true : false} name='data' className='data_radio' />
                                         </div>
                                         <div className="col-xl-6 col-12">
-                                          <p>- Date and time : &nbsp;&nbsp;{(i.time_duration).replace("T", "    ")} </p>
-                                          <p>- Total amount : &nbsp;&nbsp;&nbsp;{i.current_price}</p>
+                                          <p>{i.time_duration === "" ?
+                                            <></> :
+                                            <>
+                                              - Date and time :&nbsp;&nbsp; {(i.time_duration).toString().replace("T", "    ")}
+                                            </>} </p>
+                                          <p>- Total amount :&nbsp;&nbsp;&nbsp; {i.current_price}</p>
                                           <p>- Memo :&nbsp;&nbsp;&nbsp; {i.memo}</p>
                                           <p>- Colateralized Asset : &nbsp;&nbsp;&nbsp;{i.sym}</p>
                                         </div>
@@ -386,8 +439,17 @@ const Order = () => {
                                           <div className="v_line"></div>
                                         </div>
                                         <div className="col-xl-4 col-12">
-                                          <p>- Liq. Price : &nbsp;&nbsp;{(i.settlement_price).toFixed(2)}</p>
-                                          <p>- % ROE : &nbsp;&nbsp;&nbsp;{(i.current_price / i.settlement_price).toFixed(2)}</p>
+                                          <p>{i.settlement_price === 0 ?
+                                            <></> :
+                                            <>
+                                              - Liq. Price : &nbsp;&nbsp;{Number((i.settlement_price)).toFixed(2)}
+                                            </>}</p>
+                                          <p>
+                                            {i.settlement_price === 0 ?
+                                              <></> :
+                                              <>
+                                                - % ROE : &nbsp;&nbsp;&nbsp;{Number((i.current_price / i.settlement_price)).toFixed(2)}
+                                              </>}</p>
                                         </div>
                                       </div>
                                     </div>
@@ -395,12 +457,15 @@ const Order = () => {
                                 })
                               }
                               {
-                                openPositionDataPool.map(i => {
+                                openPositionDataPool.map((i,index) => {
                                   return (
-                                    <div className="card back mt-3 mb-4 text_for_order parent_card p-4 hover_cards" onClick={() => gettingData(i)}>
+                                    <div key={index} className={`card back mt-3 mb-4 text_for_order parent_card p-4 hover_cards ${cardClicked === index ? 'special_card_order' : ''}`} onClick={() => {
+                                      gettingData(i)
+                                      setCardClicked(index)
+                                    }}>
                                       <div className="row">
                                         <div className="text-end">
-                                          <input type="radio" name='data' className='data_radio' />
+                                          <input type="checkbox" checked={cardClicked === index ? true : false} name='data' className='data_radio' />
                                         </div>
                                         <div className="col-xl-6 col-12">
                                           <p>- Date and time :&nbsp;&nbsp; {i.time_duration} </p>
@@ -413,7 +478,11 @@ const Order = () => {
                                         </div>
                                         <div className="col-xl-4 col-12">
                                           <p>- Colateralized Asset : &nbsp;&nbsp;&nbsp;{i.sym}</p>
-                                          <p>- Liq. Price : &nbsp;&nbsp;{(i.post_price).toFixed(2)}</p>
+                                          <p>{i.post_price === 0 ?
+                                <></> :
+                                <>
+                                  - Liq. Price : &nbsp;&nbsp;{Number((i.post_price)).toFixed(2)}
+                                </>}</p>
                                         </div>
                                       </div>
                                     </div>
@@ -421,16 +490,23 @@ const Order = () => {
                                 })
                               }
                               {
-                                openOrderDataParticipant.map(i => {
+                                openOrderDataParticipant.map((i,index) => {
                                   return (
-                                    <div className="card back mt-3 mb-4 text_for_order parent_card p-4 hover_cards" onClick={() => gettingData(i)}>
+                                    <div key={index} className={`card back mt-3 mb-4 text_for_order parent_card p-4 hover_cards ${cardClicked === index ? 'special_card_order' : ''}`} onClick={() => {
+                                      gettingData(i)
+                                      setCardClicked(index)
+                                    }}>
                                       <div className="row">
                                         <div className="text-end">
-                                          <input type="radio" name='data' className='data_radio' />
+                                          <input type="checkbox" checked={cardClicked === index ? true : false} name='data' className='data_radio' />
                                         </div>
                                         <div className="col-xl-6 col-12">
-                                          <p>- Date and time : &nbsp;&nbsp;{(i.time_duration).replace("T", "    ")} </p>
-                                          <p>- Total amount : &nbsp;&nbsp;&nbsp;{i.current_price}</p>
+                                          <p>{i.time_duration === "" ?
+                                            <></> :
+                                            <>
+                                              - Date and time :&nbsp;&nbsp; {(i.time_duration).toString().replace("T", "    ")}
+                                            </>} </p>
+                                          <p>- Total amount :&nbsp;&nbsp;&nbsp; {i.current_price}</p>
                                           <p>- Memo :&nbsp;&nbsp;&nbsp; {i.memo}</p>
                                           <p>- Colateralized Asset : &nbsp;&nbsp;&nbsp;{i.sym}</p>
                                         </div>
@@ -439,8 +515,17 @@ const Order = () => {
                                           <div className="v_line"></div>
                                         </div>
                                         <div className="col-xl-4 col-12">
-                                          <p>- Liq. Price : &nbsp;&nbsp;{(i.settlement_price).toFixed(2)}</p>
-                                          <p>- % ROE : &nbsp;&nbsp;&nbsp;{(i.current_price / i.settlement_price).toFixed(2)}</p>
+                                          <p>{i.settlement_price === 0 ?
+                                            <></> :
+                                            <>
+                                              - Liq. Price : &nbsp;&nbsp;{Number((i.settlement_price)).toFixed(2)}
+                                            </>}</p>
+                                          <p>
+                                            {i.settlement_price === 0 ?
+                                              <></> :
+                                              <>
+                                                - % ROE : &nbsp;&nbsp;&nbsp;{Number((i.current_price / i.settlement_price)).toFixed(2)}
+                                              </>}</p>
                                         </div>
                                       </div>
                                     </div>
@@ -448,12 +533,15 @@ const Order = () => {
                                 })
                               }
                               {
-                                openOrderDataPool.map(i => {
+                                openOrderDataPool.map((i,index) => {
                                   return (
-                                    <div className="card back mt-3 mb-4 text_for_order parent_card p-4 hover_cards" onClick={() => gettingData(i)}>
+                                    <div key={index} className={`card back mt-3 mb-4 text_for_order parent_card p-4 hover_cards ${cardClicked === index ? 'special_card_order' : ''}`} onClick={() => {
+                                      gettingData(i)
+                                      setCardClicked(index)
+                                    }}>
                                       <div className="row">
                                         <div className="text-end">
-                                          <input type="radio" name='data' className='data_radio' />
+                                          <input type="checkbox" checked={cardClicked === index ? true : false} name='data' className='data_radio' />
                                         </div>
                                         <div className="col-xl-6 col-12">
                                           <p>- Date and time :&nbsp;&nbsp; {i.time_duration} </p>
@@ -466,7 +554,11 @@ const Order = () => {
                                         </div>
                                         <div className="col-xl-4 col-12">
                                           <p>- Colateralized Asset : &nbsp;&nbsp;&nbsp;{i.sym}</p>
-                                          <p>- Liq. Price : &nbsp;&nbsp;{(i.post_price).toFixed(2)}</p>
+                                          <p>{i.post_price === 0 ?
+                                <></> :
+                                <>
+                                  - Liq. Price : &nbsp;&nbsp;{Number((i.post_price)).toFixed(2)}
+                                </>}</p>
                                         </div>
                                       </div>
                                     </div>
@@ -610,7 +702,7 @@ const Order = () => {
                                   </div>
                                 </div>
                                 <div className="col-6">
-                                  <button className="round-btn margin_btn" onClick={addMargin}>
+                                  <button className="round-btn margin_btn place_order_btn" onClick={addMargin}>
                                     Add Margin
                                   </button>
                                 </div>

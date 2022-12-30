@@ -6,7 +6,9 @@ import { useDispatch } from "react-redux";
 import { avtarType } from "../../Feature/Order/orderSlice";
 import { logOutUser } from "../../Feature/Auth/authSlice";
 import { initializeApp } from "firebase/app";
-import {getAuth, GoogleAuthProvider, signInWithPopup} from 'firebase/auth';
+import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import statement from "./Group 87.png";
+import setting from "./Group 97.png"
 
 const Profile = () => {
 
@@ -41,6 +43,8 @@ const Profile = () => {
             })
     };
 
+    const [checkPool, setCheckPool] = useState(false);
+
     useEffect(() => {
         getAvtar();
         change();
@@ -59,7 +63,7 @@ const Profile = () => {
                 for (let i = 0; i < Object.entries(res).length; i++) {
                     if (e === Object.entries(res)[i][1]) {
                         var data = JSON.stringify({
-                            "avtar": i+1
+                            "avtar": i + 1
                         })
                         fetch("https://www.flitchcoin.com/api/dashboard", {
                             method: "PUT",
@@ -117,6 +121,9 @@ const Profile = () => {
             .then(res => {
                 setUsername(res.username);
                 setName(res.name);
+                if (res.is_pool) {
+                    setCheckPool(true);
+                }
             })).catch((err) => {
                 console.log(err);
             })
@@ -152,18 +159,18 @@ const Profile = () => {
         storageBucket: "auth-77872.appspot.com",
         messagingSenderId: "768493241754",
         appId: "1:768493241754:web:6e3a5b66a938bff5962623"
-      };
-      
-      const app = initializeApp(firebaseConfig);
-      const auth = getAuth(app);
-      
-      const provider = new GoogleAuthProvider();
-      const sigInWithGoogle = () => {
-          signInWithPopup(auth, provider).then(result => {
-              setUsername(result.user.email);
-              setPass(result.user.uid);
-          }).catch(err => console.log(err)); 
-      };
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const provider = new GoogleAuthProvider();
+    const sigInWithGoogle = () => {
+        signInWithPopup(auth, provider).then(result => {
+            setUsername(result.user.email);
+            setPass(result.user.uid);
+        }).catch(err => console.log(err));
+    };
 
     const closeAccount = () => {
         var data = `grant_type=&username=${username}&password=${pass}&scope=&client_id=&client_secret=`;
@@ -187,6 +194,42 @@ const Profile = () => {
                     alert("Wrong Password!");
                 }
             })).catch(err => console.log(err))
+    };
+
+    const [formData, setFormData] = useState({
+        type: null
+    });
+    const { type } = formData;
+
+    const onClick = (e) => {
+        setFormData((prevData) => ({
+            ...prevData,
+            type: null
+        }));
+        dispatch(logOutUser());
+    };
+
+    const become = (e) => {
+        e.preventDefault();
+        setTimeout(() => {
+            const data = JSON.stringify({
+                "is_pool": !checkPool
+            })
+            fetch('https://flitchcoin.com/api/mode', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    Authorization: `Bearer ${fetchToken()}`,
+                    'Content-Type': 'application/json'
+                },
+                body: data
+            }).then((result) => result.json()
+                .then(res => {
+                    navigate("/login");
+                    onClick();
+                })).catch(err => console.log(err));
+        }, 5000);
+        alert("You will now signed out from this page . Please login again !");
     };
 
     return (
@@ -273,26 +316,45 @@ const Profile = () => {
                     </div>
                 </> :
                     <>
-                        <div className="row">
+                        <div className="row ">
                             <div className="col-xxl-2 col-xl-3 col-12 side_navigation">
-                                <Link to="/profile" className='link'><i className="fa-regular fa-circle-user p-4 dropdown-item text-danger"> &nbsp; &nbsp; P r o f i l e</i></Link>
-                                <Link to="/statements" className='link'><i className="fa-solid fa-list p-4 dropdown-item"> &nbsp; &nbsp; S t a t e m e n t s</i></Link>
+                                <Link to="/profile" className='link'><i className=" ps-4 pe-4 pt-2 pb-2 mb-3 dropdown-item mt-5 selected-item"><img src={avt} style={{ height: "30px", width: "30px", borderRadius: "50%" }} /> &nbsp; Profile</i></Link>
+                                <Link to="/statements" className='link'><i className=" ps-4 pe-4 pt-2 pb-2 mb-3 dropdown-item"><img src={statement} style={{ height: "32px", width: "32px" }} /> &nbsp; Statements</i></Link>
+                                <Link to="/settings" className='link'><i className="ps-4 pe-4 pt-2 pb-2 dropdown-item"><img src={setting} style={{ height: "25px", width: "25px" }} /> &nbsp; Settings</i></Link>
                             </div>
                             <div className="col-md-2"></div>
-                            <div className="col-12 col-md-6">
-                                <h1 className='text-center mt-4'>Profile</h1>
+                            <div className="col-12 col-md-6 mt-4">
+                                <p className='text-center mt-4' style={{ fontSize: "47px", fontWeight: "700" }}>Profile</p>
                                 <hr />
                                 <div className='mt-5'>
-                                    <div className="row">
+                                    <div className="row profile_section pt-5">
                                         <div className="col-12 text-center col-md-2">
                                             <img src={avt} className="avatar_big_2" alt="profile img" />
+                                            <p className="text-muted mt-2 edit" onClick={() => setShow(true)}>Edit</p>
                                         </div>
                                         <div className="col-12 col-md-6">
                                             <div className="row ms-3 mt-3"><h4>{name}</h4></div>
                                             <div className="row ms-3"><h6 className='text-muted'>{username}</h6></div>
                                         </div>
                                         <div className="col-12 col-md-4 mt-4">
-                                            <button onClick={() => setShow(true)}>Edit Profile Photo</button>
+                                            <div className="plain_text row mb-4 mt-1">
+                                                <div className="col-5 text-end">
+                                                    {
+                                                        checkPool ? <>Pool</> : <>Part.</>
+                                                    }
+                                                </div>
+                                                <div className="col-2" style={{ marginTop: "-22px" }}>
+                                                    <div>
+                                                        <input type="checkbox" id="toggle" onClick={become} />
+                                                        <label htmlFor="toggle" className="switch_toggle"></label>
+                                                    </div>
+                                                </div>
+                                                <div className="col-5 ps-5 text-start">
+                                                    {
+                                                        !checkPool ? <>Pool</> : <>Part.</>
+                                                    }
+                                                </div>
+                                            </div>
                                         </div>
                                         <Modal
                                             show={show}
@@ -302,6 +364,10 @@ const Profile = () => {
                                             className="modal-dialog-login"
                                         >
                                             <div className="back p-3">
+                                                <div className="row">
+                                                    <div className="col-10"></div>
+                                                    <div className="col-2"><button type="button" className="btn-close" aria-label="Close" onClick={() => setShow(false)}></button></div>
+                                                </div>
                                                 <h2>Select your Avatar !</h2>
                                                 {arr ? <>
                                                     {arr.map((items) => {
@@ -309,7 +375,7 @@ const Profile = () => {
                                                             <img src={items} alt="" className="change_profile" onClick={() => edit(items)} />
                                                         )
                                                     })}
-                                                </>:<></>
+                                                </> : <></>
                                                 }
                                             </div>
                                         </Modal>
@@ -318,7 +384,7 @@ const Profile = () => {
                                 <div className='profile_section mt-4'>
                                     <h2>Contact Info</h2><hr />
                                     <div className="accordion accordion-flush" id="accordionFlushExample">
-                                        <div className="accordion-item">
+                                        <div className="accordion-item mt-3">
                                             <h2 className="accordion-header" id="flush-headingOne">
                                                 <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                                                     Display Name : &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span className='reduce_bold'>{name}</span>
@@ -326,7 +392,7 @@ const Profile = () => {
                                             </h2>
                                             <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                                                 <div className="accordion-body">
-                                                    <input className='input_profile txt-underline input pressed p-3 mt-3 w-100' placeholder='Display name' name="display name" value={display} onChange={(e) => setDisplay(e.target.value)} /><span className="underline"></span><br /><br />
+                                                    <input className='input_login txt-underline p-3 mt-3 w-100' placeholder='Display name' name="display name" value={display} onChange={(e) => setDisplay(e.target.value)} /><span className="underline"></span><br /><br />
                                                     <div className="row">
                                                         <div className="col-md-8"></div>
                                                         <div className="col-md-2 col-6"><button className='btn btn-light w-100' onClick={() => setDisplay("")} data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">Cancel</button></div>
@@ -336,7 +402,7 @@ const Profile = () => {
                                             </div>
                                         </div>
                                         <br />
-                                        <div className="accordion-item">
+                                        <div className="accordion-item mb-3">
                                             <h2 className="accordion-header" id="flush-headingTwo">
                                                 <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
                                                     Email address : &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span className='reduce_bold'>{username}</span>
@@ -365,7 +431,7 @@ const Profile = () => {
                                             <div className="back p-3">
                                                 <h2>Enter Your Password</h2><br />
                                                 <input type="password" className='txt-underline p-3 w-100 input pressed' placeholder='Password' name="Password" value={pass} onChange={(e) => setPass(e.target.value)} /><br />
-                                                <button onClick={sigInWithGoogle} type="button" className="button_google button w-100"><i className="fa-brands fa-google text-primary">&nbsp;&nbsp;&nbsp;Google user</i></button><br/><br/><br/>
+                                                <button onClick={sigInWithGoogle} type="button" className="button_google button w-100"><i className="fa-brands fa-google text-primary">&nbsp;&nbsp;&nbsp;Google user</i></button><br /><br /><br />
                                                 <button
                                                     type="button"
                                                     className="primary me-4"

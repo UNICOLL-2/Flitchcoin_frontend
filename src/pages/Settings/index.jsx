@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logOutUser } from "../../Feature/Auth/authSlice";
 import { Modal } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import statement from "./Group 87.png";
+import setting_img from "./Group 97.png";
 
 const Settings = () => {
 
@@ -133,86 +136,120 @@ const Settings = () => {
         getInfo();
     },[],show,show1)
 
-    const [setting, setSetting] = useState(true)
+    const [setting, setSetting] = useState(true);
+
+    const [avt, setAvt] = useState();
+  
+    const change = () => {
+      fetch('https://www.flitchcoin.com/api/dashboard', {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          Authorization: `Bearer ${fetchToken()}`
+        }
+      }).then((result) => result.json()
+        .then(res => {
+          setAvt(res.avtar_im);
+        })).catch((err) => {
+          console.log(err);
+        })
+    };
+  
+    useEffect(() => {
+      change();
+    }, []);
 
     return (
-        <div className='container'>
-            <div className="row">
-                <div className="col-md-2"></div>
-                <div className="col-md-8 profile_section" style={{ background: "white" }}>
-                    {setting ?
-                        <>
-                            <div className="row p-4">
-                                <h6 className="col-md-4 navigate col-12" role="button">2-Step Verification</h6>
-                                <h6 className="col-md-4 col-12 " role="button" onClick={() => setSetting(false)}>Become {checkPool ? <>Participant</> : <>Pool</>}</h6>
-                                <hr /><br /><br /><br />
-                                <p><b>Select your 2-step verification method</b></p>
-                                <p>Your 2-step verification method is valid across all your Flitchcoin accounts</p><br /><br /><br /><br />
-                                <p className="text-muted"><b>CURRENT</b></p>
-                                <p>You have currently opted to continue {fa2 ? <>with</> : <>without</>} 2 - Factor Authentication</p>
-                                <button className="w-50" onClick={() => setShow1(true)}>{fa2 ? <>Deactivate</> : <>Activate</>} 2-FA</button>
-                                <Modal
-                                    show={show1}
-                                    onHide={() => setShow1(false)}
-                                    backdrop="static"
-                                    keyboard={false}
-                                    className="modal-dialog-login"
-                                >
-                                    <div className="back p-3">
-                                        <h2>Confirm !!!</h2>
-                                        <b>Do you want to continue to {fa2 ? <>Deactivate</> : <>Activate</>} 2-Factor Authentication</b>
-                                        <p>Notice: On clicking Confirm You will be taken back to login page.</p>
-                                        <button
-                                            type="button"
-                                            className="primary me-4"
-                                            onClick={() => setShow1(false)}
-                                        >
-                                            Cancel
-                                        </button>
-                                        <button type="button" className="primary" onClick={manageFa2}>
-                                            Confirm
-                                        </button>
-                                    </div>
-                                </Modal>
-                            </div>
-                        </> :
-                        <>
-                            <div className="row p-4">
-                                <h6 className="col-md-4 col-12" role="button" onClick={() => setSetting(true)}>2-Step Verification</h6>
-                                <h6 className="col-md-4 col-12 navigate" role="button">Become {checkPool ? <>Participant</> : <>Pool</>}</h6>
-                                <hr /><br /><br /><br />
-                                <p className="text-muted"><b>CURRENT</b></p>
-                                <p>You have currently opted to continue as {!checkPool ? <>Participant</> : <>Pool</>}</p>
-                                <button className="w-50" onClick={() => setShow(true)}>Become {checkPool ? <>Participant</> : <>Pool</>}</button>
-                                <Modal
-                                    show={show}
-                                    onHide={() => setShow(false)}
-                                    backdrop="static"
-                                    keyboard={false}
-                                    className="modal-dialog-login"
-                                >
-                                    <div className="back p-3">
-                                        <h2>Confirm !!!</h2>
-                                        <b>Do you want to continue to become {checkPool ? <>Participant</> : <>Pool</>}</b>
-                                        <p>Notice: On clicking Confirm You will be taken back to login page.</p>
-                                        <button
-                                            type="button"
-                                            className="primary me-4"
-                                            onClick={() => setShow(false)}
-                                        >
-                                            Cancel
-                                        </button>
-                                        <button type="button" className="primary" onClick={become}>
-                                            Confirm
-                                        </button>
-                                    </div>
-                                </Modal>
-                            </div>
-                        </>}
-                </div>
-                <div className="col-md-2"></div>
-            </div>
+        // <div className='container'>
+        //     <div className="row">
+        //         <div className="col-md-2"></div>
+        //         <div className="col-md-8 profile_section" style={{ background: "white" }}>
+        //             {setting ?
+        //                 <>
+        //                     <div className="row p-4">
+        //                         <h6 className="col-md-4 navigate col-12" role="button">2-Step Verification</h6>
+        //                         <h6 className="col-md-4 col-12 " role="button" onClick={() => setSetting(false)}>Become {checkPool ? <>Participant</> : <>Pool</>}</h6>
+        //                         <hr /><br /><br /><br />
+        //                         <p><b>Select your 2-step verification method</b></p>
+        //                         <p>Your 2-step verification method is valid across all your Flitchcoin accounts</p><br /><br /><br /><br />
+        //                         <p className="text-muted"><b>CURRENT</b></p>
+        //                         <p>You have currently opted to continue {fa2 ? <>with</> : <>without</>} 2 - Factor Authentication</p>
+        //                         <button className="w-50" onClick={() => setShow1(true)}>{fa2 ? <>Deactivate</> : <>Activate</>} 2-FA</button>
+        //                         <Modal
+        //                             show={show1}
+        //                             onHide={() => setShow1(false)}
+        //                             backdrop="static"
+        //                             keyboard={false}
+        //                             className="modal-dialog-login"
+        //                         >
+        //                             <div className="back p-3">
+        //                                 <h2>Confirm !!!</h2>
+        //                                 <b>Do you want to continue to {fa2 ? <>Deactivate</> : <>Activate</>} 2-Factor Authentication</b>
+        //                                 <p>Notice: On clicking Confirm You will be taken back to login page.</p>
+        //                                 <button
+        //                                     type="button"
+        //                                     className="primary me-4"
+        //                                     onClick={() => setShow1(false)}
+        //                                 >
+        //                                     Cancel
+        //                                 </button>
+        //                                 <button type="button" className="primary" onClick={manageFa2}>
+        //                                     Confirm
+        //                                 </button>
+        //                             </div>
+        //                         </Modal>
+        //                     </div>
+        //                 </> :
+        //                 <>
+        //                     <div className="row p-4">
+        //                         <h6 className="col-md-4 col-12" role="button" onClick={() => setSetting(true)}>2-Step Verification</h6>
+        //                         <h6 className="col-md-4 col-12 navigate" role="button">Become {checkPool ? <>Participant</> : <>Pool</>}</h6>
+        //                         <hr /><br /><br /><br />
+        //                         <p className="text-muted"><b>CURRENT</b></p>
+        //                         <p>You have currently opted to continue as {!checkPool ? <>Participant</> : <>Pool</>}</p>
+        //                         <button className="w-50" onClick={() => setShow(true)}>Become {checkPool ? <>Participant</> : <>Pool</>}</button>
+        //                         <Modal
+        //                             show={show}
+        //                             onHide={() => setShow(false)}
+        //                             backdrop="static"
+        //                             keyboard={false}
+        //                             className="modal-dialog-login"
+        //                         >
+        //                             <div className="back p-3">
+        //                                 <h2>Confirm !!!</h2>
+        //                                 <b>Do you want to continue to become {checkPool ? <>Participant</> : <>Pool</>}</b>
+        //                                 <p>Notice: On clicking Confirm You will be taken back to login page.</p>
+        //                                 <button
+        //                                     type="button"
+        //                                     className="primary me-4"
+        //                                     onClick={() => setShow(false)}
+        //                                 >
+        //                                     Cancel
+        //                                 </button>
+        //                                 <button type="button" className="primary" onClick={become}>
+        //                                     Confirm
+        //                                 </button>
+        //                             </div>
+        //                         </Modal>
+        //                     </div>
+        //                 </>}
+        //         </div>
+        //         <div className="col-md-2"></div>
+        //     </div>
+        // </div>
+        <div>
+        <div className="row mt-4">
+          <div className="col-xxl-2 col-xl-3 col-12 side_navigation">
+            <Link to="/profile" className='link'><i className=" ps-4 pe-4 pt-2 pb-2 mb-3 dropdown-item mt-5 "><img src={avt} style={{ height: "30px", width: "30px", borderRadius: "50%" }} /> &nbsp; Profile</i></Link>
+            <Link to="/statements" className='link'><i className=" ps-4 pe-4 pt-2 pb-2 mb-3 dropdown-item"><img src={statement} style={{ height: "32px", width: "32px" }} /> &nbsp; Statements</i></Link>
+            <Link to="/settings" className='link'><i className="ps-4 pe-4 pt-2 pb-2 dropdown-item  selected-item"><img src={setting_img} style={{ height: "25px", width: "25px" }} /> &nbsp; Settings</i></Link>
+          </div>
+          <div className="col-md-2"></div>
+          <div className="col-12 col-md-6">
+            
+          </div>
         </div>
+      </div>
     )
 }
 

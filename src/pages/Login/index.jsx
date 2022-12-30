@@ -19,6 +19,7 @@ function Login() {
   const { userToken, user } = useSelector((state) => state.auth);
 
   const [show, setShow] = useState(false);
+  const [noInfo, setNoInfo] = useState(false);
 
   useEffect(() => {
     if (userToken?.access_token) {
@@ -146,11 +147,11 @@ function Login() {
       </div>
       <form className="container" onSubmit={submitHandler}>
         <div className="row ">
-        <div className="col-lg-4"></div>
-        <div className="col-lg-4 card back special_card_profile margin_bottom">
-        <div className="segment mt-4">
-          <h1><img src={side_login_img} style={{height: "78px", width: "51px"}}/>&nbsp;&nbsp; &nbsp;  Log In</h1>
-        </div>
+          <div className="col-lg-4"></div>
+          <div className="col-lg-4 card back special_card_profile margin_bottom">
+            <div className="segment mt-4">
+              <h1><img src={side_login_img} style={{ height: "78px", width: "51px" }} />&nbsp;&nbsp; &nbsp;  Log In</h1>
+            </div>
             <label className="label">
               <input
                 className="input_login"
@@ -173,11 +174,11 @@ function Login() {
               />
             </label>
             <div className="row">
-            <div className="col-lg-6">
-                <button type="button" className="round-btn red button" onClick={()=>navigate("/sign-up")}>New Signup</button>
+              <div className="col-lg-6">
+                <button type="button" className="round-btn red button" onClick={() => navigate("/sign-up")}>New Signup</button>
               </div>
               <div className="col-lg-6">
-                <button type="button" className="round-btn red button" onClick={()=>navigate("/forgot_Password")}>Forgot password</button>
+                <button type="button" className="round-btn red button" onClick={() => navigate("/forgot_Password")}>Forgot password</button>
               </div>
             </div>
             {
@@ -187,43 +188,43 @@ function Login() {
                   type="submit"
                   value="Log In"
                   name="Log In"
-                  style={{fontSize: "28px"}}
+                  style={{ fontSize: "28px" }}
                 >
                   Enter OTP
                 </button>
                 :
                 <>
-                
+
                   <button
-                  className="red button mt-5"
-                  type="submit"
-                  value="Log In"
-                  name="Log In"
-                  style={{fontSize: "28px"}}
-                >
-                  <div className="row">
-                    <div className="col-4"></div>
-                  <div className="col-4 text-center">
-                  Log in
-                  </div>
-                  <div className="col-4">
-                  <img src={login_lock} className="pb-2" style={{height: "35px", width: "27px"}}/>
-                  </div>
-                  </div>
-                </button>                  
+                    className="red button mt-5"
+                    type="submit"
+                    value="Log In"
+                    name="Log In"
+                    style={{ fontSize: "28px" }}
+                  >
+                    <div className="row">
+                      <div className="col-4"></div>
+                      <div className="col-4 text-center">
+                        Log in
+                      </div>
+                      <div className="col-4">
+                        <img src={login_lock} className="pb-2" style={{ height: "35px", width: "27px" }} />
+                      </div>
+                    </div>
+                  </button>
                 </>
             }
             <button type="button" onClick={sigInWithGoogle} className="mt-4 primary round-btn w-100 mb-5 place_order_btn" >
               <div className="row">
                 <div className="col-2">
-                <img src={google_img} style={{height: "41px", width: "41px"}}/>
+                  <img src={google_img} style={{ height: "41px", width: "41px" }} />
                 </div>
                 <div className="col-10 pt-1">
-                Sign In With Google
+                  Sign In With Google
                 </div>
               </div>
-              </button>
-        </div>
+            </button>
+          </div>
         </div>
       </form>
 
@@ -260,6 +261,21 @@ function Login() {
           </button>
         </div>
       </Modal>
+      <button type="button" class="btn btn-primary" id="liveToastBtn">Show live toast</button>
+
+      <div class="position-fixed bottom-0 end-0 p-3" style={{zIndex: "11"}}>
+        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <img src="..." class="rounded me-2" alt="..."/>
+              <strong class="me-auto">Bootstrap</strong>
+              <small>11 mins ago</small>
+              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body">
+            Hello, world! This is a toast message.
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
