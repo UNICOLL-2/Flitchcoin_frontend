@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../Feature/Auth/authSlice";
 import Animation from "../../Animation";
 import { Modal } from "react-bootstrap";
+import Toast from 'react-bootstrap/Toast';
 
 function Forgot_Pass() {
 
@@ -16,11 +17,13 @@ function Forgot_Pass() {
     });
     const { username, password } = formData;
     const [msg, setMsg] = useState();
+    const [showA, setShowA] = useState(false);
+    const [showB, setShowB] = useState(false);
 
     const submitHandler = (e) => {
         e.preventDefault();
         if ((username === "") || (password === "")) {
-            alert("Please fill in the above information in ");
+            setShowA(true);
         } else {
             var data = JSON.stringify({
                 "username": username,
@@ -60,7 +63,7 @@ function Forgot_Pass() {
     const otpHandler = (e) => {
         e.preventDefault();
         if (otp === "") {
-            alert("Please fill in the otp ");
+            setShowB(true);
         } else {
             var data = JSON.stringify({
                 "otp": Number(otp),
@@ -91,7 +94,22 @@ function Forgot_Pass() {
             <Animation />
             <form className="container mt-5" onSubmit={submitHandler}>
                 <div className="row">
-                    <div className="col-lg-4"></div>
+                    <div className="col-lg-4">
+                        <Toast onClose={() => setShowA(false)} className="text-center position-absolute" style={{ zIndex: "11", marginTop: "5rem" }} position="top-center" show={showA} delay={3000} autohide>
+                            <Toast.Header>
+                                <strong className="me-auto">Flitchcoin</strong>
+                                <small>Unfilled !</small>
+                            </Toast.Header>
+                            <Toast.Body>Please enter details to proceed.</Toast.Body>
+                        </Toast>
+                        <Toast onClose={() => setShowB(false)} className="text-center position-absolute" style={{ zIndex: "11", marginTop: "5rem" }} position="top-center" show={showB} delay={3000} autohide>
+                            <Toast.Header>
+                                <strong className="me-auto">Flitchcoin</strong>
+                                <small>Error !</small>
+                            </Toast.Header>
+                            <Toast.Body>Please fill in the OTP.</Toast.Body>
+                        </Toast>
+                    </div>
                     <div className="col-lg-4 card back special_card_profile ms-2 mt-2 mb-3">
                         <div className="segment">
                             <h1>Enter Your Credentials</h1>

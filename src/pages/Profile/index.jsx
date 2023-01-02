@@ -5,20 +5,19 @@ import { Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { avtarType } from "../../Feature/Order/orderSlice";
 import { logOutUser } from "../../Feature/Auth/authSlice";
-import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import statement from "./Group 87.png";
-import setting from "./Group 97.png"
+import setting from "./Group 97.png";
+import Toast from 'react-bootstrap/Toast';
 
 const Profile = () => {
 
     const [avt, setAvt] = useState();
     const [show, setShow] = useState(false);
-    const [show1, setShow1] = useState(false);
     const [arr, setArr] = useState();
     const [loading, setLoading] = useState(true);
     const [display, setDisplay] = useState("");
-    const [pass, setPass] = useState("");
+    const [showA, setShowA] = useState(false);
+    const [showB, setShowB] = useState(false);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -147,52 +146,8 @@ const Profile = () => {
             body: data
         }).then(result => result.json()
             .then(res => {
-                alert("Dispaly name changed successfully!!");
+                setShowA(true);
                 setName(res.name);
-            })).catch(err => console.log(err))
-    };
-
-    const firebaseConfig = {
-        apiKey: "AIzaSyD9-xgz9FYET9nVocqKmfPqWeOShtDw5AY",
-        authDomain: "auth-77872.firebaseapp.com",
-        projectId: "auth-77872",
-        storageBucket: "auth-77872.appspot.com",
-        messagingSenderId: "768493241754",
-        appId: "1:768493241754:web:6e3a5b66a938bff5962623"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    const provider = new GoogleAuthProvider();
-    const sigInWithGoogle = () => {
-        signInWithPopup(auth, provider).then(result => {
-            setUsername(result.user.email);
-            setPass(result.user.uid);
-        }).catch(err => console.log(err));
-    };
-
-    const closeAccount = () => {
-        var data = `grant_type=&username=${username}&password=${pass}&scope=&client_id=&client_secret=`;
-        console.log(data);
-        fetch("https://flitchcoin.com/api/Signup", {
-            method: "DELETE",
-            headers: {
-                'Accept': 'application/x-www-form-urlencoded ',
-                'Content-Type': 'application/x-www-form-urlencoded ',
-                Authorization: `Bearer ${fetchToken()}`
-            },
-            body: data
-        }).then(result => result.json()
-            .then(res => {
-                console.log(res);
-                if (res.status === 200) {
-                    alert("Your account has been deleted permanently");
-                    dispatch(logOutUser());
-                    navigate("/login");
-                } else {
-                    alert("Wrong Password!");
-                }
             })).catch(err => console.log(err))
     };
 
@@ -229,7 +184,7 @@ const Profile = () => {
                     onClick();
                 })).catch(err => console.log(err));
         }, 5000);
-        alert("You will now signed out from this page . Please login again !");
+        setShowB(true);
     };
 
     return (
@@ -316,14 +271,29 @@ const Profile = () => {
                     </div>
                 </> :
                     <>
-                        <div className="row ">
+                        <div className="row mt-4">
                             <div className="col-xxl-2 col-xl-3 col-12 side_navigation">
                                 <Link to="/profile" className='link'><i className=" ps-4 pe-4 pt-2 pb-2 mb-3 dropdown-item mt-5 selected-item"><img src={avt} style={{ height: "30px", width: "30px", borderRadius: "50%" }} /> &nbsp; Profile</i></Link>
                                 <Link to="/statements" className='link'><i className=" ps-4 pe-4 pt-2 pb-2 mb-3 dropdown-item"><img src={statement} style={{ height: "32px", width: "32px" }} /> &nbsp; Statements</i></Link>
                                 <Link to="/settings" className='link'><i className="ps-4 pe-4 pt-2 pb-2 dropdown-item"><img src={setting} style={{ height: "25px", width: "25px" }} /> &nbsp; Settings</i></Link>
                             </div>
-                            <div className="col-md-2"></div>
-                            <div className="col-12 col-md-6 mt-4">
+                            <div className="col-md-2">
+                            <Toast onClose={() => setShowA(false)} className="text-center position-absolute" style={{ zIndex: "11", marginTop: "5rem" }} position="top-center" show={showA} delay={3000} autohide>
+                            <Toast.Header>
+                                <strong className="me-auto">Flitchcoin</strong>
+                                <small>Done !</small>
+                            </Toast.Header>
+                            <Toast.Body>Your display name has been changed.</Toast.Body>
+                        </Toast>
+                        <Toast onClose={() => setShowB(false)} className="text-center position-absolute" style={{ zIndex: "11", marginTop: "5rem" }} position="top-center" show={showB} delay={3000} autohide>
+                            <Toast.Header>
+                                <strong className="me-auto">Flitchcoin</strong>
+                                <small>Carefull !</small>
+                            </Toast.Header>
+                            <Toast.Body>You will be loged out after this event. Please log in again.</Toast.Body>
+                        </Toast>
+                            </div>
+                            <div className="col-12 col-md-6 mt-4 mb-4">
                                 <p className='text-center mt-4' style={{ fontSize: "47px", fontWeight: "700" }}>Profile</p>
                                 <hr />
                                 <div className='mt-5'>
@@ -412,38 +382,6 @@ const Profile = () => {
                                                 <div className="accordion-body">Your email address has been set to <span className='text-muted'>{username}</span></div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div className='profile_section mt-3 mb-4'>
-                                    <h3>Close Account</h3>
-                                    <div className="row">
-                                        <div className="col-md-9 col-12 text-muted">
-                                            On clicking the button you will close your account permanently . Make sure you have no amount in your flitchCoin wallet otherwise it may lead to loss of that amount.
-                                        </div>
-                                        <div className="col-md-3 col-12"><button className='btn btn-danger' onClick={() => setShow1(true)}><b>Close Account</b></button></div>
-                                        <Modal
-                                            show={show1}
-                                            onHide={() => setShow1(false)}
-                                            backdrop="static"
-                                            keyboard={false}
-                                            className="modal-dialog-login"
-                                        >
-                                            <div className="back p-3">
-                                                <h2>Enter Your Password</h2><br />
-                                                <input type="password" className='txt-underline p-3 w-100 input pressed' placeholder='Password' name="Password" value={pass} onChange={(e) => setPass(e.target.value)} /><br />
-                                                <button onClick={sigInWithGoogle} type="button" className="button_google button w-100"><i className="fa-brands fa-google text-primary">&nbsp;&nbsp;&nbsp;Google user</i></button><br /><br /><br />
-                                                <button
-                                                    type="button"
-                                                    className="primary me-4"
-                                                    onClick={() => setShow1(false)}
-                                                >
-                                                    Cancel
-                                                </button>
-                                                <button type="button" className="primary" onClick={closeAccount}>
-                                                    Confirm
-                                                </button>
-                                            </div>
-                                        </Modal>
                                     </div>
                                 </div>
                             </div>

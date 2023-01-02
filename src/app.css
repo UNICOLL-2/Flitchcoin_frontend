@@ -570,6 +570,77 @@ textarea:focus {
 	margin-bottom: 8px;
 }
 
+/* #### TOOLTIP ####  */
+.ud-tooltip {
+	position: relative;
+  }
+  .ud-tooltip:hover .tip-content2 {
+	display: block;
+  }
+  .ud-tooltip:hover .tip-content1 {
+	display: block;
+  }
+  .ud-tooltip .tip-content1 {
+	display: none;
+	position: absolute;
+	top: 43px;
+	left: 70px;
+	width: 120px;
+	height: 70px;
+	padding: 17px 5px;
+	background-color: #eaeaea;
+	border: 3px solid #d0d0d0;
+  }
+  .ud-tooltip .tip-content1::before {
+	content: "";
+	position: absolute;
+	top: -17px;
+	left: 38px;
+	width: 30px;
+	height: 30px;
+	background-color: #eaeaea;
+	border: 3px solid #d0d0d0;
+	transform: rotate(45deg);
+	border-radius: 10px;
+  
+	border-bottom-color: transparent;
+	border-right-color: transparent;
+  }
+  .ud-tooltip .tip-content1 p {
+	font-size: 10px;
+	text-align: left;
+  }
+  .ud-tooltip .tip-content2 {
+	display: none;
+	position: absolute;
+	top: 43px;
+	right: 41px;
+	width: 120px;
+	height: 70px;
+	padding: 17px 5px;
+	background-color: #eaeaea;
+	border: 3px solid #d0d0d0;
+  }
+  .ud-tooltip .tip-content2::before {
+	content: "";
+	position: absolute;
+	top: -17px;
+	left: 38px;
+	width: 30px;
+	height: 30px;
+	background-color: #eaeaea;
+	border: 3px solid #d0d0d0;
+	transform: rotate(45deg);
+	border-radius: 10px;
+  
+	border-bottom-color: transparent;
+	border-right-color: transparent;
+  }
+  .ud-tooltip .tip-content2 p {
+	font-size: 10px;
+  }
+  /* ### TOOLTIP #### */
+
 @media screen and (max-width: 990px) {
 	.dashboard__devision {
 		display: none;
@@ -2643,7 +2714,7 @@ canvas {
 	width: 80px;
 }
 
-.edit{
+.edit {
 	text-decoration: underline;
 	cursor: pointer;
 }
@@ -2677,7 +2748,7 @@ canvas {
 	font-size: 25px;
 }
 
-.dropdown-item:hover{
+.dropdown-item:hover {
 	border-radius: 20px !important;
 	border: 2px solid transparent !important;
 	background: linear-gradient(#D9D9D9, #D9D9D9),
@@ -2696,11 +2767,11 @@ canvas {
 }
 
 .accordion-flush .accordion-item .accordion-button {
-    border-radius: 20px!important;
+	border-radius: 20px !important;
 }
 
-.accordion-flush .accordion-item{
-	border-radius: 20px!important;
+.accordion-flush .accordion-item {
+	border-radius: 20px !important;
 }
 
 #flush-collapseOne {
@@ -2708,8 +2779,8 @@ canvas {
 	border: 1px solid rgb(211, 211, 211);
 }
 
-.tool:hover{
-	cursor:help;
+.tool:hover {
+	cursor: help;
 }
 
 /* settings page */
@@ -2719,6 +2790,11 @@ canvas {
 	font-weight: 700;
 }
 
+.settings_box {
+	background: #D9D9D9;
+	border-radius: 28px;
+	
+}
 
 .border_to_card {
 	border-radius: 30px !important;

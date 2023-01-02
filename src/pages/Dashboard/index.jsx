@@ -360,15 +360,32 @@ function Dashboard() {
             <div className="row">
               <div className="plain_text row mb-4 mt-3">
                 <div className="col-5 text-end">
-                  {
-                    checkPool ?
-                      <>
+                  {checkPool ? (
+                    <>
+                      <div className="ud-tooltip">
+                        <p
+                          className="tool"
+                          data-bs-toggle="tooltip"
+                          data-bs-placement="bottom"
+                        >
                           Pool
-                      </> :
-                      <>
-                          Part.
-                      </>
-                  }
+                        </p>
+                        <div className="tip-content1">
+                          <p>Lorem ipsum dolor sit amet.</p>
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <p
+                        className="tool"
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="bottom"
+                      >
+                        Part.
+                      </p>
+                    </>
+                  )}
                 </div>
                 <div className="col-2" style={{ marginTop: "-22px" }}>
                   <div>
@@ -377,15 +394,34 @@ function Dashboard() {
                   </div>
                 </div>
                 <div className="col-5 ps-4 text-start">
-                  {
-                    !checkPool ?
-                      <>
+                  {!checkPool ? (
+                    <>
+                      <div className="ud-tooltip">
+                        <p
+                          className="tool"
+                          data-bs-toggle="tooltip"
+                          data-bs-placement="bottom"
+                        >
                           Pool
-                      </> :
-                      <>
+                        </p>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="ud-tooltip">
+                        <p
+                          className="tool"
+                          data-bs-toggle="tooltip"
+                          data-bs-placement="bottom"
+                        >
                           Part.
-                      </>
-                  }
+                        </p>
+                        <div className="tip-content2">
+                          <p>Lorem ipsum dolor sit amet.</p>
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
               <div className="col-xl-4">

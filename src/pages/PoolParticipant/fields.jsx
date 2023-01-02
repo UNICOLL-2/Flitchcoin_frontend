@@ -21,18 +21,6 @@ const Fields = (props) => {
     return (
         <div>
             <div className="row mb-4">
-              <div className="col-3">
-                <button className="round-btn ps-3 pe-3">10%</button>
-              </div>
-              <div className="col-3">
-                <button className="round-btn ps-3 pe-3">25%</button>
-              </div>
-              <div className="col-3">
-                <button className="round-btn ps-3 pe-3">50%</button>
-              </div>
-              <div className="col-3">
-                <button className="round-btn ps-3 pe-2">100%</button>
-              </div>
             </div>
                     <div className="col-12">
                       <div className="input1 w-100">
@@ -53,7 +41,7 @@ const Fields = (props) => {
                         <input
                           type="number"
                           name="duration"
-                          placeholder="Duration:             Days"
+                          placeholder="Duration:            Days"
                           className="input_login txt-underline p-3 mb-3 w-100"
                           value={value}
                           onChange={onChangeValues}

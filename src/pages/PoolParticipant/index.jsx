@@ -38,8 +38,6 @@ const PoolParticipant = () => {
     });
   };
 
-
-
   const [coins, setCoins] = useState('');
   const [coinsNet, setCoinsNet] = useState('');
 
@@ -167,14 +165,14 @@ const PoolParticipant = () => {
                       <Toast.Body>Please enter an amount greater than $ 20 to proceed with order.</Toast.Body>
                     </Toast>
                     <h2 className="text-center mb-5">Place Order</h2>
-                    <div className="col-12 mb-5 btn-group">
+                    <div className="col-12 mb-3 btn-group">
                       <button
                         type="button"
                         className="btn btn-dark dropdown-toggle w-100 round-btn"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
                       >
-                        <b>{coin}</b>
+                        <b>{coin}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
                       </button>
                       <ul className="dropdown-menu drop">
                         {asset.map(items => {
@@ -195,7 +193,7 @@ const PoolParticipant = () => {
                         style={{ position: "absolute", width: "90%" }}
                         onClick={sendOrder}
                       >
-                        Place Order  ${(amountToBeConverted).toFixed(2)}
+                        Place Order  ${{amountToBeConverted} === "NaN" ? <>0</>: <>{(amountToBeConverted).toFixed(2)}</>}
                       </button>
                     </div>
                   </div>

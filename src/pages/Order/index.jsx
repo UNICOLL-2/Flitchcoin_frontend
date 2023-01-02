@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { fetchToken } from "../../Auth";
 import bit_img from "./image 4.png";
+import { Modal } from "react-bootstrap";
+import Toast from 'react-bootstrap/Toast';
 
 const Order = () => {
 
   const [cardClicked, setCardClicked] = useState(null);
   const [type, setType] = useState("History");
   const [checkPool, setCheckPool] = useState(false);
+  const [show1, setShow1] = useState(false);
+  const [showA, setShowA] = useState(false);
+  const [showB, setShowB] = useState(false);
 
   const getInfo = () => {
     fetch('https://flitchcoin.com/api/users/me/items/', {
@@ -35,6 +40,7 @@ const Order = () => {
   const [openOrderDataParticipant, setOpenOrderDataParticipant] = useState([]);
   const [openPositionDataPool, setOpenPositionDataPool] = useState([]);
   const [openPositionDataParticipant, setOpenPositionDataParticipant] = useState([]);
+  const [allMemo, setAllMemo] = useState([]);
 
   const order = () => {
     fetch("https://flitchcoin.com/api/order", {
@@ -46,6 +52,11 @@ const Order = () => {
     }).then((result) => result.json()
       .then(resp => {
         const res = (Object.values(resp));
+        var tempArr_5 = [];
+        for (let i = 0; i < res.length; i++) {
+          tempArr_5.push(res[i].memo);
+        }
+        setAllMemo([...tempArr_5]);
         var tempArr_1 = [];
         var tempArr_2 = [];
         var tempArr_3 = [];
@@ -99,7 +110,6 @@ const Order = () => {
 
   var { withdrawableHedge, entryPrice, markPrice, roe, liquationPrice, colateralizedAsset, allocatedMargin, totalAmount, alt_id, memo } = cardDataParticipant;
   var { _liquationPrice, _colateralizedAsset, _totalAmount, _alt_id, _memo } = cardDataPool;
-
 
   const gettingData = (item) => {
     if (checkPool) {
@@ -168,22 +178,23 @@ const Order = () => {
   const [amount, setAmount] = useState("");
 
   const closeOrder = () => {
-    var data = JSON.stringify({
-      "memo": cardDataParticipant.memo
-    })
-    fetch("https://flitchcoin.com/api/order", {
-      method: 'DELETE',
-      headers: {
-        'Accept': 'application/json',
-        Authorization: `Bearer ${fetchToken()}`,
-        'Content-Type': 'application/json'
-      },
-      body: data
-    }).then((result) => {
-      result.json().then((res) => {
-        console.log(res)
-      });
-    }).catch(err => console.log(err));
+    setShowA(true);
+    // var data = JSON.stringify({
+    //   "memo": cardDataParticipant.memo
+    // })
+    // fetch("https://flitchcoin.com/api/order", {
+    //   method: 'DELETE',
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     Authorization: `Bearer ${fetchToken()}`,
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: data
+    // }).then((result) => {
+    //   result.json().then((res) => {
+    //     setShowA(true);
+    //   });
+    // }).catch(err => console.log(err));
   };
 
   const addMargin = () => {
@@ -227,6 +238,28 @@ const Order = () => {
       });
     }).catch(err => console.log(err));
   };
+
+  const closeAllOrders = () => {
+    allMemo.map(i => {
+      var data = JSON.stringify({
+        "memo": i
+      })
+      fetch("https://flitchcoin.com/api/order", {
+        method: 'DELETE',
+        headers: {
+          'Accept': 'application/json',
+          Authorization: `Bearer ${fetchToken()}`,
+          'Content-Type': 'application/json'
+        },
+        body: data
+      }).then((result) => {
+        result.json().then((res) => {
+          setShow1(false);
+          setShowB(true);
+        });
+      }).catch(err => console.log(err));
+    })
+  }
 
   return (
     <div className="container">
@@ -294,7 +327,7 @@ const Order = () => {
                     })
                   }
                   {
-                    openPositionDataPool.map((i,index) => {
+                    openPositionDataPool.map((i, index) => {
                       return (
                         <div key={index} className={`card back mt-3 mb-4 text_for_order parent_card p-4 hover_cards ${cardClicked === index ? 'special_card_order' : ''}`} onClick={() => {
                           gettingData(i)
@@ -333,7 +366,7 @@ const Order = () => {
                     type === "Open Orders" ?
                       <>
                         {
-                          openOrderDataParticipant.map((i,index) => {
+                          openOrderDataParticipant.map((i, index) => {
                             return (
                               <div key={index} className={`card back mt-3 mb-4 text_for_order parent_card p-4 hover_cards ${cardClicked === index ? 'special_card_order' : ''}`} onClick={() => {
                                 gettingData(i)
@@ -376,7 +409,7 @@ const Order = () => {
                           })
                         }
                         {
-                          openOrderDataPool.map((i,index) => {
+                          openOrderDataPool.map((i, index) => {
                             return (
                               <div key={index} className={`card back mt-3 mb-4 text_for_order parent_card p-4 hover_cards ${cardClicked === index ? 'special_card_order' : ''}`} onClick={() => {
                                 gettingData(i)
@@ -398,10 +431,10 @@ const Order = () => {
                                   <div className="col-xl-4 col-12">
                                     <p>- Colateralized Asset : &nbsp;&nbsp;&nbsp;{i.sym}</p>
                                     <p>{i.post_price === 0 ?
-                                <></> :
-                                <>
-                                  - Liq. Price : &nbsp;&nbsp;{Number((i.post_price)).toFixed(2)}
-                                </>}</p>
+                                      <></> :
+                                      <>
+                                        - Liq. Price : &nbsp;&nbsp;{Number((i.post_price)).toFixed(2)}
+                                      </>}</p>
                                   </div>
                                 </div>
                               </div>
@@ -414,7 +447,7 @@ const Order = () => {
                           type === "History" ?
                             <>
                               {
-                                openPositionDataParticipant.map((i,index) => {
+                                openPositionDataParticipant.map((i, index) => {
                                   return (
                                     <div key={index} className={`card back mt-3 mb-4 text_for_order parent_card p-4 hover_cards ${cardClicked === index ? 'special_card_order' : ''}`} onClick={() => {
                                       gettingData(i)
@@ -457,7 +490,7 @@ const Order = () => {
                                 })
                               }
                               {
-                                openPositionDataPool.map((i,index) => {
+                                openPositionDataPool.map((i, index) => {
                                   return (
                                     <div key={index} className={`card back mt-3 mb-4 text_for_order parent_card p-4 hover_cards ${cardClicked === index ? 'special_card_order' : ''}`} onClick={() => {
                                       gettingData(i)
@@ -479,10 +512,10 @@ const Order = () => {
                                         <div className="col-xl-4 col-12">
                                           <p>- Colateralized Asset : &nbsp;&nbsp;&nbsp;{i.sym}</p>
                                           <p>{i.post_price === 0 ?
-                                <></> :
-                                <>
-                                  - Liq. Price : &nbsp;&nbsp;{Number((i.post_price)).toFixed(2)}
-                                </>}</p>
+                                            <></> :
+                                            <>
+                                              - Liq. Price : &nbsp;&nbsp;{Number((i.post_price)).toFixed(2)}
+                                            </>}</p>
                                         </div>
                                       </div>
                                     </div>
@@ -490,7 +523,7 @@ const Order = () => {
                                 })
                               }
                               {
-                                openOrderDataParticipant.map((i,index) => {
+                                openOrderDataParticipant.map((i, index) => {
                                   return (
                                     <div key={index} className={`card back mt-3 mb-4 text_for_order parent_card p-4 hover_cards ${cardClicked === index ? 'special_card_order' : ''}`} onClick={() => {
                                       gettingData(i)
@@ -533,7 +566,7 @@ const Order = () => {
                                 })
                               }
                               {
-                                openOrderDataPool.map((i,index) => {
+                                openOrderDataPool.map((i, index) => {
                                   return (
                                     <div key={index} className={`card back mt-3 mb-4 text_for_order parent_card p-4 hover_cards ${cardClicked === index ? 'special_card_order' : ''}`} onClick={() => {
                                       gettingData(i)
@@ -555,10 +588,10 @@ const Order = () => {
                                         <div className="col-xl-4 col-12">
                                           <p>- Colateralized Asset : &nbsp;&nbsp;&nbsp;{i.sym}</p>
                                           <p>{i.post_price === 0 ?
-                                <></> :
-                                <>
-                                  - Liq. Price : &nbsp;&nbsp;{Number((i.post_price)).toFixed(2)}
-                                </>}</p>
+                                            <></> :
+                                            <>
+                                              - Liq. Price : &nbsp;&nbsp;{Number((i.post_price)).toFixed(2)}
+                                            </>}</p>
                                         </div>
                                       </div>
                                     </div>
@@ -575,10 +608,46 @@ const Order = () => {
           </div>
         </div>
         <div className="col-xl-4">
+        <Toast onClose={() => setShowA(false)} className="text-center position-absolute" style={{ zIndex: "11"}} position="top-center" show={showA} delay={3000} autohide>
+        <Toast.Header>
+          <strong className="me-auto">Flitchcoin</strong>
+          <small>Done !</small>
+        </Toast.Header>
+        <Toast.Body>Your order has been closed.</Toast.Body>
+      </Toast>
+      <Toast onClose={() => setShowB(false)} className="text-center position-absolute" style={{ zIndex: "11"}} position="top-center" show={showB} delay={3000} autohide>
+        <Toast.Header>
+          <strong className="me-auto">Flitchcoin</strong>
+          <small>Done !</small>
+        </Toast.Header>
+        <Toast.Body>All of your orders has been closed.</Toast.Body>
+      </Toast>
           <div className="text-end">
-            <button className="close_btn mb-5 p-2 ps-5 pe-5">
+            <button className="close_btn mb-5 p-2 ps-5 pe-5" onClick={() => setShow1(true)}>
               Close all orders
             </button>
+            <Modal
+              show={show1}
+              onHide={() => setShow1(false)}
+              backdrop="static"
+              keyboard={false}
+              className="modal-dialog-login"
+            >
+              <div className="back p-3">
+                <h2>Confirm !!!</h2>
+                <b>Do you want to close all of your orders.</b>
+                <button
+                  type="button"
+                  className="primary me-4 mt-3"
+                  onClick={() => setShow1(false)}
+                >
+                  Cancel
+                </button>
+                <button type="button mt-3" className="primary" onClick={closeAllOrders}>
+                  Confirm
+                </button>
+              </div>
+            </Modal>
           </div>
           {
             type === "Open Positions" ?

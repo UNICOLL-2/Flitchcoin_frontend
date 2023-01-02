@@ -10,7 +10,6 @@ import Login from "../../pages/Login";
 import SignUp from "../../pages/SignUp";
 import { RequireToken } from "../../Auth";
 import HomeMain from "../../pages/Home_main";
-import SignVerify from "../../pages/Sign_verify";
 import QRVerify from "../../pages/QRVerify";
 import ForgotPass from "../../pages/Forgot_Pass";
 import ProtectedRoutes from "../../pages/ProtectedRoutes";
@@ -42,7 +41,6 @@ function Content() {
           <Route path="/add_wallet" element={<Protection Cmp={AddWallet} />} />
         <Route path="/about" element={<About />} />
         <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/sign_verify" element={<SignVerify />} />
         <Route path="/forgot_password" element={<ForgotPass />} />
       </Routes>
     </div>
