@@ -147,7 +147,7 @@ const Order = () => {
       body: data
     }).then((result) => {
       result.json().then((res) => {
-        console.log(res)
+        console.log(res[0].liq_p)
       });
     }).catch(err => console.log(err));
   };
@@ -178,23 +178,22 @@ const Order = () => {
   const [amount, setAmount] = useState("");
 
   const closeOrder = () => {
-    setShowA(true);
-    // var data = JSON.stringify({
-    //   "memo": cardDataParticipant.memo
-    // })
-    // fetch("https://flitchcoin.com/api/order", {
-    //   method: 'DELETE',
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     Authorization: `Bearer ${fetchToken()}`,
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: data
-    // }).then((result) => {
-    //   result.json().then((res) => {
-    //     setShowA(true);
-    //   });
-    // }).catch(err => console.log(err));
+    var data = JSON.stringify({
+      "memo": cardDataParticipant.memo
+    })
+    fetch("https://flitchcoin.com/api/order", {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        Authorization: `Bearer ${fetchToken()}`,
+        'Content-Type': 'application/json'
+      },
+      body: data
+    }).then((result) => {
+      result.json().then((res) => {
+        setShowA(true);
+      });
+    }).catch(err => console.log(err));
   };
 
   const addMargin = () => {
