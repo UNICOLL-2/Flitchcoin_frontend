@@ -170,8 +170,8 @@ const QRVerify = () => {
             <Animation />
             <div className="container">
                 <div className="row mt-5">
-                    <h1 className='text-center text-muted'>Setup Two Factor Authentication</h1>
-                    <div className="col col-md-1"></div>
+                    <h1 className='text-center setup_text'>Setup Two Factor Authentication</h1>
+                    {/* <div className="col col-md-1"></div>
                     <div className="col card mt-3 mb-3 col-12 col-md-3 p-5">
                         {page === true ?
                             <>
@@ -268,7 +268,16 @@ const QRVerify = () => {
                                 </form>
                             </>}
                     </div>
-                    <div className="col col-md-1"></div>
+                    <div className="col col-md-1"></div> */}
+
+                    <div className="card back parent_card">
+                        <div className="row">
+                            <div className="col-xl-4 mt-5">
+                                
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </>

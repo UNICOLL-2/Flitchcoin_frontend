@@ -77,6 +77,16 @@ function Header() {
     } else {
       setIsActive(true);
     }
+  };
+
+  function function1() {
+    document.getElementById("wa").style.width="200px";
+    document.getElementById("wa").style.opacity="1";
+  }
+   
+  function function2() {
+    document.getElementById("wa").style.width="0";
+    document.getElementById("wa").style.opacity="0";
   }
 
   return (
@@ -108,7 +118,7 @@ function Header() {
             selectedType === "pool" || selectedType === "participant" ?
               <>
                 <div className="brand ms-4" onClick={() => navigate(-1)}>&#x2190;</div>
-                <img src={avt} alt="avatar" className="logo" id="menubtn" onClick={open}/>
+                <img src={avt} alt="avatar" className="logo" id="menubtn" onClick={open} onMouseEnter={function1} onMouseLeave={function2}/><div class="avt" id="wa"><p class="tx">Tushar Gupta</p></div>
                 <div className="headinglist">
                 <Link to="/Api" className="margin_start ">Api</Link>
                 <Link to="/Dashboard" className="margin_bw ">Dashboard</Link>
