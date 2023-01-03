@@ -21,6 +21,8 @@ function Dashboard() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
+  const [tableInfo, setTableInfo] = useState([]);
+  const [totalBalance, setTotalBalance] = useState(0);
 
   const account = () => {
     fetch("https://flitchcoin.com/api/account", {
@@ -37,8 +39,15 @@ function Dashboard() {
           // Object.keys will return keys of object 
           // Object.entries will return array of key with value
           // Object.values will return array of values of all keys
-
-          
+          var tempArr = [];
+          var count = 0;
+          const data = (Object.values(res));
+          for (let i = 0; i < data.length; i++) {
+            tempArr.push(data[i]);
+            count += data[i].total;
+          }
+          setTableInfo([...tempArr]);
+          setTotalBalance(count);
         })
       ).catch((err) => {
         console.log(err);
@@ -215,7 +224,7 @@ function Dashboard() {
               </div>
             </div>
             <div className="row card back special_card_account">
-              <p className="welcome_1">Account Summary : $ 4500000</p>
+              <p className="welcome_1">Account Summary : $ {totalBalance}</p>
               {
                 fa2 ?
                   <>
@@ -415,50 +424,44 @@ function Dashboard() {
       </div>
       <div className="container mt-5 mb-5 pb-5">
         <div className="row">
-          <div className="col-xl-7 enable_scroll me-5">
-            <div className="row">
-              <div className="col-lg-6 p-0">
-                {
-                  newArr.map(name => {
-                    return (
-                      <>
-                        <hr className='mt-3' />
-                        <div className="p-3 row align-items-center making_lines">
-                          <div className="col-3"><img src={name[1]} className="dashboard_logo" /></div>
-                          <div className="col-6">{name[0]}</div>
-                        </div>
-                        <hr />
-                      </>
-                    )
-                  })
-                }
-              </div>
-              <div className="col-lg-3 p-0">
-                {arr1.map(names => {
-                  return (
-                    <>
-                      <hr className='mt-3' />
-                      <div className="row p-3">{names}</div>
-                      <hr />
-                    </>
-                  )
-                })}
-              </div>
-              <div className="col-lg-3 p-0">
-                {arr2.map(names => {
-                  return (
-                    <>
-                      <hr className='mt-3' />
-                      <div className="row p-3 making_lines_end">{names}</div>
-                      <hr />
-                    </>
-                  )
-                })}
-              </div>
+          
+          <div className="col-xl-7  me-5">
+            <div className="row table_section">
+            <div className="col-6">
+            <p className="text-muted ps-5 ms-4">Coin</p>
+          </div>
+          <div className="col-3">
+            <p className="text-muted ps-5">Total</p>
+          </div>
+          <div className="col-3">
+            <p className="text-muted ps-4">Yield</p>
+          </div>
+            </div>
+            <div className="row ps-5 pe-2 enable_scroll">
+            {
+              tableInfo.map(i => {
+                return (
+                  <div className="row table_section mt-3">
+                    <div className="col-1">
+                      <img className='table_coin' src={i.link} alt="coin_img" style={{borderRadius: "50%"}} />
+                    </div>
+                    <div className="col-5 pt-1">
+                      <p>{i.asset}</p>
+                    </div>
+                    <div className="col-3 pt-1">
+                      <p className='text-center'>{i.total}</p>
+                    </div>
+                    <div className="col-3 pt-1">
+                      <p className='text-center'>{i.yield}</p>
+                    </div>
+                  </div>
+                )
+              })
+            }
             </div>
           </div>
           <div className="col-xl-4">
-            <Timeline colorTheme="light" feedMode="market" market="crypto" height={600} width="120%"></Timeline>
+            <Timeline colorTheme="light" feedMode="market" market="crypto" height={670} width="120%"></Timeline>
           </div>
         </div>
       </div>

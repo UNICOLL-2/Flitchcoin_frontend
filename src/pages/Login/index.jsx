@@ -9,7 +9,6 @@ import Animation from "../../Animation";
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import side_login_img from "./Vector.png";
-import login_lock from "./Vector (1).png";
 import google_img from "./image 21.png";
 import Toast from 'react-bootstrap/Toast';
 
@@ -130,7 +129,7 @@ function Login() {
         username: result.user.email,
         password: result.user.uid,
       }));
-      checkUser();
+      checkUser(result.user.email);
       if (fa2 === "true") {
         setShow(true);
       } else {
@@ -156,7 +155,7 @@ function Login() {
               <Toast.Body>Please enter details to proceed for Login.</Toast.Body>
             </Toast>
           </div>
-          <div className="col-lg-5 ms-5 ps-5 pe-5 card back special_card_profile margin_bottom">
+          <div className="col-lg-5 ps-5 pe-5 card back special_card_profile margin_login">
             <div className="segment mt-2">
               <h1><img src={side_login_img} style={{ height: "78px", width: "51px" }} />&nbsp;&nbsp;Log In</h1>
             </div>
@@ -182,10 +181,10 @@ function Login() {
               />
             </label>
             <div className="row mt-4">
-              <div className="col-lg-5 ms-2">
+              <div className="col-xl-5 signup_margin">
                 <button type="button" className="round-btn red button no_pad ps-3 pe-3" onClick={() => navigate("/sign-up")}>New Signup</button>
               </div>
-              <div className="col-lg-6 ms-4 ">
+              <div className="col-xl-6 forgot_margin ">
                 <button type="button" className="ps-3 pe-2 round-btn red button no_pad" onClick={() => navigate("/forgot_Password")}>Forgot password ?</button>
               </div>
             </div>
@@ -196,7 +195,7 @@ function Login() {
                   type="submit"
                   value="Log In"
                   name="Log In"
-                  style={{ fontSize: "28px" }}
+                  style={{ fontSize: "2vw" }}
                 >
                   Enter OTP
                 </button>
@@ -208,7 +207,7 @@ function Login() {
                     type="submit"
                     value="Log In"
                     name="Log In"
-                    style={{ fontSize: "28px" }}
+                    style={{ fontSize: "2vw" }}
                   >
                     <div className="row">
                       <div className="col-4"></div>
@@ -229,7 +228,7 @@ function Login() {
                 <div className="col-2">
                   <img src={google_img} style={{ height: "41px", width: "41px" }} />
                 </div>
-                <div className="col-9" style={{ fontSize: "28px" }}>
+                <div className="col-9" style={{ fontSize: "2vw" }}>
                   Sign In With Google
                 </div>
               </div>

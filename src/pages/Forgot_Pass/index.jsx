@@ -110,7 +110,7 @@ function Forgot_Pass() {
                             <Toast.Body>Please fill in the OTP.</Toast.Body>
                         </Toast>
                     </div>
-                    <div className="col-lg-4 card back special_card_profile ms-2 mt-2 mb-3">
+                    <div className="col-lg-4 card back special_card_profile margin_login mt-2 mb-3">
                         <div className="segment">
                             <h1>Enter Your Credentials</h1>
                         </div>

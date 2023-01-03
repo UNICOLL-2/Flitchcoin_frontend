@@ -72,7 +72,6 @@ const loginToken = async (data) => {
       },
     });
     if (response.data) {
-      console.log("first")
       localStorage.setItem("token", response.data.access_token);
     }
   } catch (error) {

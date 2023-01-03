@@ -570,6 +570,18 @@ textarea:focus {
 	margin-bottom: 8px;
 }
 
+.table_section{
+	border: 1px solid rgb(211, 211, 211);
+	border-radius: 20px;
+	padding: 12px;
+	padding-top: 24px;
+}
+
+.table_coin{
+	height: 35px!important;
+	width: 35px!important;
+}
+
 /* #### TOOLTIP ####  */
 .ud-tooltip {
 	position: relative;
