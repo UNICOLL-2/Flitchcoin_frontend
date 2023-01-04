@@ -118,7 +118,7 @@ function Header() {
             selectedType === "pool" || selectedType === "participant" ?
               <>
                 <div className="brand ms-4" onClick={() => navigate(-1)}>&#x2190;</div>
-                <img src={avt} alt="avatar" className="logo" id="menubtn" onClick={open} onMouseEnter={function1} onMouseLeave={function2}/><div class="avt" id="wa"><p class="tx">Tushar Gupta</p></div>
+                <img src={avt} alt="avatar" className="logo" id="menubtn" onClick={open} onMouseEnter={function1} onMouseLeave={function2}/><div className="avt" id="wa"><p className="tx">Tushar Gupta</p></div>
                 <div className="headinglist">
                 <Link to="/Api" className="margin_start ">Api</Link>
                 <Link to="/Dashboard" className="margin_bw ">Dashboard</Link>

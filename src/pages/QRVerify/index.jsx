@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
-import { loginToken,userLogin } from "../../Feature/Auth/authSlice";
+import { loginToken, userLogin } from "../../Feature/Auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import Animation from "../../Animation";
 import { useDispatch } from "react-redux";
@@ -9,161 +9,164 @@ import { fetchToken } from "../../Auth";
 import { useSelector } from "react-redux";
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import statement from "./Group 87.png";
+import setting from "./Group 97.png";
+import line from "./Line 18.png";
 
 const QRVerify = () => {
 
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const [otp1, setOtp1] = useState();
-    const [qr, setQr] = useState("");
-    const [page, setPage] = useState(true);
-    const [changeButton, setChangeButton] = useState(false);
-    const [show1, setShow1] = useState(false);
-    const [show, setShow] = useState(false);
+    // const navigate = useNavigate();
+    // const dispatch = useDispatch();
+    // const [otp1, setOtp1] = useState();
+    // const [qr, setQr] = useState("");
+    const [page, setPage] = useState("Choose");
+    // const [changeButton, setChangeButton] = useState(false);
+    // const [show1, setShow1] = useState(false);
+    // const [show, setShow] = useState(false);
 
-    const getOtp = () => {
-        fetch("https://flitchcoin.com/api/fa2url", {
-            method: 'GET',
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${fetchToken()}`,
-            },
-        }).then((result) => {
-            result.json().then((res) => {
-                setQr(res);
-            })
-        })
-    };
+    // const getOtp = () => {
+    //     fetch("https://flitchcoin.com/api/fa2url", {
+    //         method: 'GET',
+    //         headers: {
+    //             Accept: "application/json",
+    //             "Content-Type": "application/json",
+    //             Authorization: `Bearer ${fetchToken()}`,
+    //         },
+    //     }).then((result) => {
+    //         result.json().then((res) => {
+    //             setQr(res);
+    //         })
+    //     })
+    // };
 
 
-    const findUser = () => {
-        fetch("https://flitchcoin.com/api/users/me/items/", {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                Authorization: `Bearer ${fetchToken()}`
-            }
-        }).then((result) => result.json()
-            .then(res => {
-                setFormData((prevData) => ({
-                    ...prevData,
-                    username: res.username,
-                }))
-                if (res.is_pool) {
-                    setFormData((prevData) => ({
-                        ...prevData,
-                        type: 'pool'
-                      }));
-                } else {
-                    setFormData((prevData) => ({
-                        ...prevData,
-                        type: 'participant'
-                      }));
-                }
-            })).catch((err) => {
-                console.log(err);
-            })
-    };
+    // const findUser = () => {
+    //     fetch("https://flitchcoin.com/api/users/me/items/", {
+    //         method: 'GET',
+    //         headers: {
+    //             'Accept': 'application/json',
+    //             Authorization: `Bearer ${fetchToken()}`
+    //         }
+    //     }).then((result) => result.json()
+    //         .then(res => {
+    //             setFormData((prevData) => ({
+    //                 ...prevData,
+    //                 username: res.username,
+    //             }))
+    //             if (res.is_pool) {
+    //                 setFormData((prevData) => ({
+    //                     ...prevData,
+    //                     type: 'pool'
+    //                 }));
+    //             } else {
+    //                 setFormData((prevData) => ({
+    //                     ...prevData,
+    //                     type: 'participant'
+    //                 }));
+    //             }
+    //         })).catch((err) => {
+    //             console.log(err);
+    //         })
+    // };
 
-    useEffect(() => {
-        getOtp();
-        findUser();
-    }, []);
+    // useEffect(() => {
+    //     getOtp();
+    //     findUser();
+    // }, []);
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyD9-xgz9FYET9nVocqKmfPqWeOShtDw5AY",
-        authDomain: "auth-77872.firebaseapp.com",
-        projectId: "auth-77872",
-        storageBucket: "auth-77872.appspot.com",
-        messagingSenderId: "768493241754",
-        appId: "1:768493241754:web:6e3a5b66a938bff5962623"
-    };
+    // const firebaseConfig = {
+    //     apiKey: "AIzaSyD9-xgz9FYET9nVocqKmfPqWeOShtDw5AY",
+    //     authDomain: "auth-77872.firebaseapp.com",
+    //     projectId: "auth-77872",
+    //     storageBucket: "auth-77872.appspot.com",
+    //     messagingSenderId: "768493241754",
+    //     appId: "1:768493241754:web:6e3a5b66a938bff5962623"
+    // };
 
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
+    // const app = initializeApp(firebaseConfig);
+    // const auth = getAuth(app);
 
-    const provider = new GoogleAuthProvider();
-    const sigInWithGoogle = () => {
-        signInWithPopup(auth, provider).then(result => {
-            console.log(result.user.uid);
-            setFormData((prevData) => ({
-                ...prevData,
-                username: result.user.email,
-                password: result.user.uid,
-            }))
-        }).catch(err => console.log(err));
-    };
+    // const provider = new GoogleAuthProvider();
+    // const sigInWithGoogle = () => {
+    //     signInWithPopup(auth, provider).then(result => {
+    //         console.log(result.user.uid);
+    //         setFormData((prevData) => ({
+    //             ...prevData,
+    //             username: result.user.email,
+    //             password: result.user.uid,
+    //         }))
+    //     }).catch(err => console.log(err));
+    // };
 
-    var [formData, setFormData] = useState({
-        username: "",
-        password: "",
-        type: null,
-        otp: "",
-    });
+    // var [formData, setFormData] = useState({
+    //     username: "",
+    //     password: "",
+    //     type: null,
+    //     otp: "",
+    // });
 
-    var {
-        username,
-        password,
-        type,
-        otp,
-    } = formData;
+    // var {
+    //     username,
+    //     password,
+    //     type,
+    //     otp,
+    // } = formData;
 
-    const submitHandler = (e) => {
-        const data = JSON.stringify({
-            "otp": otp1
-        });
-        e.preventDefault();
-        if (otp1 === "") {
-            alert("Enter OTP");
-        } else {
-            fetch("https://flitchcoin.com/api/fa2url", {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${fetchToken()}`,
-                },
-                body: data
-            }).then(res => res.json())
-                .then((data) => {
-                    console.log(data)
-                    if (data.true) {
-                        dispatch(loginToken(formData));
-                    } else if (data.false) {
-                        alert("WRONG OTP");
-                    } else {
-                        alert("Max tries Reached. Try again !!");
-                        navigate("/login");
-                    }
-                }).catch((err) => {
-                    console.log(err);
-                })
-        }
-    };
+    // const submitHandler = (e) => {
+    //     const data = JSON.stringify({
+    //         "otp": otp1
+    //     });
+    //     e.preventDefault();
+    //     if (otp1 === "") {
+    //         alert("Enter OTP");
+    //     } else {
+    //         fetch("https://flitchcoin.com/api/fa2url", {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Accept': 'application/json',
+    //                 'Content-Type': 'application/json',
+    //                 Authorization: `Bearer ${fetchToken()}`,
+    //             },
+    //             body: data
+    //         }).then(res => res.json())
+    //             .then((data) => {
+    //                 console.log(data)
+    //                 if (data.true) {
+    //                     dispatch(loginToken(formData));
+    //                 } else if (data.false) {
+    //                     alert("WRONG OTP");
+    //                 } else {
+    //                     alert("Max tries Reached. Try again !!");
+    //                     navigate("/login");
+    //                 }
+    //             }).catch((err) => {
+    //                 console.log(err);
+    //             })
+    //     }
+    // };
 
-    const noFa = () => {
-        fetch("https://flitchcoin.com/api/fa2url", {
-            method: 'DELETE',
-            headers: {
-                'Accept': 'application/json',
-                Authorization: `Bearer ${fetchToken()}`,
-            }
-        }).then(result => result.json()
-            .then(res => {
-                if (res.status === 200) {
-                    dispatch(loginToken(formData));
-                    navigate("/dashboard");
-                }
-            })).catch(err => console.log(err))
-    };
+    // const noFa = () => {
+    //     fetch("https://flitchcoin.com/api/fa2url", {
+    //         method: 'DELETE',
+    //         headers: {
+    //             'Accept': 'application/json',
+    //             Authorization: `Bearer ${fetchToken()}`,
+    //         }
+    //     }).then(result => result.json()
+    //         .then(res => {
+    //             if (res.status === 200) {
+    //                 dispatch(loginToken(formData));
+    //                 navigate("/dashboard");
+    //             }
+    //         })).catch(err => console.log(err))
+    // };
 
-    const onChange = (e) => {
-        setFormData((prevData) => ({
-          ...prevData,
-          [e.target.name]: e.target.value,
-        }));
-      };
+    // const onChange = (e) => {
+    //     setFormData((prevData) => ({
+    //         ...prevData,
+    //         [e.target.name]: e.target.value,
+    //     }));
+    // }; 
 
     return (
         <>
@@ -269,15 +272,44 @@ const QRVerify = () => {
                             </>}
                     </div>
                     <div className="col col-md-1"></div> */}
-
-                    <div className="card back parent_card">
-                        <div className="row">
-                            <div className="col-xl-4 mt-5">
-                                
+                    <div className="row ps-5 pe-5">
+                        <div className="card back parent_card ms-3 me-3 mb-3 mt-4 pb-5">
+                            <div className="row">
+                                <div className="col-xl-4 mt-5 ps-5">
+                                <i className={`ps-4 pe-4 pt-2 mt-1 dropdown-qr ${page === "Choose" ? 'selected-qr':''}`} onClick={() => setPage("Choose")}><img src={statement} style={{ height: "32px", width: "32px" }} /> &nbsp; Choose</i>
+                                <img src={line} alt="line" className='line_link' />
+                                <i className={`ps-4 pe-4 pt-2 mt-1 dropdown-qr ${page === "Setup" ? 'selected-qr':''}`} onClick={() => setPage("Setup")}><img src={setting} style={{ height: "25px", width: "25px" }} /> &nbsp; Setup Auth</i>
+                                <img src={line} alt="line" className='line_link' />
+                                <i className={`ps-4 pe-4 pt-2 mt-1 dropdown-qr ${page === "Verify" ? 'selected-qr':''}`} onClick={() => setPage("Verify")}><img src={setting} style={{ height: "25px", width: "25px" }} /> &nbsp; Verify QR code</i>
+                                </div>
+                                <div className="col-xl-8">
+                                    {
+                                        page === "Choose" ?
+                                        <>
+                                        choose 
+                                        </>:
+                                        <>
+                                        {
+                                            page === "Setup" ?
+                                            <>
+setup
+                                            </>:
+                                            <>
+                                                {
+                                                    page === "Verify" ?
+                                                    <>
+verify
+                                                    </>:
+                                                    <></>
+                                                }
+                                            </>
+                                        }
+                                        </>
+                                    }
+                                </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </>

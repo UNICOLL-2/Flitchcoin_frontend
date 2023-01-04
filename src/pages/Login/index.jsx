@@ -112,6 +112,7 @@ function Login() {
   const firebaseConfig = {
     apiKey: "AIzaSyD9-xgz9FYET9nVocqKmfPqWeOShtDw5AY",
     authDomain: "auth-77872.firebaseapp.com",
+    // authDomain: "auth.flitchcoin.com",
     projectId: "auth-77872",
     storageBucket: "auth-77872.appspot.com",
     messagingSenderId: "768493241754",
