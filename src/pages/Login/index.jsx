@@ -20,6 +20,7 @@ function Login() {
 
   const [show, setShow] = useState(false);
   const [showA, setShowA] = useState(false);
+  const [gAuth, setgAuth] = useState(false)
 
   useEffect(() => {
     if (userToken?.access_token) {
@@ -30,7 +31,10 @@ function Login() {
         navigate("/dashboard");
       }
     }
-  }, [userToken, user]);
+    if(gAuth && formData.username.length>0 && formData.password.length>0){
+      dispatch(loginToken(formData))
+    }
+  }, [userToken, user, dispatch]);
 
   var [formData, setFormData] = useState({
     username: "",
@@ -125,6 +129,7 @@ function Login() {
   const provider = new GoogleAuthProvider();
   const sigInWithGoogle = () => {
     signInWithPopup(auth, provider).then(result => {
+      setgAuth(true)
       setFormData((prevData) => ({
         ...prevData,
         username: result.user.email,

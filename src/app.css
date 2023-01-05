@@ -3350,3 +3350,19 @@ ul {
 	background-clip: padding-box, border-box !important;
 	background-origin: padding-box, border-box !important;
 }
+
+.qr_head{
+	font-weight: 600;
+	font-size: 20px;
+}
+
+.qr_btn{
+	font-size: 16px!important;
+}
+
+.to_middle{
+	margin-top: 14rem!important;
+}
+.to_middle_2{
+	margin-top: 8rem!important;
+}

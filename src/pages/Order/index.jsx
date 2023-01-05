@@ -110,30 +110,9 @@ const Order = () => {
 
   var { withdrawableHedge, entryPrice, markPrice, roe, liquationPrice, colateralizedAsset, allocatedMargin, totalAmount, alt_id, memo } = cardDataParticipant;
   var { _liquationPrice, _colateralizedAsset, _totalAmount, _alt_id, _memo } = cardDataPool;
+  const [lp, setLp] = useState(0);
 
   const gettingData = (item) => {
-    if (checkPool) {
-      setCardDataPool(() => ({
-        _liquationPrice: item.post_price,
-        _colateralizedAsset: item.sym,
-        _totalAmount: item.amt,
-        _alt_id: (item.alt_id).substring(0, 15),
-        _memo: (item.memo).substring(0, 12)
-      }));
-    } else {
-      setCardDataParticipant(() => ({
-        withdrawableHedge: item.hedge,
-        entryPrice: item.init_price,
-        markPrice: item.current_price,
-        // roe: (item.current_price / item.settlement_price).toFixed(2),
-        // liquationPrice: (item.settlement_price).toFixed(2),
-        colateralizedAsset: item.sym,
-        allocatedMargin: item.init_amt,
-        totalAmount: item.current_price,
-        alt_id: (item.alt_id).substring(0, 15),
-        memo: (item.memo).substring(0, 12)
-      }));
-    }
     const data = JSON.stringify({
       "memo": item.memo
     })
@@ -147,9 +126,32 @@ const Order = () => {
       body: data
     }).then((result) => {
       result.json().then((res) => {
-        console.log(res[0].liq_p)
+        setLp(res[0].liq_p);
       });
     }).catch(err => console.log(err));
+    if (checkPool) {
+      setCardDataPool(() => ({
+        _liquationPrice: item.post_price,
+        _colateralizedAsset: item.sym,
+        _totalAmount: item.amt,
+        _alt_id: (item.alt_id).substring(0, 15),
+        _memo: (item.memo).substring(0, 12)
+      }));
+    } else {
+      console.log(lp);
+      setCardDataParticipant(() => ({
+        withdrawableHedge: item.hedge,
+        entryPrice: item.init_price,
+        markPrice: item.current_price,
+        roe: (item.current_price / item.settlement_price).toFixed(2),
+        liquationPrice: (lp).toFixed(2),
+        colateralizedAsset: item.sym,
+        allocatedMargin: item.init_amt,
+        totalAmount: item.current_price,
+        alt_id: (item.alt_id).substring(0, 15),
+        memo: (item.memo).substring(0, 12)
+      }));
+    }
   };
 
   const [asset, setAsset] = useState([]);

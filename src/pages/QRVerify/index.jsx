@@ -1,310 +1,237 @@
 import React, { useEffect, useState } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
-import { loginToken, userLogin } from "../../Feature/Auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import Animation from "../../Animation";
-import { useDispatch } from "react-redux";
-import { Modal } from "react-bootstrap";
 import { fetchToken } from "../../Auth";
-import { useSelector } from "react-redux";
-import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import statement from "./Group 87.png";
 import setting from "./Group 97.png";
 import line from "./Line 18.png";
+import Toast from 'react-bootstrap/Toast';
 
 const QRVerify = () => {
 
-    // const navigate = useNavigate();
-    // const dispatch = useDispatch();
-    // const [otp1, setOtp1] = useState();
-    // const [qr, setQr] = useState("");
+    const navigate = useNavigate();
+    const [otp1, setOtp1] = useState();
+    const [qr, setQr] = useState("");
     const [page, setPage] = useState("Choose");
-    // const [changeButton, setChangeButton] = useState(false);
-    // const [show1, setShow1] = useState(false);
-    // const [show, setShow] = useState(false);
+    const [isActive, setIsActive] = useState(false);
+    const [showA, setShowA] = useState(false);
+    const [showB, setShowB] = useState(false);
+    const [showC, setShowC] = useState(false);
+    const [showD, setShowD] = useState(false);
 
-    // const getOtp = () => {
-    //     fetch("https://flitchcoin.com/api/fa2url", {
-    //         method: 'GET',
-    //         headers: {
-    //             Accept: "application/json",
-    //             "Content-Type": "application/json",
-    //             Authorization: `Bearer ${fetchToken()}`,
-    //         },
-    //     }).then((result) => {
-    //         result.json().then((res) => {
-    //             setQr(res);
-    //         })
-    //     })
-    // };
+    const getOtp = () => {
+        fetch("https://flitchcoin.com/api/fa2url", {
+            method: 'GET',
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${fetchToken()}`,
+            },
+        }).then((result) => {
+            result.json().then((res) => {
+                setQr(res);
+            })
+        })
+    };
 
+    useEffect(() => {
+        getOtp();
+    }, []);
 
-    // const findUser = () => {
-    //     fetch("https://flitchcoin.com/api/users/me/items/", {
-    //         method: 'GET',
-    //         headers: {
-    //             'Accept': 'application/json',
-    //             Authorization: `Bearer ${fetchToken()}`
-    //         }
-    //     }).then((result) => result.json()
-    //         .then(res => {
-    //             setFormData((prevData) => ({
-    //                 ...prevData,
-    //                 username: res.username,
-    //             }))
-    //             if (res.is_pool) {
-    //                 setFormData((prevData) => ({
-    //                     ...prevData,
-    //                     type: 'pool'
-    //                 }));
-    //             } else {
-    //                 setFormData((prevData) => ({
-    //                     ...prevData,
-    //                     type: 'participant'
-    //                 }));
-    //             }
-    //         })).catch((err) => {
-    //             console.log(err);
-    //         })
-    // };
+    const submitHandler = (e) => {
+        e.preventDefault();
+        console.log(otp1);
+        if (otp1 === undefined || otp1 === "") {
+            setShowA(true);
+        } else {
+            const data = JSON.stringify({
+                "otp": otp1
+            });
+            fetch("https://flitchcoin.com/api/fa2url", {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${fetchToken()}`,
+                },
+                body: data
+            }).then(res => res.json())
+                .then((data) => {
+                    console.log(data)
+                    if (data.status == 200) {
+                        setShowB(true);
+                        navigate("/dashboard");
+                    } else {
+                        setShowC(true);
+                    }
+                }).catch((err) => {
+                    console.log(err);
+                })
+        }
+    };
 
-    // useEffect(() => {
-    //     getOtp();
-    //     findUser();
-    // }, []);
-
-    // const firebaseConfig = {
-    //     apiKey: "AIzaSyD9-xgz9FYET9nVocqKmfPqWeOShtDw5AY",
-    //     authDomain: "auth-77872.firebaseapp.com",
-    //     projectId: "auth-77872",
-    //     storageBucket: "auth-77872.appspot.com",
-    //     messagingSenderId: "768493241754",
-    //     appId: "1:768493241754:web:6e3a5b66a938bff5962623"
-    // };
-
-    // const app = initializeApp(firebaseConfig);
-    // const auth = getAuth(app);
-
-    // const provider = new GoogleAuthProvider();
-    // const sigInWithGoogle = () => {
-    //     signInWithPopup(auth, provider).then(result => {
-    //         console.log(result.user.uid);
-    //         setFormData((prevData) => ({
-    //             ...prevData,
-    //             username: result.user.email,
-    //             password: result.user.uid,
-    //         }))
-    //     }).catch(err => console.log(err));
-    // };
-
-    // var [formData, setFormData] = useState({
-    //     username: "",
-    //     password: "",
-    //     type: null,
-    //     otp: "",
-    // });
-
-    // var {
-    //     username,
-    //     password,
-    //     type,
-    //     otp,
-    // } = formData;
-
-    // const submitHandler = (e) => {
-    //     const data = JSON.stringify({
-    //         "otp": otp1
-    //     });
-    //     e.preventDefault();
-    //     if (otp1 === "") {
-    //         alert("Enter OTP");
-    //     } else {
-    //         fetch("https://flitchcoin.com/api/fa2url", {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Accept': 'application/json',
-    //                 'Content-Type': 'application/json',
-    //                 Authorization: `Bearer ${fetchToken()}`,
-    //             },
-    //             body: data
-    //         }).then(res => res.json())
-    //             .then((data) => {
-    //                 console.log(data)
-    //                 if (data.true) {
-    //                     dispatch(loginToken(formData));
-    //                 } else if (data.false) {
-    //                     alert("WRONG OTP");
-    //                 } else {
-    //                     alert("Max tries Reached. Try again !!");
-    //                     navigate("/login");
-    //                 }
-    //             }).catch((err) => {
-    //                 console.log(err);
-    //             })
-    //     }
-    // };
-
-    // const noFa = () => {
-    //     fetch("https://flitchcoin.com/api/fa2url", {
-    //         method: 'DELETE',
-    //         headers: {
-    //             'Accept': 'application/json',
-    //             Authorization: `Bearer ${fetchToken()}`,
-    //         }
-    //     }).then(result => result.json()
-    //         .then(res => {
-    //             if (res.status === 200) {
-    //                 dispatch(loginToken(formData));
-    //                 navigate("/dashboard");
-    //             }
-    //         })).catch(err => console.log(err))
-    // };
-
-    // const onChange = (e) => {
-    //     setFormData((prevData) => ({
-    //         ...prevData,
-    //         [e.target.name]: e.target.value,
-    //     }));
-    // }; 
+    const noFa = () => {
+        fetch("https://flitchcoin.com/api/fa2url", {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'application/json',
+                Authorization: `Bearer ${fetchToken()}`,
+            }
+        }).then(result => result.json()
+            .then(res => {
+                if (res.status === 200) {
+                    setShowD(true);
+                    navigate("/dashboard");
+                }
+            })).catch(err => console.log(err))
+    };
 
     return (
         <>
             <Animation />
             <div className="container">
                 <div className="row mt-5">
+                    <Toast onClose={() => setShowA(false)} className="text-center position-absolute" style={{ zIndex: "11", marginTop: "5rem" }} position="top-center" show={showA} delay={3000} autohide>
+                        <Toast.Header>
+                            <strong className="me-auto">Flitchcoin</strong>
+                            <small>Unfilled !</small>
+                        </Toast.Header>
+                        <Toast.Body>Please enter the OTP to proceed.</Toast.Body>
+                    </Toast>
+                    <Toast onClose={() => setShowB(false)} className="text-center position-absolute" style={{ zIndex: "11", marginTop: "5rem" }} position="top-center" show={showB} delay={3000} autohide>
+                        <Toast.Header>
+                            <strong className="me-auto">Flitchcoin</strong>
+                            <small>Congrats !</small>
+                        </Toast.Header>
+                        <Toast.Body>You have now opted for 2 FA !</Toast.Body>
+                    </Toast>
+                    <Toast onClose={() => setShowC(false)} className="text-center position-absolute" style={{ zIndex: "11", marginTop: "5rem" }} position="top-center" show={showC} delay={3000} autohide>
+                        <Toast.Header>
+                            <strong className="me-auto">Flitchcoin</strong>
+                            <small>Error !</small>
+                        </Toast.Header>
+                        <Toast.Body>Please enter the correct OTP to proceed.</Toast.Body>
+                    </Toast>
+                    <Toast onClose={() => setShowD(false)} className="text-center position-absolute" style={{ zIndex: "11", marginTop: "5rem" }} position="top-center" show={showD} delay={3000} autohide>
+                        <Toast.Header>
+                            <strong className="me-auto">Flitchcoin</strong>
+                            <small>Done !</small>
+                        </Toast.Header>
+                        <Toast.Body>You have now opted not to continue with 2 FA .</Toast.Body>
+                    </Toast>
                     <h1 className='text-center setup_text'>Setup Two Factor Authentication</h1>
-                    {/* <div className="col col-md-1"></div>
-                    <div className="col card mt-3 mb-3 col-12 col-md-3 p-5">
-                        {page === true ?
-                            <>
-                                <div className="number mb-3 pt-2 pb-2 text-center mt-5"><b>Continue with 2 - FA </b></div>
-                                <div className="number me-3 pt-2 pb-2 text-center mt-4">Verify Your QR</div>
-                            </> :
-                            <>
-                                <div className="number mb-3 pt-2 pb-2 text-center position-relative mt-5">Continue with 2 - FA<span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">&#10004;</span></div>
-                                <div className="number me-3 pt-2 pb-2 text-center mt-4"><b>Verify Your QR</b></div>
-                            </>}
-                    </div>
-                    <div className="col card mt-3 mb-3 col-12 col-md-7 p-5">
-                        {page === true ?
-                            <>
-                                <h3>Continue with 2 - FA ?</h3>
-                                <p className='text-muted mt-4'>2 Factor Authentication provides you with the most provided security features and enhanced protection of wallet.</p>
-                                <input type="radio" className="btn-check" name="options-outlined" id="success-outlined" autoComplete="off" onClick={() => setChangeButton(false)} />
-                                <label className="btn btn-outline-info p-4 mb-4" htmlhtmlFor="success-outlined">Continue with 2 factor Authentication</label>
-
-                                <input type="radio" className="btn-check" name="options-outlined" id="danger-outlined" autoComplete="off" onClick={() => setChangeButton(true)} />
-                                <label className="btn btn-outline-danger p-4" htmlhtmlFor="danger-outlined">Continue without 2 factor Authentication</label>
-                                {changeButton ?
-                                    <>
-                                        <button className="btn-primary w-50 mt-5" onClick={() => setShow1(true)}>Log in Without 2-FA</button>
-                                        <Modal
-                                            show={show1}
-                                            onHide={() => setShow1(false)}
-                                            backdrop="static"
-                                            keyboard={false}
-                                            className="modal-dialog-login"
-                                        >
-                                            <div className="back p-3">
-                                                <h2>Enter Your Password</h2><br />
-                                                <input type="password" className='txt-underline p-3 w-100 input pressed' placeholder='Password' name="password" value={password} onChange={onChange} /><br />
-                                                <button onClick={sigInWithGoogle} type="button" className="button_google button w-100"><i className="fa-brands fa-google text-primary">&nbsp;&nbsp;&nbsp;Google user</i></button><br /><br /><br />
-                                                <button
-                                                    type="button"
-                                                    className="primary me-4"
-                                                    onClick={() => setShow1(false)}
-                                                >
-                                                    Cancel
-                                                </button>
-                                                <button type="button" className="primary" onClick={noFa}>
-                                                    Confirm
-                                                </button>
-                                            </div>
-                                        </Modal>
-                                    </> :
-                                    <>
-                                        <button className="btn-primary w-50 mt-5" onClick={() => setPage(false)}>Next</button>
-                                    </>}
-                            </> :
-                            <>
-                                <form onSubmit={submitHandler}>
-                                    <h3>QR OTP VERIFICATION</h3>
-                                    <p className='text-muted mt-4'>Use an Authenticator app like Google Authenthicator to scan the QR code.</p>
-                                    <QRCodeSVG
-                                        value={qr}
-                                        size={150}
-                                    />
-                                    <p className='text-muted mt-5'>Once you have connected your app enter your most recent 6-digit verification code for Flitchcoin.</p>
-                                    <label className="label">
-                                        <input className="input_login w-50"
-                                            type="text"
-                                            name="otp"
-                                            value={otp1}
-                                            onChange={e => setOtp1(e.target.value)}
-                                            placeholder="x - x - x - x - x - x - x - x" />
-                                    </label>
-                                    <button className="btn-primary w-50" onClick={() => setShow(true)} value="Log In" name="Log In">Log in</button>
-                                    <Modal
-                                        show={show}
-                                        onHide={() => setShow(false)}
-                                        backdrop="static"
-                                        keyboard={false}
-                                        className="modal-dialog-login"
-                                    >
-                                        <div className="back p-3">
-                                            <h2>Enter Your Password</h2><br />
-                                            <input type="password" className='txt-underline p-3 w-100 input pressed' placeholder='Password' name="password" value={password} onChange={onChange} /><br />
-                                            <button onClick={sigInWithGoogle} type="button" className="button_google button w-100"><i className="fa-brands fa-google text-primary">&nbsp;&nbsp;&nbsp;Google user</i></button><br /><br /><br />
-                                            <button
-                                                type="button"
-                                                className="primary me-4"
-                                                onClick={() => setShow(false)}
-                                            >
-                                                Cancel
-                                            </button>
-                                            <button className="primary" type="submit">
-                                                Confirm
-                                            </button>
-                                        </div>
-                                    </Modal>
-                                </form>
-                            </>}
-                    </div>
-                    <div className="col col-md-1"></div> */}
                     <div className="row ps-5 pe-5">
                         <div className="card back parent_card ms-3 me-3 mb-3 mt-4 pb-5">
                             <div className="row">
-                                <div className="col-xl-4 mt-5 ps-5">
-                                <i className={`ps-4 pe-4 pt-2 mt-1 dropdown-qr ${page === "Choose" ? 'selected-qr':''}`} onClick={() => setPage("Choose")}><img src={statement} style={{ height: "32px", width: "32px" }} /> &nbsp; Choose</i>
-                                <img src={line} alt="line" className='line_link' />
-                                <i className={`ps-4 pe-4 pt-2 mt-1 dropdown-qr ${page === "Setup" ? 'selected-qr':''}`} onClick={() => setPage("Setup")}><img src={setting} style={{ height: "25px", width: "25px" }} /> &nbsp; Setup Auth</i>
-                                <img src={line} alt="line" className='line_link' />
-                                <i className={`ps-4 pe-4 pt-2 mt-1 dropdown-qr ${page === "Verify" ? 'selected-qr':''}`} onClick={() => setPage("Verify")}><img src={setting} style={{ height: "25px", width: "25px" }} /> &nbsp; Verify QR code</i>
+                                <div className={`col-xl-4 ps-5 ${page === "Choose" ? 'to_middle' : 'to_middle_2'}`}>
+                                    <i className={`ps-4 pe-4 pt-2 mt-1 dropdown-qr ${page === "Choose" ? 'selected-qr ' : ''}`} onClick={() => setPage("Choose")}><img src={statement} style={{ height: "32px", width: "32px" }} /> &nbsp; Choose</i>
+                                    <img src={line} alt="line" className='line_link' />
+                                    <i className={`ps-4 pe-4 pt-2 mt-1 dropdown-qr ${page === "Setup" ? 'selected-qr' : ''}`}><img src={setting} style={{ height: "25px", width: "25px" }} /> &nbsp; Setup Auth</i>
+                                    <img src={line} alt="line" className='line_link' />
+                                    <i className={`ps-4 pe-4 pt-2 mt-1 dropdown-qr ${page === "Verify" ? 'selected-qr' : ''}`}><img src={setting} style={{ height: "25px", width: "25px" }} /> &nbsp; Verify QR code</i>
                                 </div>
-                                <div className="col-xl-8">
+                                <div className="col-xl-8 p-5 pb-0">
                                     {
                                         page === "Choose" ?
-                                        <>
-                                        choose 
-                                        </>:
-                                        <>
-                                        {
-                                            page === "Setup" ?
                                             <>
-setup
-                                            </>:
+                                                <div className="row">
+                                                    <div className="row settings_box ps-5 pe-5 pt-3 pb-2">
+                                                        <div className="col-lg-8">
+                                                            <p className='qr_head'>I want to Activate 2 - Step Verification</p>
+                                                            <p>*** You can change this anytime through settings page.</p>
+                                                        </div>
+                                                        <div className="col-lg-4">
+                                                            <button className="round-btn margin_btn place_order_btn ps-5 pe-5 mt-3 qr_btn" onClick={() => { setIsActive(true); setPage("Setup") }}>
+                                                                Activate
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div className="row settings_box ps-5 pe-5 pt-3 pb-2 mt-4 mb-5">
+                                                        <div className="col-lg-8">
+                                                            <p className='qr_head'>Nah ! I'm good without 2 - Step Verification</p>
+                                                            <p>*** You can change this anytime through settings page.</p>
+                                                        </div>
+                                                        <div className="col-lg-4">
+                                                            <button className="round-btn red button ps-4 pe-4 mt-5 qr_btn" onClick={noFa}>
+                                                                De - Activate
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <p><span className="text-primary">Two-factor authentication (2FA) </span>is an excellent way to add an extra layer of security to your online accounts, including your wallet. Here are a few reasons why you should consider using it:<br />
+                                                        1. It helps protect against unauthorized access to your accounts, even if someone else has obtained your login credentials.<br />
+                                                        2. It's quick and easy to set up, and can be done through a variety of methods, such as SMS, email, or google authentication app.<br />
+                                                        3. It provides peace of mind knowing that your accounts have an extra level of protection.<br />
+                                                        4. Many online services, including financial institutions, now require 2FA for added security, so it's becoming increasingly important to use it.</p>
+                                                </div>
+                                            </> :
                                             <>
                                                 {
-                                                    page === "Verify" ?
-                                                    <>
-verify
-                                                    </>:
-                                                    <></>
+                                                    page === "Setup" && isActive ?
+                                                        <>
+                                                            <p><span className="qr_head"> Here’s an example to set up two-factor authentication (2FA) using the <span className="text-primary"> Google Authenticator</span> app:</span><br /><br />
+                                                                1. Download the Google Authenticator app on your phone. It is available for both Android and iOS devices.<br />
+                                                                2. Go to the account or service that you want to enable 2FA for and look for the option to enable 2FA. This is usually found in the security settings.<br />
+                                                                3. Follow the prompts to set up 2FA. This may include scanning a QR code or entering a secret key.<br />
+                                                                4. The Google Authenticator app will generate a 6-digit code that you will need to enter in order to complete the setup process.<br />
+                                                                5. From now on, whenever you log in to your account, you will be prompted to enter both your password and the 6-digit code generated by the Google Authenticator app.<br /><br />
+                                                                That's it! You have now successfully set up 2FA using the Google Authenticator app. It's a good idea to write down the secret key or save it somewhere safe, in case you lose access to your phone or the app.<br /><br />
+                                                                <p className="text-muted">**You can change your auth app anytime through the same process.</p></p>
+                                                            <div className="row">
+                                                                <div className="col-lg-6">
+                                                                    <button className="round-btn red button ps-4 pe-4 mt-5 qr_btn w-100">
+                                                                        I need more help !
+                                                                    </button>
+                                                                </div>
+                                                                <div className="col-lg-6 text-center">
+                                                                    <button className="round-btn margin_btn place_order_btn ps-5 pe-5 mt-5 qr_btn w-100" onClick={() => setPage("Verify")}>
+                                                                        I've Completed setup &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'>'}
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </> :
+                                                        <>
+                                                            {
+                                                                page === "Verify" && isActive ?
+                                                                    <>
+                                                                        <div className="row mb-4">
+                                                                            <div className="col-xl-4">
+                                                                                <QRCodeSVG
+                                                                                    value={qr}
+                                                                                    size={150}
+                                                                                />
+                                                                            </div>
+                                                                            <div className="col-xl-8 mt-5">
+                                                                                <p>Enter OTP here : &nbsp;&nbsp;&nbsp;<input placeholder='x - x - x - x' value={otp1} onChange={(e) => setOtp1(e.target.value)} className='input_login w-50 p-2 ps-4'></input></p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <p>Here are the steps to scan a QR code and enter a one-time passcode (OTP) for two-factor authentication (2FA):<br />
+                                                                            1. Open the authenticator app on your phone (such as Google Authenticator).<br />
+                                                                            2. Tap the plus sign (+) or the option to add a new account.<br />
+                                                                            3. Choose the option to scan a QR code.<br />
+                                                                            4. Hold your phone up to the QR code displayed on the screen. The app should automatically scan the code and add the account to your app.<br />
+                                                                            5. Once the account has been added to your authenticator app, it will display a 6-digit code. This is the one-time passcode (OTP) that you will need to enter in order to complete the login process.<br />
+                                                                            6. Finally enter the OTP in input box above and click “proceed & Finish Setup button”.<br />
+                                                                        </p>
+                                                                        <p className="text-muted">**You can change your auth app anytime through the same process.</p>
+                                                                        <div className="row">
+                                                                            <div className="col-lg-6">
+                                                                                <button className="round-btn red button ps-4 pe-4 mt-4 qr_btn w-100" onClick={noFa}>
+                                                                                    I don't need 2 FA !
+                                                                                </button>
+                                                                            </div>
+                                                                            <div className="col-lg-6 text-center">
+                                                                                <button className="round-btn margin_btn place_order_btn ps-5 pe-5 mt-4 qr_btn w-100" onClick={submitHandler}>
+                                                                                    Proceed & Finish setup &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{'>'}
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </> :
+                                                                    <></>
+                                                            }
+                                                        </>
                                                 }
                                             </>
-                                        }
-                                        </>
                                     }
                                 </div>
                             </div>
