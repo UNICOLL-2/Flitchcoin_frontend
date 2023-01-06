@@ -5,7 +5,6 @@ import Order from "../../pages/Order";
 import PoolParticipant from "../../pages/PoolParticipant";
 import Api from "../../pages/Api";
 import Dashboard from "../../pages/Dashboard";
-import About from "../../pages/About";
 import Login from "../../pages/Login";
 import SignUp from "../../pages/SignUp";
 import { RequireToken } from "../../Auth";
@@ -39,7 +38,6 @@ function Content() {
           <Route path="/deposit" element={<Protection Cmp={Deposit}/>} />
           <Route path="/qr_verify" element={<Protection Cmp={QRVerify} />} />
           <Route path="/add_wallet" element={<Protection Cmp={AddWallet} />} />
-        <Route path="/about" element={<About />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/forgot_password" element={<ForgotPass />} />
       </Routes>

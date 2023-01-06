@@ -20,9 +20,13 @@ function Login() {
 
   const [show, setShow] = useState(false);
   const [showA, setShowA] = useState(false);
+  const [showB, setShowB] = useState(false);
   const [gAuth, setgAuth] = useState(false)
 
   useEffect(() => {
+    if(userToken === undefined) {
+      setShowB(true);
+    }
     if (userToken?.access_token) {
       dispatch(userLogin());
     }
@@ -160,8 +164,15 @@ function Login() {
               </Toast.Header>
               <Toast.Body>Please enter details to proceed for Login.</Toast.Body>
             </Toast>
+            <Toast onClose={() => setShowB(false)} className="text-center position-absolute" style={{ zIndex: "11", marginTop: "5rem" }} position="top-center" show={showB} delay={3000} autohide>
+              <Toast.Header>
+                <strong className="me-auto">Flitchcoin</strong>
+                <small>Error !</small>
+              </Toast.Header>
+              <Toast.Body>Wrong Username or Password.</Toast.Body>
+            </Toast>
           </div>
-          <div className="col-lg-5 ps-5 pe-5 card back special_card_profile margin_login">
+          <div className="col-lg-5 ps-5 pe-5 card back special_card_order margin_login">
             <div className="segment mt-2">
               <h1><img src={side_login_img} style={{ height: "78px", width: "51px" }} />&nbsp;&nbsp;Log In</h1>
             </div>

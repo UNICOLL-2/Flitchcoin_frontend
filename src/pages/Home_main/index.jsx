@@ -12,29 +12,27 @@ function Home() {
 
   return (
     <>
-      <div className="back shadow pb-3">
+    <Animation/>
         <div className="container">
           <section className="row pt-3">
-            <div className="col-sm-12 col-md-6 col-lg-5 d-flex flex-column justify-content-center h_get_to_know">
-              <div className="pt-3"> ALADDIN BY BLACKROCK</div>
-              <h1 className="pt-3">GET TO KNOW THE ALADDIN ADVANTAGE</h1>
-              <div className="pt-3">
-                See why BlackRock and hundreds of other investment professionals
-                turn to the power of Aladdin to work smarter, not harder.
+            <div className="col-lg-5 d-flex flex-column justify-content-center h_get_to_know">
+              <h1 className="pt-3 api_head">KNOW THE <span className="text-primary"> FLITCHCOIN</span> ADVANTAGE</h1>
+              <div className="pt-3 api_text">
+              Unleash the full potential of your cryptocurrency portfolio with Flitchcoin's lending and borrowing feature. Get access to funds for trading or generate passive income with your digital assets.
               </div>
               <div className="pt-3 h_get_to_know_button">
                 <button
                   type="button"
-                  className="primary"
-                  style={{ position: "absolute", marginBottom: "10px" }}
+                  className="primary ps-5 pe-5 mt-4 pt-3 pb-3"
+                  style={{ position: "absolute"}}
                 >
                   Learn more about
                 </button>
               </div>
             </div>
-            <div className="col-sm-12 col-md-6 mt-5 manage_margin_2 card back">
+            <div className="col-lg-6 mt-5 ms-5 card back">
               <SymbolOverview colorTheme="light"
-                height={300}
+                height={320}
                 width="100%"
                 chartType="area"
                 downColor="#800080"
@@ -50,71 +48,38 @@ function Home() {
                 } />
             </div>
           </section>
-          <section className="my_50">
-            <p className="h2">The clarity to act in a complex world</p>
-            <p className="py-3">
-              More than investment software, Aladdin technology brings clarity and
-              connectivity to the world’s financial ecosystem.
-            </p>
-            <p className="">
-              Everything we do is guided by the conviction that investors need
-              this clarity at every point in the investment process in order to
-              make more informed decisions, scale efficiently and achieve better
-              investment outcomes. In pursuit of this goal, we are relentlessly
-              innovating and constantly evolving Aladdin technology.
-            </p>
+          <section className="mt-5 pt-5">
+            <p className="text-center api_head">FLITCHCOIN as a <span className="text-primary"> One - Stop Solution </span></p>
+            <p className="api_text">At Flitchcoin, we strive to make managing digital currency as simple and hassle-free as possible. Our platform serves as a one-stop-shop for all your digital currency needs, offering a range of payment, staking, and liquidity lending solutions to help you thrive. Our free and easy-to-use account services makes it easy for you to get started with managing digital currency, providing you with all the tools and resources you need.</p>
+                <div className="row mt-5 pt-4">
+                  <div className="col-6">
+                    <p className="text-end api_head">NO MATTER</p>
+                  </div>
+                </div>
+                <div className="row">
+                <div className="col-6"></div>
+                  <div className="col-6">
+                    <p className="text-start api_head">WHETHER IT'S</p>
+                  </div>
+                </div>
           </section>
-          <section className="my_50">
-            <div className="row">
-              <div className="col-md-6 col-sm-12">
-                <div className="row">
-                  <div className="col-lg-10 col-sm-12">
-                    <div className="h4">Aladdin for institutional investors</div>
-                    <div className="">
-                      Aladdin Enterprise is a flexible, end-to-end operating
-                      system that brings clarity to investment professionals.
-                    </div>
-                    <div className="pt-3 h_get_to_know_button">
-                      <button
-                        type="button h_get_to_know_button "
-                        className="primary"
-                        style={{ position: "absolute" }}
-                      >
-                        Learn more about
-                      </button>
-                    </div>
-                  </div>
+          <section className="row mt-5 ">
+                <div className="col-5">
+                  <p className="api_head">Flitchcoin for Pool Investors</p>
+                  <p className="api_text">Maximize your returns with Flitchcoin's high yield stablecoin funds. As a pool investor, you have access to a range of investment, borrowing, and staking options that offer risk-free opportunities to grow your portfolio.</p>
                 </div>
-              </div>
-              <div className="col-md-6 col-sm-12 aladdin_for_wealth_managers">
-                <div className="row">
-                  <div className="col-lg-10 col-sm-12">
-                    <div className="h4">Aladdin for wealth managers</div>
-                    <div className="">
-                      Aladdin Wealth is an industry-leading platform powering the
-                      future of wealth management.
-                    </div>
-                    <div className="pt-3 mb-5">
-                      <button
-                        type="button"
-                        className="primary"
-                        style={{ position: "absolute" }}
-                      >
-                        Learn about Aladdin Wealth
-                      </button>
-                    </div>
-                  </div>
+                <div className="col-2"></div>
+                <div className="col-5">
+                <p className="api_head">Flitchcoin for Part. Investors</p>
+                  <p className="api_text">As a participant investor at Flitchcoin, you have access to a range of high yield flitch funds where you can invest, borrow, and flexibly stake your cryptocurrencies.</p>
                 </div>
-              </div>
-            </div>
           </section>
           <Animation />
-          <section className="my_50">
+          {/* <section className="mt-5 pt-5">
             <div className="row">
               <div className="col-md-5 col-sm-12 mt-5 ms-2 card back">
-                <SymbolInfo colorTheme="dark" autosize symbol="BTC" isTransparent></SymbolInfo>
+                <SymbolInfo colorTheme="dark" autosize symbol="XRPUSDT" isTransparent></SymbolInfo>
               </div>
-              {/* <div className="col-md-1"></div> */}
               <div className="col-md-6 col-sm-12 manage_margin_2 d-flex flex-column justify-content-center">
                 <div className="pt-3">
                   <p className="h3">THE POWER OF ALADDIN + EFRONT</p>
@@ -180,9 +145,8 @@ function Home() {
           </section>
           <div className="card back mt-5 mb-3">
             <ForexCrossRates colorTheme="light" height={400} width="100%" isTransparent></ForexCrossRates>
-          </div>
+          </div> */}
         </div>
-      </div>
       <Footer />
     </>
   );

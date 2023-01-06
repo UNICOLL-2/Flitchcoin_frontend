@@ -110,25 +110,8 @@ const Order = () => {
 
   var { withdrawableHedge, entryPrice, markPrice, roe, liquationPrice, colateralizedAsset, allocatedMargin, totalAmount, alt_id, memo } = cardDataParticipant;
   var { _liquationPrice, _colateralizedAsset, _totalAmount, _alt_id, _memo } = cardDataPool;
-  const [lp, setLp] = useState(0);
 
   const gettingData = (item) => {
-    const data = JSON.stringify({
-      "memo": item.memo
-    })
-    fetch("https://flitchcoin.com/api/check/one/open/positions", {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        Authorization: `Bearer ${fetchToken()}`,
-        'Content-Type': 'application/json'
-      },
-      body: data
-    }).then((result) => {
-      result.json().then((res) => {
-        setLp(res[0].liq_p);
-      });
-    }).catch(err => console.log(err));
     if (checkPool) {
       setCardDataPool(() => ({
         _liquationPrice: item.post_price,
@@ -138,19 +121,35 @@ const Order = () => {
         _memo: (item.memo).substring(0, 12)
       }));
     } else {
-      console.log(lp);
-      setCardDataParticipant(() => ({
-        withdrawableHedge: item.hedge,
-        entryPrice: item.init_price,
-        markPrice: item.current_price,
-        roe: (item.current_price / item.settlement_price).toFixed(2),
-        liquationPrice: (lp).toFixed(2),
-        colateralizedAsset: item.sym,
-        allocatedMargin: item.init_amt,
-        totalAmount: item.current_price,
-        alt_id: (item.alt_id).substring(0, 15),
-        memo: (item.memo).substring(0, 12)
-      }));
+      const data = JSON.stringify({
+        "memo": item.memo
+      })
+      fetch("https://flitchcoin.com/api/check/one/open/positions", {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          Authorization: `Bearer ${fetchToken()}`,
+          'Content-Type': 'application/json'
+        },
+        body: data
+      }).then((result) => {
+        result.json().then((res) => {
+          var lip = 0;
+          lip = res[0].liq_p;
+          setCardDataParticipant(() => ({
+            withdrawableHedge: item.hedge,
+            entryPrice: item.init_price,
+            markPrice: item.current_price,
+            roe: (item.current_price / item.settlement_price).toFixed(2),
+            liquationPrice: (lip).toFixed(2),
+            colateralizedAsset: item.sym,
+            allocatedMargin: item.init_amt,
+            totalAmount: item.current_price,
+            alt_id: (item.alt_id).substring(0, 15),
+            memo: (item.memo).substring(0, 12)
+          }));
+        });
+      }).catch(err => console.log(err));      
     }
   };
 

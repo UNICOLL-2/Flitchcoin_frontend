@@ -66,8 +66,8 @@ function Dashboard() {
     navigate("/order");
   };
 
-  const [newArr, setNewArr] = useState([]);
   const [checkPool, setCheckPool] = useState(false);
+  const [fullName, setFullName] = useState("");
 
   const getInfo = () => {
     fetch('https://flitchcoin.com/api/users/me/items/', {
@@ -78,6 +78,7 @@ function Dashboard() {
       }
     }).then((result) => result.json()
       .then(res => {
+        setFullName(res.name);
         if (res.is_pool) {
           setCheckPool(true);
         }
@@ -110,12 +111,30 @@ function Dashboard() {
       })
   };
 
+  const [avt, setAvt] = useState();
+
+  const getAvt = () => {
+    fetch('https://www.flitchcoin.com/api/dashboard', {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        Authorization: `Bearer ${fetchToken()}`
+      }
+    }).then((result) => result.json()
+      .then(res => {
+        setAvt(res.avtar_im);
+      })).catch((err) => {
+        console.log(err);
+      })
+  };
+
   useEffect(() => {
     account();
     getInfo();
     setTimeout(() => {
       setOnLoad(true);
     }, 2000);
+    getAvt();
   }, []);
 
   useEffect(() => {
@@ -205,7 +224,16 @@ function Dashboard() {
         <div className="row ps-5 pb-4">
           <div className="col-xl-7 me-5">
             <div className="row pb-4">
-              <div className="col-xl-6 welcome">Welcome <b>Tushar ,</b></div>
+              <div className="col-xl-6 welcome">Welcome <b>
+                { 
+                fullName.indexOf(" ") === -1 ? 
+                <>
+                {fullName}
+                </>:
+                <>
+                {(fullName).substring(0,fullName.indexOf(" "))}
+                </>
+                },</b></div>
               <div className="col-xl-3">
                 <button
                   className="ps-5 pe-5 round-btn"
@@ -288,8 +316,6 @@ function Dashboard() {
           </div>
           <div className="col-xl-4 card back special_card_profile">
             <div className="row">
-              <div className="col-lg-4"></div>
-              <div className="col-lg-6">
                 <Toast onClose={() => setShowA(false)} className="position-absolute" style={{ zIndex: "11", marginTop: "5rem" }} position="top-center" show={showA} delay={3000} autohide>
                   <Toast.Header>
                     <strong className="me-auto">Flitchcoin</strong>
@@ -297,10 +323,14 @@ function Dashboard() {
                   </Toast.Header>
                   <Toast.Body>Please enter details to proceed for Login.</Toast.Body>
                 </Toast>
-                <img src={image} className="dashboard_img" />
-                <p className="plain_text">Tushar Gupta</p>
-              </div>
-              <div className="col-lg-3"></div>
+                <div className="row mt-4">
+                  <div className="col-5"></div>
+                  <div className="col-2">
+                  <img src={avt} className="dashboard_img" />
+                  </div>
+                  <div className="col-5"></div>
+                </div>
+                <p className="plain_text text-center mt-4">{fullName}</p>
             </div>
             <div className="row">
               <div className="plain_text row mb-4 mt-3">
@@ -312,6 +342,7 @@ function Dashboard() {
                           className="tool"
                           data-bs-toggle="tooltip"
                           data-bs-placement="bottom"
+                          title="Tooltip on bottom"
                         >
                           Pool
                         </p>
@@ -322,13 +353,19 @@ function Dashboard() {
                     </>
                   ) : (
                     <>
-                      <p
-                        className="tool"
-                        data-bs-toggle="tooltip"
-                        data-bs-placement="bottom"
-                      >
-                        Part.
-                      </p>
+                      <div className="ud-tooltip">
+                        <p
+                          className="tool"
+                          data-bs-toggle="tooltip"
+                          data-bs-placement="bottom"
+                          title="Tooltip on bottom"
+                        >
+                          Part.
+                        </p>
+                        <div className="tip-content1">
+                          <p>Lorem ipsum dolor sit amet.</p>
+                        </div>
+                      </div>
                     </>
                   )}
                 </div>
@@ -346,9 +383,13 @@ function Dashboard() {
                           className="tool"
                           data-bs-toggle="tooltip"
                           data-bs-placement="bottom"
+                          title="Tooltip on bottom"
                         >
                           Pool
                         </p>
+                        <div className="tip-content2">
+                          <p>Lorem ipsum dolor sit amet.</p>
+                        </div>
                       </div>
                     </>
                   ) : (
@@ -358,6 +399,7 @@ function Dashboard() {
                           className="tool"
                           data-bs-toggle="tooltip"
                           data-bs-placement="bottom"
+                          title="Tooltip on bottom"
                         >
                           Part.
                         </p>
@@ -370,25 +412,13 @@ function Dashboard() {
                 </div>
               </div>
               <div className="col-xl-4">
-                <button
-                  className="swap round-btn"
-                >
-                  Swap
-                </button>
+                <button className="swap round-btn">Swap</button>
               </div>
               <div className="col-xl-4">
-                <button
-                  className="deposit_btn round-btn"
-                >
-                  Deposit
-                </button>
+                <button className="deposit_btn round-btn">Deposit</button>
               </div>
               <div className="col-xl-4">
-                <button
-                  className="buy round-btn"
-                >
-                  Buy
-                </button>
+                <button className="buy round-btn">Buy</button>
               </div>
             </div>
             <div className="row mt-5">
@@ -424,7 +454,6 @@ function Dashboard() {
       </div>
       <div className="container mt-5 mb-5 pb-5">
         <div className="row">
-          
           <div className="col-xl-7  me-5">
             <div className="row table_section">
             <div className="col-6">

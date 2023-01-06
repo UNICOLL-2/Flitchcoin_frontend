@@ -78,9 +78,9 @@ const loginToken = async (data) => {
     response = error.response;
   }
   if(response.status === 401) {
-    alert("Wrong Username or Password");
+  }else{
+    return response.data;
   }
-  return response.data;
 };
 
 // user login
