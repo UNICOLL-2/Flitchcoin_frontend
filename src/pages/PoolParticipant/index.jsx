@@ -76,12 +76,6 @@ const PoolParticipant = () => {
       })
   };
 
-  useEffect(() => {
-    coin1();
-    coinNet();
-    price();
-  }, [coin]);
-
   const [amountToBeConverted, setAmountToBeConverted] = useState(0);
 
   var dur = 0;
@@ -127,7 +121,41 @@ const PoolParticipant = () => {
           console.log(err);
         })
     }
-  }
+  };
+
+  const [lt, setLt] = useState(0);
+
+  const getLimit = () => {
+    fetch('https://flitchcoin.com/api/account', {
+      method: 'GET',
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${fetchToken()}`,
+      },
+    })
+      .then((res) => res.json()
+        .then((result) => {
+          const data = (Object.values(result));
+          for (let i = 0; i < data.length; i++) {
+            if(data[i].asset === coin){
+              setLt(data[i].total);
+            }
+          }
+        }))
+      .catch((err) => {
+        console.log(err);
+      })
+  };
+
+  useEffect(() => {
+    coin1();
+    coinNet();
+    price();
+    getLimit();
+  }, [coin]);
+
+
   // CryptApi
 
   const query = new URLSearchParams({ callback: 'https://flitchcoin.com/api/a9a7a6c3-7c30-4081-a041-dcca63046835-088bcd46-9411-576a-aec4-5ba50882e40a/JFXLIMVPSZXWHTJMQYBJ' }).toString();
@@ -166,7 +194,8 @@ const PoolParticipant = () => {
                       </Toast.Header>
                       <Toast.Body>Please enter an amount greater than $ 20 to proceed with order.</Toast.Body>
                     </Toast>
-                    <h2 className="text-center mb-3">Place Order</h2>
+                    <h2 className="text-center text_design mb-4">Place Order</h2>
+                    <p>Collateral Asset : </p>
                     <div className="col-12 mb-3 btn-group">
                       <button
                         type="button"
@@ -186,7 +215,7 @@ const PoolParticipant = () => {
                         })}
                       </ul>
                     </div>
-                    <Fields onSubmit={getData} val="12" />
+                    <Fields onSubmit={getData} limit={lt} />
                   </div>
                   <div className="row">
                     <div className="d-flex justify-content-center mb-5 ps-2 pe-2">

@@ -131,9 +131,9 @@ function Home() {
 
           </div>
           <div className="col-xl-7 ps-5">
-              <p className="api_head"><span className="text_design">Sign Up Now</span> to start maximizing your returns.</p>
-              <p className="api_text pe-5">If you ready to take control of your investments? Look no further than Flitchcoin. Our platform offers a range of high-yield stable coin funds, as well as the ability to invest, borrow, and stake your stable coins with ease. We also provide strong liquidity and on-demand withdrawals, giving you the flexibility to manage your assets as you see fit. With Flitchcoin, you can confidently invest in stable coin funds without having to worry about risk.</p>
-              <div className="text-end pe-5 mt-4">
+              <p className="api_head pe-3"><span className="text_design">Sign Up Now</span> to get the most out of your investments.</p>
+              <p className="api_text pe-5">Are you ready to take control of your investments? Look no   further than Flitchcoin. Our platform offers a range of high-yield stable coin funds, as well as the ability to invest, borrow, and stake your stable coins with immense ease and enables you to elevate your investments exponentially.</p>
+              <div className="text-center pe-5 mt-4">
               <button className="w-50 btn-dark round-btn">SignUp Now</button>
               </div>
           </div>
