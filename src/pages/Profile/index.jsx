@@ -8,6 +8,7 @@ import { logOutUser } from "../../Feature/Auth/authSlice";
 import statement from "./Group 87.png";
 import setting from "./Group 97.png";
 import Toast from 'react-bootstrap/Toast';
+import Footer from '../../layouts/Footer/index';
 
 const Profile = () => {
 
@@ -386,6 +387,7 @@ const Profile = () => {
                                 </div>
                             </div>
                         </div>
+                        <Footer/>
                     </>
             }
         </div>

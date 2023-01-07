@@ -10,6 +10,7 @@ import setting_img from "./Group 97.png";
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import Toast from 'react-bootstrap/Toast';
+import Footer from '../../layouts/Footer/index';
 
 const Settings = () => {
 
@@ -275,6 +276,7 @@ const Settings = () => {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </div>
     )
 }

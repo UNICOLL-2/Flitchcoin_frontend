@@ -15,6 +15,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { EffectCoverflow, Pagination, Autoplay, Navigation } from "swiper";
 import Toast from 'react-bootstrap/Toast';
+import Footer from '../../layouts/Footer/index';
 
 function Dashboard() {
 
@@ -494,6 +495,7 @@ function Dashboard() {
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   );
 }

@@ -9,6 +9,7 @@ import { coinType } from "../../Feature/Order/orderSlice";
 import { orderType } from "../../Feature/Order/orderSlice";
 import { fetchToken } from "../../Auth";
 import Fields from "./fields";
+import Footer from '../../layouts/Footer/index';
 import Toast from 'react-bootstrap/Toast';
 
 const PoolParticipant = () => {
@@ -146,6 +147,7 @@ const PoolParticipant = () => {
   }, []);
 
   return (
+    <>
     <div className="container mb-5">
       <div className="row">
         <div className=" col-xl-9 mt-5">
@@ -215,6 +217,8 @@ const PoolParticipant = () => {
         <CryptoCurrencyMarket colorTheme="light" width="100%" height={654} isTransparent ></CryptoCurrencyMarket>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 };
 

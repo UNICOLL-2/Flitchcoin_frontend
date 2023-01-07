@@ -70,7 +70,7 @@ function Footer() {
   if (selectedType === "participant" || selectedType === "pool") {
     return (
       <>
-        <div className="footer-bg1">
+        <div className="footer-bg1 mt-5">
           <div className="container">
             <div className="row">
               <div className="col-md-12">

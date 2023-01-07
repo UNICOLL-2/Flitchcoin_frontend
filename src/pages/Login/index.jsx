@@ -11,6 +11,7 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import side_login_img from "./Vector.png";
 import google_img from "./image 21.png";
 import Toast from 'react-bootstrap/Toast';
+import Footer from '../../layouts/Footer/index';
 
 function Login() {
   const dispatch = useDispatch();
@@ -287,8 +288,7 @@ function Login() {
           </button>
         </div>
       </Modal>
-
-
+      <Footer/>
     </div>
   );
 }

@@ -7,6 +7,7 @@ import statement from "./Group 87.png";
 import setting from "./Group 97.png";
 import line from "./Line 18.png";
 import Toast from 'react-bootstrap/Toast';
+import Footer from '../../layouts/Footer/index';
 
 const QRVerify = () => {
 
@@ -239,6 +240,7 @@ const QRVerify = () => {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </>
     )
 }

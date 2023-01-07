@@ -4,6 +4,7 @@ import jsPDF from 'jspdf';
 import statement from "./Group 87.png";
 import setting from "./Group 97.png";
 import { fetchToken } from "../../Auth";
+import Footer from '../../layouts/Footer/index';
 
 const Statements = () => {
 
@@ -105,6 +106,7 @@ const Statements = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   )
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { fetchToken } from "../../Auth";
 import { useNavigate } from "react-router-dom";
+import Footer from '../../layouts/Footer/index';
 
 const Withdraw = () => {
 
@@ -147,6 +148,7 @@ const Withdraw = () => {
   };
 
   return (
+    <>
         <div className="container">
           <div className="row mb-5">
             <div className="col-xl-8 me-5">
@@ -259,6 +261,8 @@ const Withdraw = () => {
             </div>
           </div>
         </div>
+        <Footer/>
+        </>
   )
 }
 

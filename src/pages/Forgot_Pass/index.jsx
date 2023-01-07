@@ -5,6 +5,7 @@ import { loginUser } from "../../Feature/Auth/authSlice";
 import Animation from "../../Animation";
 import { Modal } from "react-bootstrap";
 import Toast from 'react-bootstrap/Toast';
+import Footer from '../../layouts/Footer/index';
 
 function Forgot_Pass() {
 
@@ -171,6 +172,7 @@ function Forgot_Pass() {
                     </button>
                 </div>
             </Modal>
+            <Footer/>
         </div>
     );
 }

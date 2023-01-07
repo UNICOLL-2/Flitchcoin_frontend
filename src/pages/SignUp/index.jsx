@@ -13,6 +13,7 @@ import login_lock from "./Vector (1).png";
 import google_img from "./image 21.png";
 import referal_img from "./image 28.png";
 import Toast from 'react-bootstrap/Toast';
+import Footer from '../../layouts/Footer/index';
 
 function SignUp() {
 
@@ -300,6 +301,7 @@ function SignUp() {
           </button>
         </div>
       </Modal>
+      <Footer/>
     </>
   );
 }

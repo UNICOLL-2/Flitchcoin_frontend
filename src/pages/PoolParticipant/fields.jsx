@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const Fields = (props,{val}) => {
+const Fields = (props) => {
 
       const [value, setValue] = useState();
       const [amount, setAmount] = useState();
@@ -13,7 +13,7 @@ const Fields = (props,{val}) => {
       const arr=[];
 
       useEffect(() => {
-        console.log(val)
+        console.log(props.val)
       })
 
       useEffect(() => {

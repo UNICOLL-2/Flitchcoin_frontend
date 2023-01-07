@@ -3,6 +3,7 @@ import { fetchToken } from "../../Auth";
 import bit_img from "./image 4.png";
 import { Modal } from "react-bootstrap";
 import Toast from 'react-bootstrap/Toast';
+import Footer from '../../layouts/Footer/index';
 
 const Order = () => {
 
@@ -262,6 +263,7 @@ const Order = () => {
   }
 
   return (
+    <>
     <div className="container">
       <div className="row  mt-5 mb-5">
         <div className="col-xl-7 me-5">
@@ -948,6 +950,8 @@ const Order = () => {
         </div>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 };
 
