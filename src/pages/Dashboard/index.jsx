@@ -463,7 +463,7 @@ function Dashboard() {
             <p className="text-muted ps-5">Total</p>
           </div>
           <div className="col-3">
-            <p className="text-muted ps-4">Yield</p>
+            <p className="text-muted ps-4">Used</p>
           </div>
             </div>
             <div className="row ps-5 pe-2 enable_scroll">

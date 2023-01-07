@@ -254,7 +254,7 @@ const Settings = () => {
                                             <div className="back p-3">
                                                 <h2>Enter Your Password</h2><br />
                                                 <input type="password" className='txt-underline p-3 w-100 input pressed' placeholder='Password' name="Password" value={pass} onChange={(e) => setPass(e.target.value)} /><br />
-                                                <button onClick={sigInWithGoogle} type="button" className="button_google button w-100"><i className="fa-brands fa-google text-primary">&nbsp;&nbsp;&nbsp;Google user</i></button><br /><br /><br />
+                                                <button onClick={sigInWithGoogle} type="button" className="button_google button w-100"><i className="fa-brands fa-google text_design">&nbsp;&nbsp;&nbsp;Google user</i></button><br /><br /><br />
                                                 <button
                                                     type="button"
                                                     className="primary me-4"

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-const Fields = (props) => {
+const Fields = (props,{val}) => {
 
       const [value, setValue] = useState();
       const [amount, setAmount] = useState();
@@ -13,6 +13,10 @@ const Fields = (props) => {
       const arr=[];
 
       useEffect(() => {
+        console.log(val)
+      })
+
+      useEffect(() => {
         arr.push(value);
         arr.push(amount);
         props.onSubmit(arr);
@@ -20,19 +24,18 @@ const Fields = (props) => {
 
     return (
         <div>
-            <div className="row mb-4">
+            <div className="row mb-0">
             </div>
                     <div className="col-12">
                       <div className="input1 w-100">
                         <input
                           type="number"
                           name="amount"
-                          placeholder="Amount:               BTC"
-                          className="input_login txt-underline p-3 mb-3 w-100"
+                          placeholder="Amount:  BTC"
+                          className="input_login p-3 mb-3 w-100"
                           value={amount}
                           onChange={e => setAmount(e.target.value)}
                         />
-                        <span className="underline"></span>
                       </div>
                     </div>
                     <div className="col-12">
@@ -41,12 +44,11 @@ const Fields = (props) => {
                         <input
                           type="number"
                           name="duration"
-                          placeholder="Duration:            Days"
-                          className="input_login txt-underline p-3 mb-3 w-100"
+                          placeholder="Duration:  Days"
+                          className="input_login p-3 mb-0 w-100"
                           value={value}
                           onChange={onChangeValues}
                         />
-                        <span className="underline"></span>
                       </div>
                     </div>
         </div>

@@ -333,8 +333,6 @@ element.style {
 .api_text {
 	font-size: 20px;
 	font-weight: 0;
-	display: flex;
-	align-items: center;
 	font-style: normal;
 	color: #6B6B6B;
 	text-align: justify;
@@ -345,6 +343,104 @@ element.style {
 	font-weight: 600;
 	color: #000;
 }
+
+.text_design {
+	background-image: linear-gradient(to right, #3787ff, #0016a5) !important;
+	-webkit-background-clip: text !important;
+	color: transparent !important;
+}
+
+.flitch_earn {
+	font-family: 'Lexend';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 64px;
+	line-height: 70px;
+	background: linear-gradient(180deg, #FFFFFF 27.6%, rgba(255, 255, 255, 0) 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	text-fill-color: transparent;
+}
+
+.button_special {
+	background-color: rgba(255, 255, 255, 0);
+	border: 0.125rem solid rgba(255, 255, 255, 0.2);
+	cursor: pointer;
+	letter-spacing: 0.2125rem;
+	line-height: 1;
+	overflow: hidden;
+	padding: 1.25rem 1.875rem;
+	position: relative;
+	text-align: center;
+	text-transform: uppercase;
+	transition: 
+		background-color 0.2s cubic-bezier(0.19, 1, 0.22, 1),
+		border 1s cubic-bezier(0.19, 1, 0.22, 1),
+		color 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+	user-select: none;
+}
+
+.button_special a {
+	color: rgba(255, 255, 255, 0.6);
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.button_special .mask {
+	background-color: rgba(255, 255, 255, 0.5);
+	height: 6.25rem;
+	position: absolute;
+	transform: translate3d(-120%, -50px, 0) rotate3d(0, 0, 1, 45deg);
+	transition: all 1.1s cubic-bezier(0.19, 1, 0.22, 1);
+	width: 12.5rem;
+}
+
+.button_special .shift {
+	display: inline-block;
+	transition: all 1.1s cubic-bezier(0.19, 1, 0.22, 1);
+	vertical-align: text-top;
+}
+
+.button_special:hover {
+	background-color: rgba(255, 255, 255, 0.05);
+	border-color: rgba(255, 255, 255, 1.0);
+	box-shadow:  0 0 0.3125rem rgba(255, 255, 255, 0.8);
+}
+
+.button_special:hover a {
+	color: rgba(255, 255, 255, 1.0);
+}
+
+.button_special:hover .mask {
+	background-color: rgba(255, 255, 255, 1.0);
+	transform: translate3d(120%, -100px, 0) rotate3d(0, 0, 1, 90deg);
+}
+
+.button_special:hover .shift {
+	transform: translateX(0.3125rem);
+}
+
+.button_special:active {
+	background-color: rgba(255, 255, 255, 1.0);
+}
+
+.button_special:active a {
+	color:  rgba(32, 32, 32, 1);
+}
+
+.card_margin{
+	margin-left: 4rem!important;
+	margin-right: 2rem!important;
+}
+
+@media screen and (max-width: 1400px) {
+	.card_margin{
+		margin-left: 2rem!important;
+		margin-right: 1rem!important;
+	}
+}
+
 
 /* Card/ */
 .column {
@@ -446,9 +542,6 @@ textarea:focus {
 		max-width: 100% !important;
 		height: auto;
 	}
-}
-
-@media screen and (min-width: 990px) {
 	.modal {
 		width: 120% !important;
 		margin-left: -10%;
@@ -3566,7 +3659,7 @@ ul {
 	border-radius: 20px !important;
 	border: 2px solid transparent !important;
 	background: linear-gradient(#111111, #111111),
-		linear-gradient(to right, #111111, #fff) !important;
+		linear-gradient(to right, #111111 25%, #fff) !important;
 	background-clip: padding-box, border-box !important;
 	background-origin: padding-box, border-box !important;
 
@@ -3600,8 +3693,6 @@ ul {
 	margin-bottom: 20px;
 }
 
-.footerbottom .content2 {}
-
 .footerbottom .content2 .privacy-links {
 	text-align: right;
 }
@@ -3632,98 +3723,115 @@ ul {
 
 @media screen and (max-width: 1200px) {
 	.footer-top .gradient-heading h3 {
-	  margin-bottom: 0;
-	  font-weight: 300;
-	  font-size: 11px;
+		margin-bottom: 0;
+		font-weight: 300;
+		font-size: 11px;
 	}
+
 	.footer-top .social-links .line1 {
-	  width: 62%;
+		width: 62%;
 	}
+
 	.footerbottom .pattern {
-	  width: 570px;
+		width: 570px;
 	}
-  }
-  
-  @media screen and (max-width: 992px) {
+}
+
+@media screen and (max-width: 992px) {
 	.footer-top .social-links .line1 {
-	  width: 46%;
+		width: 46%;
 	}
+
 	.startusing .content1 h2 {
-	  font-size: 23px;
-  
-	  margin-bottom: 30px;
+		font-size: 23px;
+
+		margin-bottom: 30px;
 	}
+
 	.startusing .content2 {
-	  margin-right: 0px;
+		margin-right: 0px;
 	}
-  
+
 	.footerbottom .content1 .line2 {
-	  width: 90%;
+		width: 90%;
 	}
-  }
-  @media screen and (max-width: 768px) {
+}
+
+@media screen and (max-width: 768px) {
 	.footer-top .social-links .line1 {
-	  display: none;
+		display: none;
 	}
+
 	.footer-top .gradient-heading h3 {
-	  text-align: center;
-	  margin-bottom: 20px;
-	  font-size: 18px;
+		text-align: center;
+		margin-bottom: 20px;
+		font-size: 18px;
 	}
+
 	.footer-top .socialMedia-icons ul {
-	  justify-content: center;
-	  margin: 25px 0;
+		justify-content: center;
+		margin: 25px 0;
 	}
-	.footer-top .startusing .content1 {
-	}
-  
+
+	.footer-top .startusing .content1 {}
+
 	.startusing .content1 .flitchcoin-img {
-	  margin: 0 auto;
+		margin: 0 auto;
 	}
+
 	.startusing .content1 .flitchcoin-img img {
-	  margin-left: 0px;
+		margin-left: 0px;
 	}
-  
+
 	.footer-top .startusing .content2 {
-	  margin-top: 35px;
+		margin-top: 35px;
 	}
-  
+
 	.footerbottom .content2 .privacy-links {
-	  text-align: center;
+		text-align: center;
 	}
+
 	.footerbottom .content2 .chat {
-	  text-align: center;
+		text-align: center;
 	}
-  
+
 	.footerbottom .content2 {
-	  margin-bottom: 35px;
+		margin-bottom: 35px;
 	}
+
 	.footerbottom .pattern {
-	  width: 465px;
+		width: 465px;
 	}
-  }
-  @media screen and (max-width: 576px) {
+}
+
+@media screen and (max-width: 576px) {
 	.footerbottom .content1 {
-	  padding: 0 10px;
+		padding: 0 10px;
 	}
-  }
-  @media screen and (max-width: 440px) {
+}
+
+@media screen and (max-width: 440px) {
 	.footerbottom .content1 {
-	  padding: 0 10px;
+		padding: 0 10px;
 	}
+
 	.footerbottom .content1 p {
-	  font-size: 11px;
+		font-size: 11px;
 	}
+
 	.footer-top .gradient-heading h3 {
-	  font-size: 16px;
+		font-size: 16px;
 	}
-  }
-  @media screen and (max-width: 360px) {
+}
+
+@media screen and (max-width: 360px) {
 	.footer-top .gradient-heading h3 {
-	  font-size: 14px;
+		font-size: 14px;
 	}
+
 	.startusing .content1 h2 {
-	  font-size: 20px;
+		font-size: 20px;
 	}
-  }
+}
+
 /* #### FOOTER #####  */

@@ -24,7 +24,7 @@ function Api() {
       <div className="container">
         <section className="row pt-5" data-aos="fade-up" data-aos-offset="200" data-aos-delay="50">
           <div className="col-lg-6 d-flex flex-column justify-content-center h_get_to_know">
-            <p className="pt-3 api_head">POWER CUSTOM SOLUTIONS WITH <span className="text-primary"> FLITCHCOIN'S API SURFACE</span> </p>
+            <p className="pt-3 api_head">POWER CUSTOM SOLUTIONS WITH <span className="text_design"> FLITCHCOIN'S API SURFACE</span> </p>
             <p className="pt-3 api_text">
               Experience the power of Flitchcoin's custom solutions and take your portfolio management to the next level. Our API surface enables you to build your own solutions with access to the depth of crypto market. You can build your own solutions and access a range of data and capabilities to power proprietary applications and create custom tools that meet your needs.
             </p>

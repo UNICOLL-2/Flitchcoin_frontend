@@ -146,10 +146,10 @@ const PoolParticipant = () => {
   }, []);
 
   return (
-    <div className="mb-5">
+    <div className="container mb-5">
       <div className="row">
-        <div className=" col-xl-8 ms-5 mt-5">
-          <AdvancedRealTimeChart theme="light" autosize symbol={coinsNet} ></AdvancedRealTimeChart>
+        <div className=" col-xl-9 mt-5">
+          <AdvancedRealTimeChart theme="light" autosize symbol={coinsNet} height={680} ></AdvancedRealTimeChart>
         </div>
         <div className="col-xl-3">
           <div className="container">
@@ -164,7 +164,7 @@ const PoolParticipant = () => {
                       </Toast.Header>
                       <Toast.Body>Please enter an amount greater than $ 20 to proceed with order.</Toast.Body>
                     </Toast>
-                    <h2 className="text-center mb-5">Place Order</h2>
+                    <h2 className="text-center mb-3">Place Order</h2>
                     <div className="col-12 mb-3 btn-group">
                       <button
                         type="button"
@@ -184,7 +184,7 @@ const PoolParticipant = () => {
                         })}
                       </ul>
                     </div>
-                    <Fields onSubmit={getData} />
+                    <Fields onSubmit={getData} val="12" />
                   </div>
                   <div className="row">
                     <div className="d-flex justify-content-center mb-5 ps-2 pe-2">

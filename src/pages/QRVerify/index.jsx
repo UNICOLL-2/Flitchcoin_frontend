@@ -158,7 +158,7 @@ const QRVerify = () => {
                                                             </button>
                                                         </div>
                                                     </div>
-                                                    <p><span className="text-primary">Two-factor authentication (2FA) </span>is an excellent way to add an extra layer of security to your online accounts, including your wallet. Here are a few reasons why you should consider using it:<br />
+                                                    <p><span className="text_design">Two-factor authentication (2FA) </span>is an excellent way to add an extra layer of security to your online accounts, including your wallet. Here are a few reasons why you should consider using it:<br />
                                                         1. It helps protect against unauthorized access to your accounts, even if someone else has obtained your login credentials.<br />
                                                         2. It's quick and easy to set up, and can be done through a variety of methods, such as SMS, email, or google authentication app.<br />
                                                         3. It provides peace of mind knowing that your accounts have an extra level of protection.<br />
@@ -169,7 +169,7 @@ const QRVerify = () => {
                                                 {
                                                     page === "Setup" && isActive ?
                                                         <>
-                                                            <p><span className="qr_head"> Here’s an example to set up two-factor authentication (2FA) using the <span className="text-primary"> Google Authenticator</span> app:</span><br /><br />
+                                                            <p><span className="qr_head"> Here’s an example to set up two-factor authentication (2FA) using the <span className="text_design"> Google Authenticator</span> app:</span><br /><br />
                                                                 1. Download the Google Authenticator app on your phone. It is available for both Android and iOS devices.<br />
                                                                 2. Go to the account or service that you want to enable 2FA for and look for the option to enable 2FA. This is usually found in the security settings.<br />
                                                                 3. Follow the prompts to set up 2FA. This may include scanning a QR code or entering a secret key.<br />
