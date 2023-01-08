@@ -26,6 +26,7 @@ function Header() {
   };
 
   const onClick = (e) => {
+    open();
     rel_login();
     dispatch(logOutUser());
   }
@@ -98,39 +99,30 @@ function Header() {
         <div className="container">
           <div className="containerinner ">
             {
-              selectedType === "accept" ?
-                <>
-                  <Link to="/" className="text-dark ms-4 p-1" >
+              selectedType === "pool" || selectedType === "participant" ?
+              <></>:
+              <>
+               <Link to="/" className="text-dark ms-4 p-1" >
                     <div className="i"></div>
                     <div className="i"></div>
                   </Link>
                   <Link to="/login" type="button" className=" me-4" ><i className="fa-solid fa-right-to-bracket icons_login">&nbsp; Login</i></Link>
-                </> :
-                <>
-                  {
-                    selectedType === "decline" ?
-                      <>
-                        <Link to="/" className="text-dark ms-4 p-1" ><div className="i"></div>
-                    <div className="i"></div></Link>
-                        <Link to="/sign-up" className="me-4"><i className="fa-regular fa-face-smile-wink icons_login">&nbsp;&nbsp;Let's Start</i></Link>
-                      </> :
-                      <>
-                      </>
-                  }
-                </>
+              </>
             }
+                 
           </div>
           <div className="contain" id="mainlist">
             {
               selectedType === "pool" || selectedType === "participant" ?
                 <>
-                  <div className="brand ms-4" onClick={() => navigate(-1)}>&#x2190;</div>
                   {
                     isActive ?
                       <>
+                      <div className="pe-5 me-2"></div>
                         <img src={cross} alt="avatar" className="logo" id="menubtn" onClick={open} />
                       </> :
                       <>
+                        <div className="brand ms-4" onClick={() => navigate(-1)}>&#x2190;</div>
                         <img src={avt} alt="avatar" className="logo" id="menubtn" onClick={open} onMouseEnter={function1} onMouseLeave={function2} /><div className="avt" id="wa"><p className="tx pe-4">{fullName}</p></div>
                       </>
                   }
@@ -138,8 +130,10 @@ function Header() {
                   <div className="headinglist">
                     <Link to="/Api" className="margin_start ">Api</Link>
                     <Link to="/Dashboard" className="margin_bw ">Dashboard</Link>
-                    <Link to="/" className="margin_bw me-5 pe-5" ><div className="i"></div>
-                    <div className="i"></div></Link>
+                    <Link to="/" className="margin_bw me-5 pe-5" >
+                      <div className="i"></div>
+                      <div className="i"></div>
+                      </Link>
                     <Link to="/place_order" className="margin_bw ">Order</Link>
                     <Link to="/order" className="margin_bw ">History</Link></div>
                 </> :
@@ -154,37 +148,28 @@ function Header() {
             <div className="hamburger">
               <div className="containerinner ">
                 {
-                  selectedType === "accept" ?
+                  selectedType === "pool" || selectedType === "participant" ?
+                    <></>:
                     <>
-                      <Link to="/" className="text_dark ms-4 p-1" ><div className="i"></div>
-                    <div className="i"></div></Link>
+                      <Link to="/" className="text_dark ms-4 p-1" >
+                        <div className="i"></div>
+                        <div className="i"></div>
+                        </Link>
                       <Link to="/login" type="button" className=" me-4" ><i className="fa-solid fa-right-to-bracket icons_login">&nbsp; Login</i></Link>
-                    </> :
-                    <>
-                      {
-                        selectedType === "decline" ?
-                          <>
-                            <Link to="/" className="text-dark ms-4 p-1" ><div className="i"></div>
-                    <div className="i"></div></Link>
-                            <Link to="/sign-up" className="me-4"><i className="fa-regular fa-face-smile-wink icons_login">&nbsp;&nbsp;Let's Start</i></Link>
-                          </> :
-                          <>
-                          </>
-                      }
-                    </>
+                    </> 
                 }
               </div>
               <div className="contain ms-5" id="mainmenu">
                 {
                   selectedType === "pool" || selectedType === "participant" ?
                     <>
-                      <div className="brand ms-4" onClick={() => navigate(-1)}>&#x2190;</div>
                       {
                         isActive ?
                           <>
                             <img src={cross} alt="avatar" className="logo" id="menubtn" onClick={open} />
                           </> :
                           <>
+                            <div className="brand ms-4" onClick={() => navigate(-1)}>&#x2190;</div>
                             <img src={avt} alt="avatar" className="logo" id="menubtn" onClick={open} />
                           </>
                       }

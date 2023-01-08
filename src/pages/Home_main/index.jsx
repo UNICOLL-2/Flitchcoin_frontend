@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Animation from "../../Animation";
 import Footer from '../../layouts/Footer/index';
 import { SymbolOverview } from "react-ts-tradingview-widgets";
@@ -35,8 +35,62 @@ function Home() {
               </button>
             </div>
           </div>
-          <div className="col-lg-6 mt-5 ms-5 card parent_card back">
-            <SymbolOverview colorTheme="light"
+          <div className="col-lg-6 mt-5 card_margin card parent_card back">
+            <MiniChart colorTheme="dark" width="100%" height={350} symbol="SOLUSDT" isTransparent></MiniChart>
+
+            {/* <SymbolOverview colorTheme="light"
+              height={320}
+              width="100%"
+              chartType="area"
+              downColor="#800080"
+              borderDownColor="#800080"
+              wickDownColor="#800080"
+              isTransparent
+              symbols={
+                [
+                  ["BTC", "BTCUSDT"],
+                  ["ETH", "ETHUSDT"],
+                  ["MATIC", "MATICUSDT"]
+                ]
+              } /> */}
+          </div>
+        </section>
+        <section className="mt-5 pt-5">
+          <p className="text-center api_head">FLITCHCOIN as a <span className="text_design"> One - Stop Solution </span></p>
+          <p className="api_text">At Flitchcoin, we strive to make managing digital currency as simple and hassle-free as possible. Our platform serves as a one-stop-shop for all your digital currency needs, offering a range of payment, staking, and liquidity lending solutions to help you thrive. Our free and easy-to-use account services makes it easy for you to get started with managing digital currency, providing you with all the tools and resources you need.</p>
+          <div className="row mt-5 pt-4">
+            <div className="col-6">
+              <p className="text-end api_head" data-aos="fade-up">NO MATTER</p>
+            </div>
+            <div className="col-6">
+              <p className="text-start api_head" data-aos="fade-down">WHETHER IT'S</p>
+            </div>
+          </div>
+          <div className="row mt-4">
+            <div className="col-xl-6">
+              <p className="text-primary text-center api_head">Stable</p>
+              <div className="card parent_card back text-center me-4 p-2">
+              <SymbolOverview colorTheme="light"
+              height={320}
+              width="100%"
+              chartType="area"
+              downColor="#800080"
+              borderDownColor="#800080"
+              wickDownColor="#800080"
+              isTransparent
+              symbols={
+                [
+                  ["USDT", "USDTUSD"],
+                  ["USDC","USDCUSD"],
+                  ["BUSD","BUSDUSD"]
+                ]
+              } />
+              </div>
+            </div>
+            <div className="col-xl-6">
+              <p className="text-danger text-center api_head">Volatile</p>
+              <div className="card parent_card back text-center ms-4 p-2">
+              <SymbolOverview colorTheme="light"
               height={320}
               width="100%"
               chartType="area"
@@ -51,17 +105,7 @@ function Home() {
                   ["MATIC", "MATICUSDT"]
                 ]
               } />
-          </div>
-        </section>
-        <section className="mt-5 pt-5">
-          <p className="text-center api_head">FLITCHCOIN as a <span className="text_design"> One - Stop Solution </span></p>
-          <p className="api_text">At Flitchcoin, we strive to make managing digital currency as simple and hassle-free as possible. Our platform serves as a one-stop-shop for all your digital currency needs, offering a range of payment, staking, and liquidity lending solutions to help you thrive. Our free and easy-to-use account services makes it easy for you to get started with managing digital currency, providing you with all the tools and resources you need.</p>
-          <div className="row mt-5 pt-4">
-            <div className="col-6">
-              <p className="text-end api_head" data-aos="fade-up">NO MATTER</p>
-            </div>
-            <div className="col-6">
-              <p className="text-start api_head" data-aos="fade-down">WHETHER IT'S</p>
+              </div>
             </div>
           </div>
         </section>
@@ -91,7 +135,7 @@ function Home() {
                   </div>
                 </div>
                 <div className="col-9">
-                  <p className="text-start flitch_earn"> Flitch - EARN</p>
+                  <p className="text-start flitch_earn">Flitch-EARN</p>
                 </div>
               </div>
               <p className="text-white mt-3">Experience the Flitchcoin advantage and diversify your cryptocurrency portfolio with our extended earn service. Reduce your risk exposure and borrow assets to take them off the markets with our lending and borrowing feature.<br />
@@ -118,25 +162,24 @@ function Home() {
               At <b className="text-dark"> Flitchcoin</b>, we are committed to <b className="text-dark">transparency</b> and <b className="text-dark">stability</b> in all aspects of our business. We welcome clear regulation and value engagement with <b className="text-dark">policymakers</b> to ensure transparency and stability for our customers in order to promote a more responsible and stable future for cryptocurrency. Choose Flitchcoin and join us in building a more transparent and stable future.
             </p>
           </div>
-          <div className="col-lg-6 mt-5 ms-5 card parent_card back">
-            {/* <SymbolInfo colorTheme="dark" autosize symbol="XRPUSDT" isTransparent></SymbolInfo> */}
-            <MiniChart colorTheme="dark" width="100%" height={400} symbol="SOLUSDT" isTransparent></MiniChart>
+          <div className="col-lg-6 mt-5 card_margin card parent_card back">
+            <SymbolInfo colorTheme="dark" autosize symbol="XRPUSDT" isTransparent></SymbolInfo>
           </div>
           <p className="mt-5 pt-5 api_text mb-5">At <b className="text-dark"> Flitchcoin</b>, we believe in building delightful user experiences that make it <b className="text-dark"> easy and intuitive</b> for people to interact with your business. Our <b className="text-dark"> Lending, Staking, and Earn</b> platforms are designed to be easy to use, and you can get started right away. With Flitchcoin, we created beautiful, intuitive ways for your entire ecosystem to engage with that helped in improving the overall user experience and driving growth.
             <br />Join us and see the difference Flitchcoin can make for you and your business.</p>
         </section>
         <div className="settings_box mt-5 pt-4 pb-4 mb-5">
           <div className="row">
-          <div className="col-xl-5">
+            <div className="col-xl-5">
 
-          </div>
-          <div className="col-xl-7">
-              <p className="api_head"><span className="text_design">Sign Up Now</span> to start maximizing your returns.</p>
-              <p className="api_text pe-5">If you ready to take control of your investments? Look no further than Flitchcoin. Our platform offers a range of high-yield stable coin funds, as well as the ability to invest, borrow, and stake your stable coins with ease. We also provide strong liquidity and on-demand withdrawals, giving you the flexibility to manage your assets as you see fit. With Flitchcoin, you can confidently invest in stable coin funds without having to worry about risk.</p>
-              <div className="text-end pe-5 mt-4">
-              <button className="w-50 btn-dark round-btn">SignUp Now</button>
+            </div>
+            <div className="col-xl-7 ps-5">
+              <p className="api_head pe-3"><span className="text_design">Sign Up Now</span> to get the most out of your investments.</p>
+              <p className="api_text pe-5">Are you ready to take control of your investments? Look no   further than Flitchcoin. Our platform offers a range of high-yield stable coin funds, as well as the ability to invest, borrow, and stake your stable coins with immense ease and enables you to elevate your investments exponentially.</p>
+              <div className="text-center pe-5 mt-4">
+                <button className="w-50 btn-dark round-btn">SignUp Now</button>
               </div>
-          </div>
+            </div>
           </div>
         </div>
       </div>

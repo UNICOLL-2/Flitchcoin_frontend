@@ -3,19 +3,13 @@ import { AdvancedRealTimeChart } from "react-ts-tradingview-widgets";
 import { SymbolInfo } from "react-ts-tradingview-widgets";
 import { TechnicalAnalysis } from "react-ts-tradingview-widgets";
 import { CryptoCurrencyMarket } from "react-ts-tradingview-widgets";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { coinType } from "../../Feature/Order/orderSlice";
-import { orderType } from "../../Feature/Order/orderSlice";
 import { fetchToken } from "../../Auth";
 import Fields from "./fields";
 import Footer from '../../layouts/Footer/index';
-import Toast from 'react-bootstrap/Toast';
 
 const PoolParticipant = () => {
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+
   const [asset, setAsset] = useState([]);
   const [coin, setCoin] = useState("Select coin");
 
@@ -55,104 +49,10 @@ const PoolParticipant = () => {
         setCoinsNet(`BTCUSDT`) : setCoinsNet(`${coin}USDT`)
     }
   }
-
-  const [priceInUsd, setPriceInUsd] = useState(0);
-
-  const price = () => {
-    const sym = coin.toUpperCase();
-    fetch(`https://flitchcoin.com/api/prices/${sym}`, {
-      method: 'GET',
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-      }
-    })
-      .then((res) => res.json()
-        .then((result) => {
-          setPriceInUsd(result[0]);
-        }))
-      .catch((err) => {
-        console.log(err);
-      })
-  };
-
-  const [amountToBeConverted, setAmountToBeConverted] = useState(0);
-
-  var dur = 0;
-  var userAmt = 0;
-  const getData = (data) => {
-    dur = (Number(data[0]));
-    userAmt = (Number(data[1]));
-    const getValue = () => {
-      setAmountToBeConverted(userAmt * priceInUsd);
-    };
-    getValue();
-  };
-
-  const [showA, setShowA] = useState(false);
-
-  function sendOrder() {
-    if (amountToBeConverted <= 20) {
-      setShowA(true);
-    } else {
-      var data = JSON.stringify({
-        "coin": coin.toLowerCase(),
-        "amount": userAmt,
-        "duration": dur
-      });
-      fetch('https://flitchcoin.com/api/order', {
-        method: 'POST',
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${fetchToken()}`,
-        },
-        body: data,
-      })
-        .then((res) => res.json()
-          .then((result) => {
-            if (result.status === 200) {
-              dispatch(coinType(coin));
-              dispatch(orderType("order"));
-              navigate("/order");
-            }
-          }))
-        .catch((err) => {
-          console.log(err);
-        })
-    }
-  };
-
-  const [lt, setLt] = useState(0);
-
-  const getLimit = () => {
-    fetch('https://flitchcoin.com/api/account', {
-      method: 'GET',
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${fetchToken()}`,
-      },
-    })
-      .then((res) => res.json()
-        .then((result) => {
-          const data = (Object.values(result));
-          for (let i = 0; i < data.length; i++) {
-            if(data[i].asset === coin){
-              setLt(data[i].total);
-            }
-          }
-        }))
-      .catch((err) => {
-        console.log(err);
-      })
-  };
-
+  
   useEffect(() => {
     coin1();
     coinNet();
-    price();
-    getLimit();
   }, [coin]);
 
 
@@ -167,7 +67,7 @@ const PoolParticipant = () => {
       { method: 'GET' }
     );
     const data = await response.text();
-    console.log(data);
+    // console.log(data);
   }
   useEffect(() => {
     asset_list();
@@ -187,14 +87,14 @@ const PoolParticipant = () => {
               <div className="back card special_card_order pt-4 pb-4">
                 <div className="pb-5">
                   <div className="row order__body">
-                    <Toast onClose={() => setShowA(false)} className="text-center position-absolute" style={{ zIndex: "11" }} position="top-center" show={showA} delay={3000} autohide>
+                    {/* <Toast onClose={() => setShowA(false)} className="text-center position-absolute" style={{ zIndex: "11" }} position="top-center" show={showA} delay={3000} autohide>
                       <Toast.Header>
                         <strong className="me-auto">Flitchcoin</strong>
                         <small>Amount Barrier !</small>
                       </Toast.Header>
                       <Toast.Body>Please enter an amount greater than $ 20 to proceed with order.</Toast.Body>
-                    </Toast>
-                    <h2 className="text-center text_design mb-4">Place Order</h2>
+                    </Toast> */}
+                    <h2 className="text-center text_design mb-5">Place Order</h2>
                     <p>Collateral Asset : </p>
                     <div className="col-12 mb-3 btn-group">
                       <button
@@ -215,18 +115,7 @@ const PoolParticipant = () => {
                         })}
                       </ul>
                     </div>
-                    <Fields onSubmit={getData} limit={lt} />
-                  </div>
-                  <div className="row">
-                    <div className="d-flex justify-content-center mb-5 ps-2 pe-2">
-                      <button
-                        className="primary mt-4 ps-5 pe-5 round-btn place_order_btn "
-                        style={{ position: "absolute", width: "90%" }}
-                        onClick={sendOrder}
-                      >
-                        Place Order  ${{amountToBeConverted} === "NaN" ? <>0</>: <>{(amountToBeConverted).toFixed(2)}</>}
-                      </button>
-                    </div>
+                    <Fields sym={coin} />
                   </div>
                 </div>
               </div>

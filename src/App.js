@@ -1,26 +1,13 @@
-import { useDispatch, useSelector } from "react-redux";
 import Layout from "./layouts";
-import {  Modal } from "react-bootstrap";
-import { useState, useEffect } from "react";
-import { defaultType, userLogin  } from "./Feature/Auth/authSlice";
+import { Modal } from "react-bootstrap";
 import "./app.css";
 import wave from "./66615-wave-blue-lines.gif";
 
 const App = () => {
-  const dispatch = useDispatch();
-  const { selectedType } = useSelector((state) => state.auth);
-  const [show, setShow] = useState(true);
-  const typeSelector = (e) => {
-    dispatch(defaultType(e));
-    setShow(false);
-  };
-  useEffect(() => {
-    dispatch(userLogin());
-  }, []);
-
   return (
     <div>
-      {selectedType === undefined && (
+      <Layout />
+      {/* {selectedType === undefined && (
         <Modal
           show={show}
           onHide={() => setShow(false)}
@@ -85,8 +72,7 @@ const App = () => {
             </div>
           </div>
         </Modal>
-        )}
-      {selectedType ? <Layout /> : null}
+        )} */}
     </div>
   );
 };

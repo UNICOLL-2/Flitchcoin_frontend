@@ -135,9 +135,9 @@ function Footer() {
                       </div>
                       <div className="sub-content2">
                         <ul>
-                          <li>
+                          {/* <li>
                             <a href="#">The 7% club</a>
-                          </li>
+                          </li> */}
                           <li>
                             <a href="#">Earn</a>
                           </li>
@@ -239,7 +239,7 @@ function Footer() {
                   </div>
                   <div className="chat">
                     <h3>Let's chat</h3>
-                    <a href="#">support@flitchcoin.com</a>
+                    <a href="mailto:pr@flitchcoin.com">pr@flitchcoin.com</a>
                   </div>
                 </div>
               </div>
