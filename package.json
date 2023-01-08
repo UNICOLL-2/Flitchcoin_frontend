@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@binance/fiat-widget": "^0.0.0-dev.e0f3bbe",
     "@fortawesome/fontawesome-svg-core": "^6.1.2",
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.2",
@@ -16,6 +17,7 @@
     "axios": "^0.27.2",
     "babel": "^6.23.0",
     "babel-plugin-macros": "^3.1.0",
+    "binance-fiat-widget": "^1.1.16",
     "bootstrap": "^5.1.3",
     "chart.js": "^3.9.1",
     "chartjs-adapter-date-fns": "^2.0.0",

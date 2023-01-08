@@ -9,7 +9,6 @@ import Footer from '../../layouts/Footer/index';
 
 const PoolParticipant = () => {
 
-
   const [asset, setAsset] = useState([]);
   const [coin, setCoin] = useState("Select coin");
 
@@ -76,7 +75,7 @@ const PoolParticipant = () => {
 
   return (
     <>
-    <div className="container mb-5">
+    <div className="container">
       <div className="row">
         <div className=" col-xl-9 mt-5">
           <AdvancedRealTimeChart theme="light" autosize symbol={coinsNet} height={680} ></AdvancedRealTimeChart>
@@ -84,16 +83,9 @@ const PoolParticipant = () => {
         <div className="col-xl-3">
           <div className="container">
             <div className="row pt-5 pb-1">
-              <div className="back card special_card_order pt-4 pb-4">
-                <div className="pb-5">
+              <div className="back card special_card_order pt-4">
+                <div className="pb-2">
                   <div className="row order__body">
-                    {/* <Toast onClose={() => setShowA(false)} className="text-center position-absolute" style={{ zIndex: "11" }} position="top-center" show={showA} delay={3000} autohide>
-                      <Toast.Header>
-                        <strong className="me-auto">Flitchcoin</strong>
-                        <small>Amount Barrier !</small>
-                      </Toast.Header>
-                      <Toast.Body>Please enter an amount greater than $ 20 to proceed with order.</Toast.Body>
-                    </Toast> */}
                     <h2 className="text-center text_design mb-5">Place Order</h2>
                     <p>Collateral Asset : </p>
                     <div className="col-12 mb-3 btn-group">

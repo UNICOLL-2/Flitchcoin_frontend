@@ -83,7 +83,7 @@ function Footer() {
                     <div className="socialMedia-icons">
                       <ul className="d-flex align-items-center">
                         <li>
-                          <a href="#">
+                          <a href="https://www.linkedin.com/company/flitchcoin/about/?viewAsMember=true" target="_blank">
                             <BsLinkedin />
                           </a>
                         </li>
@@ -216,7 +216,7 @@ function Footer() {
                     strictly prohibited.
                   </p>
                   <div className="line2"></div>
-                  <p>© 2022 Flitchcoin. All rights reserved.</p>
+                  <p>© 2023 Flitchcoin. All rights reserved.</p>
                 </div>
               </div>
               <div className="col-md-3">

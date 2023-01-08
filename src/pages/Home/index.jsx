@@ -6,8 +6,10 @@ import { SymbolInfo } from "react-ts-tradingview-widgets";
 import { MiniChart } from "react-ts-tradingview-widgets";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { Link, useNavigate } from "react-router-dom";
 
 function Home() {
+  const navigate = useNavigate();
 
   AOS.init();
   AOS.init({
@@ -37,22 +39,6 @@ function Home() {
           </div>
           <div className="col-lg-6 mt-5 card_margin card parent_card back">
             <MiniChart colorTheme="dark" width="100%" height={350} symbol="SOLUSDT" isTransparent></MiniChart>
-
-            {/* <SymbolOverview colorTheme="light"
-              height={320}
-              width="100%"
-              chartType="area"
-              downColor="#800080"
-              borderDownColor="#800080"
-              wickDownColor="#800080"
-              isTransparent
-              symbols={
-                [
-                  ["BTC", "BTCUSDT"],
-                  ["ETH", "ETHUSDT"],
-                  ["MATIC", "MATICUSDT"]
-                ]
-              } /> */}
           </div>
         </section>
         <section className="mt-5 pt-5">
@@ -143,13 +129,15 @@ function Home() {
             </div>
             <div className="col-xl-1"></div>
             <div className="col-xl-3 mt-5">
+              <Link to="/login" style={{textDecoration: "none"}}>
               <div class="button_special mt-5">
-                <a href="#">
+                <a href="" >
                   Start earning &nbsp;&nbsp;
                   <span class="shift">›</span>
                 </a>
                 <div class="mask"></div>
               </div>
+              </Link>
             </div>
           </div>
         </div>
