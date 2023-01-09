@@ -30,6 +30,7 @@ const Fields = (props) => {
 
   const [lt, setLt] = useState(0);
   const [showA, setShowA] = useState(false);
+  const [showB, setShowB] = useState(false);
 
   const [priceInUsd, setPriceInUsd] = useState(0);
 
@@ -76,8 +77,6 @@ const Fields = (props) => {
       })
   };
 
-  const [agree, setAgree] = useState(false);
-
   function sendOrder() {
     fetch("https://flitchcoin.com/api/agreement/", {
       method: 'GET',
@@ -88,48 +87,43 @@ const Fields = (props) => {
       }
     }).then((res) => res.json()
       .then((result) => {
-        setAgree(result.agreement);
-        console.log(agree)
+        if (result.agreement) {
+          if (amountToBeConverted <= 20) {
+            setShowA(true);
+          } else {
+            var data = JSON.stringify({
+              "coin": (props.sym).toLowerCase(),
+              "amount": amount,
+              "duration": value
+            });
+            fetch('https://flitchcoin.com/api/order', {
+              method: 'POST',
+              headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${fetchToken()}`,
+              },
+              body: data,
+            })
+              .then((res) => res.json()
+                .then((result) => {
+                  if (result.status === 200) {
+                    dispatch(coinType(props.sym));
+                    dispatch(orderType("order"));
+                    navigate("/order");
+                  }
+                }))
+              .catch((err) => {
+                console.log(err);
+              })
+          }
+        } else {
+          setShow(true);
+        }
       }))
       .catch((err) => {
         console.log(err);
       });
-      setAgree(agree)
-      console.log(agree);
-    if (agree) {
-      if (amountToBeConverted <= 20) {
-        setShowA(true);
-      } else {
-        var data = JSON.stringify({
-          "coin": (props.sym).toLowerCase(),
-          "amount": amount,
-          "duration": value
-        });
-        fetch('https://flitchcoin.com/api/order', {
-          method: 'POST',
-          headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${fetchToken()}`,
-          },
-          body: data,
-        })
-          .then((res) => res.json()
-            .then((result) => {
-              if (result.status === 200) {
-                dispatch(coinType(props.sym));
-                dispatch(orderType("order"));
-                navigate("/order");
-              }
-            }))
-          .catch((err) => {
-            console.log(err);
-          })
-      }
-    } else {
-      // setShow(true);
-    }
-
   };
 
   useEffect(() => {
@@ -141,12 +135,34 @@ const Fields = (props) => {
   useEffect(() => {
     date.setDate(date.getDate() + value - 72);
     setRepDate(date.toLocaleDateString());
-  }, [value])
+  }, [value]);
 
   useEffect(() => {
     getLimit();
     price();
   }, [props.sym]);
+
+  const termAccept = () => {
+    const data = JSON.stringify({
+      "agreement": true
+    });
+    fetch('https://flitchcoin.com/api/agreement/', {
+      method: 'POST',
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${fetchToken()}`,
+      },
+      body: data,
+    })
+      .then((res) => res.json()
+        .then((result) => {
+          sendOrder();
+        }))
+      .catch((err) => {
+        console.log(err);
+      })
+  }
 
   return (
     <>
@@ -157,21 +173,30 @@ const Fields = (props) => {
         </Toast.Header>
         <Toast.Body>Please enter an amount greater than $ 20 to proceed with order.</Toast.Body>
       </Toast>
-      <p className="api_text">Total in Account : {lt}</p>
-      <div className="mt-4">
+      <Toast onClose={() => setShowB(false)} className="text-center position-absolute" style={{ zIndex: "11" }} position="top-center" show={showB} delay={3000} autohide>
+        <Toast.Header>
+          <strong className="me-auto">Flitchcoin</strong>
+          <small>Terms Declined !</small>
+        </Toast.Header>
+        <Toast.Body>Please accept the terms to proceed with order.</Toast.Body>
+      </Toast>
+      <p className="text-muted">Total in Account : {lt}</p>
         <div className="col-12">
           <div className="row">
-            <div className="col-4">
+            <div className="col-3">
               <button className="percent_btn" onClick={() => setAmount(lt * 0.1)}>10%</button>
             </div>
-            <div className="col-4">
+            <div className="col-3">
+              <button className="percent_btn" onClick={() => setAmount(lt * 0.25)}>25%</button>
+            </div>
+            <div className="col-3">
               <button className="percent_btn" onClick={() => setAmount(lt * 0.5)}>50%</button>
             </div>
-            <div className="col-4">
+            <div className="col-3">
               <button className="percent_btn" onClick={() => setAmount(lt)}>100%</button>
             </div>
           </div>
-          <div className="row mt-4 mb-2">
+          <div className="row mt-3 mb-2">
             <label for="range">
               <input type="range" name="range" id="range" min="0" max={lt} step={0.01 * amount} value={amount} onChange={(e) => setAmount(e.target.value)} />
             </label>
@@ -181,25 +206,27 @@ const Fields = (props) => {
               type="number"
               name="amount"
               placeholder="Amount:"
-              className="input_login p-3 mb-3 w-100"
+              className="input_order w-100"
               value={amount}
               onChange={onChangeAmount}
             />
           </div>
-          <div className="row text-center text-muted mb-4">
+          <div className="row text-center text-muted"  style={{fontSize: "14px"}}>
             <p>Borrow/Lend : {(amountToBeConverted).toFixed(2)} USD eq.</p>
-            <p>Collateral Asset : {(amount)} {props.sym}</p>
           </div>
         </div>
         <div className="col-12">
-          <div className="row mb-4">
-            <div className="col-4">
+          <div className="row mb-3">
+            <div className="col-3">
               <button className="percent_btn" onClick={() => setValue(30)}>1 M</button>
             </div>
-            <div className="col-4">
+            <div className="col-3">
+              <button className="percent_btn" onClick={() => setValue(90)}>3 M</button>
+            </div>
+            <div className="col-3">
               <button className="percent_btn" onClick={() => setValue(180)}>6 M</button>
             </div>
-            <div className="col-4">
+            <div className="col-3">
               <button className="percent_btn" onClick={() => setValue(365)}>1 Yr</button>
             </div>
           </div>
@@ -211,32 +238,30 @@ const Fields = (props) => {
               type="number"
               name="duration"
               placeholder="Duration:  Days"
-              className="input_login p-3 mb-3 w-100"
+              className="input_order w-100"
               value={value}
               onChange={onChangeValues}
             />
           </div>
-          <div className="row text-center text-muted">
-            <p>Borrowing Duration : {value} Days</p>
+          <div className="row text-center text-muted" style={{fontSize: "14px"}}>
             <p>Repayment Date : {repDate}</p>
           </div>
         </div>
-        <div className="row">
-          <div className="d-flex justify-content-center mb-5 ps-2 pe-2">
+        <div className="row text-center">
+          <div className="d-flex justify-content-center mb-4 ps-2 pe-2">
             <button
-              className="primary mt-4 ps-5 pe-5 round-btn place_order_btn "
+              className="primary mt-1 ps-5 pe-5 round-btn place_order_btn "
               style={{ position: "absolute", width: "90%" }}
               onClick={sendOrder}
             >
-              Place Order  ${{ amountToBeConverted } === "NaN" ? <>0</> : <>{(amountToBeConverted).toFixed(2)}</>}
+              Place Order  ${(amountToBeConverted).toFixed(2)}
             </button>
           </div>
-          <div className="row text-center text-muted mt-5 pt-4">
+          <div className="row text-center text-muted mt-4 pt-4"  style={{fontSize: "14px"}}>
             <p>Total Payble Cost : {amount} {props.sym}</p>
             <p>Total Received : {(amountToBeConverted * 0.75).toFixed(2)} USD eq. Tentative</p>
           </div>
         </div>
-      </div>
       <Modal
         show={show}
         onHide={() => setShow(false)}
@@ -284,13 +309,13 @@ const Fields = (props) => {
                 <Modal.Footer>
                   <button
                     variant="dark"
-                    // onClick={() => typeSelector("decline")}
+                    onClick={() => { setShowB(true); setShow(false); }}
                     className="primary"
                   >
                     Decline
                   </button>
                   <button
-                    // onClick={() => typeSelector("accept")}
+                    onClick={termAccept}
                     className="primary bg-dark text-white accept"
                   >
                     Accept

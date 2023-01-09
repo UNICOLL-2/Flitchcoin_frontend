@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fetchToken } from "../../Auth";
-import Footer from '../../layouts/Footer/index';
+import SmallFooter from '../SmallFooter';
 
 const AddWallet = () => {
 
@@ -324,7 +324,7 @@ const AddWallet = () => {
                 </div>
             </div>
         </div>
-        <Footer/>
+        <SmallFooter/>
         </>
     )
 }

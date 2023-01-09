@@ -99,7 +99,7 @@ function Header() {
         <div className="container">
           <div className="containerinner ">
             {
-              selectedType === "accept" ?
+              selectedType === "accept" || selectedType === undefined ?
                 <>
                   <Link to="/" className="text-dark ms-4 p-1" >
                     <div className="i"></div>
@@ -144,7 +144,7 @@ function Header() {
             <div className="hamburger">
               <div className="containerinner ">
                 {
-                  selectedType === "accept" ?
+                  selectedType === "accept"|| selectedType === undefined  ?
                     <>
                       <Link to="/" className="text_dark ms-4 p-1" ><div className="i"></div>
                     <div className="i"></div></Link>

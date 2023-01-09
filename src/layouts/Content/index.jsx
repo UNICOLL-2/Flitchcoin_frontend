@@ -7,8 +7,6 @@ import Api from "../../pages/Api";
 import Dashboard from "../../pages/Dashboard";
 import Login from "../../pages/Login";
 import SignUp from "../../pages/SignUp";
-import { RequireToken } from "../../Auth";
-import HomeMain from "../../pages/Home_main";
 import QRVerify from "../../pages/QRVerify";
 import ForgotPass from "../../pages/Forgot_Pass";
 import ProtectedRoutes from "../../pages/ProtectedRoutes";
@@ -24,7 +22,6 @@ function Content() {
   return (
     <div >
       <Routes>
-        <Route path="/home" element={<RequireToken><HomeMain /></RequireToken>} />
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<ProtectedRoutes><Login /></ProtectedRoutes>} />
           <Route path="/Dashboard" element={<Protection Cmp={Dashboard}/>} />

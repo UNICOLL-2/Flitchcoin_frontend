@@ -5,7 +5,7 @@ import { TechnicalAnalysis } from "react-ts-tradingview-widgets";
 import { CryptoCurrencyMarket } from "react-ts-tradingview-widgets";
 import { fetchToken } from "../../Auth";
 import Fields from "./fields";
-import Footer from '../../layouts/Footer/index';
+import SmallFooter from '../SmallFooter';
 
 const PoolParticipant = () => {
 
@@ -75,7 +75,6 @@ const PoolParticipant = () => {
 
   return (
     <>
-    <div className="container">
       <div className="row">
         <div className=" col-xl-9 mt-5">
           <AdvancedRealTimeChart theme="light" autosize symbol={coinsNet} height={680} ></AdvancedRealTimeChart>
@@ -86,8 +85,7 @@ const PoolParticipant = () => {
               <div className="back card special_card_order pt-4">
                 <div className="pb-2">
                   <div className="row order__body">
-                    <h2 className="text-center text_design mb-5">Place Order</h2>
-                    <p>Collateral Asset : </p>
+                    <h2 className="text-center text_design mb-3">Place Order</h2>
                     <div className="col-12 mb-3 btn-group">
                       <button
                         type="button"
@@ -126,8 +124,7 @@ const PoolParticipant = () => {
       <div className="row card back parent_card mt-4 mb-4 ms-5 me-5">
         <CryptoCurrencyMarket colorTheme="light" width="100%" height={654} isTransparent ></CryptoCurrencyMarket>
       </div>
-    </div>
-    <Footer/>
+    <SmallFooter/>
     </>
   );
 };

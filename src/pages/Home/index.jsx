@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Animation from "../../Animation";
 import Footer from '../../layouts/Footer/index';
 import { SymbolOverview } from "react-ts-tradingview-widgets";
@@ -9,13 +9,18 @@ import 'aos/dist/aos.css';
 import { Link, useNavigate } from "react-router-dom";
 
 function Home() {
-  const navigate = useNavigate();
+
+  const [load, setLoad] = useState(true);
 
   AOS.init();
   AOS.init({
     duration: 1000,
     once: false,
   });
+
+  setTimeout(() => {
+    setLoad(false);
+  }, 2000);
 
   return (
     <>
@@ -38,7 +43,13 @@ function Home() {
             </div>
           </div>
           <div className="col-lg-6 mt-5 card_margin card parent_card back">
-            <MiniChart colorTheme="dark" width="100%" height={350} symbol="SOLUSDT" isTransparent></MiniChart>
+            {
+              load ?
+                <></> :
+                <>
+                  <MiniChart colorTheme="dark" width="100%" height={350} symbol="SOLUSDT" isTransparent></MiniChart>
+                </>
+            }
           </div>
         </section>
         <section className="mt-5 pt-5">
@@ -56,41 +67,53 @@ function Home() {
             <div className="col-xl-6">
               <p className="text-primary text-center api_head">Stable</p>
               <div className="card parent_card back text-center me-4 p-2">
-              <SymbolOverview colorTheme="light"
-              height={320}
-              width="100%"
-              chartType="area"
-              downColor="#800080"
-              borderDownColor="#800080"
-              wickDownColor="#800080"
-              isTransparent
-              symbols={
-                [
-                  ["USDT", "USDTUSD"],
-                  ["USDC","USDCUSD"],
-                  ["BUSD","BUSDUSD"]
-                ]
-              } />
+                {
+                  load ?
+                    <></> :
+                    <>
+                      <SymbolOverview colorTheme="light"
+                        height={320}
+                        width="100%"
+                        chartType="area"
+                        downColor="#800080"
+                        borderDownColor="#800080"
+                        wickDownColor="#800080"
+                        isTransparent
+                        symbols={
+                          [
+                            ["USDT", "USDTUSD"],
+                            ["USDC", "USDCUSD"],
+                            ["BUSD", "BUSDUSD"]
+                          ]
+                        } />
+                    </>
+                }
               </div>
             </div>
             <div className="col-xl-6">
               <p className="text-danger text-center api_head">Volatile</p>
               <div className="card parent_card back text-center ms-4 p-2">
-              <SymbolOverview colorTheme="light"
-              height={320}
-              width="100%"
-              chartType="area"
-              downColor="#800080"
-              borderDownColor="#800080"
-              wickDownColor="#800080"
-              isTransparent
-              symbols={
-                [
-                  ["BTC", "BTCUSDT"],
-                  ["ETH", "ETHUSDT"],
-                  ["MATIC", "MATICUSDT"]
-                ]
-              } />
+                {
+                  load ?
+                    <></> :
+                    <>
+                      <SymbolOverview colorTheme="light"
+                        height={320}
+                        width="100%"
+                        chartType="area"
+                        downColor="#800080"
+                        borderDownColor="#800080"
+                        wickDownColor="#800080"
+                        isTransparent
+                        symbols={
+                          [
+                            ["BTC", "BTCUSDT"],
+                            ["ETH", "ETHUSDT"],
+                            ["MATIC", "MATICUSDT"]
+                          ]
+                        } />
+                    </>
+                }
               </div>
             </div>
           </div>
@@ -129,14 +152,14 @@ function Home() {
             </div>
             <div className="col-xl-1"></div>
             <div className="col-xl-3 mt-5">
-              <Link to="/login" style={{textDecoration: "none"}}>
-              <div class="button_special mt-5">
-                <a href="" >
-                  Start earning &nbsp;&nbsp;
-                  <span class="shift">›</span>
-                </a>
-                <div class="mask"></div>
-              </div>
+              <Link to="/login" style={{ textDecoration: "none" }}>
+                <div class="button_special mt-5">
+                  <a href="" >
+                    Start earning &nbsp;&nbsp;
+                    <span class="shift">›</span>
+                  </a>
+                  <div class="mask"></div>
+                </div>
               </Link>
             </div>
           </div>
@@ -151,7 +174,13 @@ function Home() {
             </p>
           </div>
           <div className="col-lg-6 mt-5 card_margin card parent_card back">
-            <SymbolInfo colorTheme="dark" autosize symbol="XRPUSDT" isTransparent></SymbolInfo>
+            {
+              load ?
+                <></> :
+                <>
+                  <SymbolInfo colorTheme="dark" autosize symbol="XRPUSDT" isTransparent></SymbolInfo>
+                </>
+            }
           </div>
           <p className="mt-5 pt-5 api_text mb-5">At <b className="text-dark"> Flitchcoin</b>, we believe in building delightful user experiences that make it <b className="text-dark"> easy and intuitive</b> for people to interact with your business. Our <b className="text-dark"> Lending, Staking, and Earn</b> platforms are designed to be easy to use, and you can get started right away. With Flitchcoin, we created beautiful, intuitive ways for your entire ecosystem to engage with that helped in improving the overall user experience and driving growth.
             <br />Join us and see the difference Flitchcoin can make for you and your business.</p>

@@ -8,8 +8,8 @@ const App = () => {
   const dispatch = useDispatch();
   const { selectedType } = useSelector((state) => state.auth);
   useEffect(() => {
-    dispatch(userLogin());
     dispatch(defaultType("accept"));
+    dispatch(userLogin());
   }, []);
 
   return (

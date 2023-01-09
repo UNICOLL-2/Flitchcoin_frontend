@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { fetchToken } from "../../Auth";
 import { useNavigate } from "react-router-dom";
-import Footer from '../../layouts/Footer/index';
+import SmallFooter from '../SmallFooter';
 
 const Withdraw = () => {
 
@@ -261,7 +261,7 @@ const Withdraw = () => {
             </div>
           </div>
         </div>
-        <Footer/>
+        <SmallFooter/>
         </>
   )
 }
