@@ -6,14 +6,16 @@ import { CryptoCurrencyMarket } from "react-ts-tradingview-widgets";
 import { fetchToken } from "../../Auth";
 import Fields from "./fields";
 import SmallFooter from '../SmallFooter';
+import dropdown from "../../Polygon 2.png";
 
 const PoolParticipant = () => {
 
   const [asset, setAsset] = useState([]);
   const [coin, setCoin] = useState("Select coin");
-
-  function asset_list() {
-    fetch("https://flitchcoin.com/api/asset_list", {
+  const [coinImg, setCoinImg] = useState("");
+  
+  function asset_link() {
+    fetch("https://flitchcoin.com/api/asset_link", {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -21,13 +23,12 @@ const PoolParticipant = () => {
       }
     }).then((result) => {
       result.json().then((res) => {
-        let tmpArray = [];
-        res.map((items) => {
-          for (let i = 0; i < 1; i++) {
-            tmpArray.push(items);
-          }
+        const data = Object.values(res);
+        let tmpSymbol = [];
+        data.map(items => {
+          tmpSymbol.push(items)
         });
-        setAsset([...tmpArray]);
+        setAsset([...tmpSymbol]);
       });
     });
   };
@@ -69,9 +70,9 @@ const PoolParticipant = () => {
     // console.log(data);
   }
   useEffect(() => {
-    asset_list();
     resp();
-  }, []);
+    asset_link();
+    }, []);
 
   return (
     <>
@@ -89,17 +90,33 @@ const PoolParticipant = () => {
                     <div className="col-12 mb-3 btn-group">
                       <button
                         type="button"
-                        className="btn btn-dark dropdown-toggle w-100 round-btn"
+                        className="btn btn-dark w-100 round-btn"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
                       >
-                        <b>{coin}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
+                        <div className="row">
+                          <div className="col-2">
+                            {
+                              coinImg === "" ? 
+                              <></>:
+                              <>
+                          <img src={coinImg} className="select_img" />
+                              </>
+                            }
+                          </div>
+                          <div className="col-8 text-center">
+                        <b>{coin}</b>
+                          </div>
+                          <div className="col-2 text-center">
+                            <img src={dropdown} alt="" />
+                          </div>
+                        </div>
                       </button>
                       <ul className="dropdown-menu drop">
                         {asset.map(items => {
                           return (
                             <div>
-                              <li className="list-items" onClick={() => setCoin(items)}>{items}</li>
+                              <li className="list-items" onClick={() => {setCoin(items.symbol); setCoinImg(items.link)}}><img src={items.link} className="select_img"/> <span className="ps-3">{items.symbol}</span></li>
                             </div>
                           )
                         })}

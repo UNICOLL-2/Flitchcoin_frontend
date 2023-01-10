@@ -158,7 +158,6 @@ const Settings = () => {
 
     const closeAccount = () => {
         var data = `grant_type=&username=${username}&password=${pass}&scope=&client_id=&client_secret=`;
-        console.log(data);
         fetch("https://flitchcoin.com/api/Signup", {
             method: "DELETE",
             headers: {

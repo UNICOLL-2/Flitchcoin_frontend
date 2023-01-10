@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { fetchToken } from "../../Auth";
 import SmallFooter from '../SmallFooter';
+import dropdown from "../../Polygon 2.png";
 
 const AddWallet = () => {
 
@@ -29,7 +30,7 @@ const AddWallet = () => {
 
     useEffect(() => {
         getWallet();
-        asset_list();
+        asset_link();
     }, []);
 
     useEffect(() => {
@@ -84,30 +85,26 @@ const AddWallet = () => {
 
     const [asset, setAsset] = useState([]);
     const [coin, setCoin] = useState("Select coin");
-
-    function asset_list() {
-        fetch("https://flitchcoin.com/api/asset_list", {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                Authorization: `Bearer ${fetchToken()}`
-            }
-        }).then((result) => {
-            result.json().then((res) => {
-                let tmpArray = [];
-                res.map((items) => {
-                    for (let i = 0; i < 1; i++) {
-                        tmpArray.push(items);
-                    }
-                });
-                setAsset([...tmpArray]);
-            });
+    const [coinImg, setCoinImg] = useState("");
+  
+    function asset_link() {
+      fetch("https://flitchcoin.com/api/asset_link", {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          Authorization: `Bearer ${fetchToken()}`
+        }
+      }).then((result) => {
+        result.json().then((res) => {
+          const data = Object.values(res);
+          let tmpSymbol = [];
+          data.map(items => {
+            tmpSymbol.push(items)
+          });
+          setAsset([...tmpSymbol]);
         });
+      });
     };
-
-    useEffect(() => {
-        asset_list();
-    }, [coin]);
 
     const [network, setNetwork] = useState("Select Network");
     const [network1, setNetwork1] = useState("Select Network");
@@ -171,7 +168,6 @@ const AddWallet = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log("first")
         if (nick_name === "" || sym === "Select coin" || wallet_add === "" || net === "Select Network" || memo === "") {
             alert("Please fill in the Required fields")
         } else {
@@ -253,31 +249,54 @@ const AddWallet = () => {
                         name="nick_name"
                         value={nick_name} />
                     <p className="plain_text mt-4 ">Choose Currency :</p>
-                    <button
+                      <button
                         type="button"
-                        className="btn btn-dark dropdown-toggle w-100 round-btn"
+                        className="btn btn-dark w-100 round-btn"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
-                    >
-                        <b>{coin}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
-                    </button>
-                    <ul className="dropdown-menu drop">
+                      >
+                        <div className="row">
+                          <div className="col-2">
+                            {
+                              coinImg === "" ? 
+                              <></>:
+                              <>
+                          <img src={coinImg} className="select_img" />
+                              </>
+                            }
+                          </div>
+                          <div className="col-8">
+                        <b>{coin}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
+                          </div>
+                          <div className="col-2 text-center">
+                            <img src={dropdown} alt="" />
+                          </div>
+                        </div>
+                      </button>
+                      <ul className="dropdown-menu drop">
                         {asset.map(items => {
-                            return (
-                                <div>
-                                    <li className="list-items" onClick={() => setCoin(items)}>{items}</li>
-                                </div>
-                            )
+                          return (
+                            <div>
+                              <li className="list-items" onClick={() => {setCoin(items.symbol); setCoinImg(items.link)}}><img src={items.link} className="select_img"/> <span className="ps-3">{items.symbol}</span></li>
+                            </div>
+                          )
                         })}
-                    </ul>
+                      </ul>
                     <p className="plain_text mt-4">Choose Transfer Network :</p>
                     <button
                         type="button"
-                        className="btn btn-dark dropdown-toggle w-100 round-btn"
+                        className="btn btn-dark w-100 round-btn"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
                     >
-                        <b>{network1}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
+                        <div className="row">
+                            <div className="col-10 text-center">
+                            {network1}
+                          </div>
+                          <div className="col-2 text-center">
+                            <img src={dropdown} alt="" />
+                          </div>
+                        </div>
                     </button>
                     <ul className="dropdown-menu drop1 back" >
                         {network === 'Select Network' ?

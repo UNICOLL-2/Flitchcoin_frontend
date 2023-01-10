@@ -3027,6 +3027,12 @@ canvas {
 
 /*  Order Page */
 
+.select_img {
+	height: 29px;
+	width: 29px;
+	border-radius: 50%;
+}
+
 .input_order {
 	border: 0;
 	outline: 0;
@@ -3043,7 +3049,7 @@ canvas {
 	appearance: none;
 	-webkit-appearance: none;
 	position: relative;
-	padding: 11px!important;
+	padding: 11px !important;
 }
 
 .input_order:focus {

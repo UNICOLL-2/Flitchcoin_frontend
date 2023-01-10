@@ -4,6 +4,7 @@ import bit_img from "./image 4.png";
 import { Modal } from "react-bootstrap";
 import Toast from 'react-bootstrap/Toast';
 import SmallFooter from '../SmallFooter';
+import dropdown from "../../Polygon 2.png";
 
 const Order = () => {
 
@@ -34,7 +35,7 @@ const Order = () => {
   useEffect(() => {
     getInfo();
     order();
-    asset_list();
+    asset_link();
   }, []);
 
   const [openOrderDataPool, setOpenOrderDataPool] = useState([]);
@@ -156,9 +157,10 @@ const Order = () => {
 
   const [asset, setAsset] = useState([]);
   const [coin, setCoin] = useState("Select coin");
-
-  function asset_list() {
-    fetch("https://flitchcoin.com/api/asset_list", {
+  const [coinImg, setCoinImg] = useState("");
+  
+  function asset_link() {
+    fetch("https://flitchcoin.com/api/asset_link", {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -166,13 +168,12 @@ const Order = () => {
       }
     }).then((result) => {
       result.json().then((res) => {
-        let tmpArray = [];
-        res.map((items) => {
-          for (let i = 0; i < 1; i++) {
-            tmpArray.push(items);
-          }
+        const data = Object.values(res);
+        let tmpSymbol = [];
+        data.map(items => {
+          tmpSymbol.push(items)
         });
-        setAsset([...tmpArray]);
+        setAsset([...tmpSymbol]);
       });
     });
   };
@@ -721,23 +722,39 @@ const Order = () => {
                                 <p className="welcome_1 text-center">Adjust Margin</p>
                                 <p className="">Select currency :&nbsp; &nbsp; &nbsp;
                                   <div className="btn-group">
-                                    <button
-                                      type="button"
-                                      className="btn btn-dark dropdown-toggle ps-4 round-btn w-50"
-                                      data-bs-toggle="dropdown"
-                                      aria-expanded="false"
-                                    >
-                                      <b>{coin}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
-                                    </button>
-                                    <ul className="dropdown-menu drop">
-                                      {asset.map(items => {
-                                        return (
-                                          <div>
-                                            <li className="list-items" onClick={() => setCoin(items)}>{items}</li>
-                                          </div>
-                                        )
-                                      })}
-                                    </ul>
+                                  <button
+                        type="button"
+                        className="btn btn-dark w-100 round-btn"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        <div className="row">
+                          <div className="col-2">
+                            {
+                              coinImg === "" ? 
+                              <></>:
+                              <>
+                          <img src={coinImg} className="select_img" />
+                              </>
+                            }
+                          </div>
+                          <div className="col-8 text-center">
+                        <b>{coin}</b>
+                          </div>
+                          <div className="col-2 text-center">
+                            <img src={dropdown} alt="" />
+                          </div>
+                        </div>
+                      </button>
+                      <ul className="dropdown-menu drop">
+                        {asset.map(items => {
+                          return (
+                            <div>
+                              <li className="list-items" onClick={() => {setCoin(items.symbol); setCoinImg(items.link)}}><img src={items.link} className="select_img"/> <span className="ps-3">{items.symbol}</span></li>
+                            </div>
+                          )
+                        })}
+                      </ul>
                                   </div>
                                 </p>
                                 <div className="row mb-4">

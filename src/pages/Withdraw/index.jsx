@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { fetchToken } from "../../Auth";
 import { useNavigate } from "react-router-dom";
 import SmallFooter from '../SmallFooter';
+import dropdown from "../../Polygon 2.png";
 
 const Withdraw = () => {
 
@@ -9,9 +10,10 @@ const Withdraw = () => {
 
   const [asset, setAsset] = useState([]);
   const [coin, setCoin] = useState("Select coin");
-
-  function asset_list() {
-    fetch("https://flitchcoin.com/api/asset_list", {
+  const [coinImg, setCoinImg] = useState("");
+  
+  function asset_link() {
+    fetch("https://flitchcoin.com/api/asset_link", {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -19,16 +21,15 @@ const Withdraw = () => {
       }
     }).then((result) => {
       result.json().then((res) => {
-        let tmpArray = [];
-        res.map((items) => {
-          for (let i = 0; i < 1; i++) {
-            tmpArray.push(items);
-          }
+        const data = Object.values(res);
+        let tmpSymbol = [];
+        data.map(items => {
+          tmpSymbol.push(items)
         });
-        setAsset([...tmpArray]);
+        setAsset([...tmpSymbol]);
       });
     });
-  }
+  };
 
   const [network, setNetwork] = useState("Select Network");
   const [network1, setNetwork1] = useState("Select Network");
@@ -59,10 +60,6 @@ const Withdraw = () => {
         console.log(err);
       });
   }
-
-  useEffect(() => {
-    asset_list();
-  }, [coin])
 
   const [sym, setSym] = useState("");
 
@@ -96,6 +93,7 @@ const Withdraw = () => {
 
   useEffect(() => {
     getWallet();
+    asset_link();
   }, [])
 
   var [withdrawData, setWithdrawData] = useState({

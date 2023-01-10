@@ -43,7 +43,6 @@ function SignUp() {
     e.preventDefault();
     dispatch(verifyEmail(data));
     if (verifyString) {
-      console.log(verifyString);
       if (verifyString?.status === 400) {
         setOtpMsg(verifyString.msg)
       } else if (verifyString?.status === 200) {

@@ -42,7 +42,6 @@ const QRVerify = () => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        console.log(otp1);
         if (otp1 === undefined || otp1 === "") {
             setShowA(true);
         } else {
@@ -59,7 +58,6 @@ const QRVerify = () => {
                 body: data
             }).then(res => res.json())
                 .then((data) => {
-                    console.log(data)
                     if (data.status == 200) {
                         setShowB(true);
                         navigate("/dashboard");

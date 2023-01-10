@@ -5,14 +5,16 @@ import statement from "./Group 87.png";
 import setting from "./Group 97.png";
 import line from "./Line 18.png";
 import SmallFooter from '../SmallFooter';
+import dropdown from "../../Polygon 2.png";
 
 const Deposit = () => {
 
   const [asset, setAsset] = useState([]);
   const [coin, setCoin] = useState("Select coin");
+  const [coinImg, setCoinImg] = useState("");
 
-  function asset_list() {
-    fetch("https://flitchcoin.com/api/asset_list", {
+  function asset_link() {
+    fetch("https://flitchcoin.com/api/asset_link", {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -20,24 +22,20 @@ const Deposit = () => {
       }
     }).then((result) => {
       result.json().then((res) => {
-        let tmpArray = [];
-        res.map((items) => {
-          for (let i = 0; i < 1; i++) {
-            tmpArray.push(items);
-          }
+        const data = Object.values(res);
+        let tmpSymbol = [];
+        data.map(items => {
+          tmpSymbol.push(items)
         });
-        setAsset([...tmpArray]);
+        setAsset([...tmpSymbol]);
       });
     });
   };
 
-  useEffect(() => {
-    asset_list();
-  }, []);
 
   useEffect(() => {
-    asset_list();
-  }, [coin]);
+    asset_link();
+  }, []);
 
   const [network, setNetwork] = useState("Select Network");
   const [network1, setNetwork1] = useState("Select Network");
@@ -75,7 +73,7 @@ const Deposit = () => {
 
   return (
     <>
-    <p className="mt-4 p-2 ps-4 pe-4 text-center" style={{background: "#D9D9D9"}}>Conducting operations with non-deliverable over-the-counter instruments do not entail the transfer of ownership and other rights to the underlying assets. The size of the potential loss is limited to the size of the deposit. Past profits do not guarantee future profits.</p>
+      <p className="mt-4 p-2 ps-4 pe-4 text-center" style={{ background: "#D9D9D9" }}>Conducting operations with non-deliverable over-the-counter instruments do not entail the transfer of ownership and other rights to the underlying assets. The size of the potential loss is limited to the size of the deposit. Past profits do not guarantee future profits.</p>
       <div className="container mt-5 mb-5">
         <div className="row">
           <div className="col-xl-3 pt-5 mt-5">
@@ -89,26 +87,40 @@ const Deposit = () => {
           </div>
           <div className="col-xl-5 pe-5">
             <p className="api_head">I want to <span className="text_design">Deposit :</span></p>
-            <div className="text-center">
-              <div className="btn-group">
+            <div className="text-center btn-group">
                 <button
                   type="button"
-                  className="btn dropdown-toggle ps-5 pe-5 round-btn"
+                  className="btn w-100 round-btn ps-5 pe-5"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  <b>{coin}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
+                  <div className="row">
+                    <div className="col-2">
+                      {
+                        coinImg === "" ?
+                          <></> :
+                          <>
+                            <img src={coinImg} className="select_img" />
+                          </>
+                      }
+                    </div>
+                    <div className="col-8 text-center">
+                      <b>{coin}</b>
+                    </div>
+                    <div className="col-2 text-center">
+                      <img src={dropdown} alt="" />
+                    </div>
+                  </div>
                 </button>
                 <ul className="dropdown-menu drop">
                   {asset.map(items => {
                     return (
                       <div>
-                        <li className="list-items" onClick={() => setCoin(items)}>{items}</li>
+                        <li className="list-items" onClick={() => { setCoin(items.symbol); setCoinImg(items.link) }}><img src={items.link} className="select_img" /> <span className="ps-3">{items.symbol}</span></li>
                       </div>
                     )
                   })}
                 </ul>
-              </div>
             </div>
             <p className="api_text pt-4">Select your preferred coin for depositing your cryptocurrencies to your account.</p>
             <div className="row">
@@ -120,7 +132,7 @@ const Deposit = () => {
                 </button><br />
               </div>
               <div className="col-4">
-                <p className="text_design mt-4 pt-2" style={{fontSize: "20px"}}>Proceed here -›</p>
+                <p className="text_design mt-4 pt-2" style={{ fontSize: "20px" }}>Proceed here -›</p>
               </div>
             </div>
             <p className="text-muted mt-4">
@@ -139,12 +151,12 @@ const Deposit = () => {
                 className="mt-5"
                 size={150}
               />
-              </div>
+            </div>
           </div>
         </div>
       </div>
-      <p className='text-center ps-5 pe-5 mb-3' style={{fontSize: "10px"}}>**Filtchcoin by any means is not responsible in case of any failure of the above provided third-party services and in any case of human error flitchcoin.com doesn’t posses any liability to the user or consumers of flitchcoin or cryptapi.</p>
-      <SmallFooter/>
+      <p className='text-center ps-5 pe-5 mb-3' style={{ fontSize: "10px" }}>**Filtchcoin by any means is not responsible in case of any failure of the above provided third-party services and in any case of human error flitchcoin.com doesn’t posses any liability to the user or consumers of flitchcoin or cryptapi.</p>
+      <SmallFooter />
     </>
   )
 }

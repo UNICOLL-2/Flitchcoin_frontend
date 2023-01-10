@@ -79,7 +79,6 @@ function Forgot_Pass() {
                 body: data
             }).then(res => res.json())
                 .then((data) => {
-                    console.log(data)
                     if ((data.status) === 200) {
                         dispatch(loginUser(formData));
                         navigate('/login')
